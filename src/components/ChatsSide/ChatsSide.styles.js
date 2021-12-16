@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { rgba } from "polished";
 
 export const ChatsSideContainer = styled.div`
-  flex: 1;
+  flex: 2;
   height: 100vh;
-  margin-right: 2px;
 `;
 
 export const ChatsSideHeader = styled.div`
@@ -16,7 +15,6 @@ export const ChatsSideHeader = styled.div`
 
 export const Chats = styled.div`
   position: relative;
-  width: calc(100% - 4px);
   overflow: auto;
   height: calc(100vh - 57px);
   overflow-x: hidden;

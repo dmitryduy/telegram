@@ -6,7 +6,7 @@ export const MessagesSideContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 2;
+  flex: 3;
   background-image: url("https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png");
   background-repeat: no-repeat;
   background-size: cover;
