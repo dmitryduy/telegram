@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     CountryCodeInput,
     LoginButton,
@@ -11,6 +11,7 @@ import useInput from "../../hooks/useInput";
 import useAnimation from "../../hooks/useAnimation";
 import { fetchUserInfo } from "../../reducers/userReducer";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
@@ -19,6 +20,7 @@ const LoginPage = () => {
     const [numberAnimation, setNumberAnimation] = useAnimation(2000);
     const numberRef = useRef()
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const sendUserPhone = () => {
         if (phoneInput.length < 10 || codeNumberInput.length < 2) {
@@ -28,6 +30,13 @@ const LoginPage = () => {
         }
         dispatch(fetchUserInfo(codeNumberInput + phoneInput));
     }
+
+    useEffect(() => {
+        return () => {
+            navigate('/');
+        };
+    }, []);
+
 
     return (
         <LoginContainer>

@@ -8,7 +8,9 @@ const theme = {
         lightGray: '#f1f1f1',
         darkGray: '#9999ab',
         black: '#22224b',
-        error: '#e48383'
+        error: '#e48383',
+        myMessageBg: '#effdde',
+        green: '#6db566'
     },
     fontSizes: {
         small: '12px',

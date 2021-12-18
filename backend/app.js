@@ -24,7 +24,8 @@ app.post('/login', (req, res) => {
     else {
         const newUser = {
             id: +new Date(),
-            phoneNumber: userPhone
+            phoneNumber: userPhone,
+            dialogs: []
         };
         users.push(newUser);
         fs.writeFileSync(__dirname+ '/db/users.json', JSON.stringify(users));
