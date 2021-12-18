@@ -24,8 +24,8 @@ export const MessageInputContainer = styled.div`
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
-    transition: .2s linear;
-    .show {
+    transition: .1s linear;
+    &.show {
       opacity: 1;
       visibility: visible;
       transform: scale(1);

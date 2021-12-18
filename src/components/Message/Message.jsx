@@ -1,14 +1,14 @@
 import React from 'react';
-import formatDate from "../../formatDate";
 import { MessageContainer, MessageText, MessageTime, NewDate } from "./Message.styles";
+import dateFormat from "dateformat";
 
 const Message = ({message, isMe, showBefore, showNewDate}) => {
     return (
         <>
-            {showNewDate && <NewDate>4 Декабря</NewDate>}
+            {showNewDate && <NewDate>{dateFormat(message.timestamp, 'd mmmm')}</NewDate>}
             <MessageContainer showBefore={showBefore} className={isMe? 'me': 'partner'}>
                 <MessageText>{message.messageText}</MessageText>
-                <MessageTime>{formatDate(message.timestamp)}</MessageTime>
+                <MessageTime>{dateFormat(message.timestamp, 'HH:MM')}</MessageTime>
             </MessageContainer>
         </>
     );

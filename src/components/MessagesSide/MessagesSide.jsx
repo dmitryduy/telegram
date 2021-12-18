@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Messages, MessagesSideContainer, NoContent } from "./MessagesSide.styles";
 import Message from "../Message/Message";
-import { useDispatch, useSelector } from "react-redux";
-import { writeMessageAC } from "../../reducers/userReducer";
+import {  useSelector } from "react-redux";
 import MessageInput from "../MessageInput/MessageInput";
 
 const MessagesSide = ({messages}) => {
     const userId = useSelector(({user}) => user.id);
+    const scrollToRef = useRef(null);
+
+    useEffect(() => {
+        scrollToRef?.current?.scrollIntoView({ block: "center"});
+    }, [messages]);
+
     if (!messages) {
         return (
             <MessagesSideContainer>
                 <NoContent>Select a chat to start messaging</NoContent>
             </MessagesSideContainer>)
     }
+
 
     return (
         <MessagesSideContainer className='content'>
@@ -24,6 +30,7 @@ const MessagesSide = ({messages}) => {
                     ||  arr[index - 1].timestamp - message.timestamp > 1000 * 60 * 60 * 24)}
                     key={message.timestamp}
                     message={message}/>)}
+                <div ref={scrollToRef}/>
             </Messages>
             <MessageInput/>
         </MessagesSideContainer>

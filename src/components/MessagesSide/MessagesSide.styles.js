@@ -29,9 +29,21 @@ export const NoContent = styled.span`
 export const Messages = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - 60px);
-  
-  margin-bottom: 5px;
-  padding: 0 20px;
+  max-height: calc(100% - 55px);
+  padding: 5px 20px;
   overflow: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: ${props => rgba(props.theme.colors.darkGray, .5)};
+    border-radius: 2px;
+    transition: .2s;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 4px;
+    background-color: ${props => rgba(props.theme.colors.darkGray, .8)};
+    border-radius: 2px;
+    &:hover {
+      background-color: ${props => rgba(props.theme.colors.darkGray, 1)};
+    }
+  }
 `;

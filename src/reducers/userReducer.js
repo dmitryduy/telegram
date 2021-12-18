@@ -4,7 +4,7 @@ const initialState = {
 
 const types = {
     FETCH_USER_INFO: 'FETCH_USER_INFO',
-    WRITE_MESSAGE: 'WRITE_MESSAGE'
+    ADD_MESSAGE: 'ADD_MESSAGE'
 }
 
 const userReducer = (state=initialState, action) => {
@@ -13,11 +13,11 @@ const userReducer = (state=initialState, action) => {
             return {
                 ...action.payload
             }
-        case types.WRITE_MESSAGE:
+        case types.ADD_MESSAGE:
             const newDialogs = state.dialogs.map(dialog => dialog.id === action.payload.dialogId?
                 {...dialog, messages: [...dialog.messages, {
-                        timestamp: + new Date(),
-                        sender: state.id,
+                        timestamp: action.payload.timestamp,
+                        sender: action.payload.sender,
                         messageText: action.payload.messageText
                     }]}
             : {...dialog});
@@ -32,12 +32,13 @@ const fetchUserInfoAC = (userInfo) => ({
     payload: userInfo
 })
 
-export const writeMessageAC =(messageText, dialogId) => ({
-    type: types.WRITE_MESSAGE,
+export const addMessageAC =(messageText, dialogId, timestamp, sender) => ({
+    type: types.ADD_MESSAGE,
     payload: {
-        messageText, dialogId
+        messageText, dialogId, timestamp, sender
     }
 })
+
 
 export const fetchUserInfo = (userPhone) => (dispatch) => {
     fetch('http://localhost:5000/login', {

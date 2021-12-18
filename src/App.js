@@ -1,14 +1,27 @@
-import React  from "react";
+import React, { useEffect } from "react";
 
 import MainPage from "./pages/MainPage/MainPage";
 import Theme from "./Theme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import DialogPage from "./pages/LoginPage/DialogPage/DialogPage";
+import useSocket from "./hooks/useSocket";
+import { addMessageAC } from "./reducers/userReducer";
 
 function App() {
     const userId = useSelector(({user}) => user.id);
+    const newMessageSocket = useSocket('new message');
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        newMessageSocket.on((data) => {
+            dispatch(addMessageAC(data.messageText, data.dialogId, data.timestamp, data.sender));
+        });
+        return () => {
+            newMessageSocket.off();
+        }
+    }, []);
 
     return (
         <Theme>

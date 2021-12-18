@@ -8,7 +8,7 @@ const useInput = (startValue='', pattern=/.*/) => {
             setInputValue(event.target.value);
         }
     }
-    return [inputValue, changeState];
+    return [inputValue, changeState, () => setInputValue('')];
 }
 
 export default useInput;
