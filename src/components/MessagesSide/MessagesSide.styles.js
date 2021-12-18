@@ -27,10 +27,16 @@ export const NoContent = styled.span`
 `;
 
 export const Messages = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 55px;
   display: flex;
   flex-direction: column;
   max-height: calc(100% - 55px);
+  margin-top: auto;
   padding: 5px 20px;
+  justify-content: flex-start;
   overflow: auto;
   &::-webkit-scrollbar {
     width: 4px;

@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { ChatHeader, ChatImage, ChatItemContainer, ChatLastMessage } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
 import { useDispatch, useSelector } from "react-redux";
-import { setDialogAC } from "../../reducers/dialogReducer";
+import { removeSearchResultsAC, setDialogAC } from "../../reducers/dialogReducer";
 
-const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId}) => {
-    const activeDialogId = useSelector(({dialog}) => dialog.id);
+const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId, setSearch}) => {
+    const activeDialogId = useSelector(({dialog}) => dialog?.activeDialog?.id);
     const dispatch = useDispatch();
     const dialog = useSelector(({dialog}) => dialog.dialogs.find(dialog => dialog.id === dialogId));
 
     const setDialog = () => {
-        dispatch(setDialogAC(dialog));
+        if (!dialog) {
+            dispatch(setDialogAC({id: +new Date(), with: chatName, messages: []}));
+            dispatch(removeSearchResultsAC());
+            setSearch(false);
+        }
+        else {
+            dispatch(setDialogAC(dialog));
+        }
     }
 
 
@@ -20,7 +27,7 @@ const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId}) => {
             <div style={{flex: 1, width: '1px'}}>
                 <ChatHeader>
                     <h4>{chatName}</h4>
-                    <span>{formatDate(lastMsgDate)}</span>
+                    {lastMsgDate && <span>{formatDate(lastMsgDate)}</span>}
                 </ChatHeader>
                 <ChatLastMessage>{lastMsg}</ChatLastMessage>
             </div>

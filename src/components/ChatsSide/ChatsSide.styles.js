@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { rgba } from "polished";
+
 
 export const ChatsSideContainer = styled.div`
   flex: 2;
@@ -18,5 +18,4 @@ export const Chats = styled.div`
   overflow: auto;
   height: calc(100vh - 57px);
   overflow-x: hidden;
-
 `;

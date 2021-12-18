@@ -15,7 +15,8 @@ function App() {
 
     useEffect(() => {
         newMessageSocket.on((data) => {
-            dispatch(addReceiveMessageAC(data.messageText, data.dialogId, data.timestamp, data.sender));
+            console.log(data)
+            dispatch(addReceiveMessageAC(data.messageText, data.dialogId, data.timestamp, data.sender, data.senderNickname));
         });
         return () => {
             newMessageSocket.off();

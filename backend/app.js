@@ -22,8 +22,18 @@ const findUserByNickname = (nickname) => {
     return users.find(user => user.nickname === nickname);
 }
 
-const addMessageToDialogById = (user, dialogId, messageObj) => {
-    return user.dialogs.find(dialog => dialog.id === dialogId).messages.push(messageObj);
+const addMessageToDialogById = (user, dialogId, messageObj, messageTo) => {
+    const dialog = user.dialogs.find(dialog => dialog.id === dialogId);
+    if (dialog) {
+    dialog.messages.push(messageObj);
+    }
+    else {
+        user.dialogs.unshift({
+            id: dialogId,
+            with: messageTo,
+            messages: [messageObj]
+        })
+    }
 }
 
 app.post('/login', (req, res) => {
@@ -53,9 +63,10 @@ app.post('/login', (req, res) => {
     }
 })
 
-app.get('users/:substring', (req, res) => {
-    const substring = 5;
-    console.log(substring)
+app.get('/users/:substring', (req, res) => {
+    const substring = req.params.substring;
+    const filteredUsers = users.filter(user => user.nickname.startsWith(substring));
+    res.json(filteredUsers);
 });
 
 io.on('connection', (socket) => {
@@ -74,10 +85,10 @@ io.on('connection', (socket) => {
             sender: user.id
         }
         const receiver = findUserByNickname(messageTo);
-        addMessageToDialogById(user, dialogId, newMessageObj);
-        addMessageToDialogById(receiver, dialogId, newMessageObj);
+        addMessageToDialogById(user, dialogId, newMessageObj, messageTo);
+        addMessageToDialogById(receiver, dialogId, newMessageObj, user.nickname);
         if (receiver.online) {
-            io.to(receiver.socketId).emit("new message", {...newMessageObj, dialogId})
+            io.to(receiver.socketId).emit("new message", {...newMessageObj, dialogId, senderNickname: user.nickname})
         }
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
     })
@@ -88,6 +99,7 @@ io.on('connection', (socket) => {
             user.online = false;
             user.socketId = null;
         }
+        fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
     })
 })
 
