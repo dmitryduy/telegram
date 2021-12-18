@@ -1,5 +1,7 @@
+import { setDialogsAC } from "./dialogReducer";
+
 const initialState = {
-    phoneNumber: null
+    error: false
 }
 
 const types = {
@@ -10,18 +12,12 @@ const types = {
 const userReducer = (state=initialState, action) => {
     switch (action.type){
         case types.FETCH_USER_INFO:
+            if (action.payload.error) {
+                return {...state, error: true};
+            }
             return {
                 ...action.payload
             }
-        case types.ADD_MESSAGE:
-            const newDialogs = state.dialogs.map(dialog => dialog.id === action.payload.dialogId?
-                {...dialog, messages: [...dialog.messages, {
-                        timestamp: action.payload.timestamp,
-                        sender: action.payload.sender,
-                        messageText: action.payload.messageText
-                    }]}
-            : {...dialog});
-            return {...state, dialogs: newDialogs};
         default:
             return {...state};
     }
@@ -32,24 +28,25 @@ const fetchUserInfoAC = (userInfo) => ({
     payload: userInfo
 })
 
-export const addMessageAC =(messageText, dialogId, timestamp, sender) => ({
-    type: types.ADD_MESSAGE,
-    payload: {
-        messageText, dialogId, timestamp, sender
-    }
-})
 
-
-export const fetchUserInfo = (userPhone) => (dispatch) => {
+export const fetchUserInfo = (userPhone, nickname) => (dispatch) => {
     fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({userPhone})
+        body: JSON.stringify({userPhone, nickname})
     })
-        .then(response => response.json())
-        .then(data => dispatch(fetchUserInfoAC(data)));
+        .then(response => {
+            if (response.status === 400) {
+                return {error: 'Incorrect user nickname'};
+            }
+            return response.json();
+        })
+        .then(data => {
+            dispatch(fetchUserInfoAC({id: data.id, phoneNumber: data.phoneNumber, nickname: data.nickname}));
+            dispatch(setDialogsAC(data.dialogs));
+        });
 }
 
 export default userReducer;

@@ -18,16 +18,25 @@ const findUserById = (userId) => {
     return users.find(user => user.id === userId);
 }
 
+const findUserByNickname = (nickname) => {
+    return users.find(user => user.nickname === nickname);
+}
+
 const addMessageToDialogById = (user, dialogId, messageObj) => {
-    console.log(user, dialogId)
     return user.dialogs.find(dialog => dialog.id === dialogId).messages.push(messageObj);
 }
 
 app.post('/login', (req, res) => {
-    const {userPhone} = req.body;
+    const {userPhone, nickname} = req.body;
     const user = users.find(user => user.phoneNumber === userPhone);
     if (user) {
-        res.json(user);
+        if (user.nickname === nickname) {
+            res.json(user);
+        }
+        else {
+            res.status(400);
+            res.send();
+        }
     }
     else {
         const newUser = {
@@ -35,13 +44,19 @@ app.post('/login', (req, res) => {
             phoneNumber: userPhone,
             dialogs: [],
             online: true,
-            socketId: null
+            socketId: null,
+            nickname: nickname
         };
         users.push(newUser);
         fs.writeFileSync(__dirname+ '/db/users.json', JSON.stringify(users));
         res.json(newUser);
     }
 })
+
+app.get('users/:substring', (req, res) => {
+    const substring = 5;
+    console.log(substring)
+});
 
 io.on('connection', (socket) => {
     console.log('user id: ', socket.id);
@@ -58,12 +73,10 @@ io.on('connection', (socket) => {
             messageText: messageText,
             sender: user.id
         }
-        const receiver = findUserById(messageTo);
+        const receiver = findUserByNickname(messageTo);
         addMessageToDialogById(user, dialogId, newMessageObj);
         addMessageToDialogById(receiver, dialogId, newMessageObj);
-        console.log(receiver)
         if (receiver.online) {
-            console.log(receiver.socketId)
             io.to(receiver.socketId).emit("new message", {...newMessageObj, dialogId})
         }
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));

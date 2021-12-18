@@ -13,7 +13,7 @@ export const LoginContainer = styled.div`
 export const LoginTitle = styled.h1`
   font-size: ${props => props.theme.fontSizes.medium};
   margin-bottom: 5px;
-  
+
 `;
 
 export const LoginSubtitle = styled.p`
@@ -43,11 +43,19 @@ export const NumberInput = styled(Input).attrs({
     placeholder: '--- --- ----'
 })`
   transition: .2s;
-    &.error {
-      border-bottom: 2px solid ${props => props.theme.colors.error};
-    }
+  &.error {
+    border-bottom: 2px solid ${props => props.theme.colors.error};
+  }
 `;
 
+export const NicknameInput = styled(Input)`
+  width: 100%;
+  margin-top: -5px;
+`;
+
+export const NicknameTitle = styled(LoginSubtitle)`
+  margin-top: 20px;
+`;
 
 export const PhoneError = styled.span`
   display: inline-block;

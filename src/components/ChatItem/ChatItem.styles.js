@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 
-export const ChatItemContainer = styled(Link)`
+
+export const ChatItemContainer = styled.div`
   width: 100%;
   padding: 10px;
   display: flex;

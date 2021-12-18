@@ -1,25 +1,24 @@
 import React from 'react';
 import { MessageInputContainer } from "./MessageInput.styles";
 import useInput from "../../hooks/useInput";
-import { addMessageAC } from "../../reducers/userReducer";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import SendMessage from '../../assets/imgs/send-message-button.png';
 import useSocket from "../../hooks/useSocket";
+import { addMessageAC } from "../../reducers/dialogReducer";
 
 const MessageInput = () => {
     const [inputValue, changeInputValue, clearInput] = useInput();
-    const {id} = useParams();
+    const activeDialog = useSelector(({dialog}) => dialog.activeDialog);
     const dispatch = useDispatch();
     const messageSocket = useSocket('send message');
-    const messageTo = useSelector(({user}) => user.dialogs.find(dialog => dialog.id === +id).with);
+    const messageTo = useSelector(({dialog}) => dialog.activeDialog.with);
     const userId = useSelector(({user}) => user.id);
 
     const sendMessage = () => {
         if (inputValue) {
-            dispatch(addMessageAC(inputValue, +id, +new Date(), userId));
-            messageSocket.emit({messageTo: messageTo, messageText: inputValue, dialogId: +id});
+            dispatch(addMessageAC({timestamp: +new Date(), sender: userId, messageText: inputValue}));
+            messageSocket.emit({messageTo: messageTo, messageText: inputValue, dialogId: activeDialog.id});
             clearInput();
         }
     }

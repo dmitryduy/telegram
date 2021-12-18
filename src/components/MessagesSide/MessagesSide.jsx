@@ -4,9 +4,10 @@ import Message from "../Message/Message";
 import {  useSelector } from "react-redux";
 import MessageInput from "../MessageInput/MessageInput";
 
-const MessagesSide = ({messages}) => {
+const MessagesSide = () => {
     const userId = useSelector(({user}) => user.id);
     const scrollToRef = useRef(null);
+    const messages = useSelector(({dialog}) => dialog.activeDialog?.messages);
 
     useEffect(() => {
         scrollToRef?.current?.scrollIntoView({ block: "center"});
@@ -27,7 +28,7 @@ const MessagesSide = ({messages}) => {
                     isMe={userId === message.sender}
                     showBefore={arr[index + 1]?.sender !== message.sender}
                     showNewDate={ index === 0 || (new Date(arr[index - 1].timestamp).getDate() !== new Date(message.timestamp).getDate()
-                    ||  arr[index - 1].timestamp - message.timestamp > 1000 * 60 * 60 * 24)}
+                        ||  arr[index - 1].timestamp - message.timestamp > 1000 * 60 * 60 * 24)}
                     key={message.timestamp}
                     message={message}/>)}
                 <div ref={scrollToRef}/>

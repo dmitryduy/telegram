@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChatHeader, ChatImage, ChatItemContainer, ChatLastMessage } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
+import { useDispatch, useSelector } from "react-redux";
+import { setDialogAC } from "../../reducers/dialogReducer";
 
-const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, to, isActive}) => {
+const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId}) => {
+    const activeDialogId = useSelector(({dialog}) => dialog.id);
+    const dispatch = useDispatch();
+    const dialog = useSelector(({dialog}) => dialog.dialogs.find(dialog => dialog.id === dialogId));
 
+    const setDialog = () => {
+        dispatch(setDialogAC(dialog));
+    }
 
 
     return (
-        <ChatItemContainer to={to} className={isActive && 'active'}>
+        <ChatItemContainer className={activeDialogId === dialogId && 'active'} onClick={setDialog}>
             <ChatImage src={chatImage} alt='chat image'/>
             <div style={{flex: 1, width: '1px'}}>
                 <ChatHeader>
