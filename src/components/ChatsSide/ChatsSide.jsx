@@ -36,6 +36,7 @@ const ChatsSide = () => {
                             key={user.id}
                             chatImage='http://www.dejurka.ru/wp-content/uploads/2017/07/project-preview-large.png'
                             chatName={user.nickname}
+                            phoneNumber={user.phoneNumber}
                             lastMsg={`@${user.nickname}`}
                             lastMsgDate={null}
                         />)

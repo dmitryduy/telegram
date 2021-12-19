@@ -23,6 +23,7 @@ const MessagesSide = () => {
 
     return (
         <MessagesSideContainer className='content'>
+            <PartnerInfo/>
             <Messages>
                 {messages.map((message, index, arr) => <Message
                     isMe={userId === message.sender}

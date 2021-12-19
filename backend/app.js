@@ -25,12 +25,15 @@ const findUserByNickname = (nickname) => {
 const addMessageToDialogById = (user, dialogId, messageObj, messageTo) => {
     const dialog = user.dialogs.find(dialog => dialog.id === dialogId);
     if (dialog) {
-    dialog.messages.push(messageObj);
-    }
-    else {
+        dialog.messages.push(messageObj);
+    } else {
+        const receiver = findUserByNickname(messageTo);
         user.dialogs.unshift({
             id: dialogId,
             with: messageTo,
+            withOnline: receiver.online,
+            withPhoneNumber: receiver.phoneNumber,
+            withLastSeen: receiver.lastSeen,
             messages: [messageObj]
         })
     }
@@ -42,23 +45,22 @@ app.post('/login', (req, res) => {
     if (user) {
         if (user.nickname === nickname) {
             res.json(user);
-        }
-        else {
+        } else {
             res.status(400);
             res.send();
         }
-    }
-    else {
+    } else {
         const newUser = {
             id: +new Date(),
             phoneNumber: userPhone,
             dialogs: [],
             online: true,
             socketId: null,
-            nickname: nickname
+            nickname: nickname,
+            lastSeen: null
         };
         users.push(newUser);
-        fs.writeFileSync(__dirname+ '/db/users.json', JSON.stringify(users));
+        fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
         res.json(newUser);
     }
 })
@@ -76,6 +78,8 @@ io.on('connection', (socket) => {
         user = findUserById(userId);
         user.online = true;
         user.socketId = socket.id;
+        user.lastSeen = null;
+        socket.broadcast.emit('user online', {userNickname: user.nickname})
     })
 
     socket.on('send message', ({messageTo, messageText, dialogId}) => {
@@ -88,7 +92,14 @@ io.on('connection', (socket) => {
         addMessageToDialogById(user, dialogId, newMessageObj, messageTo);
         addMessageToDialogById(receiver, dialogId, newMessageObj, user.nickname);
         if (receiver.online) {
-            io.to(receiver.socketId).emit("new message", {...newMessageObj, dialogId, senderNickname: user.nickname})
+            io.to(receiver.socketId).emit("new message", {
+                ...newMessageObj,
+                dialogId,
+                senderNickname: user.nickname,
+                senderOnline: user.online,
+                senderPhoneNumber: user.phoneNumber,
+                senderLastSeen: user.lastSeen
+            })
         }
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
     })
@@ -98,6 +109,9 @@ io.on('connection', (socket) => {
         if (user) {
             user.online = false;
             user.socketId = null;
+            user.lastSeen = +new Date();
+            console.log(socket, user)
+            socket.broadcast.emit('user offline', {userNickname: user.nickname, lastSeen: user.lastSeen})
         }
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
     })

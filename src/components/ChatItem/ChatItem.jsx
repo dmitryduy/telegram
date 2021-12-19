@@ -4,7 +4,7 @@ import formatDate from "../../formatDate";
 import { useDispatch, useSelector } from "react-redux";
 import { removeSearchResultsAC, setDialogAC } from "../../reducers/dialogReducer";
 
-const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId, setSearch}) => {
+const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId, setSearch, phoneNumber}) => {
     const activeDialogId = useSelector(({dialog}) => dialog?.activeDialog?.id);
     const dispatch = useDispatch();
     const dialog = useSelector(({dialog}) => dialog.dialogs.find(dialog => dialog.id === dialogId));
@@ -26,7 +26,7 @@ const ChatItem = ({chatImage, chatName, lastMsg, lastMsgDate, dialogId, setSearc
             <ChatImage src={chatImage} alt='chat image'/>
             <div style={{flex: 1, width: '1px'}}>
                 <ChatHeader>
-                    <h4>{chatName}</h4>
+                    <h4>{phoneNumber || chatName}</h4>
                     {lastMsgDate && <span>{formatDate(lastMsgDate)}</span>}
                 </ChatHeader>
                 <ChatLastMessage>{lastMsg}</ChatLastMessage>
