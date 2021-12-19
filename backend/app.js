@@ -34,6 +34,7 @@ const addMessageToDialogById = (user, dialogId, messageObj, messageTo) => {
             withOnline: receiver.online,
             withPhoneNumber: receiver.phoneNumber,
             withLastSeen: receiver.lastSeen,
+            withAvatar: receiver.avatar,
             messages: [messageObj]
         })
     }
@@ -57,7 +58,8 @@ app.post('/login', (req, res) => {
             online: true,
             socketId: null,
             nickname: nickname,
-            lastSeen: null
+            lastSeen: null,
+            avatar: 'https://lh3.googleusercontent.com/proxy/dEoAsY560gMSYM5q9Ov9RaWxNf5a4-KaA5JuqRoKhBADemznTdpNrLP5nXpwgoHlibNBwssbCQ4Lq_CUbuKVhRwkAts9chQzZzjZv2j6UpoWUBUR1kZx1FL6o3qrDa2kEg'
         };
         users.push(newUser);
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
@@ -98,7 +100,8 @@ io.on('connection', (socket) => {
                 senderNickname: user.nickname,
                 senderOnline: user.online,
                 senderPhoneNumber: user.phoneNumber,
-                senderLastSeen: user.lastSeen
+                senderLastSeen: user.lastSeen,
+                senderAvatar: user.avatar
             })
         }
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));
@@ -110,7 +113,6 @@ io.on('connection', (socket) => {
             user.online = false;
             user.socketId = null;
             user.lastSeen = +new Date();
-            console.log(socket, user)
             socket.broadcast.emit('user offline', {userNickname: user.nickname, lastSeen: user.lastSeen})
         }
         fs.writeFileSync(__dirname + '/db/users.json', JSON.stringify(users));

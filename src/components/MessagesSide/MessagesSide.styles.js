@@ -33,7 +33,7 @@ export const Messages = styled.div`
   bottom: 55px;
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - 55px);
+  max-height: calc(100% - 55px - 57px);
   margin-top: auto;
   padding: 5px 20px;
   justify-content: flex-start;

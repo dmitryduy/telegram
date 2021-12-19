@@ -3,6 +3,7 @@ import ChatsSide from "../../components/ChatsSide/ChatsSide";
 import MessagesSide from "../../components/MessagesSide/MessagesSide";
 import useSocket from "../../hooks/useSocket";
 import { useSelector } from "react-redux";
+import Settings from "../../components/Settings/Settings";
 
 const MainPage = () => {
      const initSocket = useSocket('joined');
@@ -17,6 +18,7 @@ const MainPage = () => {
         <div style={{display: 'flex'}}>
             <ChatsSide/>
              <MessagesSide/>
+            <Settings/>
         </div>
     );
 };

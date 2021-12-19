@@ -19,7 +19,7 @@ function App() {
         newMessageSocket.on((data) => {
             dispatch(addReceiveMessageAC(
                 data.messageText, data.dialogId, data.timestamp, data.sender, data.senderNickname,
-                data.senderOnline, data.senderLastSeen, data.senderPhoneNumber));
+                data.senderOnline, data.senderLastSeen, data.senderPhoneNumber, data.senderAvatar));
         });
         offlineUserSocket.on(({userNickname, lastSeen}) => {
             dispatch(sendOfflineUserAC(userNickname, lastSeen));

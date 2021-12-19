@@ -9,8 +9,8 @@ const types = {
     ADD_MESSAGE: 'ADD_MESSAGE'
 }
 
-const userReducer = (state=initialState, action) => {
-    switch (action.type){
+const userReducer = (state = initialState, action) => {
+    switch (action.type) {
         case types.FETCH_USER_INFO:
             if (action.payload.error) {
                 return {...state, error: true};
@@ -44,7 +44,12 @@ export const fetchUserInfo = (userPhone, nickname) => (dispatch) => {
             return response.json();
         })
         .then(data => {
-            dispatch(fetchUserInfoAC({id: data.id, phoneNumber: data.phoneNumber, nickname: data.nickname}));
+            dispatch(fetchUserInfoAC({
+                id: data.id,
+                phoneNumber: data.phoneNumber,
+                nickname: data.nickname,
+                avatar: data.avatar
+            }));
             dispatch(setDialogsAC(data.dialogs));
         });
 }

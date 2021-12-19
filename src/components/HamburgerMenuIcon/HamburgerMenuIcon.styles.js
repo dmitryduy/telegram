@@ -6,6 +6,7 @@ export const HamburgerContainer = styled.div`
   width: 25px;
   height: 17px;
   margin-right: 10px;
+  cursor: pointer;
   span {
     position: absolute;
     display: inline-block;

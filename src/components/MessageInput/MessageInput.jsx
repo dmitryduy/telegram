@@ -17,7 +17,7 @@ const MessageInput = () => {
 
     const sendMessage = () => {
         if (inputValue) {
-            dispatch(addMessageAC({timestamp: +new Date(), sender: userId, messageText: inputValue}));
+            dispatch(addMessageAC({timestamp:1111111, sender: userId, messageText: inputValue}));
             messageSocket.emit({messageTo: messageTo, messageText: inputValue, dialogId: activeDialog.id});
             clearInput();
         }

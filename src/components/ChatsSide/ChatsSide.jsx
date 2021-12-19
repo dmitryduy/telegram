@@ -21,7 +21,7 @@ const ChatsSide = () => {
                 { !isSearch ? dialogs.map(dialog =>  <ChatItem
                         dialogId={dialog.id}
                         key={dialog.id}
-                        chatImage='http://www.dejurka.ru/wp-content/uploads/2017/07/project-preview-large.png'
+                        chatImage={dialog.withAvatar}
                         chatName={dialog.with}
                         lastMsg={dialog.messages[dialog.messages.length - 1].messageText}
                         lastMsgDate={dialog.messages[dialog.messages.length - 1].timestamp}
@@ -34,7 +34,7 @@ const ChatsSide = () => {
                             setSearch={setSearch}
                             dialogId={user.id}
                             key={user.id}
-                            chatImage='http://www.dejurka.ru/wp-content/uploads/2017/07/project-preview-large.png'
+                            chatImage={user.avatar}
                             chatName={user.nickname}
                             phoneNumber={user.phoneNumber}
                             lastMsg={`@${user.nickname}`}

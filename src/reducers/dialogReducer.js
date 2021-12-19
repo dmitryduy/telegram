@@ -28,7 +28,8 @@ const dialogReducer = (state = initialState, action) => {
                         ...action.payload,
                         withOnline: foundUser.online,
                         withLastSeen: foundUser.lastSeen,
-                        withPhoneNumber: foundUser.phoneNumber
+                        withPhoneNumber: foundUser.phoneNumber,
+                        withAvatar: foundUser.withAvatar
                     }
                 }
             }
@@ -101,6 +102,7 @@ const dialogReducer = (state = initialState, action) => {
                         id: state.activeDialog.id,
                         with: state.activeDialog.with,
                         withOnline: state.activeDialog.withOnline,
+                        withAvatar: state.activeDialog.withAvatar,
                         withPhoneNumber: state.activeDialog.withPhoneNumber,
                         withLastSeen: state.activeDialog.withLastSeen,
                         messages: [action.payload]
@@ -131,6 +133,7 @@ const dialogReducer = (state = initialState, action) => {
                         with: action.payload.senderNickname,
                         withPhoneNumber: action.payload.senderPhoneNumber,
                         withOnline: action.payload.senderOnline,
+                        withAvatar: action.payload.senderAvatar,
                         withLastSeen: action.payload.senderLastSeen,
                         id: action.payload.dialogId,
                         messages: [newMessage]
@@ -177,9 +180,9 @@ export const addMessageAC = (messageObj) => ({
 })
 
 export const addReceiveMessageAC = (messageText, dialogId, timestamp, sender,
-                                    senderNickname, senderOnline, senderLastSeen, senderPhoneNumber) => ({
+                                    senderNickname, senderOnline, senderLastSeen, senderPhoneNumber, senderAvatar) => ({
     type: types.ADD_RECEIVE_MESSAGE,
-    payload: {messageText, dialogId, timestamp, sender, senderNickname, senderOnline, senderLastSeen, senderPhoneNumber}
+    payload: {messageText, dialogId, timestamp, sender, senderNickname, senderOnline, senderLastSeen, senderPhoneNumber, senderAvatar}
 })
 
 export const setSearchResultsAC = (data) => ({

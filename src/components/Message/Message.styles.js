@@ -2,6 +2,8 @@ import styled, { css } from "styled-components";
 import { rgba } from "polished";
 
 export const NewDate = styled.div`
+  position: sticky;
+  top: 0;
   align-self: center;
   color: #fff;
   border-radius: 10px;

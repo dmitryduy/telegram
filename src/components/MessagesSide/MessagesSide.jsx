@@ -3,6 +3,7 @@ import { Messages, MessagesSideContainer, NoContent } from "./MessagesSide.style
 import Message from "../Message/Message";
 import {  useSelector } from "react-redux";
 import MessageInput from "../MessageInput/MessageInput";
+import PartnerInfo from "../PartnerInfo/PartnerInfo";
 
 const MessagesSide = () => {
     const userId = useSelector(({user}) => user.id);
