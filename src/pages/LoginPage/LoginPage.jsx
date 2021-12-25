@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     CountryCodeInput,
     LoginButton,
@@ -14,29 +14,48 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+    const isAuth = useSelector(({user}) => user.isAuth);
+
     const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+[0-9]{0,3}$/);
     const [phoneInput, setPhoneInput] = useInput('', /^[0-9]{0,10}$/);
     const [nicknameInput, setNicknameInput] = useInput('', /^[a-zA-Z0-9_]{0,20}$/)
     const [numberAnimation, setNumberAnimation] = useAnimation(2000);
-    const numberRef = useRef()
+    const [codeNumberAnimation, setCodeNumberAnimation] = useAnimation(2000);
+    const [userNicknameAnimation, setUserNicknameAnimation] = useAnimation(2000);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const error = useSelector(({user}) => user.error);
 
+    const [errorMessage, setErrorMessage] = useState('');
     const sendUserPhone = () => {
-        if (phoneInput.length < 10 || codeNumberInput.length < 2 || nicknameInput.length < 1) {
+        if (codeNumberInput.length < 2) {
+            setCodeNumberAnimation();
+            setErrorMessage('Invalid code number');
+            return;
+        }
+        if (phoneInput.length < 10) {
             setNumberAnimation();
-            numberRef.current.focus();
+            setErrorMessage('Invalid phone number');
+            return;
+        }
+        if (nicknameInput.length < 3) {
+            setUserNicknameAnimation();
+            setErrorMessage('Nickname must have more 3 symbols');
             return;
         }
         dispatch(fetchUserInfo(codeNumberInput + phoneInput, nicknameInput));
     }
 
     useEffect(() => {
-        return () => {
+        if (isAuth)
             navigate('/');
-        };
-    }, []);
+    }, [isAuth]);
+
+    useEffect(() => {
+        if (error) {
+            setErrorMessage('Incorrect username');
+        }
+    }, [error]);
 
 
     return (
@@ -45,14 +64,16 @@ const LoginPage = () => {
                 <LoginTitle>You Phone Number</LoginTitle>
                 <LoginSubtitle>Please confirm your country code and enter your mobile phone number.</LoginSubtitle>
                 <div>
-                    <CountryCodeInput value={codeNumberInput} onInput={setCodeNumberInput}/>
-                    <NumberInput ref={numberRef} className={numberAnimation && 'error'} value={phoneInput}
+                    <CountryCodeInput className={codeNumberAnimation && 'error'} value={codeNumberInput}
+                                      onInput={setCodeNumberInput}/>
+                    <NumberInput className={numberAnimation && 'error'} value={phoneInput}
                                  onInput={setPhoneInput}/>
                 </div>
                 <NicknameTitle>Enter your nickname</NicknameTitle>
-                <NicknameInput value={nicknameInput} onInput={setNicknameInput}/>
+                <NicknameInput className={userNicknameAnimation && 'error'} value={nicknameInput}
+                               onInput={setNicknameInput}/>
                 <div>
-                    <PhoneError className={numberAnimation || error && 'visible'}>Invalid phone number. or nickname. Please try again</PhoneError>
+                    <PhoneError className={errorMessage && 'visible'}>{errorMessage}</PhoneError>
                 </div>
                 <LoginButton onClick={sendUserPhone}>log in</LoginButton>
             </div>

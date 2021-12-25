@@ -43,6 +43,7 @@ const addMessageToDialogById = (user, dialogId, messageObj, messageTo) => {
 app.post('/login', (req, res) => {
     const {userPhone, nickname} = req.body;
     const user = users.find(user => user.phoneNumber === userPhone);
+    console.log(user, nickname)
     if (user) {
         if (user.nickname === nickname) {
             res.json(user);

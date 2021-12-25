@@ -7,6 +7,10 @@ export const LoginContainer = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
+  .error {
+    transition: .2s;
+    border-bottom: 2px solid ${props => props.theme.colors.error};
+  }
 `;
 
 
@@ -42,10 +46,6 @@ export const CountryCodeInput = styled(Input)`
 export const NumberInput = styled(Input).attrs({
     placeholder: '--- --- ----'
 })`
-  transition: .2s;
-  &.error {
-    border-bottom: 2px solid ${props => props.theme.colors.error};
-  }
 `;
 
 export const NicknameInput = styled(Input)`
@@ -61,7 +61,7 @@ export const PhoneError = styled.span`
   display: inline-block;
   margin: 10px 0;
   font-size: ${props => props.theme.fontSizes.small};
-  color: ${props => props.theme.colors.darkGray};
+  color: ${props => props.theme.colors.error};
   visibility: hidden;
   transition: .2s;
   opacity: 0;

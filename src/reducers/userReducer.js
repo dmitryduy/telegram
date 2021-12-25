@@ -1,7 +1,8 @@
 import { setDialogsAC } from "./dialogReducer";
 
 const initialState = {
-    error: false
+    error: false,
+    isAuth: false,
 }
 
 const types = {
@@ -16,7 +17,7 @@ const userReducer = (state = initialState, action) => {
                 return {...state, error: true};
             }
             return {
-                ...action.payload
+                ...action.payload, isAuth: true
             }
         default:
             return {...state};
@@ -48,9 +49,12 @@ export const fetchUserInfo = (userPhone, nickname) => (dispatch) => {
                 id: data.id,
                 phoneNumber: data.phoneNumber,
                 nickname: data.nickname,
-                avatar: data.avatar
+                avatar: data.avatar,
+                error: data.error
             }));
-            dispatch(setDialogsAC(data.dialogs));
+            if (!data.error) {
+                dispatch(setDialogsAC(data.dialogs));
+            }
         });
 }
 

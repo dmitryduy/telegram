@@ -56,6 +56,7 @@ export const MessageContainer = styled.div`
 export const MessageText = styled.span`
   margin-right: 7px;
   font-size: ${props => props.theme.fontSizes.normal};
+  word-wrap: break-word;
 `;
 
 export const MessageTime = styled.span`

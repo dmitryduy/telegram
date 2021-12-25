@@ -9,6 +9,7 @@ const MainPage = () => {
      const initSocket = useSocket('joined');
      const userId = useSelector(({user}) => user.id);
 
+
     useEffect(() => {
         initSocket.emit(userId);
     }, []);

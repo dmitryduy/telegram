@@ -9,7 +9,7 @@ import useSocket from "./hooks/useSocket";
 import { addReceiveMessageAC, sendOfflineUserAC, sendOnlineUserAC } from "./reducers/dialogReducer";
 
 function App() {
-    const userId = useSelector(({user}) => user.id);
+    const isAuth = useSelector(({user}) => user.isAuth);
     const newMessageSocket = useSocket('new message');
     const offlineUserSocket = useSocket('user offline');
     const onlineUserSocket = useSocket('user online');
@@ -38,15 +38,9 @@ function App() {
         <Theme>
             <div className="App">
                 <Routes>
-                    {userId ?
-                        <>
-                            <Route exact path='/' element={<MainPage/>}/>
-                        </>
-                        : <>
-                            <Route path='/login' exact element={<LoginPage/>}/>
-                            <Route exact path='*' element={<Navigate to='/login'/>}/>
-                        </>
-                    }
+                    <Route exact path={`${isAuth ? '/': '/login'}`} element={isAuth? <MainPage/>: <LoginPage/>}/>
+                    <Route path='/login' exact element={<LoginPage/>}/>
+                    <Route exact path='*' element={<Navigate to='/login'/>}/>
                 </Routes>
             </div>
         </Theme>
