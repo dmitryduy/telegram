@@ -9,7 +9,7 @@ import {
 } from "./LoginPage.styles";
 import useInput from "../../hooks/useInput";
 import useAnimation from "../../hooks/useAnimation";
-import { fetchUserInfo } from "../../reducers/userReducer";
+import { fetchUserInfo } from "../../reducers/userReducer/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

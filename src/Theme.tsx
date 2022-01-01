@@ -23,7 +23,7 @@ const theme = {
     }
 }
 
-const Theme = ({children}) => {
+const Theme: React.FC = ({children}) => {
     return (
         <ThemeProvider theme={theme}>
             {children}

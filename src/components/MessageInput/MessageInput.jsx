@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import SendMessage from '../../assets/imgs/send-message-button.png';
 import useSocket from "../../hooks/useSocket";
-import { addMessageAC } from "../../reducers/dialogReducer";
+import { addMessageAC } from "../../reducers/dialogReducer/dialogReducer";
 
 const MessageInput = () => {
     const [inputValue, changeInputValue, clearInput] = useInput();

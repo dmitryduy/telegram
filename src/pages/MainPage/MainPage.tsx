@@ -1,24 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ChatsSide from "../../components/ChatsSide/ChatsSide";
 import MessagesSide from "../../components/MessagesSide/MessagesSide";
 import useSocket from "../../hooks/useSocket";
-import { useSelector } from "react-redux";
 import Settings from "../../components/Settings/Settings";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-const MainPage = () => {
-     const initSocket = useSocket('joined');
-     const userId = useSelector(({user}) => user.id);
+const MainPage: React.FC = () => {
+    const initSocket = useSocket('joined');
+    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
 
 
     useEffect(() => {
-        initSocket.emit(userId);
+        initSocket.emit(userPhone);
     }, []);
 
 
     return (
         <div style={{display: 'flex'}}>
             <ChatsSide/>
-             <MessagesSide/>
+            <MessagesSide/>
             <Settings/>
         </div>
     );

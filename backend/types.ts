@@ -11,6 +11,8 @@ export interface IMessage {
 
 export interface IDialog {
     partnerPhone: phone,
+    partnerAvatar: string,
+    partnerNickname: string,
     messages: IMessage[];
 }
 

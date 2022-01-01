@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import settingsReducer from "./settingsReducer";
-import userReducer from "./userReducer";
-import dialogReducer from "./dialogReducer";
+import userReducer from "./userReducer/userReducer";
+import dialogReducer from "./dialogReducer/dialogReducer";
 
 const rootReducer = combineReducers({
     settings: settingsReducer,
@@ -10,3 +10,5 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+export type rootState = ReturnType<typeof rootReducer>;

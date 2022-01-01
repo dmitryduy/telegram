@@ -1,6 +1,8 @@
 import { dialogId, IDialog, IMessage, IUser, IUsers, phone } from "./types";
 
 const express = require('express');
+import { Request, Response } from 'express';
+
 const app = express();
 const http = require('http');
 const cors = require('cors');
@@ -28,16 +30,22 @@ const usersMapToArray = () => {
     return Array.from(users)
         .map(([userPhone, user]) => ([userPhone, {
             ...user,
-            dialogs: Array.from(user.dialogs).length ? Array.from(user.dialogs).length : null
+            dialogs: user.dialogs ? Array.from(user.dialogs) : null
         }]))
 }
 
-const addMessageToDialogByPhone = (user: IUser, dialogId: dialogId, message: IMessage) => {
+const addMessageToDialogByPhone = (user: IUser, dialogId: dialogId, message: IMessage, partner: IUser) => {
+    if (!user.dialogs) {
+        user.dialogs = new Map<dialogId, IDialog>();
+    }
+
     if (user.dialogs.has(dialogId)) {
-        user.dialogs.get(dialogId).messages.push(message);
+        user.dialogs.get(dialogId)!.messages.push(message);
     } else {
         user.dialogs.set(dialogId, {
-            partnerPhone: message.senderPhone,
+            partnerPhone: partner.phoneNumber,
+            partnerAvatar: partner.avatar,
+            partnerNickname: partner.nickname,
             messages: [message]
         })
     }
@@ -59,15 +67,14 @@ const createNewUser = (phoneNumber: phone, nickname: string): IUser => {
     };
 }
 
-app.post('/login', (req, res) => {
+app.post('/login', (req: Request, res: Response) => {
     const {userPhone, nickname}: { userPhone: phone, nickname: string } = req.body;
     if (users.has(userPhone)) {
-        const user: IUser = users.get(userPhone);
-        if (users.get(userPhone).nickname === nickname) {
-            res.json(user);
+        const user: IUser = users.get(userPhone)!;
+        if (users.get(userPhone)!.nickname === nickname) {
+            res.json({...user, dialogs: user.dialogs ? Array.from(user.dialogs) : null});
         } else {
-            res.status(400);
-            res.send();
+            res.json({error: true})
         }
     } else {
         const newUser = createNewUser(userPhone, nickname);
@@ -77,42 +84,57 @@ app.post('/login', (req, res) => {
     }
 })
 
-app.get('/users/:substring', (req, res) => {
+app.get('/users/:substring', (req: Request, res: Response) => {
     const substring = req.params.substring;
     const filteredUsers = Array.from(users.values())
         .filter(user => user.nickname.startsWith(substring))
-        .map(user => ({
-            phone: user.phoneNumber,
-            avatar: user.avatar,
-            nickname: user.nickname
+        .map((user): IDialog => ({
+            partnerPhone: user.phoneNumber,
+            partnerAvatar: user.avatar,
+            partnerNickname: user.nickname,
+            messages: []
         }));
     res.json(filteredUsers);
 });
 
-io.on('connection', (socket) => {
+app.get('/users/:phone', (req: Request, res: Response) => {
+    const phone: phone = req.params.substring;
+    const user = users.get(phone)!;
+    res.json({ isOnline: user.isOnline, lastSeen: user.lastSeen});
+});
+
+
+io.on('connection', (socket: any) => {
     console.log('user id: ', socket.id);
-    let user: IUser = null;
+    let user: IUser | null = null;
     socket.on('joined', (userPhone: phone) => {
-        user = users.get(userPhone);
+        user = users.get(userPhone)!;
         user.isOnline = true;
         user.socketId = socket.id;
         user.lastSeen = null;
-        socket.broadcast.emit('user online', {userNickname: user.nickname})
+        socket.broadcast.emit('user online', {userPhone: user.phoneNumber})
     })
 
-    socket.on('send message', ({senderPhone, receiverPhone, messageText, dialogId}) => {
+    socket.on('send message', ({senderPhone, receiverPhone, messageText, dialogId}:
+                                   {
+                                       senderPhone: phone, receiverPhone: phone, messageText: string,
+                                       dialogId: dialogId
+                                   }) => {
         const newMessageObj: IMessage = {
             createDate: Date.now(),
             text: messageText,
             senderPhone
         }
-        const sender = users.get(senderPhone);
-        const receiver = users.get(receiverPhone);
-        addMessageToDialogByPhone(sender, dialogId, newMessageObj);
-        addMessageToDialogByPhone(receiver, dialogId, newMessageObj);
+        const sender = users.get(senderPhone)!;
+        const receiver = users.get(receiverPhone)!;
+        addMessageToDialogByPhone(sender, dialogId, newMessageObj, receiver);
+        addMessageToDialogByPhone(receiver, dialogId, newMessageObj, sender);
         if (receiver.isOnline) {
             io.to(receiver.socketId).emit("new message", {
                 ...newMessageObj,
+                partnerPhone: sender.phoneNumber,
+                partnerAvatar: sender.avatar,
+                partnerNickname: sender.nickname,
                 dialogId,
             })
         }

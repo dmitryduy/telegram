@@ -3,7 +3,7 @@ import { SearchInput } from "./SearchField.styles";
 import useInput from "../../hooks/useInput";
 import { useDebounce } from "use-debounce";
 import { useDispatch } from "react-redux";
-import { setSearchResultsAC } from "../../reducers/dialogReducer";
+import { setSearchResultsAC } from "../../reducers/dialogReducer/dialogReducer";
 
 const SearchField = ({setSearch, isSearch, setLoading}) => {
     const [searchValue, setSearchValue] = useInput();
