@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     CountryCodeInput,
     LoginButton,
@@ -10,11 +10,12 @@ import {
 import useInput from "../../hooks/useInput";
 import useAnimation from "../../hooks/useAnimation";
 import { fetchUserInfo } from "../../reducers/userReducer/userReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-const LoginPage = () => {
-    const isAuth = useSelector(({user}) => user.isAuth);
+const LoginPage: React.FC = () => {
+    const isAuth = useTypedSelector(({user}) => user.isAuth);
 
     const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+[0-9]{0,3}$/);
     const [phoneInput, setPhoneInput] = useInput('', /^[0-9]{0,10}$/);
@@ -24,7 +25,7 @@ const LoginPage = () => {
     const [userNicknameAnimation, setUserNicknameAnimation] = useAnimation(2000);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const error = useSelector(({user}) => user.error);
+    const error = useTypedSelector(({user}) => user.isError);
 
     const [errorMessage, setErrorMessage] = useState('');
     const sendUserPhone = () => {
@@ -64,13 +65,13 @@ const LoginPage = () => {
                 <LoginTitle>You Phone Number</LoginTitle>
                 <LoginSubtitle>Please confirm your country code and enter your mobile phone number.</LoginSubtitle>
                 <div>
-                    <CountryCodeInput className={codeNumberAnimation && 'error'} value={codeNumberInput}
+                    <CountryCodeInput className={codeNumberAnimation ? 'error': ''} value={codeNumberInput}
                                       onInput={setCodeNumberInput}/>
-                    <NumberInput className={numberAnimation && 'error'} value={phoneInput}
+                    <NumberInput className={numberAnimation ? 'error': ''} value={phoneInput}
                                  onInput={setPhoneInput}/>
                 </div>
                 <NicknameTitle>Enter your nickname</NicknameTitle>
-                <NicknameInput className={userNicknameAnimation && 'error'} value={nicknameInput}
+                <NicknameInput className={userNicknameAnimation ? 'error': ''} value={nicknameInput}
                                onInput={setNicknameInput}/>
                 <div>
                     <PhoneError className={errorMessage && 'visible'}>{errorMessage}</PhoneError>

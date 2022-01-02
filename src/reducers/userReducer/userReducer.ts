@@ -46,7 +46,7 @@ export const fetchUserInfo = (userPhone: phone, nickname: string) => async (disp
         body: JSON.stringify({userPhone, nickname})
     });
 
-    let data = await response.json();
+    const data = await response.json();
     if (data.error) {
         dispatch(setErrorAC());
         return;
@@ -56,7 +56,8 @@ export const fetchUserInfo = (userPhone: phone, nickname: string) => async (disp
         nickname: data.nickname,
         avatar: data.avatar
     }));
-    dispatch(initializeDialogsAC(new Map<dialogId, IDialog>(data.dialogs)));
+    console.log(data)
+    dispatch(initializeDialogsAC(data.dialogs ? new Map<dialogId, IDialog>(data.dialogs ): null));
 
 }
 

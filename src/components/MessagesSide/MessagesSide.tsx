@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { Messages, MessagesSideContainer, NoContent } from "./MessagesSide.styles";
 import Message from "../Message/Message";
-import {  useSelector } from "react-redux";
 import MessageInput from "../MessageInput/MessageInput";
 import PartnerInfo from "../PartnerInfo/PartnerInfo";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-const MessagesSide = () => {
-    const userId = useSelector(({user}) => user.id);
-    const scrollToRef = useRef(null);
-    const messages = useSelector(({dialog}) => dialog.activeDialog?.messages);
+const MessagesSide: React.FC = () => {
+    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
+    const scrollToRef = useRef<HTMLDivElement>(null);
+    const messages = useTypedSelector(({dialog}) => dialog.activeDialog?.messages);
 
     useEffect(() => {
         scrollToRef?.current?.scrollIntoView({ block: "center"});
@@ -27,11 +27,11 @@ const MessagesSide = () => {
             <PartnerInfo/>
             <Messages>
                 {messages.map((message, index, arr) => <Message
-                    isMe={userId === message.sender}
-                    showBefore={arr[index + 1]?.sender !== message.sender}
-                    showNewDate={ index === 0 || (new Date(arr[index - 1].timestamp).getDate() !== new Date(message.timestamp).getDate()
-                        ||  arr[index - 1].timestamp - message.timestamp > 1000 * 60 * 60 * 24)}
-                    key={message.timestamp}
+                    isMe={userPhone === message.senderPhone}
+                    isShowBefore={arr[index + 1]?.senderPhone !== message.senderPhone}
+                    isShowNewDate={ index === 0 || (new Date(arr[index - 1].createDate).getDate() !== new Date(message.createDate).getDate()
+                        ||  arr[index - 1].createDate - message.createDate > 1000 * 60 * 60 * 24)}
+                    key={message.createDate}
                     message={message}/>)}
                 <div ref={scrollToRef}/>
             </Messages>

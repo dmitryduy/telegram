@@ -1,9 +1,9 @@
 import React from 'react';
 import { HamburgerContainer } from "./HamburgerMenuIcon.styles";
 import { useDispatch } from "react-redux";
-import { switchSettingsAC } from "../../reducers/settingsReducer";
+import { switchSettingsAC } from "../../reducers/settingsReducer/settingsReducer";
 
-const HamburgerMenuIcon = () => {
+const HamburgerMenuIcon: React.FC = () => {
     const dispatch = useDispatch();
     const onOpenSettings = () => {
         dispatch(switchSettingsAC(true));

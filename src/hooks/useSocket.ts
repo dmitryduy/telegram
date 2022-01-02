@@ -1,6 +1,6 @@
 import socket from "../socket";
 
-const useSocket = (msgName) => {
+const useSocket = (msgName: string) => {
 
     return {
         on: (cb) => {
@@ -11,7 +11,7 @@ const useSocket = (msgName) => {
         off: () => {
             socket.off(msgName)
         },
-        emit: (data) => {
+        emit: (data: any) => {
             socket.emit(msgName, data)
         }
     }

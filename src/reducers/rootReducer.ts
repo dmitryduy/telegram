@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import settingsReducer from "./settingsReducer";
+import settingsReducer from "./settingsReducer/settingsReducer";
 import userReducer from "./userReducer/userReducer";
 import dialogReducer from "./dialogReducer/dialogReducer";
 

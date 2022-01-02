@@ -4,12 +4,13 @@ import HamburgerMenuIcon from "../HamburgerMenuIcon/HamburgerMenuIcon";
 import { Chats, ChatsSideContainer, ChatsSideHeader } from "./ChatsSide.styles";
 import ChatItem from "../ChatItem/ChatItem";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { dialogId, timestamp } from "../../../backend/types";
+import { dialogId, phone, timestamp } from "../../../backend/types";
 
 interface IDialogToArray {
     dialogId: dialogId,
     partnerAvatar: string,
     partnerNickname: string,
+    partnerPhone: phone,
     lastMsg: string,
     lastMsgDate: timestamp
 }
@@ -22,6 +23,7 @@ const ChatsSide = () => {
             dialogId: dialogId,
             partnerAvatar: dialog.partnerAvatar,
             partnerNickname: dialog.partnerNickname,
+            partnerPhone: dialog.partnerPhone,
             lastMsg: dialog.messages[dialog.messages.length - 1].text,
             lastMsgDate: dialog.messages[dialog.messages.length - 1].createDate
         })  ;
@@ -42,6 +44,7 @@ const ChatsSide = () => {
                         key={dialog.dialogId}
                         partnerAvatar={dialog.partnerAvatar}
                         partnerNickname={dialog.partnerNickname}
+                        partnerPhone={dialog.partnerPhone}
                         lastMsg={dialog.lastMsg}
                         lastMsgDate={dialog.lastMsgDate}
                     />)

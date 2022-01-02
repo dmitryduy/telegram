@@ -12,7 +12,7 @@ export const NewDate = styled.div`
   font-size: ${props => props.theme.fontSizes.normal};
 `;
 
-export const MessageContainer = styled.div`
+export const MessageContainer = styled.div<{isShowBefore: boolean}>`
   display: flex;
   max-width: 70%;
   margin: 2px 0;
@@ -32,7 +32,7 @@ export const MessageContainer = styled.div`
   &.me {
     background-color: ${props => props.theme.colors.myMessageBg};
     align-self: flex-end;
-  ${props => props.showBefore && css`
+  ${props => props.isShowBefore && css`
     &::before {
       border-bottom: 12px solid ${props => props.theme.colors.myMessageBg};
       right: -7px;
@@ -43,7 +43,7 @@ export const MessageContainer = styled.div`
   &.partner {
     background-color: #fff;
     align-self: flex-start;
-    ${props => props.showBefore && css`
+    ${props => props.isShowBefore && css`
       &::before {
         border-bottom: 12px solid #fff;
         left: -7px;

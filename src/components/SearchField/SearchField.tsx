@@ -1,11 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { SearchInput } from "./SearchField.styles";
 import useInput from "../../hooks/useInput";
 import { useDebounce } from "use-debounce";
 import { useDispatch } from "react-redux";
-import { setSearchResultsAC } from "../../reducers/dialogReducer/dialogReducer";
+import { setFoundedGlobalUsers } from "../../reducers/dialogReducer/dialogReducer";
+import { IDialog } from "../../../backend/types";
 
-const SearchField = ({setSearch, isSearch, setLoading}) => {
+interface ISearchFieldProps {
+    setSearch: Dispatch<SetStateAction<boolean>>,
+    isSearch: boolean,
+    setLoading: Dispatch<SetStateAction<boolean>>
+}
+
+const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoading}) => {
     const [searchValue, setSearchValue] = useInput();
     const [value] = useDebounce(searchValue, 1000);
 
@@ -24,13 +31,13 @@ const SearchField = ({setSearch, isSearch, setLoading}) => {
         if (value) {
             fetch(`http://localhost:5000/users/${searchValue}`)
                 .then(response => response.json())
-                .then(data => {
+                .then((data: IDialog[]) => {
                     setLoading(false);
-                    dispatch(setSearchResultsAC(data))
+                    dispatch(setFoundedGlobalUsers(data));
                 });
 
         }
-    }, [value])
+    }, [value]);
 
     return (
         <SearchInput value={searchValue} onInput={setSearchValue} placeholder='Search...'>

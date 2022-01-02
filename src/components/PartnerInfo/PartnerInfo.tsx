@@ -1,10 +1,11 @@
 import React from 'react';
 import { PartnerInfoContainer } from "./PartnerInfo.styles";
-import { useSelector } from "react-redux";
 import dateFormat from "dateformat";
+import { timestamp } from "../../../backend/types";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-const dateToString = (date) => {
-    const now = +new Date();
+const dateToString = (date: timestamp): string => {
+    const now =  Date.now();
     if (now - date < 1000*60) {
         return 'recently';
     }
@@ -17,12 +18,12 @@ const dateToString = (date) => {
 
 }
 
-const PartnerInfo = () => {
-    const {withPhoneNumber, withLastSeen, withOnline} = useSelector(({dialog}) => dialog.activeDialog);
+const PartnerInfo: React.FC = () => {
+    const {partnerPhone, isOnline, lastSeen} = useTypedSelector(({dialog}) => dialog.activeDialog!);
     return (
         <PartnerInfoContainer>
-            <h5>{withPhoneNumber}</h5>
-            <span>{withOnline ? 'Online': `last seen ${dateToString(withLastSeen)}`}</span>
+            <h5>{partnerPhone}</h5>
+            <span>{isOnline ? 'Online': `last seen ${dateToString(lastSeen!)}`}</span>
         </PartnerInfoContainer>
     );
 };

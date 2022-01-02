@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useAnimation = (timeout) => {
+const useAnimation = (timeout: number): [boolean, () => void] => {
     const [animate, setAnimate] = useState(false);
     useEffect(() => {
         if (animate) {
@@ -9,7 +9,9 @@ const useAnimation = (timeout) => {
     }, [animate]);
 
 
-    return [animate, () => setAnimate(true)];
+    return [animate, () => {
+        setAnimate(true)
+    }];
 }
 
 export default useAnimation;

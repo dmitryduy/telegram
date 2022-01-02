@@ -1,14 +1,20 @@
 import {
     dialogActionType,
     DialogReducerAction,
+    IActiveDialog,
+    IAddMessageAC,
     IAddNewMessageAC,
     IDialogReducerState,
-    IInitializeDialogsAC, INewMessage,
+    IInitializeDialogsAC,
+    INewMessage,
     IRemoveGlobalUsersAC,
+    ISetActiveDialogAC,
+    ISetFoundedGlobalUsers,
     ISetOfflineUserAC,
     ISetOnlineUserAC
 } from "./types";
-import { dialogId, IDialog, phone, timestamp } from "../../../backend/types";
+import { dialogId, IDialog, IMessage, phone, timestamp } from "../../../backend/types";
+import { Dispatch } from "react";
 
 const initialState: IDialogReducerState = {
     dialogs: null,
@@ -21,21 +27,8 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
     switch (action.type) {
         case dialogActionType.REMOVE_SEARCH_RESULTS:
             return {...state, foundedGlobalUsers: null};
-        case types.SET_DIALOG:
-            if (!action.payload.messages.length) {
-                const foundUser = state.searchResults.find(foundedUser => foundedUser.nickname === action.payload.with);
-                return {
-                    ...state,
-                    activeDialog: {
-                        ...action.payload,
-                        withOnline: foundUser.online,
-                        withLastSeen: foundUser.lastSeen,
-                        withPhoneNumber: foundUser.phoneNumber,
-                        withAvatar: foundUser.withAvatar
-                    }
-                }
-            }
-            return {...state, activeDialog: {...action.payload}}
+        case dialogActionType.SET_ACTIVE_DIALOG:
+            return {...state, activeDialog: JSON.parse(JSON.stringify(action.payload))};
         case dialogActionType.SET_DIALOGS:
             return {...state, dialogs: action.payload};
         case dialogActionType.SET_ONLINE_USER:
@@ -54,32 +47,32 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
                 };
             }
             return {...state};
-        case types.ADD_MESSAGE:
-            const isHaveDialog = state.dialogs.find(dialog => dialog.id === state.activeDialog.id);
+        case dialogActionType.ADD_MESSAGE:
+            console.log(state.activeDialog)
+            const isHaveDialog = state.dialogs?.get(state.activeDialog!.dialogId);
+            console.log(isHaveDialog)
             if (!isHaveDialog) {
+                const copyOfDialogs = new Map(state.dialogs ? [...state.dialogs]: []);
+                copyOfDialogs.set(state.activeDialog!.dialogId, {
+                    messages: [action.payload],
+                    partnerNickname: state.activeDialog!.partnerNickname,
+                    partnerAvatar: state.activeDialog!.partnerAvatar,
+                    partnerPhone: state.activeDialog!.partnerPhone
+                });
                 return {
-                    ...state, activeDialog: {...state.activeDialog, messages: [action.payload]},
-                    dialogs: [{
-                        id: state.activeDialog.id,
-                        with: state.activeDialog.with,
-                        withOnline: state.activeDialog.withOnline,
-                        withAvatar: state.activeDialog.withAvatar,
-                        withPhoneNumber: state.activeDialog.withPhoneNumber,
-                        withLastSeen: state.activeDialog.withLastSeen,
-                        messages: [action.payload]
-                    }, ...state.dialogs]
-                }
+                    ...state, activeDialog: {...state.activeDialog!, messages: [action.payload]},
+                    dialogs: copyOfDialogs
+                };
             }
-            const newDialogs = state.dialogs.filter(dialog => dialog.id !== state.activeDialog.id);
+            const copyOfDialogs = new Map([...state.dialogs!]);
+            copyOfDialogs.get(state.activeDialog!.dialogId)!.messages.push(action.payload)
             return {
-                activeDialog: {...state.activeDialog, messages: [...state.activeDialog.messages, action.payload]},
-                dialogs: [{
-                    ...state.activeDialog,
-                    messages: [...state.activeDialog.messages, action.payload]
-                }, ...newDialogs,]
+                ...state,
+                activeDialog: {...state.activeDialog!, messages: [...state.activeDialog!.messages, action.payload]},
+                dialogs: copyOfDialogs
             }
-        case types.SET_SEARCH_RESULTS:
-            return {...state, searchResults: [...action.payload]}
+        case dialogActionType.SET_FOUNDED_GLOBAL_USERS:
+            return {...state, foundedGlobalUsers: [...action.payload]}
         case dialogActionType.ADD_NEW_MESSAGE:
             const newMessage = {
                 senderPhone: action.payload.senderPhone,
@@ -103,7 +96,7 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
             dialogsWithNewMessage.get(action.payload.dialogId)!.messages.push(newMessage);
             const activeDialogWithMessage = state.activeDialog;
             if (activeDialogWithMessage?.dialogId === action.payload.dialogId) {
-                activeDialogWithMessage.messages.push(newMessage);
+                activeDialogWithMessage.messages = [...activeDialogWithMessage.messages, newMessage];
             }
             return {
                 ...state,
@@ -116,19 +109,15 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
     }
 }
 
-export const setDialogAC = (dialog) => ({
-    type: types.SET_DIALOG,
-    payload: dialog
-})
 
-export const initializeDialogsAC = (dialogs: Map<dialogId, IDialog>): IInitializeDialogsAC => ({
+export const initializeDialogsAC = (dialogs: Map<dialogId, IDialog> | null): IInitializeDialogsAC => ({
     type: dialogActionType.SET_DIALOGS,
     payload: dialogs
 })
 
-export const addMessageAC = (messageObj) => ({
-    type: types.ADD_MESSAGE,
-    payload: messageObj
+export const addMessageAC = (message: IMessage): IAddMessageAC => ({
+    type: dialogActionType.ADD_MESSAGE,
+    payload: message
 })
 
 export const addNewMessageAC = (message: INewMessage): IAddNewMessageAC => ({
@@ -136,8 +125,8 @@ export const addNewMessageAC = (message: INewMessage): IAddNewMessageAC => ({
     payload: message
 })
 
-export const setSearchResultsAC = (data) => ({
-    type: types.SET_SEARCH_RESULTS,
+export const setFoundedGlobalUsers = (data: IDialog[]): ISetFoundedGlobalUsers => ({
+    type: dialogActionType.SET_FOUNDED_GLOBAL_USERS,
     payload: data
 })
 
@@ -157,5 +146,20 @@ export const sendOnlineUserAC = (userPhone: phone): ISetOnlineUserAC => ({
     type: dialogActionType.SET_ONLINE_USER,
     payload: userPhone
 })
+
+export const setActiveDialog = (dialog: IActiveDialog): ISetActiveDialogAC => ({
+    type: dialogActionType.SET_ACTIVE_DIALOG,
+    payload: dialog
+})
+
+export const fetchActiveDialog = (dialog: IDialog & {dialogId: dialogId | null}) => async (dispatch: Dispatch<DialogReducerAction>) => {
+    const response = await fetch(`http://localhost:5000/users/phone/${dialog.partnerPhone}`);
+    const data: { isOnline: boolean, lastSeen: timestamp | null } = await response.json();
+    dispatch(setActiveDialog({...dialog,
+        dialogId: dialog.dialogId || Date.now(),
+        isOnline: data.isOnline,
+        lastSeen: data.lastSeen
+    }));
+}
 
 export default dialogReducer;

@@ -72,6 +72,7 @@ app.post('/login', (req: Request, res: Response) => {
     if (users.has(userPhone)) {
         const user: IUser = users.get(userPhone)!;
         if (users.get(userPhone)!.nickname === nickname) {
+            console.log({...user, dialogs: user.dialogs ? Array.from(user.dialogs) : null})
             res.json({...user, dialogs: user.dialogs ? Array.from(user.dialogs) : null});
         } else {
             res.json({error: true})
@@ -80,7 +81,7 @@ app.post('/login', (req: Request, res: Response) => {
         const newUser = createNewUser(userPhone, nickname);
         users.set(userPhone, newUser);
         writeUsersToFile();
-        res.json(newUser);
+        res.json({...newUser, dialogs: newUser.dialogs ? Array.from(newUser.dialogs) : null});
     }
 })
 
@@ -97,10 +98,11 @@ app.get('/users/:substring', (req: Request, res: Response) => {
     res.json(filteredUsers);
 });
 
-app.get('/users/:phone', (req: Request, res: Response) => {
-    const phone: phone = req.params.substring;
-    const user = users.get(phone)!;
-    res.json({ isOnline: user.isOnline, lastSeen: user.lastSeen});
+app.get('/users/phone/:phone', (req: Request, res: Response) => {
+    const phone: phone = req.params.phone;
+    console.log(req.params)
+    const user = users.get(phone);
+    res.json({ isOnline: user?.isOnline || false, lastSeen: user?.lastSeen|| 0});
 });
 
 

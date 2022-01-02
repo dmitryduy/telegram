@@ -37,16 +37,21 @@ var usersMapToArray = function () {
     return Array.from(users)
         .map(function (_a) {
         var userPhone = _a[0], user = _a[1];
-        return ([userPhone, __assign(__assign({}, user), { dialogs: Array.from(user.dialogs).length ? Array.from(user.dialogs).length : null })]);
+        return ([userPhone, __assign(__assign({}, user), { dialogs: user.dialogs ? Array.from(user.dialogs) : null })]);
     });
 };
-var addMessageToDialogByPhone = function (user, dialogId, message) {
+var addMessageToDialogByPhone = function (user, dialogId, message, partner) {
+    if (!user.dialogs) {
+        user.dialogs = new Map();
+    }
     if (user.dialogs.has(dialogId)) {
         user.dialogs.get(dialogId).messages.push(message);
     }
     else {
         user.dialogs.set(dialogId, {
-            partnerPhone: message.senderPhone,
+            partnerPhone: partner.phoneNumber,
+            partnerAvatar: partner.avatar,
+            partnerNickname: partner.nickname,
             messages: [message]
         });
     }
@@ -70,18 +75,18 @@ app.post('/login', function (req, res) {
     if (users.has(userPhone)) {
         var user = users.get(userPhone);
         if (users.get(userPhone).nickname === nickname) {
-            res.json(user);
+            console.log(__assign(__assign({}, user), { dialogs: user.dialogs ? Array.from(user.dialogs) : null }));
+            res.json(__assign(__assign({}, user), { dialogs: user.dialogs ? Array.from(user.dialogs) : null }));
         }
         else {
-            res.status(400);
-            res.send();
+            res.json({ error: true });
         }
     }
     else {
         var newUser = createNewUser(userPhone, nickname);
         users.set(userPhone, newUser);
         writeUsersToFile();
-        res.json(newUser);
+        res.json(__assign(__assign({}, newUser), { dialogs: newUser.dialogs ? Array.from(newUser.dialogs) : null }));
     }
 });
 app.get('/users/:substring', function (req, res) {
@@ -89,11 +94,18 @@ app.get('/users/:substring', function (req, res) {
     var filteredUsers = Array.from(users.values())
         .filter(function (user) { return user.nickname.startsWith(substring); })
         .map(function (user) { return ({
-        phone: user.phoneNumber,
-        avatar: user.avatar,
-        nickname: user.nickname
+        partnerPhone: user.phoneNumber,
+        partnerAvatar: user.avatar,
+        partnerNickname: user.nickname,
+        messages: []
     }); });
     res.json(filteredUsers);
+});
+app.get('/users/phone/:phone', function (req, res) {
+    var phone = req.params.phone;
+    console.log(req.params);
+    var user = users.get(phone);
+    res.json({ isOnline: (user === null || user === void 0 ? void 0 : user.isOnline) || false, lastSeen: (user === null || user === void 0 ? void 0 : user.lastSeen) || 0 });
 });
 io.on('connection', function (socket) {
     console.log('user id: ', socket.id);
@@ -103,7 +115,7 @@ io.on('connection', function (socket) {
         user.isOnline = true;
         user.socketId = socket.id;
         user.lastSeen = null;
-        socket.broadcast.emit('user online', { userNickname: user.nickname });
+        socket.broadcast.emit('user online', { userPhone: user.phoneNumber });
     });
     socket.on('send message', function (_a) {
         var senderPhone = _a.senderPhone, receiverPhone = _a.receiverPhone, messageText = _a.messageText, dialogId = _a.dialogId;
@@ -114,10 +126,10 @@ io.on('connection', function (socket) {
         };
         var sender = users.get(senderPhone);
         var receiver = users.get(receiverPhone);
-        addMessageToDialogByPhone(sender, dialogId, newMessageObj);
-        addMessageToDialogByPhone(receiver, dialogId, newMessageObj);
+        addMessageToDialogByPhone(sender, dialogId, newMessageObj, receiver);
+        addMessageToDialogByPhone(receiver, dialogId, newMessageObj, sender);
         if (receiver.isOnline) {
-            io.to(receiver.socketId).emit("new message", __assign(__assign({}, newMessageObj), { dialogId: dialogId }));
+            io.to(receiver.socketId).emit("new message", __assign(__assign({}, newMessageObj), { partnerPhone: sender.phoneNumber, partnerAvatar: sender.avatar, partnerNickname: sender.nickname, dialogId: dialogId }));
         }
         writeUsersToFile();
     });

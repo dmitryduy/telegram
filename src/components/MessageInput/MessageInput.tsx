@@ -1,24 +1,25 @@
 import React from 'react';
 import { MessageInputContainer } from "./MessageInput.styles";
 import useInput from "../../hooks/useInput";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import SendMessage from '../../assets/imgs/send-message-button.png';
 import useSocket from "../../hooks/useSocket";
 import { addMessageAC } from "../../reducers/dialogReducer/dialogReducer";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-const MessageInput = () => {
+const MessageInput: React.FC = () => {
     const [inputValue, changeInputValue, clearInput] = useInput();
-    const activeDialog = useSelector(({dialog}) => dialog.activeDialog);
+    const activeDialog = useTypedSelector(({dialog}) => dialog.activeDialog);
     const dispatch = useDispatch();
     const messageSocket = useSocket('send message');
-    const messageTo = useSelector(({dialog}) => dialog.activeDialog.with);
-    const userId = useSelector(({user}) => user.id);
+    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
 
     const sendMessage = () => {
         if (inputValue) {
-            dispatch(addMessageAC({timestamp:1111111, sender: userId, messageText: inputValue}));
-            messageSocket.emit({messageTo: messageTo, messageText: inputValue, dialogId: activeDialog.id});
+            console.log(4)
+            dispatch(addMessageAC({senderPhone: userPhone!, createDate: Date.now(), text: inputValue}));
+            messageSocket.emit({senderPhone: userPhone,receiverPhone: activeDialog?.partnerPhone,  messageText: inputValue, dialogId: activeDialog?.dialogId});
             clearInput();
         }
     }
