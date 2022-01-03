@@ -2,7 +2,8 @@ import { ISettingsReducerState, SettingsActionType, SettingsReducerAction } from
 
 const initialState: ISettingsReducerState = {
     language: 'ru',
-    isShowSettings: false
+    isShowSettings: false,
+    newMessagePopupTime: 10000
 }
 
 const settingsReducer = (state=initialState, action: SettingsReducerAction) => {

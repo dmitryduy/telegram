@@ -15,6 +15,7 @@ const io = require("socket.io")(server, {
 });
 app.use(express.json());
 app.use(cors());
+app.use(express.static(__dirname + '/assets'));
 let userFile = fs.readFileSync(__dirname + '/db/users.json', 'utf8');
 
 const users: IUsers = userFile ?
@@ -63,7 +64,7 @@ const createNewUser = (phoneNumber: phone, nickname: string): IUser => {
         socketId: null,
         nickname: nickname,
         lastSeen: null,
-        avatar: 'https://lh3.googleusercontent.com/proxy/dEoAsY560gMSYM5q9Ov9RaWxNf5a4-KaA5JuqRoKhBADemznTdpNrLP5nXpwgoHlibNBwssbCQ4Lq_CUbuKVhRwkAts9chQzZzjZv2j6UpoWUBUR1kZx1FL6o3qrDa2kEg'
+        avatar: 'http://localhost:5000/images/user-logo.png'
     };
 }
 

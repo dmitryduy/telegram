@@ -48,9 +48,7 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
             }
             return {...state};
         case dialogActionType.ADD_MESSAGE:
-            console.log(state.activeDialog)
             const isHaveDialog = state.dialogs?.get(state.activeDialog!.dialogId);
-            console.log(isHaveDialog)
             if (!isHaveDialog) {
                 const copyOfDialogs = new Map(state.dialogs ? [...state.dialogs]: []);
                 copyOfDialogs.set(state.activeDialog!.dialogId, {

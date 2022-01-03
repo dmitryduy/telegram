@@ -24,6 +24,7 @@ var io = require("socket.io")(server, {
 });
 app.use(express.json());
 app.use(cors());
+app.use(express.static(__dirname + '/assets'));
 var userFile = fs.readFileSync(__dirname + '/db/users.json', 'utf8');
 var users = userFile ?
     new Map(JSON.parse(userFile))
@@ -67,7 +68,7 @@ var createNewUser = function (phoneNumber, nickname) {
         socketId: null,
         nickname: nickname,
         lastSeen: null,
-        avatar: 'https://lh3.googleusercontent.com/proxy/dEoAsY560gMSYM5q9Ov9RaWxNf5a4-KaA5JuqRoKhBADemznTdpNrLP5nXpwgoHlibNBwssbCQ4Lq_CUbuKVhRwkAts9chQzZzjZv2j6UpoWUBUR1kZx1FL6o3qrDa2kEg'
+        avatar: 'http://localhost:5000/images/user-logo.png'
     };
 };
 app.post('/login', function (req, res) {

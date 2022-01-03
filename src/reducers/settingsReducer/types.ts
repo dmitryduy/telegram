@@ -1,3 +1,4 @@
+import { timestamp } from "../../../backend/types";
 
 export enum SettingsActionType {
     SWITCH_SETTINGS = 'SWITCH_SETTINGS'
@@ -13,5 +14,6 @@ export type SettingsReducerAction = ISwitchSettingsAC;
 
 export interface ISettingsReducerState {
     language: 'ru' | 'en';
-    isShowSettings: boolean
+    isShowSettings: boolean,
+    newMessagePopupTime: timestamp
 }

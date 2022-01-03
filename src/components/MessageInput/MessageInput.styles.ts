@@ -9,6 +9,7 @@ export const MessageInputContainer = styled.div`
   height: 55px;
   width: 100%;
   background-color: #fff;
+  border-left: 1px solid ${props => props.theme.colors.lightGray};
   input {
     padding: 7px 10px 7px 20px;
     height: 100%;
