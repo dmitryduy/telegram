@@ -13,7 +13,7 @@ export const ChatsSideHeader = styled.div`
   height: 57px;
 `;
 
-export const Chats = styled.div`
+export const ChatsContainer = styled.div`
   position: relative;
   overflow: auto;
   height: calc(100vh - 57px);

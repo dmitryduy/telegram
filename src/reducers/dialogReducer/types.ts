@@ -1,4 +1,4 @@
-import { dialogId, IDialog, IMessage, phone, timestamp } from "../../../backend/types";
+import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../../backend/types";
 
 export type INewMessage =
     IMessage
@@ -56,7 +56,7 @@ export interface IAddMessageAC {
 
 export interface ISetFoundedGlobalUsers {
     type: dialogActionType.SET_FOUNDED_GLOBAL_USERS,
-    payload: IDialog[]
+    payload: IGlobalSearch
 }
 
 export type DialogReducerAction =
@@ -72,5 +72,5 @@ export type DialogReducerAction =
 export interface IDialogReducerState {
     dialogs: Map<dialogId, IDialog> | null,
     activeDialog: IActiveDialog | null,
-    foundedGlobalUsers: IDialog[] | null
+    foundedGlobalUsers: IGlobalSearch | null
 }

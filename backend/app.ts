@@ -1,4 +1,4 @@
-import { dialogId, IDialog, IMessage, IUser, IUsers, phone } from "./types";
+import { dialogId, IDialog, IGlobalSearch, IMessage, IUser, IUsers, phone } from "./types";
 
 const express = require('express');
 import { Request, Response } from 'express';
@@ -86,24 +86,46 @@ app.post('/login', (req: Request, res: Response) => {
     }
 })
 
-app.get('/users/:substring', (req: Request, res: Response) => {
-    const substring = req.params.substring;
+app.get('/users/', (req: Request, res: Response) => {
+    const {value, userPhone} = req.query;
+    const result: IGlobalSearch = {
+        chatsOfUser: [],
+        chatsOfGlobal: [],
+    }
     const filteredUsers = Array.from(users.values())
-        .filter(user => user.nickname.startsWith(substring))
-        .map((user): IDialog => ({
-            partnerPhone: user.phoneNumber,
-            partnerAvatar: user.avatar,
-            partnerNickname: user.nickname,
-            messages: []
-        }));
-    res.json(filteredUsers);
+        .filter(user => user.nickname.startsWith(value as string));
+    filteredUsers.forEach((user) => {
+        if (user.phoneNumber.slice(1) !== userPhone) {
+            let dialogId = -1;
+            if (user.dialogs) {
+                console.log(user.dialogs.entries());
+                for (let [id, partner] of user.dialogs.entries()) {
+                    if (partner.partnerPhone.slice(1) === userPhone) {
+                        dialogId = id;
+                        break;
+                    }
+                }
+            }
+            if (dialogId !== -1) {
+                result.chatsOfUser.push(dialogId);
+            } else {
+                result.chatsOfGlobal.push({
+                    partnerPhone: user.phoneNumber,
+                    partnerAvatar: user.avatar,
+                    partnerNickname: user.nickname,
+                    messages: []
+                })
+            }
+        }
+    });
+    res.json(result);
 });
 
 app.get('/users/phone/:phone', (req: Request, res: Response) => {
     const phone: phone = req.params.phone;
     console.log(req.params)
     const user = users.get(phone);
-    res.json({ isOnline: user?.isOnline || false, lastSeen: user?.lastSeen|| 0});
+    res.json({isOnline: user?.isOnline || false, lastSeen: user?.lastSeen || 0});
 });
 
 

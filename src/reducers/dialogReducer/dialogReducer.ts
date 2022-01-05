@@ -13,7 +13,7 @@ import {
     ISetOfflineUserAC,
     ISetOnlineUserAC
 } from "./types";
-import { dialogId, IDialog, IMessage, phone, timestamp } from "../../../backend/types";
+import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../../backend/types";
 import { Dispatch } from "react";
 
 const initialState: IDialogReducerState = {
@@ -50,7 +50,7 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
         case dialogActionType.ADD_MESSAGE:
             const isHaveDialog = state.dialogs?.get(state.activeDialog!.dialogId);
             if (!isHaveDialog) {
-                const copyOfDialogs = new Map(state.dialogs ? [...state.dialogs]: []);
+                const copyOfDialogs = new Map(state.dialogs ? [...state.dialogs] : []);
                 copyOfDialogs.set(state.activeDialog!.dialogId, {
                     messages: [action.payload],
                     partnerNickname: state.activeDialog!.partnerNickname,
@@ -70,7 +70,13 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
                 dialogs: copyOfDialogs
             }
         case dialogActionType.SET_FOUNDED_GLOBAL_USERS:
-            return {...state, foundedGlobalUsers: [...action.payload]}
+            return {
+                ...state,
+                foundedGlobalUsers: {
+                    chatsOfGlobal: [...action.payload.chatsOfGlobal],
+                    chatsOfUser: [...action.payload.chatsOfUser]
+                }
+            };
         case dialogActionType.ADD_NEW_MESSAGE:
             const newMessage = {
                 senderPhone: action.payload.senderPhone,
@@ -123,7 +129,7 @@ export const addNewMessageAC = (message: INewMessage): IAddNewMessageAC => ({
     payload: message
 })
 
-export const setFoundedGlobalUsers = (data: IDialog[]): ISetFoundedGlobalUsers => ({
+export const setFoundedGlobalUsers = (data: IGlobalSearch): ISetFoundedGlobalUsers => ({
     type: dialogActionType.SET_FOUNDED_GLOBAL_USERS,
     payload: data
 })
@@ -150,10 +156,11 @@ export const setActiveDialog = (dialog: IActiveDialog): ISetActiveDialogAC => ({
     payload: dialog
 })
 
-export const fetchActiveDialog = (dialog: IDialog & {dialogId: dialogId | null}) => async (dispatch: Dispatch<DialogReducerAction>) => {
+export const fetchActiveDialog = (dialog: IDialog & { dialogId: dialogId | null }) => async (dispatch: Dispatch<DialogReducerAction>) => {
     const response = await fetch(`http://localhost:5000/users/phone/${dialog.partnerPhone}`);
     const data: { isOnline: boolean, lastSeen: timestamp | null } = await response.json();
-    dispatch(setActiveDialog({...dialog,
+    dispatch(setActiveDialog({
+        ...dialog,
         dialogId: dialog.dialogId || Date.now(),
         isOnline: data.isOnline,
         lastSeen: data.lastSeen

@@ -4,7 +4,8 @@ import useInput from "../../hooks/useInput";
 import { useDebounce } from "use-debounce";
 import { useDispatch } from "react-redux";
 import { setFoundedGlobalUsers } from "../../reducers/dialogReducer/dialogReducer";
-import { IDialog } from "../../../backend/types";
+import { IGlobalSearch } from "../../../backend/types";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 interface ISearchFieldProps {
     setSearch: Dispatch<SetStateAction<boolean>>,
@@ -15,6 +16,7 @@ interface ISearchFieldProps {
 const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoading}) => {
     const [searchValue, setSearchValue] = useInput();
     const [value] = useDebounce(searchValue, 1000);
+    const userPhone = useTypedSelector(({user})  => user.phoneNumber);
 
     const dispatch = useDispatch();
 
@@ -29,9 +31,9 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
 
     useEffect(() => {
         if (value) {
-            fetch(`http://localhost:5000/users/${searchValue}`)
+            fetch(`http://localhost:5000/users?value=${searchValue}&userPhone=${userPhone!.slice(1)}`)
                 .then(response => response.json())
-                .then((data: IDialog[]) => {
+                .then((data: IGlobalSearch) => {
                     setLoading(false);
                     dispatch(setFoundedGlobalUsers(data));
                 });

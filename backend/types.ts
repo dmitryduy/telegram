@@ -27,3 +27,8 @@ export interface IUser {
 }
 
 export type IUsers = Map<phone, IUser>;
+
+export interface IGlobalSearch {
+    chatsOfUser: dialogId[],
+    chatsOfGlobal: IDialog[]
+}

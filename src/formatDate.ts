@@ -8,7 +8,7 @@ const formatDate = (timeStamp: timestamp) => {
     if (Date.now() - date < DAY_BEFORE) {
         return dateFormat(timeStamp, 'HH:MM');
     } else {
-        return dateFormat(timeStamp, 'd:mm:YYYY');
+        return dateFormat(timeStamp, 'd.mm.yyyy');
     }
 }
 
