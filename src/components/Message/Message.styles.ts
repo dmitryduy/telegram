@@ -2,14 +2,39 @@ import styled, { css } from "styled-components";
 import { rgba } from "polished";
 
 export const NewDate = styled.div`
-  position: sticky;
-  top: 0;
   align-self: center;
   color: #fff;
   border-radius: 10px;
   background-color: ${props => rgba(props.theme.colors.darkGray, .35)};
   padding: 4px 7px;
   font-size: ${props => props.theme.fontSizes.normal};
+`;
+
+export const UnreadMessagesMark = styled.div`
+  width:100%;
+  padding: 5px 0;
+  text-align: center;
+  color: ${props => props.theme.colors.darkBlue};
+  background-color: #fff;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin: 5px 0;
+  cursor: default;
+  position: relative;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-color: inherit;
+    top: 0;
+  }
+  &:before {
+    left: -20px;
+  }
+  &:after {
+    right: -20px;
+  }
 `;
 
 export const MessageContainer = styled.div<{isShowBefore: boolean}>`
@@ -56,6 +81,7 @@ export const MessageContainer = styled.div<{isShowBefore: boolean}>`
 export const MessageText = styled.span`
   margin-right: 7px;
   font-size: ${props => props.theme.fontSizes.normal};
+  width: calc(100% - 37px);
   word-wrap: break-word;
 `;
 

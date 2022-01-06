@@ -9,6 +9,8 @@ const MessagesSide: React.FC = () => {
     const userPhone = useTypedSelector(({user}) => user.phoneNumber);
     const scrollToRef = useRef<HTMLDivElement>(null);
     const messages = useTypedSelector(({dialog}) => dialog.activeDialog?.messages);
+    const unreadMessages = useTypedSelector(({dialog}) => dialog.activeDialog?.unread);
+
 
     useEffect(() => {
         scrollToRef?.current?.scrollIntoView({ block: "center"});
@@ -29,6 +31,7 @@ const MessagesSide: React.FC = () => {
                 {messages.map((message, index, arr) => <Message
                     isMe={userPhone === message.senderPhone}
                     isShowBefore={arr[index + 1]?.senderPhone !== message.senderPhone}
+                    isShowUnread={arr.length - unreadMessages! === index}
                     isShowNewDate={ index === 0 || (new Date(arr[index - 1].createDate).getDate() !== new Date(message.createDate).getDate()
                         ||  arr[index - 1].createDate - message.createDate > 1000 * 60 * 60 * 24)}
                     key={message.createDate}

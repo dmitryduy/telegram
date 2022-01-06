@@ -18,7 +18,7 @@ const LoginPage: React.FC = () => {
     const isAuth = useTypedSelector(({user}) => user.isAuth);
 
     const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+[0-9]{0,3}$/);
-    const [phoneInput, setPhoneInput] = useInput('', /^[0-9]{0,10}$/);
+    const [phoneInput, setPhoneInput] = useInput('', /^[0-9]{0,8}$/);
     const [nicknameInput, setNicknameInput] = useInput('', /^[a-zA-Z0-9_]{0,20}$/)
     const [numberAnimation, setNumberAnimation] = useAnimation(2000);
     const [codeNumberAnimation, setCodeNumberAnimation] = useAnimation(2000);
@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
             setErrorMessage('Invalid code number');
             return;
         }
-        if (phoneInput.length < 10) {
+        if (phoneInput.length < 8) {
             setNumberAnimation();
             setErrorMessage('Invalid phone number');
             return;
@@ -44,7 +44,7 @@ const LoginPage: React.FC = () => {
             setErrorMessage('Nickname must have more 3 symbols');
             return;
         }
-        dispatch(fetchUserInfo(codeNumberInput + phoneInput, nicknameInput));
+        dispatch(fetchUserInfo((codeNumberInput + phoneInput).slice(1), nicknameInput));
     }
 
     useEffect(() => {

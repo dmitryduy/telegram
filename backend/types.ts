@@ -13,6 +13,7 @@ export interface IDialog {
     partnerPhone: phone,
     partnerAvatar: string,
     partnerNickname: string,
+    unread: number
     messages: IMessage[];
 }
 

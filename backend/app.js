@@ -25,19 +25,21 @@ const usersMapToArray = () => {
     return Array.from(users)
         .map(([userPhone, user]) => ([userPhone, Object.assign(Object.assign({}, user), { dialogs: user.dialogs ? Array.from(user.dialogs) : null })]));
 };
-const addMessageToDialogByPhone = (user, dialogId, message, partner) => {
+const addMessageToDialogByPhone = (user, dialogId, message, partner, isUnread = false) => {
     if (!user.dialogs) {
         user.dialogs = new Map();
     }
     if (user.dialogs.has(dialogId)) {
         user.dialogs.get(dialogId).messages.push(message);
+        isUnread && user.dialogs.get(dialogId).unread++;
     }
     else {
         user.dialogs.set(dialogId, {
             partnerPhone: partner.phoneNumber,
             partnerAvatar: partner.avatar,
             partnerNickname: partner.nickname,
-            messages: [message]
+            messages: [message],
+            unread: isUnread ? 1 : 0
         });
     }
 };
@@ -83,13 +85,12 @@ app.get('/users/', (req, res) => {
     const filteredUsers = Array.from(users.values())
         .filter(user => user.nickname.startsWith(value));
     filteredUsers.forEach((user) => {
-        if (user.phoneNumber.slice(1) !== userPhone) {
+        if (user.phoneNumber !== userPhone) {
             let dialogId = -1;
             if (user.dialogs) {
                 console.log(user.dialogs.entries());
                 for (let [id, partner] of user.dialogs.entries()) {
-                    console.log(5)
-                    if (partner.partnerPhone.slice(1) === userPhone) {
+                    if (partner.partnerPhone === userPhone) {
                         dialogId = id;
                         break;
                     }
@@ -103,17 +104,25 @@ app.get('/users/', (req, res) => {
                     partnerPhone: user.phoneNumber,
                     partnerAvatar: user.avatar,
                     partnerNickname: user.nickname,
-                    messages: []
+                    messages: [],
+                    unread: 0
                 });
             }
         }
     });
     res.json(result);
 });
-app.get('/users/phone/:phone', (req, res) => {
-    const phone = req.params.phone;
+app.get('/users/phone', (req, res) => {
+    var _a;
+    const { partnerPhone, userPhone } = req.query;
     console.log(req.params);
-    const user = users.get(phone);
+    const user = users.get(partnerPhone);
+    (_a = users.get(userPhone).dialogs) === null || _a === void 0 ? void 0 : _a.forEach((dialog) => {
+        if (dialog.partnerPhone === partnerPhone) {
+            dialog.unread = 0;
+        }
+    });
+    writeUsersToFile();
     res.json({ isOnline: (user === null || user === void 0 ? void 0 : user.isOnline) || false, lastSeen: (user === null || user === void 0 ? void 0 : user.lastSeen) || 0 });
 });
 io.on('connection', (socket) => {
@@ -135,7 +144,7 @@ io.on('connection', (socket) => {
         const sender = users.get(senderPhone);
         const receiver = users.get(receiverPhone);
         addMessageToDialogByPhone(sender, dialogId, newMessageObj, receiver);
-        addMessageToDialogByPhone(receiver, dialogId, newMessageObj, sender);
+        addMessageToDialogByPhone(receiver, dialogId, newMessageObj, sender, true);
         if (receiver.isOnline) {
             io.to(receiver.socketId).emit("new message", Object.assign(Object.assign({}, newMessageObj), { partnerPhone: sender.phoneNumber, partnerAvatar: sender.avatar, partnerNickname: sender.nickname, dialogId }));
         }

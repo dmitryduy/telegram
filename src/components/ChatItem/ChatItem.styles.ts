@@ -34,7 +34,7 @@ export const ChatImage = styled.img`
 export const ChatHeader = styled.div`
   display: flex;
   justify-content: space-between;
-
+  margin-bottom: 5px;
   h4 {
     font-weight: 600;
     font-size: ${props => props.theme.fontSizes.extraNormal};
@@ -47,10 +47,32 @@ export const ChatHeader = styled.div`
   }
 `;
 
+export const ChatFooter = styled.footer`
+display: flex;
+  justify-content: space-between;
+`;
+
 export const ChatLastMessage = styled.div`
   font-size: ${props => props.theme.fontSizes.extraNormal};
   color: ${props => props.theme.colors.black};
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  flex: 1;
+  margin-right: 5px;
 `;
+
+export const UnreadMessages = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  height: 20px;
+  color: #fff;
+  padding: 0 5px;
+  background-color: ${props => props.theme.colors.darkBlue};
+  border-radius: 10px/ 50%;
+  font-size: ${props => props.theme.fontSizes.small};
+  
+`;
+

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { ChatHeader, ChatImage, ChatItemContainer, ChatLastMessage } from "./ChatItem.styles";
+import { ChatHeader, ChatImage, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFooter } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
 import { useDispatch } from "react-redux";
 import { fetchActiveDialog, removeGlobalUsersAC } from "../../reducers/dialogReducer/dialogReducer";
@@ -13,6 +13,7 @@ interface IChatItemProps {
     lastMsg: string,
     partnerPhone: phone,
     lastMsgDate: timestamp | null,
+    unread: number,
     setSearch?: Dispatch<SetStateAction<boolean>>
 }
 
@@ -23,27 +24,30 @@ const ChatItem: React.FC<IChatItemProps> = ({
                                                 lastMsgDate,
                                                 dialogId,
                                                 partnerAvatar,
-                                                partnerNickname
+                                                partnerNickname,
+                                                unread
                                             }) => {
     const activeDialogId = useTypedSelector(({dialog}) => dialog?.activeDialog?.dialogId);
+    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
     const dispatch = useDispatch();
     const existingDialog = useTypedSelector(({dialog}) => dialog.dialogs?.get(dialogId as number));
 
     const setDialog = () => {
+        dispatch(removeGlobalUsersAC());
+        if (setSearch) {
+            setSearch(false);
+        }
         if (!existingDialog) {
             dispatch(fetchActiveDialog({
                 messages: [],
                 partnerNickname: partnerNickname,
                 partnerPhone: partnerPhone,
                 partnerAvatar: partnerAvatar,
-                dialogId: null
-            }));
-            dispatch(removeGlobalUsersAC());
-            if (setSearch) {
-                setSearch(false);
-            }
+                dialogId: null,
+                unread: 0
+            }, userPhone!));
         } else {
-            dispatch(fetchActiveDialog({...existingDialog, dialogId: dialogId as number}));
+            dispatch(fetchActiveDialog({...existingDialog, dialogId: dialogId as number}, userPhone!));
         }
     }
 
@@ -56,7 +60,10 @@ const ChatItem: React.FC<IChatItemProps> = ({
                     <h4>{partnerNickname}</h4>
                     {lastMsgDate && <span>{formatDate(lastMsgDate)}</span>}
                 </ChatHeader>
-                <ChatLastMessage>{lastMsg}</ChatLastMessage>
+                <ChatFooter>
+                    <ChatLastMessage>{lastMsg}</ChatLastMessage>
+                    {unread !== 0 && <UnreadMessages>{unread}</UnreadMessages>}
+                </ChatFooter>
             </div>
         </ChatItemContainer>
     );

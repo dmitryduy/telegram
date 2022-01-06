@@ -31,7 +31,7 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
 
     useEffect(() => {
         if (value) {
-            fetch(`http://localhost:5000/users?value=${searchValue}&userPhone=${userPhone!.slice(1)}`)
+            fetch(`http://localhost:5000/users?value=${searchValue}&userPhone=${userPhone!}`)
                 .then(response => response.json())
                 .then((data: IGlobalSearch) => {
                     setLoading(false);

@@ -19,6 +19,7 @@ const GlobalSearch: React.FC<IGlobalSearchProps> = ({setSearch}) => {
                 partnerPhone={globalUser.partnerPhone}
                 lastMsg={`@${globalUser.partnerNickname}`}
                 lastMsgDate={null}
+                unread={0}
             />)}
         </>
     );

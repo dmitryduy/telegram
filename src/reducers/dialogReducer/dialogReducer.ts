@@ -28,7 +28,14 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
         case dialogActionType.REMOVE_SEARCH_RESULTS:
             return {...state, foundedGlobalUsers: null};
         case dialogActionType.SET_ACTIVE_DIALOG:
-            return {...state, activeDialog: JSON.parse(JSON.stringify(action.payload))};
+            const dialogsWithoutUnread: Map<dialogId, IDialog> | null = new Map(JSON.parse(JSON.stringify(state.dialogs?[...state.dialogs?.entries()]: [])));
+            if (action.payload.unread) {
+                dialogsWithoutUnread!.set(action.payload.dialogId, {
+                    ...dialogsWithoutUnread!.get(action.payload.dialogId)!,
+                    unread: 0
+                });
+            }
+            return {...state, dialogs: dialogsWithoutUnread, activeDialog: JSON.parse(JSON.stringify(action.payload))};
         case dialogActionType.SET_DIALOGS:
             return {...state, dialogs: action.payload};
         case dialogActionType.SET_ONLINE_USER:
@@ -55,7 +62,8 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
                     messages: [action.payload],
                     partnerNickname: state.activeDialog!.partnerNickname,
                     partnerAvatar: state.activeDialog!.partnerAvatar,
-                    partnerPhone: state.activeDialog!.partnerPhone
+                    partnerPhone: state.activeDialog!.partnerPhone,
+                    unread: state.activeDialog!.unread
                 });
                 return {
                     ...state, activeDialog: {...state.activeDialog!, messages: [action.payload]},
@@ -88,7 +96,8 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
                     messages: [newMessage],
                     partnerNickname: action.payload.partnerNickname,
                     partnerAvatar: action.payload.partnerAvatar,
-                    partnerPhone: action.payload.partnerPhone
+                    partnerPhone: action.payload.partnerPhone,
+                    unread: 1
                 };
                 return {
                     ...state,
@@ -101,6 +110,9 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
             const activeDialogWithMessage = state.activeDialog;
             if (activeDialogWithMessage?.dialogId === action.payload.dialogId) {
                 activeDialogWithMessage.messages = [...activeDialogWithMessage.messages, newMessage];
+            }
+            if (state.activeDialog?.dialogId !== action.payload.dialogId) {
+                dialogsWithNewMessage.get(action.payload.dialogId)!.unread++;
             }
             return {
                 ...state,
@@ -156,8 +168,8 @@ export const setActiveDialog = (dialog: IActiveDialog): ISetActiveDialogAC => ({
     payload: dialog
 })
 
-export const fetchActiveDialog = (dialog: IDialog & { dialogId: dialogId | null }) => async (dispatch: Dispatch<DialogReducerAction>) => {
-    const response = await fetch(`http://localhost:5000/users/phone/${dialog.partnerPhone}`);
+export const fetchActiveDialog = (dialog: IDialog & { dialogId: dialogId | null }, userPhone: phone) => async (dispatch: Dispatch<DialogReducerAction>) => {
+    const response = await fetch(`http://localhost:5000/users/phone?partnerPhone=${dialog.partnerPhone}&userPhone=${userPhone}`);
     const data: { isOnline: boolean, lastSeen: timestamp | null } = await response.json();
     dispatch(setActiveDialog({
         ...dialog,

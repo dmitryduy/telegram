@@ -25,7 +25,8 @@ const users: IUsers = userFile ?
 users.forEach(user => user.dialogs = user.dialogs ?
     new Map<dialogId, IDialog>(user.dialogs)
     :
-    new Map<dialogId, IDialog>())
+    new Map<dialogId, IDialog>());
+
 
 const usersMapToArray = () => {
     return Array.from(users)
@@ -35,19 +36,21 @@ const usersMapToArray = () => {
         }]))
 }
 
-const addMessageToDialogByPhone = (user: IUser, dialogId: dialogId, message: IMessage, partner: IUser) => {
+const addMessageToDialogByPhone = (user: IUser, dialogId: dialogId, message: IMessage, partner: IUser, isUnread = false) => {
     if (!user.dialogs) {
         user.dialogs = new Map<dialogId, IDialog>();
     }
 
     if (user.dialogs.has(dialogId)) {
         user.dialogs.get(dialogId)!.messages.push(message);
+        isUnread && user.dialogs.get(dialogId)!.unread++;
     } else {
         user.dialogs.set(dialogId, {
             partnerPhone: partner.phoneNumber,
             partnerAvatar: partner.avatar,
             partnerNickname: partner.nickname,
-            messages: [message]
+            messages: [message],
+            unread: isUnread? 1: 0
         })
     }
 }
@@ -95,12 +98,12 @@ app.get('/users/', (req: Request, res: Response) => {
     const filteredUsers = Array.from(users.values())
         .filter(user => user.nickname.startsWith(value as string));
     filteredUsers.forEach((user) => {
-        if (user.phoneNumber.slice(1) !== userPhone) {
+        if (user.phoneNumber !== userPhone) {
             let dialogId = -1;
             if (user.dialogs) {
                 console.log(user.dialogs.entries());
                 for (let [id, partner] of user.dialogs.entries()) {
-                    if (partner.partnerPhone.slice(1) === userPhone) {
+                    if (partner.partnerPhone === userPhone) {
                         dialogId = id;
                         break;
                     }
@@ -113,7 +116,8 @@ app.get('/users/', (req: Request, res: Response) => {
                     partnerPhone: user.phoneNumber,
                     partnerAvatar: user.avatar,
                     partnerNickname: user.nickname,
-                    messages: []
+                    messages: [],
+                    unread: 0
                 })
             }
         }
@@ -121,10 +125,16 @@ app.get('/users/', (req: Request, res: Response) => {
     res.json(result);
 });
 
-app.get('/users/phone/:phone', (req: Request, res: Response) => {
-    const phone: phone = req.params.phone;
+app.get('/users/phone', (req: Request, res: Response) => {
+    const {partnerPhone, userPhone} = req.query;
     console.log(req.params)
-    const user = users.get(phone);
+    const user = users.get(partnerPhone as phone);
+    users.get(userPhone as string)!.dialogs?.forEach((dialog) => {
+        if (dialog.partnerPhone === partnerPhone) {
+            dialog.unread = 0;
+        }
+    });
+    writeUsersToFile();
     res.json({isOnline: user?.isOnline || false, lastSeen: user?.lastSeen || 0});
 });
 
@@ -153,7 +163,7 @@ io.on('connection', (socket: any) => {
         const sender = users.get(senderPhone)!;
         const receiver = users.get(receiverPhone)!;
         addMessageToDialogByPhone(sender, dialogId, newMessageObj, receiver);
-        addMessageToDialogByPhone(receiver, dialogId, newMessageObj, sender);
+        addMessageToDialogByPhone(receiver, dialogId, newMessageObj, sender, true);
         if (receiver.isOnline) {
             io.to(receiver.socketId).emit("new message", {
                 ...newMessageObj,

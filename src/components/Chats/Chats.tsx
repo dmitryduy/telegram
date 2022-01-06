@@ -20,7 +20,8 @@ export interface IDialogToArray {
     readonly partnerNickname: string,
     readonly partnerPhone: phone,
     readonly lastMsg: string,
-    readonly lastMsgDate: timestamp
+    readonly lastMsgDate: timestamp,
+    readonly unread: number
 }
 
 
@@ -36,7 +37,8 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
             partnerNickname: dialog.partnerNickname,
             partnerPhone: dialog.partnerPhone,
             lastMsg: dialog.messages[dialog.messages.length - 1].text,
-            lastMsgDate: dialog.messages[dialog.messages.length - 1].createDate
+            lastMsgDate: dialog.messages[dialog.messages.length - 1].createDate,
+            unread: dialog.unread
         }
         dialogsToArray.push(dialogItem);
         if (foundedGlobalUsers?.chatsOfUser.includes(dialogId)) {
@@ -56,12 +58,12 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
         return <>
             {foundedGlobalUsers!.chatsOfUser.length ? <>
                 <ChatsTitle title={`Found ${foundedGlobalUsers!.chatsOfUser.length} chats`}/>
-                <UserChats dialogsToArray={userDialogsBySearch}/>
-            </>: null}
+                <UserChats dialogsToArray={userDialogsBySearch} setSearch={setSearch}/>
+            </> : null}
             {foundedGlobalUsers!.chatsOfGlobal.length ? <>
                 <ChatsTitle title='Global search results'/>
                 <GlobalSearch setSearch={setSearch}/>
-            </>: null}
+            </> : null}
         </>
 
     }
