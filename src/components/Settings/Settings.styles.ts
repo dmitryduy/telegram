@@ -23,7 +23,8 @@ export const SettingsContent = styled.div`
   top: 0;
   bottom: 0;
   left: 0;
-  width: 25%;
+  width: 17%;
+  min-width: 200px;
   background-color: #fff;
   transition: .3s;
   transform: translateX(-100%);
@@ -33,18 +34,18 @@ export const SettingsContent = styled.div`
   }
 `;
 
-export const SettingsHeader = styled.div`
-  background-image: url("https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png");
+export const SettingsHeader = styled.div<{backgroundImage: string}>`
+  background-image:  url(${props => `http://localhost:5000/images/backgrounds/${props.backgroundImage}.webp`});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  padding: 20px;
+  padding: 20px 25px;
   color: #fff;
   img {
     width: 50px;
     border-radius: 50%;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 `;
 

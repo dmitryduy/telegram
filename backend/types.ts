@@ -24,7 +24,8 @@ export interface IUser {
     socketId: string | null,
     nickname: string,
     lastSeen: timestamp | null,
-    avatar: string
+    avatar: string,
+    backgroundImage: string
 }
 
 export type IUsers = Map<phone, IUser>;

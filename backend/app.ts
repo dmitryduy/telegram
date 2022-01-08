@@ -67,7 +67,8 @@ const createNewUser = (phoneNumber: phone, nickname: string): IUser => {
         socketId: null,
         nickname: nickname,
         lastSeen: null,
-        avatar: 'http://localhost:5000/images/user-logo.png'
+        avatar: 'http://localhost:5000/images/user-logo.png',
+        backgroundImage: 'default'
     };
 }
 
@@ -76,7 +77,6 @@ app.post('/login', (req: Request, res: Response) => {
     if (users.has(userPhone)) {
         const user: IUser = users.get(userPhone)!;
         if (users.get(userPhone)!.nickname === nickname) {
-            console.log({...user, dialogs: user.dialogs ? Array.from(user.dialogs) : null})
             res.json({...user, dialogs: user.dialogs ? Array.from(user.dialogs) : null});
         } else {
             res.json({error: true})
@@ -87,6 +87,27 @@ app.post('/login', (req: Request, res: Response) => {
         writeUsersToFile();
         res.json({...newUser, dialogs: newUser.dialogs ? Array.from(newUser.dialogs) : null});
     }
+})
+
+// @ts-ignore
+app.get('/backgrounds', (req: Request, res: Response) => {
+    let filesData: string[] = [];
+    fs.readdir(__dirname +'/assets/images/backgrounds', (_err, files) => {
+        files.forEach((file: string) => {
+            filesData.push(file.slice(0, -5));
+        });
+        res.json(filesData);
+    });
+});
+
+app.post('/background', (req: Request, res: Response) => {
+    const {userPhone, chooseImage} = req.body;
+    if (users.get(userPhone)) {
+        users.get(userPhone)!.backgroundImage = chooseImage;
+        writeUsersToFile();
+    }
+
+    res.send();
 })
 
 app.get('/users/', (req: Request, res: Response) => {
@@ -187,6 +208,7 @@ io.on('connection', (socket: any) => {
         writeUsersToFile();
     })
 })
+
 
 
 server.listen(5000, () => console.log('server start'));

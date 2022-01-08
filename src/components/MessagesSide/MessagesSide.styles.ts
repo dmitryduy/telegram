@@ -2,13 +2,13 @@ import styled from "styled-components";
 import {rgba} from "polished";
 
 
-export const MessagesSideContainer = styled.div`
+export const MessagesSideContainer = styled.div<{backgroundImage: string}>`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 3;
-  background-image: url("https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png");
+  background-image: url(${props => `http://localhost:5000/images/backgrounds/${props.backgroundImage}.webp`});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

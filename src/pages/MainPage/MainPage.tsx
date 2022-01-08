@@ -10,6 +10,7 @@ import { INewMessage } from "../../reducers/dialogReducer/types";
 import { addNewMessageAC, sendOnlineUserAC, setOfflineUserAC } from "../../reducers/dialogReducer/dialogReducer";
 import { phone, timestamp } from "../../../backend/types";
 import { INewMessagePopup } from "../../globalTypes";
+import SettingsPopup from "../../components/SettingsPopup/SettingsPopup";
 
 let newMessagePopUpTimer: ReturnType<typeof setTimeout> = setTimeout(() => {
 });
@@ -63,6 +64,7 @@ const MainPage: React.FC = () => {
             <ChatsSide/>
             <MessagesSide/>
             <Settings/>
+            <SettingsPopup/>
         </div>
     );
 };

@@ -3,10 +3,12 @@ import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone
 import { useDispatch } from "react-redux";
 import { switchSettingsAC } from "../../reducers/settingsReducer/settingsReducer";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { beautifyPhone } from "../../beautifyPhone";
+import SettingsItem from "../SettingsItem/SettingsItem";
 
 const Settings: React.FC = () => {
 
-    const isShow = useTypedSelector(({settings}) => settings.isShowSettings);
+    const {isShowSettings, backgroundImage} = useTypedSelector(({settings}) => settings);
     const {avatar, phoneNumber, nickname} = useTypedSelector(({user}) => user);
     const dispatch = useDispatch();
     const onCloseSettings = () => {
@@ -15,14 +17,15 @@ const Settings: React.FC = () => {
 
     return (
         <>
-            <SettingsContainer className={isShow ? 'active': ''} onClick={onCloseSettings}>
+            <SettingsContainer className={isShowSettings ? 'active': ''} onClick={onCloseSettings}>
             </SettingsContainer>
-            <SettingsContent className={isShow ? 'active': ''}>
-                <SettingsHeader>
+            <SettingsContent className={isShowSettings ? 'active': ''}>
+                <SettingsHeader backgroundImage={backgroundImage}>
                     <img src={avatar!} alt="avatar"/>
                     <UserName>{nickname}</UserName>
-                    <UserPhone>{phoneNumber}</UserPhone>
+                    <UserPhone>{beautifyPhone(phoneNumber!)}</UserPhone>
                 </SettingsHeader>
+                <SettingsItem text='Background' type='background'/>
             </SettingsContent>
         </>
     );

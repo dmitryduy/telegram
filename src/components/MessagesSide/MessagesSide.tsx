@@ -10,6 +10,7 @@ const MessagesSide: React.FC = () => {
     const scrollToRef = useRef<HTMLDivElement>(null);
     const messages = useTypedSelector(({dialog}) => dialog.activeDialog?.messages);
     const unreadMessages = useTypedSelector(({dialog}) => dialog.activeDialog?.unread);
+    const backgroundImage = useTypedSelector(({settings}) => settings.backgroundImage);
 
 
     useEffect(() => {
@@ -18,14 +19,14 @@ const MessagesSide: React.FC = () => {
 
     if (!messages) {
         return (
-            <MessagesSideContainer>
+            <MessagesSideContainer backgroundImage={backgroundImage}>
                 <NoContent>Select a chat to start messaging</NoContent>
             </MessagesSideContainer>)
     }
 
 
     return (
-        <MessagesSideContainer className='content'>
+        <MessagesSideContainer backgroundImage={backgroundImage} className='content'>
             <PartnerInfo/>
             <Messages>
                 {messages.map((message, index, arr) => <Message

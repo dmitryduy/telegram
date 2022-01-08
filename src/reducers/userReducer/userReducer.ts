@@ -4,6 +4,8 @@ import { dialogId, IDialog, phone } from "../../../backend/types";
 import { Dispatch } from "react";
 import { initializeDialogsAC } from "../dialogReducer/dialogReducer";
 import { IInitializeDialogsAC } from "../dialogReducer/types";
+import { setBackgroundImage } from "../settingsReducer/settingsReducer";
+import { ISetBackgroundImage } from "../settingsReducer/types";
 
 const initialState: IUserReducerState = {
     isError: false,
@@ -37,7 +39,7 @@ const setErrorAC = (): ISetErrorAC => ({
     type: userActionType.INCORRECT_DATA
 })
 
-export const fetchUserInfo = (userPhone: phone, nickname: string) => async (dispatch: Dispatch<UserReducerAction | IInitializeDialogsAC>) => {
+export const fetchUserInfo = (userPhone: phone, nickname: string) => async (dispatch: Dispatch<UserReducerAction | IInitializeDialogsAC | ISetBackgroundImage>) => {
     const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
@@ -56,8 +58,8 @@ export const fetchUserInfo = (userPhone: phone, nickname: string) => async (disp
         nickname: data.nickname,
         avatar: data.avatar
     }));
-    console.log(data)
     dispatch(initializeDialogsAC(data.dialogs ? new Map<dialogId, IDialog>(data.dialogs ): null));
+    dispatch(setBackgroundImage(data.backgroundImage));
 
 }
 
