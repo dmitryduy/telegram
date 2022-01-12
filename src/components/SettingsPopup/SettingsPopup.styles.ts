@@ -19,8 +19,8 @@ export const PopupContent = styled.div`
   width: 25%;
   min-width: 350px;
   height: 80%;
-  background-color: #fff;
   padding: 15px 10px;
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.heading};
+  background-color:${props => props.theme.colors.bgColor} ;
   border-radius: 5px;
 `;

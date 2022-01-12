@@ -18,6 +18,8 @@ app.use(cors());
 app.use(express.static(__dirname + '/assets'));
 let userFile = fs.readFileSync(__dirname + '/db/users.json', 'utf8');
 
+const profileImageColors = ['#a695e7', '#6ec9cb', '#7bc862', '#faa774', '#e17076'];
+
 const users: IUsers = userFile ?
     new Map<phone, IUser>(JSON.parse(userFile))
     :
@@ -67,7 +69,7 @@ const createNewUser = (phoneNumber: phone, nickname: string): IUser => {
         socketId: null,
         nickname: nickname,
         lastSeen: null,
-        avatar: 'http://localhost:5000/images/user-logo.png',
+        avatar: profileImageColors[Math.floor(Math.random() * profileImageColors.length)],
         backgroundImage: 'default'
     };
 }

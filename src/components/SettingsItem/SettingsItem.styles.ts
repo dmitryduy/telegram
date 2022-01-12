@@ -8,7 +8,8 @@ export const SettingsItemContainer = styled.li`
   font-size: ${props => props.theme.fontSizes.extraNormal};
   font-weight: 600;
   cursor: pointer;
+  color: ${props => props.theme.colors.heading};
   &:hover {
-    background-color: ${props => props.theme.colors.lightGray};
+    background-color: ${props => props.theme.colors.chatItemHover};
   }
 `;

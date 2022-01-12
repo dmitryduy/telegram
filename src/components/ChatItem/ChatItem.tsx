@@ -1,10 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { ChatHeader, ChatImage, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFooter } from "./ChatItem.styles";
+import { ChatHeader, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFooter } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
 import { useDispatch } from "react-redux";
 import { fetchActiveDialog, removeGlobalUsersAC } from "../../reducers/dialogReducer/dialogReducer";
 import { dialogId, phone, timestamp } from "../../../backend/types";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 interface IChatItemProps {
     dialogId?: dialogId,
@@ -54,7 +55,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
 
     return (
         <ChatItemContainer className={activeDialogId === dialogId ? 'active' : ''} onClick={setDialog}>
-            <ChatImage src={partnerAvatar} alt='chat image'/>
+            <UserAvatar image={partnerAvatar} name={partnerNickname}/>
             <div style={{flex: 1, width: '1px'}}>
                 <ChatHeader>
                     <h4>{partnerNickname}</h4>

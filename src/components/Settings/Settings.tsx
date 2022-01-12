@@ -1,18 +1,26 @@
 import React  from 'react';
-import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone } from "./Settings.styles";
+import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone, Mode } from "./Settings.styles";
 import { useDispatch } from "react-redux";
-import { switchSettingsAC } from "../../reducers/settingsReducer/settingsReducer";
+import { changeModeAC, switchSettingsAC } from "../../reducers/settingsReducer/settingsReducer";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { beautifyPhone } from "../../beautifyPhone";
 import SettingsItem from "../SettingsItem/SettingsItem";
+import UserAvatar from "../UserAvatar/UserAvatar";
+
+import DayImage from '../../assets/imgs/day.png';
+import NightImage from '../../assets/imgs/night.svg';
 
 const Settings: React.FC = () => {
 
-    const {isShowSettings, backgroundImage} = useTypedSelector(({settings}) => settings);
+    const {isShowSettings, backgroundImage, mode} = useTypedSelector(({settings}) => settings);
     const {avatar, phoneNumber, nickname} = useTypedSelector(({user}) => user);
     const dispatch = useDispatch();
     const onCloseSettings = () => {
         dispatch(switchSettingsAC(false));
+    }
+
+    const changeMode = () => {
+      dispatch(changeModeAC());
     }
 
     return (
@@ -21,7 +29,8 @@ const Settings: React.FC = () => {
             </SettingsContainer>
             <SettingsContent className={isShowSettings ? 'active': ''}>
                 <SettingsHeader backgroundImage={backgroundImage}>
-                    <img src={avatar!} alt="avatar"/>
+                    <Mode onClick={changeMode} src={mode === 'day' ? DayImage: NightImage} alt="mode"/>
+                    <UserAvatar style={{marginBottom: '10px'}} image={avatar!} name={nickname!}/>
                     <UserName>{nickname}</UserName>
                     <UserPhone>{beautifyPhone(phoneNumber!)}</UserPhone>
                 </SettingsHeader>

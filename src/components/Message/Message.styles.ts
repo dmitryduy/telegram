@@ -1,11 +1,10 @@
 import styled, { css } from "styled-components";
-import { rgba } from "polished";
 
 export const NewDate = styled.div`
   align-self: center;
   color: #fff;
   border-radius: 10px;
-  background-color: ${props => rgba(props.theme.colors.darkGray, .35)};
+  background-color: ${props => props.theme.colors.dateBackground};
   padding: 4px 7px;
   font-size: ${props => props.theme.fontSizes.normal};
 `;
@@ -14,10 +13,10 @@ export const UnreadMessagesMark = styled.div`
   width:100%;
   padding: 5px 0;
   text-align: center;
-  color: ${props => props.theme.colors.darkBlue};
-  background-color: #fff;
+  color: ${props => props.theme.colors.unreadText};
+  background-color:${props => props.theme.colors.unreadTitle};
+  font-size :${props => props.theme.fontSizes.extraSmall};
   font-weight: 600;
-  letter-spacing: -1px;
   margin: 5px 0;
   cursor: default;
   position: relative;
@@ -44,6 +43,7 @@ export const MessageContainer = styled.div<{isShowBefore: boolean}>`
   padding: 7px 10px;
   border-radius: 7px;
   align-items: flex-end;
+  color: ${props => props.theme.colors.heading};
   position: relative;
   &::before {
     position: absolute;
@@ -55,22 +55,22 @@ export const MessageContainer = styled.div<{isShowBefore: boolean}>`
     bottom: 0;
   }
   &.me {
-    background-color: ${props => props.theme.colors.myMessageBg};
+    background-color: ${props => props.theme.colors.userMessage};
     align-self: flex-end;
   ${props => props.isShowBefore && css`
     &::before {
-      border-bottom: 12px solid ${props => props.theme.colors.myMessageBg};
+      border-bottom: 12px solid ${props => props.theme.colors.userMessage};
       right: -7px;
     }
   `}
   }
 
   &.partner {
-    background-color: #fff;
+    background-color: ${props => props.theme.colors.partnerMessage};
     align-self: flex-start;
     ${props => props.isShowBefore && css`
       &::before {
-        border-bottom: 12px solid #fff;
+        border-bottom: 12px solid ${props => props.theme.colors.partnerMessage};
         left: -7px;
       }
     `}
@@ -86,6 +86,6 @@ export const MessageText = styled.span`
 `;
 
 export const MessageTime = styled.span`
-  color: ${props => props.theme.colors.green};
+  color: ${props => props.theme.colors.paragraph};
   font-size: ${props => props.theme.fontSizes.small};
 `;

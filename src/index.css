@@ -5,8 +5,8 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-body {
-  overflow-x: hidden;
+body, html {
+  overflow: hidden;
 }
 
 a {

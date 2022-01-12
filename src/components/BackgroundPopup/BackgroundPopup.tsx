@@ -7,7 +7,8 @@ const BackgroundPopup: React.FC = () => {
     const [backgrounds, setBackground] = useState<string[] | null>(null);
     const dispatch = useDispatch();
     const userPhone = useTypedSelector(({user}) => user.phoneNumber);
-    const backgroundImage = useTypedSelector(({settings}) => settings.backgroundImage)
+    // @ts-ignore
+    const backgroundImage = useTypedSelector(({settings}) => settings.backgroundImage);
     const [chooseImage, setChooseImage] = useState<string >(backgroundImage);
     const [countOfLoadedImages, setCountOfLoadedImages] = useState(0);
     useEffect(() => {

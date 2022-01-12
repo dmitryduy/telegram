@@ -1,11 +1,11 @@
-import { timestamp } from "../../../backend/types";
 
-export type typeOfSettings = 'background';
+export type typeOfSettings = 'background' | 'mode';
 
 export enum SettingsActionType {
     SWITCH_SETTINGS = 'SWITCH_SETTINGS',
     SET_BACKGROUND_IMAGE = 'SET_BACKGROUND_IMAGE',
-    SET_TYPE_OF_SETTINGS = 'SET_TYPE_OF_SETTINGS'
+    SET_TYPE_OF_SETTINGS = 'SET_TYPE_OF_SETTINGS',
+    CHANGE_MODE = 'CHANGE_MODE'
 }
 
 export interface ISwitchSettingsAC {
@@ -23,13 +23,17 @@ export interface ISetTypeOfSettings {
     payload: typeOfSettings | null
 }
 
+export interface IChangeMode {
+    type: SettingsActionType.CHANGE_MODE
+}
 
-export type SettingsReducerAction = ISwitchSettingsAC | ISetBackgroundImage | ISetTypeOfSettings;
+
+export type SettingsReducerAction = ISwitchSettingsAC | ISetBackgroundImage | ISetTypeOfSettings | IChangeMode;
 
 export interface ISettingsReducerState {
     language: 'ru' | 'en';
     isShowSettings: boolean,
-    newMessagePopupTime: timestamp,
     backgroundImage: string,
-    typeSettings: typeOfSettings | null;
+    typeSettings: typeOfSettings | null,
+    mode: 'night' | 'day'
 }

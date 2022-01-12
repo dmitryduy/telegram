@@ -12,23 +12,15 @@ export const ChatItemContainer = styled.div`
   transition: .1s;
 
   &:hover {
-    background-color: ${props => props.theme.colors.lightGray};
+    background-color: ${props => props.theme.colors.chatItemHover};
   }
 
   &.active {
-    background-color: ${props => props.theme.colors.darkBlue};
-
+    background-color: ${props => props.theme.colors.chatItemActive};
     * {
       color: #fff;
     }
   }
-`;
-
-export const ChatImage = styled.img`
-  height: 100%;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 50%;
 `;
 
 export const ChatHeader = styled.div`
@@ -38,11 +30,11 @@ export const ChatHeader = styled.div`
   h4 {
     font-weight: 600;
     font-size: ${props => props.theme.fontSizes.extraNormal};
-    color: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.heading};
   }
 
   span {
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme.colors.paragraph};
     font-size: ${props => props.theme.fontSizes.normal};
   }
 `;
@@ -54,7 +46,7 @@ display: flex;
 
 export const ChatLastMessage = styled.div`
   font-size: ${props => props.theme.fontSizes.extraNormal};
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.paragraph};
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -70,7 +62,7 @@ export const UnreadMessages = styled.span`
   height: 20px;
   color: #fff;
   padding: 0 5px;
-  background-color: ${props => props.theme.colors.darkBlue};
+  background-color: ${props => props.theme.colors.unreadMessage};
   border-radius: 10px/ 50%;
   font-size: ${props => props.theme.fontSizes.small};
   

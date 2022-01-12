@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname + '/assets'));
 let userFile = fs.readFileSync(__dirname + '/db/users.json', 'utf8');
+const profileImageColors = ['#a695e7', '#6ec9cb', '#7bc862', '#faa774', '#e17076'];
 const users = userFile ?
     new Map(JSON.parse(userFile))
     :
@@ -54,7 +55,7 @@ const createNewUser = (phoneNumber, nickname) => {
         socketId: null,
         nickname: nickname,
         lastSeen: null,
-        avatar: 'http://localhost:5000/images/user-logo.png',
+        avatar: profileImageColors[Math.floor(Math.random() * profileImageColors.length)],
         backgroundImage: 'default'
     };
 };
@@ -154,6 +155,7 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('user online', { userPhone: user.phoneNumber });
     });
     socket.on('send message', ({ senderPhone, receiverPhone, messageText, dialogId }) => {
+        console.log(4)
         const newMessageObj = {
             createDate: Date.now(),
             text: messageText,

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { rgba } from "polished";
 
+
 export const Title = styled.h3`
   font-size: ${props => props.theme.fontSizes.extraMedium};
   font-weight: 500;
@@ -25,14 +26,14 @@ export const BackgroundsContainer = styled.div`
     cursor: pointer;
     border: 3px solid transparent;
     &.active {
-      border: 3px solid ${props => props.theme.colors.darkBlue};
+      border: 3px solid ${props => props.theme.colors.imageBorder};
     }
   }
 `;
 
 export const Button = styled.button`
   cursor: pointer;
-  color: ${props => props.theme.colors.darkBlue};
+  color: ${props => props.theme.colors.button};
   padding: 5px 10px;
   background-color: transparent;
   border: none;
@@ -40,10 +41,10 @@ export const Button = styled.button`
   font-size: ${props => props.theme.fontSizes.extraNormal};
   outline: none;
   &:hover:not(:disabled) {
-    background-color: ${props => rgba(props.theme.colors.blue, .2)};
+    background-color: ${props => rgba(props.theme.colors.button, .2)};
   }
   &:disabled {
     cursor: default;
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme.colors.buttonDisabled};
   }
 `;

@@ -8,24 +8,25 @@ export const MessageInputContainer = styled.div`
   bottom: 0;
   height: 55px;
   width: 100%;
-  background-color: #fff;
-  border-left: 1px solid ${props => props.theme.colors.lightGray};
+  background-color: ${props => props.theme.colors.bgColor};
   input {
     padding: 7px 10px 7px 20px;
     height: 100%;
     width: 95%;
     outline: none;
     border: none;
+    color: ${props => props.theme.colors.inputColor};
+    background-color: ${props => props.theme.colors.inputBackground};
   }
   button {
     outline: none;
-    background-color: transparent;
     border: none;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
     transition: .1s linear;
+    
     &.show {
       opacity: 1;
       visibility: visible;

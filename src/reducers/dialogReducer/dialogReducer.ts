@@ -66,7 +66,7 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
                     unread: state.activeDialog!.unread
                 });
                 return {
-                    ...state, activeDialog: {...state.activeDialog!, messages: [action.payload]},
+                    ...state, activeDialog: {...state.activeDialog!, unread: 0, messages: [action.payload]},
                     dialogs: copyOfDialogs
                 };
             }
@@ -74,7 +74,7 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
             copyOfDialogs.get(state.activeDialog!.dialogId)!.messages.push(action.payload)
             return {
                 ...state,
-                activeDialog: {...state.activeDialog!, messages: [...state.activeDialog!.messages, action.payload]},
+                activeDialog: {...state.activeDialog!, unread: 0, messages: [...state.activeDialog!.messages, action.payload]},
                 dialogs: copyOfDialogs
             }
         case dialogActionType.SET_FOUNDED_GLOBAL_USERS:
@@ -110,6 +110,7 @@ const dialogReducer = (state = initialState, action: DialogReducerAction): IDial
             const activeDialogWithMessage = state.activeDialog;
             if (activeDialogWithMessage?.dialogId === action.payload.dialogId) {
                 activeDialogWithMessage.messages = [...activeDialogWithMessage.messages, newMessage];
+                activeDialogWithMessage.unread = 0;
             }
             if (state.activeDialog?.dialogId !== action.payload.dialogId) {
                 dialogsWithNewMessage.get(action.payload.dialogId)!.unread++;

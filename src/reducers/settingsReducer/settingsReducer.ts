@@ -1,4 +1,5 @@
 import {
+    IChangeMode,
     ISetBackgroundImage,
     ISettingsReducerState,
     ISetTypeOfSettings,
@@ -10,19 +11,21 @@ import {
 const initialState: ISettingsReducerState = {
     language: 'ru',
     isShowSettings: false,
-    newMessagePopupTime: 10000,
     backgroundImage: 'default',
-    typeSettings: null
+    typeSettings: null,
+    mode: 'day'
 }
 
-const settingsReducer = (state=initialState, action: SettingsReducerAction) => {
+const settingsReducer = (state = initialState, action: SettingsReducerAction) => {
     switch (action.type) {
         case SettingsActionType.SWITCH_SETTINGS:
-        return {...state, isShowSettings: action.payload};
+            return {...state, isShowSettings: action.payload};
         case SettingsActionType.SET_BACKGROUND_IMAGE:
             return {...state, backgroundImage: action.payload};
         case SettingsActionType.SET_TYPE_OF_SETTINGS:
-            return {...state, typeSettings: action.payload, isShowSettings: false }
+            return {...state, typeSettings: action.payload, isShowSettings: false}
+        case SettingsActionType.CHANGE_MODE:
+            return {...state, mode: state.mode === 'day' ? 'night' : 'day'};
         default:
             return {...state};
     }
@@ -43,4 +46,7 @@ export const setTypeOfSettings = (type: typeOfSettings | null): ISetTypeOfSettin
     payload: type
 })
 
+export const changeModeAC = (): IChangeMode => ({
+    type: SettingsActionType.CHANGE_MODE
+})
 export default settingsReducer;

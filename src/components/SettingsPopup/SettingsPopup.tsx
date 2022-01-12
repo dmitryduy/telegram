@@ -4,6 +4,7 @@ import BackgroundPopup from "../BackgroundPopup/BackgroundPopup";
 import {PopupBackground, PopupContent} from "./SettingsPopup.styles";
 
 const SettingsPopup = () => {
+    // @ts-ignore
     const type = useTypedSelector(({settings}) => settings.typeSettings);
     if (!type) {
         return null;

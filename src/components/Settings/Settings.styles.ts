@@ -24,8 +24,8 @@ export const SettingsContent = styled.div`
   bottom: 0;
   left: 0;
   width: 17%;
+  background-color: ${props => props.theme.colors.bgColor};
   min-width: 200px;
-  background-color: #fff;
   transition: .3s;
   transform: translateX(-100%);
   z-index: 10000;
@@ -35,6 +35,7 @@ export const SettingsContent = styled.div`
 `;
 
 export const SettingsHeader = styled.div<{backgroundImage: string}>`
+  position: relative;
   background-image:  url(${props => `http://localhost:5000/images/backgrounds/${props.backgroundImage}.webp`});
   background-position: center;
   background-repeat: no-repeat;
@@ -42,12 +43,21 @@ export const SettingsHeader = styled.div<{backgroundImage: string}>`
   width: 100%;
   padding: 20px 25px;
   color: #fff;
-  img {
-    width: 50px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+`;
+
+export const Mode = styled.img`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 15px;
+  top: 20px;
+  cursor: pointer;
+  transition: .2s;
+  &:hover {
+    transform: scale(1.1);
   }
 `;
+
 
 export const UserName = styled.h5`
   font-size: ${props => props.theme.fontSizes.normal};

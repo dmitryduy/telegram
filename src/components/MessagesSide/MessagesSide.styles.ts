@@ -22,7 +22,7 @@ export const NoContent = styled.span`
   color: #fff;
   font-size: ${props => props.theme.fontSizes.normal};
   padding: 5px;
-  background-color: ${props => rgba( props.theme.colors.darkGray, .2)};
+  background-color: ${props => rgba( props.theme.colors.bgColor, .2)};
   border-radius: 10px;
 `;
 
@@ -40,16 +40,16 @@ export const Messages = styled.div`
   overflow: auto;
   &::-webkit-scrollbar {
     width: 4px;
-    background-color: ${props => rgba(props.theme.colors.darkGray, .5)};
+    background-color: ${props => rgba(props.theme.colors.bgColor, .5)};
     border-radius: 2px;
     transition: .2s;
   }
   &::-webkit-scrollbar-thumb {
     width: 4px;
-    background-color: ${props => rgba(props.theme.colors.darkGray, .8)};
+    background-color: ${props => rgba(props.theme.colors.bgColor, .8)};
     border-radius: 2px;
     &:hover {
-      background-color: ${props => rgba(props.theme.colors.darkGray, 1)};
+      background-color: ${props => rgba(props.theme.colors.bgColor, 1)};
     }
   }
 `;

@@ -8,17 +8,16 @@ export const PartnerInfoContainer = styled.div`
   width: 100%;
   height: 57px;
   top: 0;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.bgColor};
   padding: 5px 10px;
-  border-left: 1px solid ${props => props.theme.colors.lightGray};
-  border-bottom: 1px solid ${props => props.theme.colors.lightGray};
-  color: ${props => props.theme.colors.black};
+  border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
   h5 {
     font-size: ${props => props.theme.fontSizes.normal};
+    color: ${props => props.theme.colors.heading};
     font-weight: 600;
   }
   span {
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme.colors.paragraph};
     font-size: ${props => props.theme.fontSizes.extraSmall};
   }
 `;

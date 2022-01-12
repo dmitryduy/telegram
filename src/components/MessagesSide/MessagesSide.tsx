@@ -10,6 +10,7 @@ const MessagesSide: React.FC = () => {
     const scrollToRef = useRef<HTMLDivElement>(null);
     const messages = useTypedSelector(({dialog}) => dialog.activeDialog?.messages);
     const unreadMessages = useTypedSelector(({dialog}) => dialog.activeDialog?.unread);
+    // @ts-ignore
     const backgroundImage = useTypedSelector(({settings}) => settings.backgroundImage);
 
 
