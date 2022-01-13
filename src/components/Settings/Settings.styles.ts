@@ -36,7 +36,7 @@ export const SettingsContent = styled.div`
 
 export const SettingsHeader = styled.div<{backgroundImage: string}>`
   position: relative;
-  background-image:  url(${props => `http://localhost:5000/images/backgrounds/${props.backgroundImage}.webp`});
+  background-image:  url(${props => `https://telegram-server-part.herokuapp.com/images/backgrounds/${props.backgroundImage}.webp`});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

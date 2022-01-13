@@ -8,7 +8,7 @@ export const MessagesSideContainer = styled.div<{backgroundImage: string}>`
   justify-content: center;
   align-items: center;
   flex: 3;
-  background-image: url(${props => `http://localhost:5000/images/backgrounds/${props.backgroundImage}.webp`});
+  background-image: url(${props => `https://telegram-server-part.herokuapp.com/images/backgrounds/${props.backgroundImage}.webp`});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

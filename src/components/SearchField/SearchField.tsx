@@ -31,7 +31,7 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
 
     useEffect(() => {
         if (value) {
-            fetch(`http://localhost:5000/users?value=${searchValue}&userPhone=${userPhone!}`)
+            fetch(`https://telegram-server-part.herokuapp.com/users?value=${searchValue}&userPhone=${userPhone!}`)
                 .then(response => response.json())
                 .then((data: IGlobalSearch) => {
                     setLoading(false);

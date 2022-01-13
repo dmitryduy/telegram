@@ -40,7 +40,7 @@ const setErrorAC = (): ISetErrorAC => ({
 })
 
 export const fetchUserInfo = (userPhone: phone, nickname: string) => async (dispatch: Dispatch<UserReducerAction | IInitializeDialogsAC | ISetBackgroundImage>) => {
-    const response = await fetch('http://localhost:5000/login', {
+    const response = await fetch('https://telegram-server-part.herokuapp.com/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

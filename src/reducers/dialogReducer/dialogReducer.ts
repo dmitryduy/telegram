@@ -170,7 +170,7 @@ export const setActiveDialog = (dialog: IActiveDialog): ISetActiveDialogAC => ({
 })
 
 export const fetchActiveDialog = (dialog: IDialog & { dialogId: dialogId | null }, userPhone: phone) => async (dispatch: Dispatch<DialogReducerAction>) => {
-    const response = await fetch(`http://localhost:5000/users/phone?partnerPhone=${dialog.partnerPhone}&userPhone=${userPhone}`);
+    const response = await fetch(`https://telegram-server-part.herokuapp.com/users/phone?partnerPhone=${dialog.partnerPhone}&userPhone=${userPhone}`);
     const data: { isOnline: boolean, lastSeen: timestamp | null } = await response.json();
     dispatch(setActiveDialog({
         ...dialog,

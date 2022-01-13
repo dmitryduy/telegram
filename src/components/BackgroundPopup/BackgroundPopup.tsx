@@ -12,7 +12,7 @@ const BackgroundPopup: React.FC = () => {
     const [chooseImage, setChooseImage] = useState<string >(backgroundImage);
     const [countOfLoadedImages, setCountOfLoadedImages] = useState(0);
     useEffect(() => {
-        fetch('http://localhost:5000/backgrounds')
+        fetch('https://telegram-server-part.herokuapp.com/backgrounds')
             .then(response => response.json())
             .then((data: string[]) => {
                 setBackground(data);
@@ -31,7 +31,7 @@ const BackgroundPopup: React.FC = () => {
     }
 
     const changeBackground = () => {
-        fetch('http://localhost:5000/background', {
+        fetch('https://telegram-server-part.herokuapp.com/background', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ const BackgroundPopup: React.FC = () => {
             <BackgroundsContainer onClick={handleImage} style={{display: countOfLoadedImages === backgrounds?.length ? 'grid': 'none'}}>
                 {backgrounds ? backgrounds.map(background => <img
                     className={chooseImage === background? 'active': ''}
-                        key={background} src={`http://localhost:5000/images/backgrounds/${background}.webp`}
+                        key={background} src={`https://telegram-server-part.herokuapp.com/images/backgrounds/${background}.webp`}
                     onLoad={() => setCountOfLoadedImages(prev => prev + 1)}
                         alt={background}/>)
                     : null}
