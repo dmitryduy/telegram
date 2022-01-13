@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { dialogId, phone, timestamp } from "../../../backend/types";
+import { dialogId, phone, timestamp } from "../../types";
 import Loading from "../Loading/Loading";
 import NotFound from "../NotFound/NotFound";
 import GlobalSearch from "../GlobalSearch/GlobalSearch";

@@ -1,6 +1,6 @@
 
 import { IFetchUserInfoAC, ISetErrorAC, IUserReducerState, userActionType, UserReducerAction } from "./types";
-import { dialogId, IDialog, phone } from "../../../backend/types";
+import { dialogId, IDialog, phone } from "../../types";
 import { Dispatch } from "react";
 import { initializeDialogsAC } from "../dialogReducer/dialogReducer";
 import { IInitializeDialogsAC } from "../dialogReducer/types";

@@ -7,7 +7,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
 import { INewMessage } from "../../reducers/dialogReducer/types";
 import { addNewMessageAC, sendOnlineUserAC, setOfflineUserAC } from "../../reducers/dialogReducer/dialogReducer";
-import { phone, timestamp } from "../../../backend/types";
+import { phone, timestamp } from "../../types";
 import SettingsPopup from "../../components/SettingsPopup/SettingsPopup";
 
 

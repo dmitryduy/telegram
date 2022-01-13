@@ -1,4 +1,4 @@
-import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../../backend/types";
+import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../types";
 
 export type INewMessage =
     IMessage

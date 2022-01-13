@@ -1,7 +1,7 @@
 import React from 'react';
 import { PartnerInfoContainer } from "./PartnerInfo.styles";
 import dateFormat from "dateformat";
-import { timestamp } from "../../../backend/types";
+import { timestamp } from "../../types";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { beautifyPhone } from "../../beautifyPhone";
 

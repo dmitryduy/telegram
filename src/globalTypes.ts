@@ -1,4 +1,4 @@
-import { phone } from "../backend/types";
+import { phone } from "./types";
 
 export interface INewMessagePopup {
     text: string,

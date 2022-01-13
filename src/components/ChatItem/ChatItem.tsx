@@ -3,7 +3,7 @@ import { ChatHeader, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFoo
 import formatDate from "../../formatDate";
 import { useDispatch } from "react-redux";
 import { fetchActiveDialog, removeGlobalUsersAC } from "../../reducers/dialogReducer/dialogReducer";
-import { dialogId, phone, timestamp } from "../../../backend/types";
+import { dialogId, phone, timestamp } from "../../types";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserAvatar from "../UserAvatar/UserAvatar";
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MessageContainer, MessageText, MessageTime, NewDate, UnreadMessagesMark } from "./Message.styles";
 import dateFormat from "dateformat";
-import { IMessage } from "../../../backend/types";
+import { IMessage } from "../../types";
 
 interface IMessageProps {
     message: IMessage,

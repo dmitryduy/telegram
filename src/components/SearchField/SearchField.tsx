@@ -4,7 +4,7 @@ import useInput from "../../hooks/useInput";
 import { useDebounce } from "use-debounce";
 import { useDispatch } from "react-redux";
 import { setFoundedGlobalUsers } from "../../reducers/dialogReducer/dialogReducer";
-import { IGlobalSearch } from "../../../backend/types";
+import { IGlobalSearch } from "../../types";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 interface ISearchFieldProps {

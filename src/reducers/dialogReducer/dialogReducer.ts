@@ -13,7 +13,7 @@ import {
     ISetOfflineUserAC,
     ISetOnlineUserAC
 } from "./types";
-import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../../backend/types";
+import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../types";
 import { Dispatch } from "react";
 
 const initialState: IDialogReducerState = {
