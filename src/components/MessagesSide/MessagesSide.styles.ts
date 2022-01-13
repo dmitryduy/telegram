@@ -12,7 +12,7 @@ export const MessagesSideContainer = styled.div<{backgroundImage: string}>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: inherit;
   &.content {
     display: block;
   }

@@ -65,13 +65,13 @@ const LoginPage: React.FC = () => {
                 <LoginTitle>You Phone Number</LoginTitle>
                 <LoginSubtitle>Please confirm your country code and enter your mobile phone number.</LoginSubtitle>
                 <div>
-                    <CountryCodeInput className={codeNumberAnimation ? 'error': ''} value={codeNumberInput}
+                    <CountryCodeInput type='tel' className={codeNumberAnimation ? 'error': ''} value={codeNumberInput}
                                       onInput={setCodeNumberInput}/>
-                    <NumberInput className={numberAnimation ? 'error': ''} value={phoneInput}
+                    <NumberInput type='tel' className={numberAnimation ? 'error': ''} value={phoneInput}
                                  onInput={setPhoneInput}/>
                 </div>
                 <NicknameTitle>Enter your nickname</NicknameTitle>
-                <NicknameInput className={userNicknameAnimation ? 'error': ''} value={nicknameInput}
+                <NicknameInput type='text' className={userNicknameAnimation ? 'error': ''} value={nicknameInput}
                                onInput={setNicknameInput}/>
                 <div>
                     <PhoneError className={errorMessage && 'visible'}>{errorMessage}</PhoneError>

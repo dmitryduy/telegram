@@ -29,9 +29,7 @@ export const LoginSubtitle = styled.p`
   margin-bottom: 20px;
 `;
 
-const Input = styled.input.attrs({
-    type: 'tel'
-})`
+const Input = styled.input`
   outline: none;
   border: none;
   border-bottom: 2px solid ${props => props.theme.colors.inputBorder};

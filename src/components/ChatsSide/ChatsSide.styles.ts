@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ChatsSideContainer = styled.div`
   flex: 2;
-  height: 100vh;
+  height: 100%;
   background-color: ${props => props.theme.colors.bgColor};
   border-right: 1px solid  ${props => props.theme.colors.helpingBorders};;
 `;
