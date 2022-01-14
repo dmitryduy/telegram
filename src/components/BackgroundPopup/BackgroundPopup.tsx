@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Title, BackgroundsContainer, Button } from './BackgroundPopup.styles';
+import { Title, BackgroundsContainer, Button, Loading } from './BackgroundPopup.styles';
 import { useDispatch } from "react-redux";
 import { setBackgroundImage, setTypeOfSettings } from "../../reducers/settingsReducer/settingsReducer";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -45,7 +45,7 @@ const BackgroundPopup: React.FC = () => {
     return (
         <>
             <Title>Choose your new background</Title>
-            {countOfLoadedImages !== backgrounds?.length  && <div>Loading...</div>}
+            {countOfLoadedImages !== backgrounds?.length  && <Loading>Loading...</Loading>}
             <BackgroundsContainer onClick={handleImage} style={{display: countOfLoadedImages === backgrounds?.length ? 'grid': 'none'}}>
                 {backgrounds ? backgrounds.map(background => <img
                     className={chooseImage === background? 'active': ''}

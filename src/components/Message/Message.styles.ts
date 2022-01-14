@@ -1,11 +1,16 @@
 import styled, { css } from "styled-components";
 
 export const NewDate = styled.div`
+  position: sticky;
+  top: 1px;
   align-self: center;
   color: #fff;
   border-radius: 10px;
   background-color: ${props => props.theme.colors.dateBackground};
   padding: 4px 7px;
+  width: 10%;
+  min-width: 100px;
+  text-align: center;
   font-size: ${props => props.theme.fontSizes.normal};
 `;
 

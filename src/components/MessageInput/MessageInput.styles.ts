@@ -24,9 +24,16 @@ export const MessageInputContainer = styled.div`
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
+    background-color: transparent;
     transform: scale(0);
     transition: .1s linear;
     
+    img {
+     transform: scale(1.4);
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
     &.show {
       opacity: 1;
       visibility: visible;

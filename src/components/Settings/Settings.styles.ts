@@ -35,7 +35,6 @@ export const SettingsContent = styled.div`
 `;
 
 export const SettingsHeader = styled.div<{backgroundImage: string}>`
-  position: relative;
   background-image:  url(${props => `https://telegram-server-part.herokuapp.com/images/backgrounds/${props.backgroundImage}.webp`});
   background-position: center;
   background-repeat: no-repeat;
@@ -50,7 +49,7 @@ export const Mode = styled.img`
   width: 30px;
   height: 30px;
   right: 15px;
-  top: 20px;
+  bottom: 15px;
   cursor: pointer;
   transition: .2s;
   &:hover {

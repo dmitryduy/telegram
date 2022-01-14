@@ -8,6 +8,14 @@ export const Title = styled.h3`
   margin-bottom: 20px;
 `;
 
+export const Loading = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const BackgroundsContainer = styled.div`
   display: grid;
   width: 100%;

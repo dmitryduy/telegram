@@ -29,12 +29,12 @@ const Settings: React.FC = () => {
             </SettingsContainer>
             <SettingsContent className={isShowSettings ? 'active': ''}>
                 <SettingsHeader backgroundImage={backgroundImage}>
-                    <Mode onClick={changeMode} src={mode === 'day' ? DayImage: NightImage} alt="mode"/>
                     <UserAvatar style={{marginBottom: '10px'}} image={avatar!} name={nickname!}/>
                     <UserName>{nickname}</UserName>
                     <UserPhone>{beautifyPhone(phoneNumber!)}</UserPhone>
                 </SettingsHeader>
                 <SettingsItem text='Background' type='background'/>
+                <Mode onClick={changeMode} src={mode === 'day' ? DayImage: NightImage} alt="mode"/>
             </SettingsContent>
         </>
     );
