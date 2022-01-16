@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
-import { UserAvatarImage, UserAvatarSpan } from './UserAvatar.styles';
+
+import { UserAvatarContainer } from './UserAvatar.styles';
 
 
 interface IUserAvatarProps {
@@ -9,9 +10,7 @@ interface IUserAvatarProps {
 }
 
 const UserAvatar: React.FC<IUserAvatarProps> = ({image, name, style={}}) => {
-    return image[0] === '#'
-        ? <UserAvatarSpan style={style} color={image}>{name[0]}</UserAvatarSpan>
-        : <UserAvatarImage style={style} src={image} alt='avatar'/>;
+    return <UserAvatarContainer style={style} color={image}>{name[0]}</UserAvatarContainer>;
 };
 
 export default UserAvatar;

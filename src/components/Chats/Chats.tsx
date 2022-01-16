@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
+
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { dialogId, phone, timestamp } from "../../types";
 import Loading from "../Loading/Loading";
@@ -28,8 +29,10 @@ export interface IDialogToArray {
 const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
     const dialogs = useTypedSelector(({dialog}) => dialog.dialogs);
     const foundedGlobalUsers = useTypedSelector(({dialog}) => dialog.foundedGlobalUsers);
+
     const dialogsToArray: IDialogToArray[] = [];
     const userDialogsBySearch: IDialogToArray[] = [];
+
     dialogs?.forEach((dialog, dialogId) => {
         const dialogItem: IDialogToArray = {
             dialogId: dialogId,

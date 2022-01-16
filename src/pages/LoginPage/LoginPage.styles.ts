@@ -10,7 +10,7 @@ export const LoginContainer = styled.div`
   background-color: ${props => props.theme.colors.bgColor};
   .error {
     transition: .2s;
-    border-bottom: 2px solid ${props => props.theme.colors.bgColor};
+    border-bottom: 2px solid ${props => props.theme.colors.error};
   }
 `;
 

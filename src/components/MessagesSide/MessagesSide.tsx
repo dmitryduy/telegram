@@ -1,13 +1,16 @@
 import React, { useEffect, useRef } from 'react';
+
 import { Messages, MessagesSideContainer, NoContent } from "./MessagesSide.styles";
+
 import Message from "../Message/Message";
 import MessageInput from "../MessageInput/MessageInput";
 import PartnerInfo from "../PartnerInfo/PartnerInfo";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const MessagesSide: React.FC = () => {
-    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
     const scrollToRef = useRef<HTMLDivElement>(null);
+
+    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
     const messages = useTypedSelector(({dialog}) => dialog.activeDialog?.messages);
     const unreadMessages = useTypedSelector(({dialog}) => dialog.activeDialog?.unread);
     // @ts-ignore
@@ -24,7 +27,6 @@ const MessagesSide: React.FC = () => {
                 <NoContent>Select a chat to start messaging</NoContent>
             </MessagesSideContainer>)
     }
-
 
     return (
         <MessagesSideContainer backgroundImage={backgroundImage} className='content'>

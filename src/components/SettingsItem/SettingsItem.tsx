@@ -1,7 +1,9 @@
 import React from 'react';
-import { SettingsItemContainer } from './SettingsItem.styles';
-import { typeOfSettings } from "../../reducers/settingsReducer/types";
 import { useDispatch } from "react-redux";
+
+import { SettingsItemContainer } from './SettingsItem.styles';
+
+import { typeOfSettings } from "../../reducers/settingsReducer/types";
 import { setTypeOfSettings } from "../../reducers/settingsReducer/settingsReducer";
 
 interface ISettingsItemProps {

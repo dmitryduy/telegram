@@ -1,4 +1,6 @@
 
+export const Base_Url = 'https://telegram-server-part.herokuapp.com';
+
 export type timestamp = number;
 export type dialogId = number;
 export type phone = string;

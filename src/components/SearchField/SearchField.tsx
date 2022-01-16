@@ -1,11 +1,14 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
-import { SearchInput } from "./SearchField.styles";
-import useInput from "../../hooks/useInput";
-import { useDebounce } from "use-debounce";
 import { useDispatch } from "react-redux";
-import { setFoundedGlobalUsers } from "../../reducers/dialogReducer/dialogReducer";
-import { IGlobalSearch } from "../../types";
+
+import { useDebounce } from "use-debounce";
+
+import { SearchInput } from "./SearchField.styles";
+
+import useInput from "../../hooks/useInput";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { setFoundedGlobalUsers } from "../../reducers/dialogReducer/dialogReducer";
+import { Base_Url, IGlobalSearch } from "../../types";
 
 interface ISearchFieldProps {
     setSearch: Dispatch<SetStateAction<boolean>>,
@@ -31,7 +34,7 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
 
     useEffect(() => {
         if (value) {
-            fetch(`https://telegram-server-part.herokuapp.com/users?value=${searchValue}&userPhone=${userPhone!}`)
+            fetch(`${Base_Url}/users?value=${searchValue}&userPhone=${userPhone!}`)
                 .then(response => response.json())
                 .then((data: IGlobalSearch) => {
                     setLoading(false);
@@ -41,11 +44,8 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
         }
     }, [value]);
 
-    return (
-        <SearchInput value={searchValue} onInput={setSearchValue} placeholder='Search...'>
+    return <SearchInput value={searchValue} onInput={setSearchValue} placeholder='Search...'/>;
 
-        </SearchInput>
-    );
 };
 
 export default SearchField;

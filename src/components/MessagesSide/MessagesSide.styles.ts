@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {rgba} from "polished";
+import { Base_Url } from "../../types";
 
 
 export const MessagesSideContainer = styled.div<{backgroundImage: string}>`
@@ -8,7 +9,7 @@ export const MessagesSideContainer = styled.div<{backgroundImage: string}>`
   justify-content: center;
   align-items: center;
   flex: 3;
-  background-image: url(${props => `https://telegram-server-part.herokuapp.com/images/backgrounds/${props.backgroundImage}.webp`});
+  background-image: url(${props => `${Base_Url}/images/backgrounds/${props.backgroundImage}.webp`});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

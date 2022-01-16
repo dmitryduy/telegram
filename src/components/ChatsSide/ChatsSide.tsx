@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+
+import { ChatsContainer, ChatsSideContainer, ChatsSideHeader } from "./ChatsSide.styles";
+
 import SearchField from "../SearchField/SearchField";
 import HamburgerMenuIcon from "../HamburgerMenuIcon/HamburgerMenuIcon";
-import { ChatsContainer, ChatsSideContainer, ChatsSideHeader } from "./ChatsSide.styles";
 import Chats from "../Chats/Chats";
 
 const ChatsSide = () => {
