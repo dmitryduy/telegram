@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
 
 import { SettingsItemContainer } from './SettingsItem.styles';
 
-import { typeOfSettings } from "../../reducers/settingsReducer/types";
-import { setTypeOfSettings } from "../../reducers/settingsReducer/settingsReducer";
+import { typeOfSettings } from "../../reducers/settingsSlice/types";
+import { useAppDispatch } from "../../hooks/useAppSelector";
+import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
 
 interface ISettingsItemProps {
     text: string,
@@ -12,10 +12,10 @@ interface ISettingsItemProps {
 }
 
 const SettingsItem: React.FC<ISettingsItemProps>= ({text, type}) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const openPopup = () => {
-        dispatch(setTypeOfSettings(type));
+        dispatch(settingsActions.setTypeOfSettings(type));
     }
 
     return (

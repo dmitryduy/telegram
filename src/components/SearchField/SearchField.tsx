@@ -1,14 +1,13 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
-import { useDispatch } from "react-redux";
 
 import { useDebounce } from "use-debounce";
 
 import { SearchInput } from "./SearchField.styles";
 
 import useInput from "../../hooks/useInput";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { setFoundedGlobalUsers } from "../../reducers/dialogReducer/dialogReducer";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
 import { Base_Url, IGlobalSearch } from "../../types";
+import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
 
 interface ISearchFieldProps {
     setSearch: Dispatch<SetStateAction<boolean>>,
@@ -19,9 +18,9 @@ interface ISearchFieldProps {
 const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoading}) => {
     const [searchValue, setSearchValue] = useInput();
     const [value] = useDebounce(searchValue, 1000);
-    const userPhone = useTypedSelector(({user})  => user.phoneNumber);
+    const userPhone = useAppSelector(({user})  => user.phoneNumber);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         setLoading(true);
@@ -38,7 +37,7 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
                 .then(response => response.json())
                 .then((data: IGlobalSearch) => {
                     setLoading(false);
-                    dispatch(setFoundedGlobalUsers(data));
+                    dispatch(dialogActions.setFoundedGlobalUsers(data));
                 });
 
         }

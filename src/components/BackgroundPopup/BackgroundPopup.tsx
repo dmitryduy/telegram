@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
 
 import { Title, BackgroundsContainer, Button, Loading } from './BackgroundPopup.styles';
 
-import { setBackgroundImage, setTypeOfSettings } from "../../reducers/settingsReducer/settingsReducer";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
 import useFetch from "../../hooks/useFetch";
 import { Base_Url } from "../../types";
+import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
 
 const BackgroundPopup: React.FC = () => {
     const {data: backgrounds} = useFetch<string[]>('/backgrounds');
 
-    const dispatch = useDispatch();
-    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
+    const dispatch = useAppDispatch();
+    const userPhone = useAppSelector(({user}) => user.phoneNumber);
     // @ts-ignore
-    const backgroundImage = useTypedSelector(({settings}) => settings.backgroundImage);
+    const backgroundImage = useAppSelector(({settings}) => settings.backgroundImage);
     const [chooseImage, setChooseImage] = useState<string>(backgroundImage);
     const [countOfLoadedImages, setCountOfLoadedImages] = useState(0);
 
     const closePopup = () => {
-        dispatch(setTypeOfSettings(null));
+        dispatch(settingsActions.setTypeOfSettings(null));
     }
 
     const handleImage = (e: React.MouseEvent) => {
@@ -37,7 +36,7 @@ const BackgroundPopup: React.FC = () => {
             },
             body: JSON.stringify({userPhone, chooseImage})
         }).then(response => response);
-        dispatch(setBackgroundImage(chooseImage));
+        dispatch(settingsActions.setBackgroundImage(chooseImage));
         closePopup();
     }
 

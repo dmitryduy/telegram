@@ -1,10 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { ChatHeader, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFooter } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
-import { useDispatch } from "react-redux";
-import { fetchActiveDialog, removeGlobalUsersAC } from "../../reducers/dialogReducer/dialogReducer";
 import { dialogId, phone, timestamp } from "../../types";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
 interface IChatItemProps {
@@ -19,8 +17,8 @@ interface IChatItemProps {
 }
 
 const ChatItem: React.FC<IChatItemProps> = ({
-                                                partnerPhone,
-                                                setSearch,
+                                                //partnerPhone,
+                                                //setSearch,
                                                 lastMsg,
                                                 lastMsgDate,
                                                 dialogId,
@@ -28,28 +26,10 @@ const ChatItem: React.FC<IChatItemProps> = ({
                                                 partnerNickname,
                                                 unread
                                             }) => {
-    const activeDialogId = useTypedSelector(({dialog}) => dialog?.activeDialog?.dialogId);
-    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
-    const dispatch = useDispatch();
-    const existingDialog = useTypedSelector(({dialog}) => dialog.dialogs?.get(dialogId as number));
+    const activeDialogId = useAppSelector(({dialog}) => dialog?.activeDialog?.dialogId);
 
     const setDialog = () => {
-        dispatch(removeGlobalUsersAC());
-        if (setSearch) {
-            setSearch(false);
-        }
-        if (!existingDialog) {
-            dispatch(fetchActiveDialog({
-                messages: [],
-                partnerNickname: partnerNickname,
-                partnerPhone: partnerPhone,
-                partnerAvatar: partnerAvatar,
-                dialogId: null,
-                unread: 0
-            }, userPhone!));
-        } else {
-            dispatch(fetchActiveDialog({...existingDialog, dialogId: dialogId as number}, userPhone!));
-        }
+        //todo
     }
 
 

@@ -30,7 +30,7 @@ export interface IUser {
     backgroundImage: string
 }
 
-export type IUsers = Map<phone, IUser>;
+
 
 export interface IGlobalSearch {
     chatsOfUser: dialogId[],
