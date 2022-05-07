@@ -35,7 +35,7 @@ const userSlice = createSlice({
                 state.isError = true;
                 return;
             }
-
+            debugger;
             const {phoneNumber, nickname, avatar} = action.payload;
             state.avatar = avatar;
             state.phoneNumber = phoneNumber;
