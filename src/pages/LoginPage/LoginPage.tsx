@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import cn from "classnames";
@@ -15,12 +14,15 @@ import {
 
 import useInput from "../../hooks/useInput";
 import useAnimation from "../../hooks/useAnimation";
-import { fetchUserInfo } from "../../reducers/userReducer/userReducer";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { fetchUserInfo } from "../../reducers/userSlice/userReducer";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
+import { dialogId, IDialog } from "../../types";
+import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
+import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
 
 const LoginPage: React.FC = () => {
-    const isAuth = useTypedSelector(({user}) => user.isAuth);
-    const error = useTypedSelector(({user}) => user.isError);
+    const isAuth = useAppSelector(({user}) => user.isAuth);
+    const error = useAppSelector(({user}) => user.isError);
 
     const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+[0-9]?$/);
     const [phoneInput, setPhoneInput] = useInput('', /^[0-9]{0,10}$/);
@@ -30,7 +32,7 @@ const LoginPage: React.FC = () => {
     const [codeNumberAnimation, setCodeNumberAnimation] = useAnimation(2000);
     const [userNicknameAnimation, setUserNicknameAnimation] = useAnimation(2000);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -50,7 +52,12 @@ const LoginPage: React.FC = () => {
             setErrorMessage('Nickname must have 3 or symbols');
             return;
         }
-        dispatch(fetchUserInfo((codeNumberInput + phoneInput).slice(1), nicknameInput));
+        dispatch(fetchUserInfo({userPhone: (codeNumberInput + phoneInput).slice(1), nickname: nicknameInput}))
+            .unwrap()
+            .then(data => {
+                dispatch(dialogActions.initializeDialogs(new Map<dialogId, IDialog>(data.dialogs? data.dialogs: [])));
+                dispatch(settingsActions.setBackgroundImage(data.backgroundImage));
+            });
     }
 
     useEffect(() => {

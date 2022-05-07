@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import ChatItem from "../ChatItem/ChatItem";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 interface IGlobalSearchProps {
     setSearch: Dispatch<SetStateAction<boolean>>
@@ -8,7 +8,7 @@ interface IGlobalSearchProps {
 
 
 const GlobalSearch: React.FC<IGlobalSearchProps> = ({setSearch}) => {
-    const foundedGlobalUsers = useTypedSelector(({dialog}) => dialog.foundedGlobalUsers?.chatsOfGlobal!);
+    const foundedGlobalUsers = useAppSelector(({dialog}) => dialog.foundedGlobalUsers?.chatsOfGlobal!);
     return (
         <>
             {foundedGlobalUsers.map(globalUser => <ChatItem

@@ -1,35 +1,34 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from "react-redux";
 
 import ChatsSide from "../../components/ChatsSide/ChatsSide";
 import MessagesSide from "../../components/MessagesSide/MessagesSide";
 import useSocket from "../../hooks/useSocket";
 import Settings from "../../components/Settings/Settings";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { INewMessage } from "../../reducers/dialogReducer/types";
-import { addNewMessageAC, sendOnlineUserAC, setOfflineUserAC } from "../../reducers/dialogReducer/dialogReducer";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
+import { INewMessage } from "../../reducers/dialogSlice/types";
+import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
 import { phone, timestamp } from "../../types";
 import SettingsPopup from "../../components/SettingsPopup/SettingsPopup";
 
 
 const MainPage: React.FC = () => {
-    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
+    const userPhone = useAppSelector(({user}) => user.phoneNumber);
 
     const initSocket = useSocket('joined');
     const newMessageSocket = useSocket('new message');
     const offlineUserSocket = useSocket('user offline');
     const onlineUserSocket = useSocket('user online');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         newMessageSocket.on((message: INewMessage) => {
-            dispatch(addNewMessageAC(message));
+            dispatch(dialogActions.addNewMessage(message));
         });
         offlineUserSocket.on(({userPhone, userLastSeen}: { userPhone: phone, userLastSeen: timestamp }) => {
-            dispatch(setOfflineUserAC(userPhone, userLastSeen));
+            dispatch(dialogActions.setOfflineUser({userPhone, userLastSeen}));
         })
         onlineUserSocket.on(({userPhone}: { userPhone: phone }) => {
-            dispatch(sendOnlineUserAC(userPhone));
+            dispatch(dialogActions.sendOnlineUser(userPhone));
         })
         return () => {
             newMessageSocket.off();

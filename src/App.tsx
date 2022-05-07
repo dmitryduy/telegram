@@ -4,11 +4,11 @@ import MainPage from "./pages/MainPage/MainPage";
 import Theme from "./Theme";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useTypedSelector } from "./hooks/useTypedSelector";
+import { useAppSelector } from "./hooks/useAppSelector";
 
 
 function App() {
-    const isAuth = useTypedSelector(({user}) => user.isAuth);
+    const isAuth = useAppSelector(({user}) => user.isAuth);
     return (
         <Theme>
             <div className="App">

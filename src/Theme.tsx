@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from "styled-components";
-import { useTypedSelector } from "./hooks/useTypedSelector";
+import { useAppSelector } from "./hooks/useAppSelector";
 
 
 const colors = {
@@ -99,7 +99,7 @@ const darkTheme = {
 
 const Theme: React.FC = ({children}) => {
     // @ts-ignore
-    const mode = useTypedSelector(({settings}) => settings.mode);
+    const mode = useAppSelector(({settings}) => settings.mode);
 
     return (
         <ThemeProvider theme={mode === 'day' ? lightTheme : darkTheme}>

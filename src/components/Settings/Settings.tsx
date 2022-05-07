@@ -1,29 +1,27 @@
 import React  from 'react';
 
-import { useDispatch } from "react-redux";
-
 import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone, Mode } from "./Settings.styles";
-import { changeModeAC, switchSettingsAC } from "../../reducers/settingsReducer/settingsReducer";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
 import { beautifyPhone } from "../../beautifyPhone";
 import SettingsItem from "../SettingsItem/SettingsItem";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
 import DayImage from '../../assets/imgs/day.png';
 import NightImage from '../../assets/imgs/night.svg';
+import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
 
 const Settings: React.FC = () => {
-    const {isShowSettings, backgroundImage, mode} = useTypedSelector(({settings}) => settings);
-    const {avatar, phoneNumber, nickname} = useTypedSelector(({user}) => user);
+    const {isShowSettings, backgroundImage, mode} = useAppSelector(({settings}) => settings);
+    const {avatar, phoneNumber, nickname} = useAppSelector(({user}) => user);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const onCloseSettings = () => {
-        dispatch(switchSettingsAC(false));
+        dispatch(settingsActions.switchSettings(false));
     }
 
     const changeMode = () => {
-      dispatch(changeModeAC());
+      dispatch(settingsActions.changeMode());
     }
 
     return (

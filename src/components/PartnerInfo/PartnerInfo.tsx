@@ -5,7 +5,7 @@ import dateFormat from "dateformat";
 import { PartnerInfoContainer } from "./PartnerInfo.styles";
 
 import { timestamp } from "../../types";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { beautifyPhone } from "../../beautifyPhone";
 
 const dateToString = (date: timestamp): string => {
@@ -24,7 +24,7 @@ const dateToString = (date: timestamp): string => {
 }
 
 const PartnerInfo: React.FC = () => {
-    const {partnerPhone, isOnline, lastSeen} = useTypedSelector(({dialog}) => dialog.activeDialog!);
+    const {partnerPhone, isOnline, lastSeen} = useAppSelector(({dialog}) => dialog.activeDialog!);
     return (
         <PartnerInfoContainer>
             <h5>{beautifyPhone(partnerPhone)}</h5>

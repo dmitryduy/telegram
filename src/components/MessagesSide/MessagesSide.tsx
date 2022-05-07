@@ -5,16 +5,16 @@ import { Messages, MessagesSideContainer, NoContent } from "./MessagesSide.style
 import Message from "../Message/Message";
 import MessageInput from "../MessageInput/MessageInput";
 import PartnerInfo from "../PartnerInfo/PartnerInfo";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 const MessagesSide: React.FC = () => {
     const scrollToRef = useRef<HTMLDivElement>(null);
 
-    const userPhone = useTypedSelector(({user}) => user.phoneNumber);
-    const messages = useTypedSelector(({dialog}) => dialog.activeDialog?.messages);
-    const unreadMessages = useTypedSelector(({dialog}) => dialog.activeDialog?.unread);
+    const userPhone = useAppSelector(({user}) => user.phoneNumber);
+    const messages = useAppSelector(({dialog}) => dialog.activeDialog?.messages);
+    const unreadMessages = useAppSelector(({dialog}) => dialog.activeDialog?.unread);
     // @ts-ignore
-    const backgroundImage = useTypedSelector(({settings}) => settings.backgroundImage);
+    const backgroundImage = useAppSelector(({settings}) => settings.backgroundImage);
 
 
     useEffect(() => {

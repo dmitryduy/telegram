@@ -1,11 +1,11 @@
 import React from 'react';
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import BackgroundPopup from "../BackgroundPopup/BackgroundPopup";
 import {PopupBackground, PopupContent} from "./SettingsPopup.styles";
 
 const SettingsPopup = () => {
     // @ts-ignore
-    const type = useTypedSelector(({settings}) => settings.typeSettings);
+    const type = useAppSelector(({settings}) => settings.typeSettings);
     if (!type) {
         return null;
     }
