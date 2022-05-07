@@ -16,9 +16,9 @@ import useInput from "../../hooks/useInput";
 import useAnimation from "../../hooks/useAnimation";
 import { fetchUserInfo } from "../../reducers/userSlice/userReducer";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import { dialogId, IDialog } from "../../types";
 import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
 import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
+import dialogsToObject from "../../dialogsToObject";
 
 const LoginPage: React.FC = () => {
     const isAuth = useAppSelector(({user}) => user.isAuth);
@@ -55,7 +55,7 @@ const LoginPage: React.FC = () => {
         dispatch(fetchUserInfo({userPhone: (codeNumberInput + phoneInput).slice(1), nickname: nicknameInput}))
             .unwrap()
             .then(data => {
-                dispatch(dialogActions.initializeDialogs(new Map<dialogId, IDialog>(data.dialogs? data.dialogs: [])));
+                dispatch(dialogActions.initializeDialogs(dialogsToObject(data.dialogs)));
                 dispatch(settingsActions.setBackgroundImage(data.backgroundImage));
             });
     }

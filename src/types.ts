@@ -2,8 +2,9 @@
 export const Base_Url = 'https://telegram-server-part.herokuapp.com';
 
 export type timestamp = number;
-export type dialogId = number;
+export type dialogId = string;
 export type phone = string;
+export type IDialogObject = { [key: string]: IDialog };
 
 export interface IMessage {
     createDate: timestamp,
@@ -18,6 +19,7 @@ export interface IDialog {
     unread: number
     messages: IMessage[];
 }
+
 
 export interface IUser {
     phoneNumber: phone,

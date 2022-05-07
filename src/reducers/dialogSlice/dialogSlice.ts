@@ -1,12 +1,9 @@
-import {
-    IDialogReducerState,
-    INewMessage,
-} from "./types";
-import { dialogId, IDialog, IGlobalSearch, IMessage, phone, timestamp } from "../../types";
+import { IDialogReducerState, INewMessage, } from "./types";
+import { IDialogObject, IGlobalSearch, IMessage, phone, timestamp } from "../../types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-    dialogs: null,
+    dialogs: {},
     activeDialog: null,
     foundedGlobalUsers: null,
 } as IDialogReducerState
@@ -25,23 +22,23 @@ const dialogSlice = createSlice({
     name: 'dialog',
     initialState,
     reducers: {
-        initializeDialogs(state, action: PayloadAction<Map<dialogId, IDialog> | null>) {
+        initializeDialogs(state, action: PayloadAction<IDialogObject>) {
             state.dialogs = action.payload;
         },
         addMessage(state, action: PayloadAction<IMessage>) {
-            const isNewDialog = state.dialogs?.get(state.activeDialog!.dialogId);
+            const isNewDialog = state.dialogs[state.activeDialog!.dialogId];
             if (!isNewDialog) {
-                state.dialogs!.set(state.activeDialog!.dialogId, {
+                state.dialogs[state.activeDialog!.dialogId] = {
                     messages: [action.payload],
                     partnerNickname: state.activeDialog!.partnerNickname,
                     partnerAvatar: state.activeDialog!.partnerAvatar,
                     partnerPhone: state.activeDialog!.partnerPhone,
                     unread: state.activeDialog!.unread
-                });
+                };
                 state.activeDialog = {...state.activeDialog!, unread: 0, messages: [action.payload]};
             }
 
-            state.dialogs!.get(state.activeDialog!.dialogId)!.messages.push(action.payload);
+            state.dialogs[state.activeDialog!.dialogId].messages.push(action.payload);
             state.activeDialog = {
                 ...state.activeDialog!,
                 unread: 0,
@@ -55,25 +52,24 @@ const dialogSlice = createSlice({
                 text: action.payload.text
             }
 
-            if (!state.dialogs || !state.dialogs.has(action.payload.dialogId)) {
-                const newDialog: IDialog = {
+            if (!state.dialogs || !state.dialogs[action.payload.dialogId]) {
+                state.dialogs[action.payload.dialogId] = {
                     messages: [newMessage],
                     partnerNickname: action.payload.partnerNickname,
                     partnerAvatar: action.payload.partnerAvatar,
                     partnerPhone: action.payload.partnerPhone,
                     unread: 1
                 };
-                state.dialogs!.set(action.payload.dialogId, newDialog);
                 return;
             }
 
-            state.dialogs.get(action.payload.dialogId)!.messages.push(newMessage);
+            state.dialogs[action.payload.dialogId].messages.push(newMessage);
 
             if (state.activeDialog?.dialogId === action.payload.dialogId) {
                 state.activeDialog.messages.push(newMessage);
                 state.activeDialog.unread = 0;
             } else {
-                state.dialogs.get(action.payload.dialogId)!.unread++;
+                state.dialogs[action.payload.dialogId].unread++;
             }
         },
         setFoundedGlobalUsers(state, action: PayloadAction<IGlobalSearch>) {

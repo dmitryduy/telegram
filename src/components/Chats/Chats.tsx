@@ -33,7 +33,8 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
     const dialogsToArray: IDialogToArray[] = [];
     const userDialogsBySearch: IDialogToArray[] = [];
 
-    dialogs?.forEach((dialog, dialogId) => {
+    for (let dialogId in dialogs) {
+        const dialog = dialogs[dialogId];
         const dialogItem: IDialogToArray = {
             dialogId: dialogId,
             partnerAvatar: dialog.partnerAvatar,
@@ -47,7 +48,8 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
         if (foundedGlobalUsers?.chatsOfUser.includes(dialogId)) {
             userDialogsBySearch.push(dialogItem);
         }
-    })
+    }
+
     if (!isSearch) {
         return <UserChats dialogsToArray={dialogsToArray}/>
     }
