@@ -19,13 +19,18 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
 import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
 import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
 import dialogsToObject from "../../dialogsToObject";
+import useMask from "../../hooks/useMask";
+import Countries from "../../components/Countries/Countries";
+import { changeDialCode } from "../../reducers/loginSlice/loginSlice";
 
 const LoginPage: React.FC = () => {
     const isAuth = useAppSelector(({user}) => user.isAuth);
     const error = useAppSelector(({user}) => user.isError);
 
-    const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+[0-9]?$/);
-    const [phoneInput, setPhoneInput] = useInput('', /^[0-9]{0,10}$/);
+    const mask = useAppSelector(state => state.login.phoneMask);
+    const dualCode = useAppSelector(state => state.login.dualCode);
+    const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+\d{0,4}$/);
+    const [phoneInput, setPhoneInput, clearPhoneInput] = useMask(mask);
     const [nicknameInput, setNicknameInput] = useInput('', /^[a-zA-Z0-9_]{0,20}$/);
 
     const [numberAnimation, setNumberAnimation] = useAnimation(2000);
@@ -71,15 +76,29 @@ const LoginPage: React.FC = () => {
         }
     }, [error]);
 
+    useEffect(() => {
+        dispatch(changeDialCode(codeNumberInput.slice(1)));
+    }, [codeNumberInput]);
+
+    useEffect(() => {
+        setCodeNumberInput('+' + dualCode);
+        clearPhoneInput();
+    }, [dualCode]);
+
+
     return (
         <LoginContainer>
             <div>
                 <LoginTitle>You Phone Number</LoginTitle>
                 <LoginSubtitle>Please confirm your country code and enter your mobile phone number.</LoginSubtitle>
+                <Countries/>
                 <div>
                     <CountryCodeInput type='tel' className={cn({'error': codeNumberAnimation})} value={codeNumberInput}
-                                      onInput={setCodeNumberInput}/>
-                    <NumberInput type='tel' className={cn({'error': numberAnimation})} value={phoneInput}
+                                      onInput={(e) => {
+                                          clearPhoneInput();
+                                          setCodeNumberInput(e);
+                                      }}/>
+                    <NumberInput placeholder={mask} type='tel' className={cn({'error': numberAnimation})} value={phoneInput}
                                  onInput={setPhoneInput}/>
                 </div>
                 <NicknameTitle>Enter your nickname</NicknameTitle>

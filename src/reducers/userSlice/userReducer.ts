@@ -14,7 +14,7 @@ const initialState = {
 interface IUserFetch {userPhone: phone, nickname: string}
 
 export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async ({userPhone, nickname}: IUserFetch) => {
-    const response = await fetch('https://telegram-server-part.herokuapp.com/login', {
+    const response = await fetch(`${process.env.REACT_APP_URL}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,6 @@ const userSlice = createSlice({
                 state.isError = true;
                 return;
             }
-            debugger;
             const {phoneNumber, nickname, avatar} = action.payload;
             state.avatar = avatar;
             state.phoneNumber = phoneNumber;
