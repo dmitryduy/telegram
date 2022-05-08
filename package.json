@@ -32,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "set \"REACT_APP_URL=http://localhost:5000\" && npm start",
+    "public": "set \"REACT_APP_URL=https://telegram-server-part.herokuapp.com\" && npm build"
   },
   "eslintConfig": {
     "extends": [

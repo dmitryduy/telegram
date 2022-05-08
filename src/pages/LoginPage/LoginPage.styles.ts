@@ -44,14 +44,11 @@ const Input = styled.input`
 `;
 
 export const CountryCodeInput = styled(Input)`
-  width: 70px;
+  width: 80px;
   margin-right: 10px;
 `;
 
-export const NumberInput = styled(Input).attrs({
-    placeholder: '--- --- ----'
-})`
-`;
+export const NumberInput = styled(Input)``;
 
 export const NicknameInput = styled(Input)`
   width: 100%;

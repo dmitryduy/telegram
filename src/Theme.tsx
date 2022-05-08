@@ -21,6 +21,8 @@ const colors = {
     transparent: 'transparent',
     lighterGray: '#f1f1f1',
     green: '#effdde',
+    mediumGray: '#e5e5e5',
+    darkerGray: '#9a9a9a'
 };
 
 const fontSizes = {
@@ -31,6 +33,13 @@ const fontSizes = {
     medium: '16px',
     extraMedium: '18px',
     large: '20px'
+}
+
+const other = {
+    borderRadius: '10px',
+    transitionSpeed: '.2s',
+    transitionFast: '.2s',
+    popupPaddings: '20px'
 }
 
 const lightTheme = {
@@ -60,9 +69,14 @@ const lightTheme = {
         searchTitle: colors.lighterGray,
         dateBackground: colors.lightGray,
         unreadTitle: colors.white,
-        unreadText: colors.blue
+        unreadText: colors.blue,
+        searchIcon: colors.gray,
+        placeholder: colors.lightGray,
+        scrollbar: colors.mediumGray,
+        thumb: colors.darkerGray
     },
-    fontSizes
+    fontSizes,
+    other
 }
 
 const darkTheme = {
@@ -92,9 +106,14 @@ const darkTheme = {
         searchTitle: colors.darkGray,
         dateBackground: colors.lightBlue,
         unreadTitle: colors.darkGray,
-        unreadText: colors.white
+        unreadText: colors.white,
+        searchIcon: colors.gray,
+        placeholder: colors.lightGray,
+        scrollbar: colors.mediumGray,
+        thumb: colors.darkerGray
     },
-    fontSizes
+    fontSizes,
+    other
 }
 
 const Theme: React.FC = ({children}) => {
