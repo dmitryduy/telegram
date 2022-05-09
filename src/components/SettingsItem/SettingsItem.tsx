@@ -26,7 +26,6 @@ const SettingsItem: React.FC<ISettingsItemProps> = ({imgName, text, type}) => {
             dispatch(toggleNightMode());
             return;
         }
-        console.log(type + '-popup:open')
         window.emitter.emit(type + '-popup:open')
     }
 
