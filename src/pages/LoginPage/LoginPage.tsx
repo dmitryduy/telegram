@@ -15,13 +15,13 @@ import {
 import useInput from "@hooks/useInput";
 import { fetchUserInfo } from "@reducers/userSlice/userReducer";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
-import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
 import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 import dialogsToObject from "../../dialogsToObject";
 import useMask from "@hooks/useMask";
 import Countries from "@components/Countries/Countries";
 import { changeDialCode } from "@reducers/loginSlice/loginSlice";
 import { checkDualCode, checkNickname, checkPhone, getNumericPhone } from "./helpers";
+import { setBackgroundImage } from "@reducers/settingsSlice/settingsSlice";
 
 const LoginPage: React.FC = () => {
     const isAuth = useAppSelector(({user}) => user.isAuth);
@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
             .unwrap()
             .then(data => {
                 dispatch(dialogActions.initializeDialogs(dialogsToObject(data.dialogs)));
-                dispatch(settingsActions.setBackgroundImage(data.backgroundImage));
+                dispatch(setBackgroundImage(data.backgroundImage));
             });
     }
 

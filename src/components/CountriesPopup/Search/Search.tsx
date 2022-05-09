@@ -3,6 +3,7 @@ import {SearchContainer} from "./Search.styles";
 import cn from "classnames";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { setSearchCountry } from "@reducers/loginSlice/loginSlice";
+import CloseButton from "@helpComponents/CloseButton/CloseButton";
 
 const Search = () => {
     const searchCountry = useAppSelector(state => state.login.searchCountry);
@@ -24,7 +25,7 @@ const Search = () => {
             </svg>
             <input value={searchCountry} onInput={onInput} type="text"/>
             <span className={cn({hidden: searchCountry})}>Search</span>
-            <button onClick={removeText} className={cn({close: true, hidden: !searchCountry})}>&times;</button>
+            <CloseButton className={cn({close: true, hidden: !searchCountry})} onClick={removeText}/>
         </SearchContainer>
     );
 };

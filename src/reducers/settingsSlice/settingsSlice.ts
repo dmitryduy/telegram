@@ -7,7 +7,7 @@ const initialState = {
     isShowSettings: false,
     backgroundImage: 'default',
     typeSettings: null,
-    mode: 'day'
+    isNightMode: false
 } as ISettingsReducerState;
 
 const settingsSlice = createSlice({
@@ -24,10 +24,12 @@ const settingsSlice = createSlice({
             state.typeSettings = action.payload;
             state.isShowSettings = false;
         },
-        changeMode(state) {
-            state.mode = state.mode === 'day' ? 'night': 'day';
+        toggleNightMode(state) {
+            state.isNightMode = !state.isNightMode;
         }
     }
 })
 
-export const {reducer: settingReducer, actions: settingsActions} = settingsSlice;
+export const {toggleNightMode, setTypeOfSettings, switchSettings, setBackgroundImage} = settingsSlice.actions;
+
+export const {reducer: settingReducer} = settingsSlice;

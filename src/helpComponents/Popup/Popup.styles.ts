@@ -20,6 +20,7 @@ export const Background = styled.div`
   }
 `;
 
+
 export const Content = styled.div`
   position: absolute;
   display: flex;
@@ -35,6 +36,7 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.h2`
+  position: relative;
   height: 20px;
   font-size: ${props => props.theme.fontSizes.medium};
   font-weight: 600;

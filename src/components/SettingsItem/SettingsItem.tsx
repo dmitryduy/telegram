@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SettingsItemContainer } from './SettingsItem.styles';
 
 import { typeOfSettings } from "@reducers/settingsSlice/types";
 import { useAppDispatch } from "@hooks/useAppSelector";
-import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
+import { toggleNightMode } from "@reducers/settingsSlice/settingsSlice";
+import ModeSwitcher from "@components/ModeSwitcher/ModeSwitcher";
 
 interface ISettingsItemProps {
     text: string,
     type: typeOfSettings,
+    imgName?: string
 }
 
-const SettingsItem: React.FC<ISettingsItemProps>= ({text, type}) => {
+const SettingsItem: React.FC<ISettingsItemProps> = ({imgName, text, type}) => {
     const dispatch = useAppDispatch();
+    const [image, setImage] = useState('');
+    useEffect(() => {
+        import(`@images/side-menu/${imgName}.png`).then(image => setImage(image.default));
+    }, []);
+
 
     const openPopup = () => {
-        dispatch(settingsActions.setTypeOfSettings(type));
+        if (type === 'night-mode') {
+            dispatch(toggleNightMode());
+            return;
+        }
+        console.log(type + '-popup:open')
+        window.emitter.emit(type + '-popup:open')
     }
 
     return (
         <SettingsItemContainer onClick={openPopup}>
+            <img width={24} height={24} src={image} alt=""/>
             {text}
+            {type === 'night-mode' && <ModeSwitcher/>}
         </SettingsItemContainer>
     );
 };

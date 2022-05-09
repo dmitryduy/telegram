@@ -5,7 +5,7 @@ import { Title, BackgroundsContainer, Button, Loading } from './BackgroundPopup.
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import useFetch from "@hooks/useFetch";
 import { Base_Url } from "../../types";
-import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
+import { setBackgroundImage, setTypeOfSettings } from "@reducers/settingsSlice/settingsSlice";
 
 const BackgroundPopup: React.FC = () => {
     const {data: backgrounds} = useFetch<string[]>('/backgrounds');
@@ -18,7 +18,7 @@ const BackgroundPopup: React.FC = () => {
     const [countOfLoadedImages, setCountOfLoadedImages] = useState(0);
 
     const closePopup = () => {
-        dispatch(settingsActions.setTypeOfSettings(null));
+        dispatch(setTypeOfSettings(null));
     }
 
     const handleImage = (e: React.MouseEvent) => {
@@ -36,7 +36,7 @@ const BackgroundPopup: React.FC = () => {
             },
             body: JSON.stringify({userPhone, chooseImage})
         }).then(response => response);
-        dispatch(settingsActions.setBackgroundImage(chooseImage));
+        dispatch(setBackgroundImage(chooseImage));
         closePopup();
     }
 
