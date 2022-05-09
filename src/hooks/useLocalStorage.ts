@@ -1,5 +1,3 @@
-
-
 type keys = 'night-mode';
 
 interface ILocalStorage {

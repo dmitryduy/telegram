@@ -21,13 +21,7 @@ const ModeSwitcher = () => {
         localStorage.set('night-mode', isNightMode);
     }, [isNightMode]);
 
-
-
-    return (
-        <Switcher className={cn({'night-mode': isNightMode})}>
-
-        </Switcher>
-    );
+    return <Switcher className={cn({'night-mode': isNightMode})}/>;
 };
 
 export default ModeSwitcher;

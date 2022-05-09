@@ -10,10 +10,11 @@ import ModeSwitcher from "@components/ModeSwitcher/ModeSwitcher";
 interface ISettingsItemProps {
     text: string,
     type: typeOfSettings,
-    imgName?: string
+    imgName?: string,
+    changeSide?: boolean
 }
 
-const SettingsItem: React.FC<ISettingsItemProps> = ({imgName, text, type}) => {
+const SettingsItem: React.FC<ISettingsItemProps> = ({changeSide,imgName, text, type}) => {
     const dispatch = useAppDispatch();
     const [image, setImage] = useState('');
     useEffect(() => {
@@ -22,6 +23,11 @@ const SettingsItem: React.FC<ISettingsItemProps> = ({imgName, text, type}) => {
 
 
     const openPopup = () => {
+        if (changeSide) {
+            window.emitter.emit(type + '-change-side:right');
+            return;
+        }
+
         if (type === 'night-mode') {
             dispatch(toggleNightMode());
             return;
@@ -31,7 +37,7 @@ const SettingsItem: React.FC<ISettingsItemProps> = ({imgName, text, type}) => {
 
     return (
         <SettingsItemContainer onClick={openPopup}>
-            <img width={24} height={24} src={image} alt=""/>
+            <img width={24} height={24} src={image} alt={imgName}/>
             {text}
             {type === 'night-mode' && <ModeSwitcher/>}
         </SettingsItemContainer>
