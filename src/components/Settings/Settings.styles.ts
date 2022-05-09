@@ -24,9 +24,8 @@ export const SettingsContent = styled.div`
   top: 0;
   bottom: 0;
   left: 0;
-  width: 17%;
   background-color: ${props => props.theme.colors.bgColor};
-  min-width: 150px;
+  width: 250px;
   transition: .3s;
   transform: translateX(-100%);
   z-index: 10000;
@@ -44,20 +43,6 @@ export const SettingsHeader = styled.div<{ backgroundImage: string }>`
   padding: 20px 25px 10px;
   color: #fff;
   border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
-`;
-
-export const Mode = styled.img`
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  right: 15px;
-  bottom: 15px;
-  cursor: pointer;
-  transition: .2s;
-
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 

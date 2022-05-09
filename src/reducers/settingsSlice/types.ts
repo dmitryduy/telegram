@@ -5,5 +5,5 @@ export interface ISettingsReducerState {
     isShowSettings: boolean,
     backgroundImage: string,
     typeSettings: typeOfSettings | null,
-    mode: 'night' | 'day'
+    isNightMode: boolean
 }

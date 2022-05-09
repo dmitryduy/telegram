@@ -1,28 +1,22 @@
 import React from 'react';
 
-import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone, Mode } from "./Settings.styles";
+import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone } from "./Settings.styles";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { beautifyPhone } from "../../beautifyPhone";
 import SettingsItem from "@components/SettingsItem/SettingsItem";
 import UserAvatar from "@components/UserAvatar/UserAvatar";
 
-import DayImage from '@images/day.png';
-import NightImage from '@images/night.svg';
-import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
 import { getSideItems } from "@components/Settings/helpers";
+import { switchSettings } from "@reducers/settingsSlice/settingsSlice";
 
 const Settings: React.FC = () => {
-    const {isShowSettings, backgroundImage, mode} = useAppSelector(state => state.settings);
+    const {isShowSettings, backgroundImage} = useAppSelector(state => state.settings);
     const {avatar, phoneNumber, nickname} = useAppSelector(state => state.user);
 
     const dispatch = useAppDispatch();
 
     const onCloseSettings = () => {
-        dispatch(settingsActions.switchSettings(false));
-    }
-
-    const changeMode = () => {
-        dispatch(settingsActions.changeMode());
+        dispatch(switchSettings(false));
     }
 
     return (
@@ -37,7 +31,6 @@ const Settings: React.FC = () => {
                 </SettingsHeader>
                 {getSideItems().map(item => <SettingsItem key={item.text} text={item.text} type={item.type} imgName={item.imgName}/>)}
                 <SettingsItem text='Background' type='background'/>
-                <Mode onClick={changeMode} src={mode === 'day' ? DayImage : NightImage} alt="mode"/>
             </SettingsContent>
         </>
     );

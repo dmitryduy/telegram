@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from "styled-components";
-import { useAppSelector } from "./hooks/useAppSelector";
+import { useAppSelector } from "@hooks/useAppSelector";
 
 
 const colors = {
@@ -8,7 +8,7 @@ const colors = {
     slimGray: '#e0e0e0',
     darkBlue: '#2f6ea5',
     black: '#222222',
-    white: '#fff',
+    white: '#ffffff',
     gray: '#65717b',
     red: '#ef5959',
     darkGray: '#242f3d',
@@ -22,7 +22,8 @@ const colors = {
     lighterGray: '#f1f1f1',
     green: '#effdde',
     mediumGray: '#e5e5e5',
-    darkerGray: '#9a9a9a'
+    darkerGray: '#9a9a9a',
+    lgray: '#999999'
 };
 
 const fontSizes = {
@@ -74,6 +75,8 @@ const lightTheme = {
         placeholder: colors.lightGray,
         scrollbar: colors.mediumGray,
         thumb: colors.darkerGray,
+        switcher: colors.lgray,
+        switcherTumbler: colors.white
     },
     fontSizes,
     other
@@ -110,18 +113,19 @@ const darkTheme = {
         searchIcon: colors.gray,
         placeholder: colors.lightGray,
         scrollbar: colors.mediumGray,
-        thumb: colors.darkerGray
+        thumb: colors.darkerGray,
+        switcher: colors.slimBlue,
+        switcherTumbler: colors.lightBlack
     },
     fontSizes,
     other
 }
 
 const Theme: React.FC = ({children}) => {
-    // @ts-ignore
-    const mode = useAppSelector(({settings}) => settings.mode);
+    const isNightMode = useAppSelector(state => state.settings.isNightMode);
 
     return (
-        <ThemeProvider theme={mode === 'day' ? lightTheme : darkTheme}>
+        <ThemeProvider theme={isNightMode ? darkTheme : lightTheme}>
             {children}
         </ThemeProvider>
     );
