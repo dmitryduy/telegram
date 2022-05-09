@@ -73,7 +73,7 @@ const lightTheme = {
         searchIcon: colors.gray,
         placeholder: colors.lightGray,
         scrollbar: colors.mediumGray,
-        thumb: colors.darkerGray
+        thumb: colors.darkerGray,
     },
     fontSizes,
     other

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SettingsItemContainer } from './SettingsItem.styles';
 
@@ -9,10 +9,16 @@ import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
 interface ISettingsItemProps {
     text: string,
     type: typeOfSettings,
+    imgName?: string
 }
 
-const SettingsItem: React.FC<ISettingsItemProps>= ({text, type}) => {
+const SettingsItem: React.FC<ISettingsItemProps>= ({imgName, text, type}) => {
     const dispatch = useAppDispatch();
+    const [image, setImage] = useState('');
+    useEffect( () => {
+         import(`@images/side-menu/${imgName}.png`).then(image => setImage(image.default));
+    }, []);
+
 
     const openPopup = () => {
         dispatch(settingsActions.setTypeOfSettings(type));
@@ -20,6 +26,7 @@ const SettingsItem: React.FC<ISettingsItemProps>= ({text, type}) => {
 
     return (
         <SettingsItemContainer onClick={openPopup}>
+            <img width={24} height={24} src={image} alt=""/>
             {text}
         </SettingsItemContainer>
     );
