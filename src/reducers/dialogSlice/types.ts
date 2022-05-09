@@ -1,4 +1,5 @@
-import { dialogId, IDialog, IDialogObject, IGlobalSearch, IMessage, phone, timestamp } from "../../types";
+import { IDialog, IDialogObject, IGlobalSearch, IMessage } from "../../types";
+import { phone, timestamp, dialogId } from "../../globalTypes";
 
 export type INewMessage =
     IMessage

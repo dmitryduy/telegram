@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { IUserReducerState } from "./types";
-import { phone } from "../../types";
+import { IUser, phone } from "../../globalTypes";
 
 const initialState = {
     isError: false,
@@ -13,7 +13,7 @@ const initialState = {
 
 interface IUserFetch {userPhone: phone, nickname: string}
 
-export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async ({userPhone, nickname}: IUserFetch) => {
+export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async ({userPhone, nickname}: IUserFetch): Promise<IUser & { error: null } | {error: string}> => {
     const response = await fetch(`${process.env.REACT_APP_URL}/login`, {
         method: 'POST',
         headers: {
@@ -35,7 +35,7 @@ const userSlice = createSlice({
                 state.isError = true;
                 return;
             }
-            const {phoneNumber, nickname, avatar} = action.payload;
+            const {phoneNumber, nickname, avatar} = action.payload as IUser & {error: null};
             state.avatar = avatar;
             state.phoneNumber = phoneNumber;
             state.nickname = nickname;

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 
-import ChatsSide from "../../components/ChatsSide/ChatsSide";
-import MessagesSide from "../../components/MessagesSide/MessagesSide";
-import useSocket from "../../hooks/useSocket";
-import Settings from "../../components/Settings/Settings";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import { INewMessage } from "../../reducers/dialogSlice/types";
-import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
-import { phone, timestamp } from "../../types";
-import SettingsPopup from "../../components/SettingsPopup/SettingsPopup";
+import ChatsSide from "@components/ChatsSide/ChatsSide";
+import MessagesSide from "@components/MessagesSide/MessagesSide";
+import useSocket from "@hooks/useSocket";
+import Settings from "@components/Settings/Settings";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import { INewMessage } from "@reducers/dialogSlice/types";
+import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
+import SettingsPopup from "@components/SettingsPopup/SettingsPopup";
+import { phone, timestamp } from "../../globalTypes";
 
 
 const MainPage: React.FC = () => {

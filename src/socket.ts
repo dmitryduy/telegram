@@ -1,3 +1,4 @@
 import io from "socket.io-client";
-let socket = io("https://telegram-server-part.herokuapp.com");
+import { Base_Url } from "./types";
+let socket = io(Base_Url || '');
 export default socket;

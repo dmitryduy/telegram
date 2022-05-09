@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatsTitle from "../ChatsTitle/ChatsTitle";
+import ChatsTitle from "@components/ChatsTitle/ChatsTitle";
 
 const NotFound = () => {
     return (

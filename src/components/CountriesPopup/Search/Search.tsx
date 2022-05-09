@@ -1,8 +1,8 @@
 import React from 'react';
 import {SearchContainer} from "./Search.styles";
 import cn from "classnames";
-import { useAppDispatch, useAppSelector } from "../../../hooks/useAppSelector";
-import { setSearchCountry } from "../../../reducers/loginSlice/loginSlice";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import { setSearchCountry } from "@reducers/loginSlice/loginSlice";
 
 const Search = () => {
     const searchCountry = useAppSelector(state => state.login.searchCountry);

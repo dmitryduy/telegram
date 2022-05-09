@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { dialogId, phone, timestamp } from "../../types";
-import Loading from "../Loading/Loading";
-import NotFound from "../NotFound/NotFound";
-import GlobalSearch from "../GlobalSearch/GlobalSearch";
-import UserChats from "../UserChats/UserChats";
-import ChatsTitle from "../ChatsTitle/ChatsTitle";
+import { useAppSelector } from "@hooks/useAppSelector";
+import { dialogId, phone, timestamp } from "../../globalTypes";
+import Loading from "@components/Loading/Loading";
+import NotFound from "@components/NotFound/NotFound";
+import GlobalSearch from "@components/GlobalSearch/GlobalSearch";
+import UserChats from "@components/UserChats/UserChats";
+import ChatsTitle from "@components/ChatsTitle/ChatsTitle";
 
 interface IChatsProps {
     readonly isSearch: boolean,

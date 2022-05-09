@@ -4,9 +4,10 @@ import dateFormat from "dateformat";
 
 import { PartnerInfoContainer } from "./PartnerInfo.styles";
 
-import { timestamp } from "../../types";
-import { useAppSelector } from "../../hooks/useAppSelector";
+
+import { useAppSelector } from "@hooks/useAppSelector";
 import { beautifyPhone } from "../../beautifyPhone";
+import { timestamp } from "../../globalTypes";
 
 const dateToString = (date: timestamp): string => {
     const now =  Date.now();

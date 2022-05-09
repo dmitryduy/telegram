@@ -1,6 +1,7 @@
 import { IDialogReducerState, INewMessage, } from "./types";
-import { IDialogObject, IGlobalSearch, IMessage, phone, timestamp } from "../../types";
+import { IDialogObject, IGlobalSearch, IMessage } from "../../types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { phone, timestamp } from "../../globalTypes";
 
 const initialState = {
     dialogs: {},

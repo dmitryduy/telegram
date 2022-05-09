@@ -1,11 +1,11 @@
 import React from 'react';
 import { MessageInputContainer } from "./MessageInput.styles";
-import useInput from "../../hooks/useInput";
+import useInput from "@hooks/useInput";
 
-import SendMessage from '../../assets/imgs/send-button.svg';
-import useSocket from "../../hooks/useSocket";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
+import SendMessage from '@images/send-button.svg';
+import useSocket from "@hooks/useSocket";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 
 const MessageInput: React.FC = () => {
     const [inputValue, changeInputValue, clearInput] = useInput();

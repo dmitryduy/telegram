@@ -4,10 +4,10 @@ import { useDebounce } from "use-debounce";
 
 import { SearchInput } from "./SearchField.styles";
 
-import useInput from "../../hooks/useInput";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
+import useInput from "@hooks/useInput";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { Base_Url, IGlobalSearch } from "../../types";
-import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
+import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 
 interface ISearchFieldProps {
     setSearch: Dispatch<SetStateAction<boolean>>,

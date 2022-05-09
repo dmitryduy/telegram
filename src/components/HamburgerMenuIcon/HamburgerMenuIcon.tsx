@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { HamburgerContainer } from "./HamburgerMenuIcon.styles";
-import { useAppDispatch } from "../../hooks/useAppSelector";
-import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
+import { useAppDispatch } from "@hooks/useAppSelector";
+import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
 
 
 const HamburgerMenuIcon: React.FC = () => {
