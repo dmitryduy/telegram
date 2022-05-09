@@ -7,14 +7,14 @@ import cn from "classnames";
 interface IPopupProps {
     title: string,
     bottomButton?: string,
-    active: boolean,
-    setActive:  React.Dispatch<React.SetStateAction<boolean>>
+    emitName: string,
+    active: boolean
 }
 
-const Popup: FC<IPopupProps> = ({setActive, active, bottomButton, title, children}) => {
+const Popup: FC<IPopupProps> = ({active, emitName, bottomButton, title, children}) => {
     const closePopup = (e) => {
         e.stopPropagation();
-        setActive(false);
+        window.emitter.emit(emitName);
     }
 
     return ReactDOM.createPortal(

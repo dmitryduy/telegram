@@ -15,9 +15,18 @@ const Countries: FC = () => {
     }
 
     useEffect(() => {
+        window.emitter.on('popup-country:hide', () => {
+            setActivePopup(false);
+        })
+        return () => {
+            window.emitter.un('popup-country:hide');
+        }
+    }, []);
+
+    useEffect(() => {
         if (!activePopup) {
             // надо, чтобы пользователь не видел удаление поля страны в попапе при его закрытии
-            setTimeout(() =>  dispatch(setSearchCountry('')), 200);
+            setTimeout(() => dispatch(setSearchCountry('')), 200);
         }
     }, [activePopup]);
 
@@ -26,7 +35,7 @@ const Countries: FC = () => {
         <CountriesContainer onClick={openPopup}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/></svg>
             <span>{countryName}</span>
-            <CountriesPopup setActive={setActivePopup} active={activePopup}/>
+            <CountriesPopup active={activePopup}/>
         </CountriesContainer>
     );
 };

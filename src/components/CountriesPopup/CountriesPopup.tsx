@@ -15,18 +15,14 @@ interface ICountry {
     mask: string,
 }
 
-interface ICountriesPopup {
-    active: boolean,
-    setActive: React.Dispatch<React.SetStateAction<boolean>>
-}
 
 const getCountryByDualCode = (countries: ICountry[], dualCode): ICountry | undefined => countries.find(country => country.dualCode === dualCode);
 
-const getCountryFromSearch = (countries: ICountry[], text: string): ICountry[]  => {
+const getCountryFromSearch = (countries: ICountry[], text: string): ICountry[] => {
     return countries.filter(country => country.name.toLowerCase().includes(text.toLowerCase()));
 }
 
-const CountriesPopup: FC<ICountriesPopup> = ({active, setActive}) => {
+const CountriesPopup: FC<{ active: boolean }> = ({active}) => {
     const {data: countries} = useFetch<ICountry[]>('/countries/en');
     const {dualCode, searchCountry} = useAppSelector(state => state.login);
     const dispatch = useAppDispatch();
@@ -52,7 +48,7 @@ const CountriesPopup: FC<ICountriesPopup> = ({active, setActive}) => {
 
         const dualCode = button.getAttribute('data-dual-code');
         dispatch(changeDialCode(dualCode || ''));
-        setActive(false);
+        window.emitter.emit('popup-country:hide');
     }
 
     if (!countries) return null;
@@ -65,7 +61,7 @@ const CountriesPopup: FC<ICountriesPopup> = ({active, setActive}) => {
 
 
     return (
-        <Popup active={active} setActive={setActive} title='Select Country' bottomButton='Close'>
+        <Popup active={active} emitName='popup-country:hide' title='Select Country' bottomButton='Close'>
             <Search/>
             <CountriesContainer onClick={changeCountryHandler}>
                 {foundedCountries.length ? foundedCountries : <NotFound marginTop={40}>Country not found</NotFound>}

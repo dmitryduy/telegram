@@ -4,8 +4,10 @@ import MainPage from "./pages/MainPage/MainPage";
 import Theme from "./Theme";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAppSelector } from "./hooks/useAppSelector";
+import { useAppSelector } from "@hooks/useAppSelector";
+import { Emitter } from "@helpers/emitter";
 
+window.emitter = new Emitter;
 
 function App() {
     const isAuth = useAppSelector(({user}) => user.isAuth);
