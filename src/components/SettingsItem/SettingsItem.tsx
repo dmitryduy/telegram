@@ -4,7 +4,7 @@ import { SettingsItemContainer } from './SettingsItem.styles';
 
 import { typeOfSettings } from "@reducers/settingsSlice/types";
 import { useAppDispatch } from "@hooks/useAppSelector";
-import { setTypeOfSettings, toggleNightMode } from "@reducers/settingsSlice/settingsSlice";
+import { toggleNightMode } from "@reducers/settingsSlice/settingsSlice";
 import ModeSwitcher from "@components/ModeSwitcher/ModeSwitcher";
 
 interface ISettingsItemProps {
@@ -26,7 +26,8 @@ const SettingsItem: React.FC<ISettingsItemProps> = ({imgName, text, type}) => {
             dispatch(toggleNightMode());
             return;
         }
-        dispatch(setTypeOfSettings(type));
+        console.log(type + '-popup:open')
+        window.emitter.emit(type + '-popup:open')
     }
 
     return (

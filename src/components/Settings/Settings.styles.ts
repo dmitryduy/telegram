@@ -11,7 +11,7 @@ export const SettingsContainer = styled.div`
   z-index: 1000;
   visibility: hidden;
   opacity: 0;
-  transition: .3s;
+  transition: ${props => props.theme.other.transitionSpeed};
 
   &.active {
     visibility: visible;
@@ -26,7 +26,7 @@ export const SettingsContent = styled.div`
   left: 0;
   background-color: ${props => props.theme.colors.bgColor};
   width: 250px;
-  transition: .3s;
+  transition: ${props => props.theme.other.transitionSpeed};
   transform: translateX(-100%);
   z-index: 10000;
 

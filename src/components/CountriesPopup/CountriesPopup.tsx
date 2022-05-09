@@ -61,7 +61,7 @@ const CountriesPopup: FC<{ active: boolean }> = ({active}) => {
 
 
     return (
-        <Popup active={active} emitName='popup-country:hide' title='Select Country' bottomButton='Close'>
+        <Popup active={active} emitCloseName='popup-country:hide' title='Select Country' bottomButton='Close'>
             <Search/>
             <CountriesContainer onClick={changeCountryHandler}>
                 {foundedCountries.length ? foundedCountries : <NotFound marginTop={40}>Country not found</NotFound>}

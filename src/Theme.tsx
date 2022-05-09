@@ -4,7 +4,7 @@ import { useAppSelector } from "@hooks/useAppSelector";
 
 
 const colors = {
-    lightBlack: '#17212b',
+    lightBlack: '#282e33',
     slimGray: '#e0e0e0',
     darkBlue: '#2f6ea5',
     black: '#222222',
@@ -17,7 +17,7 @@ const colors = {
     lightBlue: '#2b5278',
     blue: '#4082bc',
     slimBlue: '#40a7e3',
-    darkBlack: '#0e1621',
+    darkBlack: '#242a2e',
     transparent: 'transparent',
     lighterGray: '#f1f1f1',
     green: '#effdde',
@@ -76,7 +76,8 @@ const lightTheme = {
         scrollbar: colors.mediumGray,
         thumb: colors.darkerGray,
         switcher: colors.lgray,
-        switcherTumbler: colors.white
+        switcherTumbler: colors.white,
+        tooltip: colors.lightBlack
     },
     fontSizes,
     other
@@ -115,7 +116,8 @@ const darkTheme = {
         scrollbar: colors.mediumGray,
         thumb: colors.darkerGray,
         switcher: colors.slimBlue,
-        switcherTumbler: colors.lightBlack
+        switcherTumbler: colors.lightBlack,
+        tooltip: colors.black
     },
     fontSizes,
     other

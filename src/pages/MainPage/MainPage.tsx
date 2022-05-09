@@ -9,6 +9,8 @@ import { INewMessage } from "@reducers/dialogSlice/types";
 import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 import SettingsPopup from "@components/SettingsPopup/SettingsPopup";
 import { phone, timestamp } from "../../globalTypes";
+import ExtraSettings from "@components/ExtraSettings/ExtraSettings";
+import Tooltip from "@helpComponents/Tooltip/Tooltip";
 
 
 const MainPage: React.FC = () => {
@@ -47,6 +49,8 @@ const MainPage: React.FC = () => {
             <MessagesSide/>
             <Settings/>
             <SettingsPopup/>
+            <ExtraSettings/>
+            <Tooltip/>
         </div>
     );
 };
