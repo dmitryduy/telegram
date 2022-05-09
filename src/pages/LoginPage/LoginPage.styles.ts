@@ -8,10 +8,6 @@ export const LoginContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${props => props.theme.colors.bgColor};
-  .error {
-    transition: .2s;
-    border-bottom: 2px solid ${props => props.theme.colors.error};
-  }
 `;
 
 
@@ -60,8 +56,9 @@ export const NicknameTitle = styled(LoginSubtitle)`
 `;
 
 export const PhoneError = styled.span`
-  display: inline-block;
+  display: block;
   margin: 10px 0;
+  height: 15px;
   font-size: ${props => props.theme.fontSizes.small};
   color: ${props => props.theme.colors.error};
   visibility: hidden;

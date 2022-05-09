@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import { Title, BackgroundsContainer, Button, Loading } from './BackgroundPopup.styles';
 
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import useFetch from "../../hooks/useFetch";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import useFetch from "@hooks/useFetch";
 import { Base_Url } from "../../types";
-import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
+import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
 
 const BackgroundPopup: React.FC = () => {
     const {data: backgrounds} = useFetch<string[]>('/backgrounds');

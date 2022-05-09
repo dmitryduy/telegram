@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import ChatItem from "../ChatItem/ChatItem";
-import { IDialogToArray } from "../Chats/Chats";
+import ChatItem from "@components/ChatItem/ChatItem";
+import { IDialogToArray } from "@components/Chats/Chats";
 
 const UserChats = ({dialogsToArray, setSearch}: {dialogsToArray: IDialogToArray[], setSearch?: Dispatch<SetStateAction<boolean>>}) => {
     return (

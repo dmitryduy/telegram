@@ -1,14 +1,14 @@
 import React  from 'react';
 
 import { SettingsContainer, SettingsContent, SettingsHeader, UserName, UserPhone, Mode } from "./Settings.styles";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { beautifyPhone } from "../../beautifyPhone";
-import SettingsItem from "../SettingsItem/SettingsItem";
-import UserAvatar from "../UserAvatar/UserAvatar";
+import SettingsItem from "@components/SettingsItem/SettingsItem";
+import UserAvatar from "@components/UserAvatar/UserAvatar";
 
-import DayImage from '../../assets/imgs/day.png';
-import NightImage from '../../assets/imgs/night.svg';
-import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
+import DayImage from '@images/day.png';
+import NightImage from '@images/night.svg';
+import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
 
 const Settings: React.FC = () => {
     const {isShowSettings, backgroundImage, mode} = useAppSelector(({settings}) => settings);

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Background, Bottom, Body, Title, Content } from './Popup.styles';
 import ReactDOM from "react-dom";
-import Button from "../Button/Button";
+import Button from "@helpComponents/Button/Button";
 import cn from "classnames";
 
 interface IPopupProps {

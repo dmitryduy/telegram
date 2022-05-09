@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import ChatItem from "../ChatItem/ChatItem";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import ChatItem from "@components/ChatItem/ChatItem";
+import { useAppSelector } from "@hooks/useAppSelector";
 
 interface IGlobalSearchProps {
     setSearch: Dispatch<SetStateAction<boolean>>

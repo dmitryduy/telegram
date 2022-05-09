@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppSelector } from "../../hooks/useAppSelector";
-import BackgroundPopup from "../BackgroundPopup/BackgroundPopup";
+import { useAppSelector } from "@hooks/useAppSelector";
+import BackgroundPopup from "@components/BackgroundPopup/BackgroundPopup";
 import {PopupBackground, PopupContent} from "./SettingsPopup.styles";
 
 const SettingsPopup = () => {

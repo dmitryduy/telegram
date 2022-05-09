@@ -12,52 +12,40 @@ import {
     NumberInput, PhoneError
 } from "./LoginPage.styles";
 
-import useInput from "../../hooks/useInput";
-import useAnimation from "../../hooks/useAnimation";
-import { fetchUserInfo } from "../../reducers/userSlice/userReducer";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import { settingsActions } from "../../reducers/settingsSlice/settingsSlice";
-import { dialogActions } from "../../reducers/dialogSlice/dialogSlice";
+import useInput from "@hooks/useInput";
+import { fetchUserInfo } from "@reducers/userSlice/userReducer";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import { settingsActions } from "@reducers/settingsSlice/settingsSlice";
+import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 import dialogsToObject from "../../dialogsToObject";
-import useMask from "../../hooks/useMask";
-import Countries from "../../components/Countries/Countries";
-import { changeDialCode } from "../../reducers/loginSlice/loginSlice";
+import useMask from "@hooks/useMask";
+import Countries from "@components/Countries/Countries";
+import { changeDialCode } from "@reducers/loginSlice/loginSlice";
+import { checkDualCode, checkNickname, checkPhone, getNumericPhone } from "./helpers";
 
 const LoginPage: React.FC = () => {
     const isAuth = useAppSelector(({user}) => user.isAuth);
     const error = useAppSelector(({user}) => user.isError);
+    const {dualCode, countryName, phoneMask: mask} = useAppSelector(state => state.login);
 
-    const mask = useAppSelector(state => state.login.phoneMask);
-    const dualCode = useAppSelector(state => state.login.dualCode);
-    const [codeNumberInput, setCodeNumberInput] = useInput('+', /^\+\d{0,4}$/);
-    const [phoneInput, setPhoneInput, clearPhoneInput] = useMask(mask);
-    const [nicknameInput, setNicknameInput] = useInput('', /^[a-zA-Z0-9_]{0,20}$/);
-
-    const [numberAnimation, setNumberAnimation] = useAnimation(2000);
-    const [codeNumberAnimation, setCodeNumberAnimation] = useAnimation(2000);
-    const [userNicknameAnimation, setUserNicknameAnimation] = useAnimation(2000);
+    const [codeNumberValue, setCodeNumberValue] = useInput('+', /^\+\d{0,4}$/);
+    const [phoneValue, setPhoneValue, clearPhoneValue] = useMask(mask);
+    const [nicknameValue, setNicknameValue] = useInput('', /^[a-zA-Z0-9_]{0,20}$/);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState('');
-    const sendUserPhone = () => {
-        if (codeNumberInput.length < 2) {
-            setCodeNumberAnimation();
-            setErrorMessage('Invalid code number');
+
+    const login = () => {
+        const errorMessage = checkDualCode(countryName) || checkPhone(phoneValue, mask) || checkNickname(nicknameValue);
+
+        if (errorMessage) {
+            setErrorMessage(errorMessage);
             return;
         }
-        if (phoneInput.length < 8) {
-            setNumberAnimation();
-            setErrorMessage('Invalid phone number(11 digits needed)');
-            return;
-        }
-        if (nicknameInput.length < 3) {
-            setUserNicknameAnimation();
-            setErrorMessage('Nickname must have 3 or symbols');
-            return;
-        }
-        dispatch(fetchUserInfo({userPhone: (codeNumberInput + phoneInput).slice(1), nickname: nicknameInput}))
+
+        dispatch(fetchUserInfo({userPhone: getNumericPhone(phoneValue, codeNumberValue), nickname: nicknameValue}))
             .unwrap()
             .then(data => {
                 dispatch(dialogActions.initializeDialogs(dialogsToObject(data.dialogs)));
@@ -77,13 +65,17 @@ const LoginPage: React.FC = () => {
     }, [error]);
 
     useEffect(() => {
-        dispatch(changeDialCode(codeNumberInput.slice(1)));
-    }, [codeNumberInput]);
+        dispatch(changeDialCode(codeNumberValue.slice(1)));
+    }, [codeNumberValue]);
 
     useEffect(() => {
-        setCodeNumberInput('+' + dualCode);
-        clearPhoneInput();
+        setCodeNumberValue('+' + dualCode);
+        clearPhoneValue();
     }, [dualCode]);
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [codeNumberValue, phoneValue, nicknameValue])
 
 
     return (
@@ -93,21 +85,19 @@ const LoginPage: React.FC = () => {
                 <LoginSubtitle>Please confirm your country code and enter your mobile phone number.</LoginSubtitle>
                 <Countries/>
                 <div>
-                    <CountryCodeInput type='tel' className={cn({'error': codeNumberAnimation})} value={codeNumberInput}
+                    <CountryCodeInput type='tel' value={codeNumberValue}
                                       onInput={(e) => {
-                                          clearPhoneInput();
-                                          setCodeNumberInput(e);
+                                          clearPhoneValue();
+                                          setCodeNumberValue(e);
                                       }}/>
-                    <NumberInput placeholder={mask} type='tel' className={cn({'error': numberAnimation})} value={phoneInput}
-                                 onInput={setPhoneInput}/>
+                    <NumberInput placeholder={mask} type='tel' value={phoneValue} onInput={setPhoneValue}/>
                 </div>
                 <NicknameTitle>Enter your nickname</NicknameTitle>
-                <NicknameInput type='text' className={cn({'error': userNicknameAnimation})} value={nicknameInput}
-                               onInput={setNicknameInput}/>
+                <NicknameInput type='text' value={nicknameValue} onInput={setNicknameValue}/>
                 <div>
                     <PhoneError className={cn({'visible': errorMessage})}>{errorMessage}</PhoneError>
                 </div>
-                <LoginButton onClick={sendUserPhone}>log in</LoginButton>
+                <LoginButton onClick={login}>log in</LoginButton>
             </div>
         </LoginContainer>
     );

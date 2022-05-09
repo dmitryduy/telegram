@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react';
-import Popup from "../../helpComponents/Popup/Popup";
-import useFetch from "../../hooks/useFetch";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import { changeCountry, changeDialCode } from "../../reducers/loginSlice/loginSlice";
+import Popup from "@helpComponents/Popup/Popup";
+import useFetch from "@hooks/useFetch";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import { changeCountry, changeDialCode } from "@reducers/loginSlice/loginSlice";
 import Search from "./Search/Search";
 import CountryItem from "./CountryItem/CountryItem";
 import { CountriesContainer } from './CountriesPopup.styles';
-import NotFound from "../../helpComponents/NotFound/NotFound";
+import NotFound from "@helpComponents/NotFound/NotFound";
+import { INVALID_COUNTRY_CODE, NO_COUNTRY } from "../../constants";
 
 interface ICountry {
     name: string,
@@ -18,9 +19,6 @@ interface ICountriesPopup {
     active: boolean,
     setActive: React.Dispatch<React.SetStateAction<boolean>>
 }
-
-const INVALID_COUNTRY_CODE = 'Invalid country code';
-const NO_COUNTRY = 'Country Code';
 
 const getCountryByDualCode = (countries: ICountry[], dualCode): ICountry | undefined => countries.find(country => country.dualCode === dualCode);
 
@@ -57,7 +55,7 @@ const CountriesPopup: FC<ICountriesPopup> = ({active, setActive}) => {
         setActive(false);
     }
 
-    if (!countries) return <div>loading...</div>
+    if (!countries) return null;
 
     if (countries) {
         foundedCountries = getCountryFromSearch(countries, searchCountry).map(country => <CountryItem

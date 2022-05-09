@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-const isNumber = (char: string) => /\d/.test(char);
+import isNumber from "../helpers/isNumber";
 
 
 const isCorrectByMask = (value: string, mask: string) => {

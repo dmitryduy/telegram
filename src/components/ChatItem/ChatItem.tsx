@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { ChatHeader, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFooter } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
-import { dialogId, phone, timestamp } from "../../types";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import UserAvatar from "../UserAvatar/UserAvatar";
+import { dialogId, phone, timestamp } from "../../globalTypes";
+import { useAppSelector } from "@hooks/useAppSelector";
+import UserAvatar from "@components/UserAvatar/UserAvatar";
 
 interface IChatItemProps {
     dialogId?: dialogId,

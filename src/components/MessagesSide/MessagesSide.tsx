@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react';
 
 import { Messages, MessagesSideContainer, NoContent } from "./MessagesSide.styles";
 
-import Message from "../Message/Message";
-import MessageInput from "../MessageInput/MessageInput";
-import PartnerInfo from "../PartnerInfo/PartnerInfo";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import Message from "@components/Message/Message";
+import MessageInput from "@components/MessageInput/MessageInput";
+import PartnerInfo from "@components/PartnerInfo/PartnerInfo";
+import { useAppSelector } from "@hooks/useAppSelector";
 
 const MessagesSide: React.FC = () => {
     const scrollToRef = useRef<HTMLDivElement>(null);

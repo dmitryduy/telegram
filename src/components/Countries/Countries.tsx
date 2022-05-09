@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { CountriesContainer } from './Countries.styles';
-import CountriesPopup from "../CountriesPopup/CountriesPopup";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelector";
-import { setSearchCountry } from "../../reducers/loginSlice/loginSlice";
+import CountriesPopup from "@components/CountriesPopup/CountriesPopup";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
+import { setSearchCountry } from "@reducers/loginSlice/loginSlice";
 
 
 const Countries: FC = () => {
@@ -16,7 +16,7 @@ const Countries: FC = () => {
 
     useEffect(() => {
         if (!activePopup) {
-            // надо, чтобы пользователь не видел удаление поля страны в попапе
+            // надо, чтобы пользователь не видел удаление поля страны в попапе при его закрытии
             setTimeout(() =>  dispatch(setSearchCountry('')), 200);
         }
     }, [activePopup]);
