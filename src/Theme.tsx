@@ -23,7 +23,8 @@ const colors = {
     green: '#effdde',
     mediumGray: '#e5e5e5',
     darkerGray: '#9a9a9a',
-    lgray: '#999999'
+    lgray: '#999999',
+    darkGreen: '#3ee2cc'
 };
 
 const fontSizes = {
@@ -77,7 +78,8 @@ const lightTheme = {
         thumb: colors.darkerGray,
         switcher: colors.lgray,
         switcherTumbler: colors.white,
-        tooltip: colors.lightBlack
+        tooltip: colors.lightBlack,
+        popupBg: colors.lighterGray
     },
     fontSizes,
     other
@@ -87,8 +89,8 @@ const darkTheme = {
     colors: {
         bgColor: colors.lightBlack,
         inputBackground: colors.transparent,
-        inputFocusBorder: colors.darkBlue,
-        button: colors.darkBlue,
+        inputFocusBorder: colors.darkGreen,
+        button: colors.darkGreen,
         heading: colors.white,
         inputBorder: colors.gray,
         paragraph: colors.gray,
@@ -104,7 +106,7 @@ const darkTheme = {
         unreadMessage: colors.blue,
         partnerMessage: colors.lightBlack,
         userMessage: colors.lightBlue,
-        helpingBorders: colors.darkBlack,
+        helpingBorders: colors.lightGray,
         imageBorder: colors.lightBlue,
         buttonDisabled: colors.darkGray,
         searchTitle: colors.darkGray,
@@ -117,7 +119,8 @@ const darkTheme = {
         thumb: colors.darkerGray,
         switcher: colors.slimBlue,
         switcherTumbler: colors.lightBlack,
-        tooltip: colors.black
+        tooltip: colors.black,
+        popupBg: colors.slimBlack,
     },
     fontSizes,
     other

@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
             </SettingsContainer>
             <SettingsContent className={isShowSettings ? 'active' : ''}>
                 <SettingsHeader backgroundImage={backgroundImage}>
-                    <User avatarPos='avatar-top' styleContainer={{padding: "20px 25px 10px"}}/>
+                    <User avatarPos='avatar-top' styleContainer={{padding: "20px 25px 10px"}} phone/>
                 </SettingsHeader>
                 {getSideItems().map(item => <SettingsItem key={item.text} text={item.text} type={item.type} imgName={item.imgName}/>)}
                 <SettingsItem text='Background' type='background'/>

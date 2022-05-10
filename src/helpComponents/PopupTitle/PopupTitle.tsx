@@ -10,9 +10,9 @@ export const Title = styled.h2`
   height: 20px;
   font-size: ${props => props.theme.fontSizes.medium};
   color: ${props => props.theme.colors.heading};
+  background-color: ${props => props.theme.colors.bgColor};
   font-weight: 600;
-  margin-bottom: 10px;
-  padding: 0 20px;
+  padding: 20px;
 `;
 
 interface IPopupTitle {

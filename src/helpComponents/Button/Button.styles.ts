@@ -10,8 +10,9 @@ export const Btn = styled.button`
   font-weight: 600;
   font-size: ${props => props.theme.fontSizes.extraNormal};
   outline: none;
+  border-radius: 3px;
   &:hover:not(:disabled) {
-    background-color: ${props => rgba(props.theme.colors.button, .2)};
+    background-color: ${props => rgba(props.theme.colors.button, .1)};
   }
   &:disabled {
     cursor: default;

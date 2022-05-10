@@ -27,5 +27,8 @@ export interface IUserReducerState{
     isAuth: boolean,
     phoneNumber: phone | null,
     nickname: string | null,
-    avatar: string| null
+    avatar: string| null,
+    bio: string | null,
+    name: string | null,
+    surname: string | null
 }

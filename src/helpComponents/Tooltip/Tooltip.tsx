@@ -8,6 +8,7 @@ const Container = styled.div`
   pointer-events: none;
   top: 50%;
   left: 50%;
+  text-align: center;
   transform: translate(-50%, -50%);
   color: #fff;
   padding: 10px 20px;

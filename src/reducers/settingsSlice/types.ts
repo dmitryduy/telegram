@@ -6,9 +6,11 @@ export type typeOfSettings =
     | 'contacts'
     | 'calls'
     | 'saved-messages'
-    | 'settings'
+    | 'extra-settings'
     | 'edit-profile'
-    | 'chat-settings';
+    | 'chat-settings'
+    | 'name'
+    | 'nickname';
 
 export interface ISettingsReducerState {
     language: 'ru' | 'en';

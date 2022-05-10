@@ -11,6 +11,7 @@ import SettingsPopup from "@components/SettingsPopup/SettingsPopup";
 import { phone, timestamp } from "../../globalTypes";
 import ExtraSettings from "@components/ExtraSettings/ExtraSettings";
 import Tooltip from "@helpComponents/Tooltip/Tooltip";
+import NamePopup from "@components/NamePopup/NamePopup";
 
 
 const MainPage: React.FC = () => {
@@ -50,6 +51,7 @@ const MainPage: React.FC = () => {
             <Settings/>
             <SettingsPopup/>
             <ExtraSettings/>
+            <NamePopup/>
             <Tooltip/>
         </div>
     );

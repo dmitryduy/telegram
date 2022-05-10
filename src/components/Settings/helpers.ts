@@ -6,7 +6,7 @@ export const getSideItems = (): { text: string, imgName: string, type: typeOfSet
         {text: 'New Channel', imgName: 'report', type: 'new-channel'},
         {text: 'Contacts', imgName: 'contacts', type: 'contacts'},
         {text: 'Saved Messages', imgName: 'saved-messages', type: 'saved-messages'},
-        {text: 'Settings', imgName: 'settings', type: 'settings'},
+        {text: 'Settings', imgName: 'settings', type: 'extra-settings'},
         {text: 'Night Mode', imgName: 'night-mode', type: 'night-mode'}
     ]
 }
