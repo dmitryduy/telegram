@@ -12,6 +12,9 @@ export const Main = styled.div`
 
 export const LeftSide = styled.div`
   width: 50%;
+  &.hide {
+    max-height: 0;
+  }
 `;
 
 export const RightSide = styled.div`

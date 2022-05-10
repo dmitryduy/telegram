@@ -24,7 +24,7 @@ const SettingsItem: React.FC<ISettingsItemProps> = ({changeSide,imgName, text, t
 
     const openPopup = () => {
         if (changeSide) {
-            window.emitter.emit(type + '-change-side:right');
+            window.emitter.emit('extra-settings-item:click', {type});
             return;
         }
 

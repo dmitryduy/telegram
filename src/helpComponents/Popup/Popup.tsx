@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Background, Bottom, Body, Content } from './Popup.styles';
 import ReactDOM from "react-dom";
 import Button from "@helpComponents/Button/Button";
@@ -13,7 +13,7 @@ interface IPopupProps {
     closeButton?: boolean,
 }
 
-const Popup: FC<IPopupProps> = ({closeButton, active, emitCloseName, bottomButton, title, children}) => {
+const Popup = React.forwardRef<HTMLDivElement | null, IPopupProps & React.ReactNode>(({ closeButton, active, emitCloseName, bottomButton, title, children}, ref)=> {
     const closePopup = (e: React.FormEvent<HTMLElement>) => {
         e.stopPropagation();
         window.emitter.emit(emitCloseName);
@@ -21,7 +21,7 @@ const Popup: FC<IPopupProps> = ({closeButton, active, emitCloseName, bottomButto
 
     return ReactDOM.createPortal(
         <Background className={cn({active, hidden: !active})} onClick={closePopup}>
-            <Content onClick={e => e.stopPropagation()}>
+            <Content ref={ref} onClick={e => e.stopPropagation()}>
                 {title && <PopupTitle closePopup={closePopup} closeButton={closeButton}>{title}</PopupTitle>}
                 <Body>{children}</Body>
                 {bottomButton && <Bottom><Button onClick={closePopup}>{bottomButton}</Button></Bottom>}
@@ -29,6 +29,6 @@ const Popup: FC<IPopupProps> = ({closeButton, active, emitCloseName, bottomButto
         </Background>,
         document.querySelector('body') as Element
     );
-};
+});
 
 export default Popup;

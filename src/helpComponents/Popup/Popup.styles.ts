@@ -26,13 +26,16 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 50px;
+  transform: translateX(-50%);
   width: 320px;
+
   padding: 20px 0 0 0;
   border-radius: ${props => props.theme.other.borderRadius};
   background-color: ${props => props.theme.colors.bgColor};
   overflow: hidden;
+  max-height: 75vh;
+  transition: ${props => props.theme.other.transitionSpeed};
 `;
 
 export const Body = styled.div`
@@ -49,5 +52,5 @@ export const Bottom = styled.div`
   margin-bottom: 0;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 ${props => props.theme.other.popupPaddings};
+  padding: 0 ${props => props.theme.other.popupPaddings} 10px;
 `;
