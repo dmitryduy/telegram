@@ -26,22 +26,16 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 75vh;
+  top: 50px;
+  transform: translateX(-50%);
   width: 320px;
-  padding: 20px 0 10px 0;
+
+  padding: 20px 0 0 0;
   border-radius: ${props => props.theme.other.borderRadius};
   background-color: ${props => props.theme.colors.bgColor};
-`;
-
-export const Title = styled.h2`
-  position: relative;
-  height: 20px;
-  font-size: ${props => props.theme.fontSizes.medium};
-  font-weight: 600;
-  margin-bottom: 10px;
-  padding: 0 20px;
+  overflow: hidden;
+  max-height: 75vh;
+  transition: ${props => props.theme.other.transitionSpeed};
 `;
 
 export const Body = styled.div`
@@ -58,5 +52,5 @@ export const Bottom = styled.div`
   margin-bottom: 0;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 ${props => props.theme.other.popupPaddings};
+  padding: 0 ${props => props.theme.other.popupPaddings} 10px;
 `;

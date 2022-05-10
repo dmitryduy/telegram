@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   padding: 10px;
   height: 100px;
+  border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
   span[data-avatar] {
     position: relative;
     height: 80px;
