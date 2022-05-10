@@ -35,7 +35,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
 
     return (
         <ChatItemContainer className={activeDialogId === dialogId ? 'active' : ''} onClick={setDialog}>
-            <UserAvatar image={partnerAvatar} name={partnerNickname}/>
+            <UserAvatar image={partnerAvatar}/>
             <div style={{flex: 1, width: '1px'}}>
                 <ChatHeader>
                     <h4>{partnerNickname}</h4>

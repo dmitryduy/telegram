@@ -10,6 +10,11 @@ export const Main = styled.div`
   }
 `;
 
+
+export const Items = styled.div`
+  background-color: ${props => props.theme.colors.bgColor};
+  padding: 5px 0;
+`;
 export const LeftSide = styled.div`
   width: 50%;
   &.hide {

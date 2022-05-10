@@ -12,6 +12,7 @@ export const SettingsItemContainer = styled.li`
   cursor: pointer;
   color: ${props => props.theme.colors.heading};
   user-select: none;
+  background-color: ${props => props.theme.colors.bgColor};
   &:hover {
     background-color: ${props => props.theme.colors.chatItemHover};
   }

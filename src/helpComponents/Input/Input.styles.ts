@@ -1,28 +1,20 @@
 import styled from "styled-components";
 
-export const SearchContainer = styled.div`
+export const InputContainer = styled.div`
   position: relative;
   border-bottom: 1px solid ${props => props.theme.colors.inputBorder};
-  padding: 5px ${props => props.theme.other.popupPaddings};
-
-  svg {
-    fill: ${props => props.theme.colors.searchIcon};
-    transform: rotateZ(90deg);
-    height: 16px;
-  }
+  width: 100%;
 
   span {
     position: absolute;
-    left: calc(26px + ${props => props.theme.other.popupPaddings});
-    top: 50%;
-    transform: translateY(-50%);
+    left: 0;
     color: ${props => props.theme.colors.placeholder};
     font-size: ${props => props.theme.fontSizes.normal};
     pointer-events: none;
     transition: ${props => props.theme.other.transitionSpeed};
 
     &.hidden {
-      transform: translateX(20px) translateY(-50%);
+      transform: translateX(20px);
       opacity: 0;
     }
   }
@@ -31,11 +23,16 @@ export const SearchContainer = styled.div`
     transform: translateY(-50%) rotateZ(180deg) scale(0);
   }
 
-  input {
+  input, textarea {
     outline: none;
     background-color: ${props => props.theme.colors.inputBackground};
     color: ${props => props.theme.colors.inputColor};
     border: none;
     font-size: ${props => props.theme.fontSizes.extraMedium};
+  }
+  textarea {
+    resize: none;
+    overflow: hidden;
+    font-size: ${props => props.theme.fontSizes.normal};
   }
 `;

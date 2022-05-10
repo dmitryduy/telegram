@@ -29,10 +29,8 @@ export const Content = styled.div`
   top: 50px;
   transform: translateX(-50%);
   width: 320px;
-
-  padding: 20px 0 0 0;
+  background-color: ${props => props.theme.colors.popupBg};
   border-radius: ${props => props.theme.other.borderRadius};
-  background-color: ${props => props.theme.colors.bgColor};
   overflow: hidden;
   max-height: 75vh;
   transition: ${props => props.theme.other.transitionSpeed};
@@ -41,16 +39,16 @@ export const Content = styled.div`
 export const Body = styled.div`
   height: calc(100% - 80px);
   flex: 1 0 auto;
-  border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
-  margin-bottom: 10px;
+  //border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
 `;
 
 export const Bottom = styled.div`
   display: flex;
-  height:20px;
+  max-height: 50px;
   flex: 0 0 auto;
   margin-bottom: 0;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 ${props => props.theme.other.popupPaddings} 10px;
+  padding: 10px ${props => props.theme.other.popupPaddings};
+  background-color: ${props => props.theme.colors.bgColor};
 `;

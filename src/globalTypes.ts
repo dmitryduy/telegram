@@ -25,7 +25,10 @@ export interface IUser {
     nickname: string,
     lastSeen: timestamp | null,
     avatar: string,
-    backgroundImage: string
+    backgroundImage: string,
+    bio: string | null,
+    name: string | null,
+    surname: string | null
 }
 
 export interface INewMessagePopup {

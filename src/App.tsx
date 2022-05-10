@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 
 import MainPage from "./pages/MainPage/MainPage";
 import Theme from "./Theme";
@@ -10,7 +10,8 @@ import { Emitter } from "@helpers/emitter";
 window.emitter = new Emitter;
 
 function App() {
-    const isAuth = useAppSelector(({user}) => user.isAuth);
+    const isAuth = useAppSelector(state => state.user.isAuth);
+
     return (
         <Theme>
             <div className="App">

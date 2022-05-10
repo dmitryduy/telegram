@@ -1,30 +1,49 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const UserContainer = styled.div`
   display: flex;
-  padding: 10px;
-  height: 100px;
   border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
-  span[data-avatar] {
-    position: relative;
-    height: 80px;
-    width: 80px;
-    margin-right: 20px;
+  background-color: ${props => props.theme.colors.bgColor};
+  margin-bottom: 5px;
+  &.avatar-top {
+    flex-direction: column;
+
+    span[data-avatar] {
+      margin-bottom: 10px;
+    }
+  }
+
+  &.avatar-left {
+    align-items: center;
+
+    span[data-avatar] {
+      margin-right: 20px;
+    }
+  }
+  
+  .info.center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
   .name {
     color: ${props => props.theme.colors.heading};
+    font-size: ${props => props.theme.fontSizes.medium};
     margin-bottom: 5px;
   }
+
   .phone {
     font-size: ${props => props.theme.fontSizes.extraSmall};
     color: ${props => props.theme.colors.heading};
     font-weight: 500;
   }
+
   .nickname {
     position: relative;
     color: ${props => props.theme.colors.paragraph};
     font-size: ${props => props.theme.fontSizes.normal};
     cursor: pointer;
+
     &:hover {
       &:before {
         position: absolute;
