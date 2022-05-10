@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Popup from "@helpComponents/Popup/Popup";
 import { switchSettings } from "@reducers/settingsSlice/settingsSlice";
-import { useAppDispatch } from "@hooks/useAppSelector";
-import UserInfo from "@components/ExtraSettings/UserInfo/UserInfo";
+import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import SettingsItem from "@components/SettingsItem/SettingsItem";
 import { Main, LeftSide, RightSide } from './ExtraSettings.styles';
 import cn from "classnames";
 import PopupTitle from "@helpComponents/PopupTitle/PopupTitle";
 import InfoSettings from "@components/ExtraSettings/InfoSettings/InfoSettings";
 import ChatSettings from "@components/ExtraSettings/ChatSettings/ChatSettings";
+import User from "@helpComponents/User/User";
+import copyNickname from "@components/ExtraSettings/helpers/copyNickname";
 
 type itemTypes = 'edit-profile' | 'chat-settings';
 
@@ -19,6 +20,7 @@ const ExtraSettings = () => {
     const [currentType, setCurrentType] = useState<itemTypes | ''>('');
     const contentRef = useRef<HTMLDivElement>(null);
     const mainRef = useRef<HTMLDivElement>(null);
+    const nickname = useAppSelector(state => state.user.nickname);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -71,7 +73,7 @@ const ExtraSettings = () => {
             <Main ref={mainRef} className={cn({right: side === 'right'})}>
                 <LeftSide className={cn({hide: side === 'right'})}>
                     <PopupTitle closePopup={closeLeftPopup} closeButton>Settings</PopupTitle>
-                    <UserInfo/>
+                    <User styleContainer={{padding: "10px 20px"}} avatarPos='avatar-left' onNicknameClick={() => copyNickname(nickname || '')} nickname/>
                     <SettingsItem text='Edit Profile' type='edit-profile' imgName='edit-profile' changeSide/>
                     <SettingsItem text='Chat Settings' type='chat-settings' imgName='chat-settings' changeSide/>
                 </LeftSide>

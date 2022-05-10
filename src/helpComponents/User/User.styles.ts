@@ -1,15 +1,20 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const UserContainer = styled.div`
   display: flex;
-  padding: 10px;
-  height: 100px;
   border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
+  &.avatar-top {
+    flex-direction: column;
+    span[data-avatar] {
+      margin-bottom: 10px;
+    }
+  }
   span[data-avatar] {
     position: relative;
-    height: 80px;
-    width: 80px;
     margin-right: 20px;
+  }
+  &.avatar-left {
+    align-items: center;
   }
   .name {
     color: ${props => props.theme.colors.heading};

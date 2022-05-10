@@ -40,19 +40,5 @@ export const SettingsHeader = styled.div<{ backgroundImage: string }>`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  padding: 20px 25px 10px;
   color: #fff;
-  border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
-`;
-
-
-export const UserName = styled.h5`
-  font-size: ${props => props.theme.fontSizes.normal};
-  font-weight: 600;
-  color: ${props => props.theme.colors.heading};
-`;
-
-export const UserPhone = styled.span`
-  font-size: ${props => props.theme.fontSizes.extraSmall};
-  color: ${props => props.theme.colors.paragraph};
 `;
