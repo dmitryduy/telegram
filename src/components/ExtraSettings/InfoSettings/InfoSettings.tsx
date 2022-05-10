@@ -8,7 +8,7 @@ import { Items } from '../ExtraSettings.styles';
 const InfoSettings = () => {
     return (
         <Container>
-            <User textPosition='center' styleAvatar={{width: 100, height: 100}}
+            <User textPosition='center' styleAvatar={{width: 100, height: 100, fontSize: 40}}
                   styleContainer={{alignItems: 'center', borderBottom: "none", marginBottom: 10}}
                   avatarPos='avatar-top'/>
             <BioInput/>

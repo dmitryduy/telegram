@@ -55,13 +55,7 @@ export const updateBio = createAsyncThunk('user/updateBio', async (_, {getState,
 
 });
 
-export const updateName = createAsyncThunk('user/updateName', async ({
-                                                                         name,
-                                                                         surname
-                                                                     }: { name: string, surname: string }, {
-                                                                         rejectWithValue,
-                                                                         getState
-                                                                     }) => {
+export const updateName = createAsyncThunk('user/updateName', async ({name, surname}: { name: string, surname: string }, {rejectWithValue, getState}) => {
     const state = getState() as RootState;
     try {
         const response = await fetch(`${process.env.REACT_APP_URL}/name`, {
@@ -80,6 +74,27 @@ export const updateName = createAsyncThunk('user/updateName', async ({
     }
 })
 
+export const updateNickname = createAsyncThunk('user/updateNickname', async ({nickname}: { nickname: string }, {rejectWithValue, getState}) => {
+    const state = getState() as RootState;
+    try {
+        const response = await fetch(`${process.env.REACT_APP_URL}/is-available-nickname`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nickname, prevNickname: state.user.nickname})
+        });
+        if (!response.ok) {
+            return rejectWithValue('Cannot update nickname.')
+        }
+        return response.ok;
+    } catch (e) {
+        return rejectWithValue('Cannot update nickname.');
+    }
+})
+
+
+
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -90,6 +105,9 @@ const userSlice = createSlice({
         setName(state, action: PayloadAction<{ name: string, surname: string }>) {
             state.name = action.payload.name;
             state.surname = action.payload.surname;
+        },
+        setNickname(state, action: PayloadAction<string>) {
+            state.nickname = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -111,6 +129,6 @@ const userSlice = createSlice({
     }
 })
 
-export const {setBio, setName} = userSlice.actions;
+export const {setBio, setName, setNickname} = userSlice.actions;
 
 export const {reducer: userReducer} = userSlice;

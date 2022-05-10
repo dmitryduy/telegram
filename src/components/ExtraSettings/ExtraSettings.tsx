@@ -75,7 +75,7 @@ const ExtraSettings = () => {
             <Main ref={mainRef} className={cn({right: side === 'right'})}>
                 <LeftSide className={cn({hide: side === 'right'})}>
                     <PopupTitle closePopup={closeLeftPopup} closeButton>Settings</PopupTitle>
-                    <User styleAvatar={{height: 80, width: 80}} styleContainer={{padding: "10px 20px"}}
+                    <User styleAvatar={{height: 80, width: 80, fontSize: 25}} styleContainer={{padding: "10px 20px"}}
                           avatarPos='avatar-left' onNicknameClick={() => copyNickname(nickname || '')} nickname phone/>
                     <Items>
                         <SettingsItem text='Edit Profile' type='edit-profile' imgName='edit-profile' changeSide/>

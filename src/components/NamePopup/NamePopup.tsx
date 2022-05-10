@@ -1,23 +1,16 @@
-import React  from 'react';
+import React from 'react';
 import Popup from "@helpComponents/Popup/Popup";
 import usePopup from "@hooks/usePopup";
 import TextInput from "@helpComponents/TextInput/TextInput";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import useInput from "@hooks/useInput";
 import { setName, updateName } from "@reducers/userSlice/userReducer";
-import noop from "@helpers/noop";
 
 const NamePopup = () => {
-    const [active, , emitCloseName] = usePopup('name',  noop, () => {
-        // Чтобы пользователь не видел смену в инпутах
-        setTimeout(() => {
-            setUsername(name || '');
-            setUserSurname(surname || '');
-        }, 200);
-    });
     const {name, surname} = useAppSelector(state => state.user);
     const [username, setUsername] = useInput(name || '', /^.{0,12}$/);
     const [userSurname, setUserSurname] = useInput(surname || '', /^.{0,12}$/);
+    const [active, , emitCloseName] = usePopup('name');
     const dispatch = useAppDispatch();
 
     const saveName = () => {
