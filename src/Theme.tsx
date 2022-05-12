@@ -41,8 +41,8 @@ const fontSizes = {
 const other = {
     borderRadius: '10px',
     transitionSpeed: '.2s',
-    transitionFast: '.2s',
-    popupPaddings: '20px'
+    transitionSpeedSlow: '.3s',
+    popupPaddings: '15px'
 }
 
 const lightTheme = {

@@ -27,7 +27,7 @@ const NamePopup = () => {
     }
 
     return (
-        <Popup top='30%' zIndex={100} emitCloseName={emitCloseName} title='Edit your name' active={active} onSubmit={saveName} submitButton='Save' bottomButton='Cancel'>
+        <Popup width={290} top='20%' zIndex={100} emitCloseName={emitCloseName} title='Edit your name' active={active} onSubmit={saveName} submitButton='Save' bottomButton='Cancel'>
             <TextInput emitErrorName='username:error' placeHolder='First name' value={username} setValue={setUsername}/>
             <TextInput placeHolder='Last Name' value={userSurname} setValue={setUserSurname}/>
         </Popup>

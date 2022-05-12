@@ -6,8 +6,10 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAppSelector } from "@hooks/useAppSelector";
 import { Emitter } from "@helpers/emitter";
+import { LocalStorage } from "@helpers/localStorage";
 
-window.emitter = new Emitter;
+window.emitter = new Emitter();
+window.storage = new LocalStorage();
 
 function App() {
     const isAuth = useAppSelector(state => state.user.isAuth);
