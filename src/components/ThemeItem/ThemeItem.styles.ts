@@ -6,6 +6,7 @@ export const ThemeItemContainer = styled.div<{ beforeColor: string, afterColor: 
   height: 115px;
   width: 80px;
   margin-bottom: 5px;
+  cursor: pointer;
 
   &:before, &:after {
     position: absolute;
@@ -36,6 +37,7 @@ export const ThemeItemContainer = styled.div<{ beforeColor: string, afterColor: 
 `;
 
 export const ThemeNameTooltip = styled.span`
+  cursor: pointer;
   text-align: center;
   font-size: ${props => props.theme.fontSizes.normal};
   color: ${props => props.theme.colors.paragraph};

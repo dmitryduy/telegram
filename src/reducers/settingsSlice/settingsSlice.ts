@@ -27,7 +27,7 @@ const settingsSlice = createSlice({
             state.isShowSettings = false;
         },
         toggleNightMode(state, action: PayloadAction<boolean | undefined>) {
-            if (!action.payload) {
+            if (action.payload === undefined) {
                 state.isNightMode = !state.isNightMode;
             } else {
                 state.isNightMode = action.payload;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PopupItemContainer } from '@styled-components/PopupItemContainer';
 import SettingsTitle from "@helpComponents/SettingsTitle/SettingsTitle";
 import ThemeItem from "@components/ThemeItem/ThemeItem";
@@ -12,8 +12,8 @@ import noop from "@helpers/noop";
 const checkboxColors =  ['#40a7e3', '#45bce7','#52b440', '#d46c99', '#df8a49', '#9978c8','#c55245','#687b98','#dea922'];
 
 const ThemeSettings = () => {
-
-    const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>(window.storage.get('night-mode') ? 'dark' : 'light');
+    const {isNightMode} = useAppSelector(state => state.settings);
+    const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>(isNightMode ? 'dark' : 'light');
     const {themeColor} = useAppSelector(state => state.settings);
     const [currentThemeColor, setCurrentThemeColor]  = useState<themeColor>(themeColor);
     const dispatch = useAppDispatch();
@@ -33,6 +33,15 @@ const ThemeSettings = () => {
         dispatch(setThemeColor(e.target.value as themeColor));
         window.storage.set('theme-color', e.target.value);
     }
+
+    useEffect(() => {
+        if (isNightMode && selectedTheme !== 'dark') {
+            setSelectedTheme('dark');
+        } else if (!isNightMode && selectedTheme !== 'light'){
+            setSelectedTheme('light');
+        }
+    }, [isNightMode]);
+
 
     return (
         <PopupItemContainer>
