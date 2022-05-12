@@ -15,7 +15,8 @@ interface IPopupProps {
     active: boolean,
     closeButton?: boolean,
     zIndex?: number,
-    top?: string
+    top?: string,
+    width?: number
 }
 
 const Popup = React.forwardRef<HTMLDivElement | null, IPopupProps & React.ReactNode>((props, ref)=> {
@@ -26,7 +27,7 @@ const Popup = React.forwardRef<HTMLDivElement | null, IPopupProps & React.ReactN
 
     return ReactDOM.createPortal(
         <Background style={{zIndex: props.zIndex}} className={cn({active: props.active, hidden: !props.active})} onClick={closePopup}>
-            <Content style={{top: props.top}} ref={ref} onClick={e => e.stopPropagation()}>
+            <Content style={{top: props.top, width: props.width}} ref={ref} onClick={e => e.stopPropagation()}>
                 {props.title && <PopupTitle closePopup={closePopup} closeButton={props.closeButton}>{props.title}</PopupTitle>}
                 <Body>{props.children}</Body>
                 {(props.bottomButton || props.submitButton) &&

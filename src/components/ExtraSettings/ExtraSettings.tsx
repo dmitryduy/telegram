@@ -11,8 +11,14 @@ import ChatSettings from "@components/ExtraSettings/ChatSettings/ChatSettings";
 import User from "@helpComponents/User/User";
 import copyNickname from "@components/ExtraSettings/helpers/copyNickname";
 import usePopup from "@hooks/usePopup";
+import HideByCondition from "@helpComponents/HideByCondition/HideByCondition";
 
 type itemTypes = 'edit-profile' | 'chat-settings';
+
+const titleName: Record<itemTypes, string> = {
+    'edit-profile': 'Info',
+    'chat-settings': 'Chat settings'
+}
 
 
 const ExtraSettings = () => {
@@ -84,9 +90,13 @@ const ExtraSettings = () => {
                 </LeftSide>
                 <RightSide>
                     <PopupTitle backEventName='go-back:click' closePopup={closeRightPopup} closeButton
-                                backButton>Info</PopupTitle>
-                    {currentType === 'edit-profile' && <InfoSettings/>}
-                    {currentType === 'chat-settings' && <ChatSettings/>}
+                                backButton>{titleName[currentType]}</PopupTitle>
+                    <HideByCondition hide={currentType !== 'edit-profile'}>
+                        <InfoSettings/>
+                    </HideByCondition>
+                    <HideByCondition hide={currentType !== 'chat-settings'}>
+                        <ChatSettings/>
+                    </HideByCondition>
                 </RightSide>
             </Main>
         </Popup>

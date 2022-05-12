@@ -8,7 +8,8 @@
       "@reducers/*": ["./src/reducers/*"],
       "@pages/*": ["./src/pages/*"],
       "@helpComponents/*": ["./src/helpComponents/*"],
-      "@images/*": ["./src/assets/imgs"]
+      "@images/*": ["./src/assets/imgs"],
+      "@styled-components/*": ["./src/Styled-components/*"]
     }
   }
 }

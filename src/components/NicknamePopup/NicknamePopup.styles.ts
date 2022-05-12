@@ -6,6 +6,7 @@ export const NicknamePopupContainer = styled.div`
   p {
     font-size: ${props => props.theme.fontSizes.extraSmall};
     padding-bottom: 15px;
+    color: ${props => props.theme.colors.heading};
     &.error {
       color: ${props => props.theme.colors.error};
     }

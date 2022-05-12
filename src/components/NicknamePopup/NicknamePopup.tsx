@@ -40,7 +40,7 @@ const NicknamePopup = () => {
 
 
     return (
-        <Popup top='30%' active={active} emitCloseName={emitCloseName} title='Username' bottomButton='Cancel'
+        <Popup width={290} top='20%' active={active} emitCloseName={emitCloseName} title='Username' bottomButton='Cancel'
                submitButton='Save' onSubmit={onSubmit}>
             <TextInput emitErrorName='nickname-popup:error' placeHolder='@nickname' value={value} setValue={setValue}/>
             <NicknamePopupContainer>

@@ -28,7 +28,7 @@ export const Content = styled.div`
   left: 50%;
   top: 50px;
   transform: translateX(-50%);
-  width: 320px;
+  width: 380px;
   background-color: ${props => props.theme.colors.popupBg};
   border-radius: ${props => props.theme.other.borderRadius};
   overflow: hidden;

@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { ISettingsReducerState, typeOfSettings } from "./types";
+import { themeColor } from "../../globalTypes";
 
 const initialState = {
     language: 'ru',
     isShowSettings: false,
     backgroundImage: 'default',
     typeSettings: null,
-    isNightMode: false
+    isNightMode: false,
+    themeColor: JSON.parse(localStorage.getItem('theme-color') || "#40a7e3")
 } as ISettingsReducerState;
 
 const settingsSlice = createSlice({
@@ -24,12 +26,19 @@ const settingsSlice = createSlice({
             state.typeSettings = action.payload;
             state.isShowSettings = false;
         },
-        toggleNightMode(state) {
-            state.isNightMode = !state.isNightMode;
+        toggleNightMode(state, action: PayloadAction<boolean | undefined>) {
+            if (action.payload === undefined) {
+                state.isNightMode = !state.isNightMode;
+            } else {
+                state.isNightMode = action.payload;
+            }
+        },
+        setThemeColor(state, action: PayloadAction<themeColor>) {
+            state.themeColor = action.payload;
         }
     }
 })
 
-export const {toggleNightMode, setTypeOfSettings, switchSettings, setBackgroundImage} = settingsSlice.actions;
+export const {toggleNightMode, setTypeOfSettings, switchSettings, setBackgroundImage, setThemeColor} = settingsSlice.actions;
 
 export const {reducer: settingReducer} = settingsSlice;

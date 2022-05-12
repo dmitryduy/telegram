@@ -1,31 +1,31 @@
-type keys = 'night-mode';
+import { themeColor } from "../globalTypes";
+
+export type localStorageKeys = 'night-mode' | 'theme-color';
 
 interface ILocalStorage {
-    'night-mode': boolean
+    'night-mode': boolean,
+    'theme-color': themeColor
 }
 
 const testData = {
-    "night-mode": true
-} as ILocalStorage
+    'night-mode': true,
+    'theme-color': "#52b440"
+} as ILocalStorage;
 
 
-const useLocalStorage = () => {
-    const get = <T>(key: keys):T | null  => {
+export class LocalStorage {
+    get<T>(key: localStorageKeys): T | undefined {
         const item = localStorage.getItem(key);
-        if (!item) return null;
+        if (!item) return;
 
         return JSON.parse(item);
     }
 
-    const set = <T>(key: keys, value: T) => {
+    set<T>(key: localStorageKeys, value: T){
         if (typeof value !== typeof testData[key]) {
             window.emitter.emit<{value: string}>('tooltip:show', {value: 'Invalid value of localStorage'});
             return;
         }
         localStorage.setItem(key, JSON.stringify(value));
     }
-
-    return {get, set};
 }
-
-export default useLocalStorage;

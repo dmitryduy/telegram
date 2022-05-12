@@ -1,3 +1,5 @@
+import { themeColor } from "../../globalTypes";
+
 export type typeOfSettings =
     'background'
     | 'night-mode'
@@ -17,5 +19,6 @@ export interface ISettingsReducerState {
     isShowSettings: boolean,
     backgroundImage: string,
     typeSettings: typeOfSettings | null,
-    isNightMode: boolean
+    isNightMode: boolean,
+    themeColor: themeColor
 }
