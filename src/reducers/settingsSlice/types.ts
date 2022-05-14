@@ -2,6 +2,7 @@ import { themeColor } from "../../globalTypes";
 
 export type typeOfSettings =
     'background'
+    | 'background-preview'
     | 'night-mode'
     | 'new-group'
     | 'new-channel'
@@ -18,7 +19,6 @@ export interface ISettingsReducerState {
     language: 'ru' | 'en';
     isShowSettings: boolean,
     backgroundImage: string,
-    typeSettings: typeOfSettings | null,
     isNightMode: boolean,
     themeColor: themeColor
 }

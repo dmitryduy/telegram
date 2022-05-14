@@ -13,6 +13,8 @@ import ExtraSettings from "@components/ExtraSettings/ExtraSettings";
 import Tooltip from "@helpComponents/Tooltip/Tooltip";
 import NamePopup from "@components/NamePopup/NamePopup";
 import NicknamePopup from "@components/NicknamePopup/NicknamePopup";
+import BackgroundPopup from "@components/BackgroundPopup/BackgroundPopup";
+
 
 
 const MainPage: React.FC = () => {
@@ -54,6 +56,7 @@ const MainPage: React.FC = () => {
             <ExtraSettings/>
             <NamePopup/>
             <NicknamePopup/>
+            <BackgroundPopup/>
             <Tooltip/>
         </div>
     );

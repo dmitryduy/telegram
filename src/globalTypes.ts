@@ -30,7 +30,6 @@ export interface IDialog {
 }
 
 export interface IUserSettings {
-    themeColor: themeColor
 }
 
 export interface IUser {

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { rgba } from "polished";
 
-export const Btn = styled.button`
+export const Btn = styled.button<{color: string}>`
   cursor: pointer;
-  color: ${props => props.theme.colors.button};
+  color: ${props => props.color};
   padding: 5px 10px;
   background-color: transparent;
   border: none;
@@ -12,7 +12,7 @@ export const Btn = styled.button`
   outline: none;
   border-radius: 3px;
   &:hover:not(:disabled) {
-    background-color: ${props => rgba(props.theme.colors.button, .1)};
+    background-color: ${props => rgba(props.color, .1)};
   }
   &:disabled {
     cursor: default;

@@ -28,11 +28,11 @@ export const Content = styled.div`
   left: 50%;
   top: 50px;
   transform: translateX(-50%);
-  width: 380px;
+  width: 390px;
   background-color: ${props => props.theme.colors.popupBg};
   border-radius: ${props => props.theme.other.borderRadius};
   overflow: hidden;
-  max-height: 75vh;
+  max-height: calc(100vh - 50px);
   transition: ${props => props.theme.other.transitionSpeed};
 `;
 

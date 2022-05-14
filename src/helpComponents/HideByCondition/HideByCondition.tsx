@@ -16,11 +16,7 @@ const Container = styled.div`
 `;
 
 const HideByCondition: FC<IHideByConditionProps> = ({ hide, children }) => {
-    return (
-        <Container className={cn({hide})}>
-            {children}
-        </Container>
-    );
+    return <Container className={cn({hide})}>{children}</Container>;
 };
 
 export default HideByCondition;

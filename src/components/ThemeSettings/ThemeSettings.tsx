@@ -50,11 +50,11 @@ const ThemeSettings = () => {
                 <ThemeItem nameColor={selectedTheme === 'light' ? themeColor: undefined} name='Classic' bgColor='#9bd494' myMessageColor='#ffffff' partnerMessageColor='#ffffff' onClick={lightThemeHandle}>
                     <RadioButton value='light' checked={selectedTheme === 'light'} onChange={ () => setSelectedTheme('light')}/>
                 </ThemeItem>
-                <ThemeItem nameColor={selectedTheme === 'dark' ? themeColor: undefined} name='Night' bgColor='#485761' myMessageColor='#6b808d' partnerMessageColor='#6b808d' onClick={darkThemeHandle}>
+                <ThemeItem nameColor={selectedTheme === 'dark' ? themeColor: undefined} name='Night' bgColor='#485761' myMessageColor='#5ca8d4' partnerMessageColor='#6b818d' onClick={darkThemeHandle}>
                     <RadioButton value='dark' checked={selectedTheme === 'dark'} onChange={ () => setSelectedTheme('dark')}/>
                 </ThemeItem>
                 <ThemeItem name='Soon...' bgColor='#7ec4ea' myMessageColor='#d7f0ff' partnerMessageColor='#ffffff' onClick={noop}/>
-                <ThemeItem name='Soon...' bgColor='#485761' myMessageColor='#5ca8d4' partnerMessageColor='#6b818d' onClick={noop}/>
+                <ThemeItem name='Soon...' bgColor='#485761' myMessageColor='#6b808d' partnerMessageColor='#6b808d' onClick={noop}/>
             </FlexContainer>
             <FlexContainer justify='space-between'>
                 {checkboxColors.map(color => <RadioButton color={color} key={color} checked={color === currentThemeColor} value={color} onChange={themeColorHandler} filled/>)}

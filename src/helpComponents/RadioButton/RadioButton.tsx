@@ -60,7 +60,7 @@ interface IRadioButtonProps {
 
 const RadioButton: FC<IRadioButtonProps> = ({checked, value, color = '#fff', filled = false, onChange}) => {
     return (
-        <RadioLabel color={color} className={cn({active: checked, filled})} htmlFor={value}>
+        <RadioLabel color={color} className={cn({active: checked, filled, radiobutton: true})} htmlFor={value}>
             <Radio type='radio' id={value} value={value} checked={checked} onChange={onChange}/>
         </RadioLabel>
     );

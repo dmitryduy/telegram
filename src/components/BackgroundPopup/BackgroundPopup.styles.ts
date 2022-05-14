@@ -1,58 +1,36 @@
 import styled from "styled-components";
-import { rgba } from "polished";
+import { Scroll } from "@styled-components/Scroll";
 
-
-export const Title = styled.h3`
-  font-size: ${props => props.theme.fontSizes.extraMedium};
-  font-weight: 500;
-  margin-bottom: 20px;
-`;
-
-export const Loading = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const BackgroundsContainer = styled.div`
+export const BackgroundsContainer = styled(Scroll)<{color: string}>`
   display: grid;
-  width: 100%;
-  flex: 1;
-  overflow: auto;
-  grid-template-columns: 1fr 1fr;
+  background-color: ${props => props.theme.colors.bgColor};
+  padding: 0 10px;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  margin-bottom: 10px;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  img {
-    width: 100%;
-    height: 300px;
-    
-    cursor: pointer;
-    border: 3px solid transparent;
-    &.active {
-      border: 3px solid ${props => props.theme.colors.imageBorder};
+  overflow: auto;
+  max-height: min(450px, 75vh);
+  span {
+    position: relative;
+    height: 180px;
+    &.active-image:before {
+      position: absolute;
+      border: 3px solid #fff;
+      color: #fff;
+      content: '✔';
+      text-align: center;
+      width: 30px;
+      height: 30px;
+      bottom: 5px;
+      right: 5px;
+      border-radius: 50%;
+      background-color: ${props => props.color};
     }
   }
-`;
-
-export const Button = styled.button`
-  cursor: pointer;
-  color: ${props => props.theme.colors.button};
-  padding: 5px 10px;
-  background-color: transparent;
-  border: none;
-  font-weight: 600;
-  font-size: ${props => props.theme.fontSizes.extraNormal};
-  outline: none;
-  &:hover:not(:disabled) {
-    background-color: ${props => rgba(props.theme.colors.button, .2)};
-  }
-  &:disabled {
-    cursor: default;
-    color: ${props => props.theme.colors.buttonDisabled};
+ 
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
   }
 `;

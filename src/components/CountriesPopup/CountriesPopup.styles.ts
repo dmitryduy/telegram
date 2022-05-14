@@ -1,20 +1,7 @@
 import styled from "styled-components";
-import { rgba } from "polished";
+import { Scroll } from "@styled-components/Scroll";
 
-export const CountriesContainer = styled.div`
+export const CountriesContainer = styled(Scroll)`
   overflow: auto;
   max-height: 55vh;
-  &::-webkit-scrollbar {
-    width: 4px;
-    background-color: ${props => rgba(props.theme.colors.scrollbar, .5)};
-    border-radius: 2px;
-  }
-  &::-webkit-scrollbar-thumb {
-    width: 4px;
-    background-color: ${props => rgba(props.theme.colors.thumb, .8)};
-    border-radius: 2px;
-    &:hover {
-      background-color: ${props => rgba(props.theme.colors.thumb, 1)};
-    }
-  }
 `;
