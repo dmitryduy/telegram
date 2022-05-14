@@ -25,7 +25,9 @@ const colors = {
     darkerGray: '#9a9a9a',
     lgray: '#999999',
     darkGreen: '#3ee2cc',
-    success: '#4ab44a'
+    success: '#4ab44a',
+    scrollbar: '#3e4348',
+    thumb: '#7d8084'
 };
 
 const fontSizes = {
@@ -117,8 +119,8 @@ const darkTheme = {
         unreadText: colors.white,
         searchIcon: colors.gray,
         placeholder: colors.lightGray,
-        scrollbar: colors.mediumGray,
-        thumb: colors.darkerGray,
+        scrollbar: colors.scrollbar,
+        thumb: colors.thumb,
         switcher: colors.slimBlue,
         switcherTumbler: colors.lightBlack,
         tooltip: colors.black,

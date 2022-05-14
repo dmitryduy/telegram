@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const useFetch = <T>(path: string) => {
     const [data, setData] = useState<T | null>(null);
+    const [state, setState] = useState<'loading' | 'done' | null>('loading');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -11,7 +12,14 @@ const useFetch = <T>(path: string) => {
         }
         fetchData();
     }, []);
-    return {data};
+
+    useEffect(() => {
+       if (data) {
+           setState('done');
+       }
+    }, [data]);
+
+    return {data, state};
 }
 
 export default useFetch;

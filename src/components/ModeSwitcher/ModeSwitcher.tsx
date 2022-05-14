@@ -8,6 +8,7 @@ import { toggleNightMode } from "@reducers/settingsSlice/settingsSlice";
 const ModeSwitcher = () => {
 
     const {isNightMode} = useAppSelector(state => state.settings);
+    const {themeColor} = useAppSelector(state => state.settings);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const ModeSwitcher = () => {
         window.storage.set('night-mode', isNightMode);
     }, [isNightMode]);
 
-    return <Switcher className={cn({'night-mode': isNightMode})}/>;
+    return <Switcher color={themeColor} className={cn({'night-mode': isNightMode})}/>;
 };
 
 export default ModeSwitcher;

@@ -1,6 +1,7 @@
 import { Dispatch, useEffect, useState } from "react";
+import { typeOfSettings } from "@reducers/settingsSlice/types";
 
-const usePopup = (eventName: string, openCb?: () => void, closeCb?: () => void): [boolean, Dispatch<boolean>, string] => {
+const usePopup = (eventName: typeOfSettings, openCb?: () => void, closeCb?: () => void): [boolean, Dispatch<boolean>, string] => {
     const [active, setActive] = useState(false);
 
     useEffect(() => {

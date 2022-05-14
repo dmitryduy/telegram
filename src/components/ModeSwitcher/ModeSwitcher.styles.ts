@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Switcher = styled.span`
+export const Switcher = styled.span<{color: string}>`
   position: relative;
   display: inline-block;
   width: 24px;
@@ -23,8 +23,10 @@ export const Switcher = styled.span`
   }
 
   &.night-mode {
+    background-color: ${props => props.color};
     &:after {
       left: calc(24px - 2px - 10px);
+      border: 2px solid  ${props => props.color};
     }
   }
 `;

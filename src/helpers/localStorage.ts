@@ -1,15 +1,17 @@
 import { themeColor } from "../globalTypes";
 
-export type localStorageKeys = 'night-mode' | 'theme-color';
+export type localStorageKeys = 'night-mode' | 'theme-color' | 'background-image';
 
 interface ILocalStorage {
     'night-mode': boolean,
-    'theme-color': themeColor
+    'theme-color': themeColor,
+    'background-image': string
 }
 
 const testData = {
     'night-mode': true,
-    'theme-color': "#52b440"
+    'theme-color': "#52b440",
+    'background-image': ''
 } as ILocalStorage;
 
 

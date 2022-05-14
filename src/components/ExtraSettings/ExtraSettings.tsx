@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Popup from "@helpComponents/Popup/Popup";
 import { switchSettings } from "@reducers/settingsSlice/settingsSlice";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
-import SettingsItem from "@components/SettingsItem/SettingsItem";
 import { Main, LeftSide, RightSide, Items } from './ExtraSettings.styles';
 import cn from "classnames";
 import PopupTitle from "@helpComponents/PopupTitle/PopupTitle";
@@ -12,6 +11,7 @@ import User from "@helpComponents/User/User";
 import copyNickname from "@components/ExtraSettings/helpers/copyNickname";
 import usePopup from "@hooks/usePopup";
 import HideByCondition from "@helpComponents/HideByCondition/HideByCondition";
+import ListItem from "@helpComponents/ListItem/ListItem";
 
 type itemTypes = 'edit-profile' | 'chat-settings';
 
@@ -84,8 +84,10 @@ const ExtraSettings = () => {
                     <User styleAvatar={{height: 80, width: 80, fontSize: 25}} styleContainer={{padding: "10px 20px"}}
                           avatarPos='avatar-left' onNicknameClick={() => copyNickname(nickname || '')} nickname phone/>
                     <Items>
-                        <SettingsItem text='Edit Profile' type='edit-profile' imgName='edit-profile' changeSide/>
-                        <SettingsItem text='Chat Settings' type='chat-settings' imgName='chat-settings' changeSide/>
+                        <ListItem text='Edit Profile' imgName='edit-profile'
+                                  onClick={() => window.emitter.emit('extra-settings-item:click', {type: 'edit-profile'})}/>
+                        <ListItem text='Chat Settings' imgName='chat-settings'
+                                  onClick={() => window.emitter.emit('extra-settings-item:click', {type: 'chat-settings'})}/>
                     </Items>
                 </LeftSide>
                 <RightSide>

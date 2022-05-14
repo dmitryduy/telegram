@@ -21,7 +21,6 @@ import useMask from "@hooks/useMask";
 import Countries from "@components/Countries/Countries";
 import { changeDialCode } from "@reducers/loginSlice/loginSlice";
 import { checkDualCode, checkNickname, checkPhone, getNumericPhone } from "./helpers";
-import { setBackgroundImage } from "@reducers/settingsSlice/settingsSlice";
 
 const LoginPage: React.FC = () => {
     const isAuth = useAppSelector(({user}) => user.isAuth);
@@ -49,7 +48,6 @@ const LoginPage: React.FC = () => {
             .unwrap()
             .then(data => {
                 dispatch(dialogActions.initializeDialogs(dialogsToObject(data.dialogs)));
-                dispatch(setBackgroundImage(data.backgroundImage));
             });
     }
 
