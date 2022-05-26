@@ -11,6 +11,7 @@ import BackgroundPreviewPopup from "@components/BackgroundPreviewPopup/Backgroun
 import { useAppSelector } from "@hooks/useAppSelector";
 import cn from "classnames";
 
+
 const BackgroundPopup: React.FC = () => {
     const [active, , emitCloseName] = usePopup('background');
     const {data: backgroundNames, state} = useFetch<string[]>('/backgrounds');

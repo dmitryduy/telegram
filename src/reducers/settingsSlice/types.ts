@@ -20,5 +20,6 @@ export interface ISettingsReducerState {
     isShowSettings: boolean,
     backgroundImage: string,
     isNightMode: boolean,
-    themeColor: themeColor
+    themeColor: themeColor,
+    sendMessageBy: 'enter' | 'ctrl-enter'
 }
