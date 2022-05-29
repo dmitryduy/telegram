@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import CloseButton from "@helpComponents/CloseButton/CloseButton";
+import CloseButton from "../../helpComponents/CloseButton/CloseButton";
 import styled from "styled-components";
-import BackButton from "@helpComponents/BackButton/BackButton";
+import BackButton from "../../helpComponents/BackButton/BackButton";
 
 export const Title = styled.h2`
   position: relative;

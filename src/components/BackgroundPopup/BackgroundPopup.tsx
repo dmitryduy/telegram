@@ -11,6 +11,7 @@ import BackgroundPreviewPopup from "@components/BackgroundPreviewPopup/Backgroun
 import { useAppSelector } from "@hooks/useAppSelector";
 import cn from "classnames";
 
+
 const BackgroundPopup: React.FC = () => {
     const [active, , emitCloseName] = usePopup('background');
     const {data: backgroundNames, state} = useFetch<string[]>('/backgrounds');
@@ -31,7 +32,7 @@ const BackgroundPopup: React.FC = () => {
                    bottomButton='Close'>
                 <BackgroundsContainer color={themeColor} onClick={openImagePopup}>
                     {state === 'loading' && <Loading/>}
-                    {state === 'done' && backgroundNames && backgroundNames.map(backgroundName => <span className={cn({'active-image': backgroundImage === backgroundName})}>
+                    {state === 'done' && backgroundNames && backgroundNames.map(backgroundName => <span key={backgroundName} className={cn({'active-image': backgroundImage === backgroundName})}>
                         <img
                             src={getBackgroundImagePath(backgroundName)} data-image-name={backgroundName}
                             alt={backgroundName}/>

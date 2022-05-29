@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 
-
-export const ChatItemContainer = styled.div`
+export const ChatItemContainer = styled.div<{color: string}>`
   width: 100%;
   padding: 10px;
   display: flex;
@@ -17,8 +16,24 @@ export const ChatItemContainer = styled.div`
 
   &.active {
     background-color: ${props => props.theme.colors.chatItemActive};
+
     * {
       color: #fff;
+    }
+  }
+  
+  .avatar {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      border-radius: 50%;
+      width: 13px;
+      height: 13px;
+      bottom: 0;
+      right: 0;
+      border: 2px solid #fff;
+      background-color: ${props => props.color};
     }
   }
 `;
@@ -27,6 +42,7 @@ export const ChatHeader = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
+
   h4 {
     font-weight: 600;
     font-size: ${props => props.theme.fontSizes.extraNormal};
@@ -39,11 +55,6 @@ export const ChatHeader = styled.div`
   }
 `;
 
-export const ChatFooter = styled.footer`
-display: flex;
-  justify-content: space-between;
-`;
-
 export const ChatLastMessage = styled.div`
   font-size: ${props => props.theme.fontSizes.extraNormal};
   color: ${props => props.theme.colors.paragraph};
@@ -54,7 +65,7 @@ export const ChatLastMessage = styled.div`
   margin-right: 5px;
 `;
 
-export const UnreadMessages = styled.span`
+export const UnreadMessages = styled.span<{color: string}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,9 +73,9 @@ export const UnreadMessages = styled.span`
   height: 20px;
   color: #fff;
   padding: 0 5px;
-  background-color: ${props => props.theme.colors.unreadMessage};
+  background-color: ${props => props.color};
   border-radius: 10px/ 50%;
   font-size: ${props => props.theme.fontSizes.small};
-  
+
 `;
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from "styled-components";
 
-const Icon = styled.svg`
+export const Icon = styled.svg`
   width: 18px;
   height: 18px;
   fill: ${props => props.theme.colors.placeholder};
@@ -9,7 +9,7 @@ const Icon = styled.svg`
   cursor: pointer;
 `;
 
-interface IBackButtonProps {
+export interface IBackButtonProps {
     backEventName: string
 }
 

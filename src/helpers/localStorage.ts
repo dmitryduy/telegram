@@ -1,17 +1,19 @@
-import { themeColor } from "../globalTypes";
+import { sendHotkey, themeColor } from "../globalTypes";
 
-export type localStorageKeys = 'night-mode' | 'theme-color' | 'background-image';
+export type localStorageKeys = 'night-mode' | 'theme-color' | 'background-image' | 'send-hotkey';
 
 interface ILocalStorage {
     'night-mode': boolean,
     'theme-color': themeColor,
-    'background-image': string
+    'background-image': string,
+    'send-hotkey': sendHotkey
 }
 
 const testData = {
     'night-mode': true,
     'theme-color': "#52b440",
-    'background-image': ''
+    'background-image': '',
+    'send-hotkey': 'enter'
 } as ILocalStorage;
 
 
