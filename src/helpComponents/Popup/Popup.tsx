@@ -1,11 +1,11 @@
 import React from 'react';
 import { Background, Bottom, Body, Content } from './Popup.styles';
 import ReactDOM from "react-dom";
-import Button from "@helpComponents/Button/Button";
+import Button from "../../helpComponents/Button/Button";
 import cn from "classnames";
-import PopupTitle from "@helpComponents/PopupTitle/PopupTitle";
-import noop from "@helpers/noop";
-import { FlexContainer } from "@styled-components/FlexContainer";
+import PopupTitle from "../../helpComponents/PopupTitle/PopupTitle";
+import noop from "../../helpers/noop";
+import { FlexContainer } from "../../Styled-components/FlexContainer";
 
 interface IPopupProps {
     emitCloseName: string,
@@ -16,7 +16,7 @@ interface IPopupProps {
     onSubmit?: () => void
     closeButton?: boolean,
     zIndex?: number,
-    top?: string,
+    top?: number,
     width?: number,
 }
 
@@ -33,7 +33,7 @@ const Popup = React.forwardRef<HTMLDivElement | null, IPopupProps & React.ReactN
                 <Body>{props.children}</Body>
                 {(props.bottomButton || props.submitButton) &&
                 <Bottom>
-                    {props.bottomButton && <Button onClick={closePopup || noop}>{props.bottomButton}</Button>}
+                    {props.bottomButton && <Button onClick={closePopup}>{props.bottomButton}</Button>}
                     {props.submitButton && <Button onClick={props.onSubmit || noop}>{props.submitButton}</Button>}
                 </Bottom>
                 }

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { ISettingsReducerState } from "./types";
-import { themeColor } from "../../globalTypes";
+import { sendHotkey, themeColor } from "../../globalTypes";
 
 const initialState = {
     language: 'ru',
@@ -9,7 +9,7 @@ const initialState = {
     backgroundImage: JSON.parse(localStorage.getItem('background-image') || "\"default\""),
     isNightMode: false,
     themeColor: JSON.parse(localStorage.getItem('theme-color') || "\"#40a7e3\""),
-    sendMessageBy: JSON.parse(localStorage.getItem('send-key') || "\"enter\"")
+    sendHotkey: JSON.parse(localStorage.getItem('send-hotkey') || "\"enter\"")
 } as ISettingsReducerState;
 
 const settingsSlice = createSlice({
@@ -32,12 +32,12 @@ const settingsSlice = createSlice({
         setThemeColor(state, action: PayloadAction<themeColor>) {
             state.themeColor = action.payload;
         },
-        setSendMessageType(state, action: PayloadAction<typeof initialState.sendMessageBy>) {
-            state.sendMessageBy = action.payload;
+        setHotkeyBySend(state, action: PayloadAction<sendHotkey>) {
+            state.sendHotkey = action.payload;
         }
     }
 })
 
-export const {toggleNightMode, switchSettings, setBackgroundImage, setThemeColor, setSendMessageType} = settingsSlice.actions;
+export const {toggleNightMode, switchSettings, setBackgroundImage, setThemeColor, setHotkeyBySend} = settingsSlice.actions;
 
 export const {reducer: settingReducer} = settingsSlice;

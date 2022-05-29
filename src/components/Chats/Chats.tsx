@@ -9,20 +9,20 @@ import UserChats from "@components/UserChats/UserChats";
 import ChatsTitle from "@components/ChatsTitle/ChatsTitle";
 
 interface IChatsProps {
-    readonly isSearch: boolean,
-    readonly isLoading: boolean,
-    readonly setSearch: Dispatch<SetStateAction<boolean>>
+    isSearch: boolean,
+    isLoading: boolean,
+    setSearch: Dispatch<SetStateAction<boolean>>
 }
 
 
 export interface IDialogToArray {
-    readonly dialogId: dialogId,
-    readonly partnerAvatar: string,
-    readonly partnerNickname: string,
-    readonly partnerPhone: phone,
-    readonly lastMsg: string,
-    readonly lastMsgDate: timestamp,
-    readonly unread: number
+    dialogId: dialogId,
+    partnerAvatar: string,
+    partnerNickname: string,
+    partnerPhone: phone,
+    lastMsg: string,
+    lastMsgDate: timestamp,
+    unread: number
 }
 
 
@@ -50,20 +50,15 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
         }
     }
 
-    if (!isSearch) {
-        return <UserChats dialogsToArray={dialogsToArray}/>
-    }
+    if (!isSearch) return <UserChats/>
 
-    if (isLoading) {
-        return <Loading/>
-    }
-
+    if (isLoading) return <Loading/>
 
     if (foundedGlobalUsers?.chatsOfUser.length || foundedGlobalUsers?.chatsOfGlobal.length) {
         return <>
             {foundedGlobalUsers!.chatsOfUser.length ? <>
                 <ChatsTitle title={`Found ${foundedGlobalUsers!.chatsOfUser.length} chats`}/>
-                <UserChats dialogsToArray={userDialogsBySearch} setSearch={setSearch}/>
+             {/*   <UserChats dialogsToArray={userDialogsBySearch} setSearch={setSearch}/>*/}
             </> : null}
             {foundedGlobalUsers!.chatsOfGlobal.length ? <>
                 <ChatsTitle title='Global search results'/>

@@ -6,16 +6,17 @@ import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import ThemedText from "@helpComponents/ThemedText/ThemedText";
 import { FlexContainer } from '@styled-components/FlexContainer';
 import { MessagesSettingsList } from './MessagesSettings.styles';
-import { setSendMessageType } from "@reducers/settingsSlice/settingsSlice";
+import { sendHotkey } from "../../globalTypes";
+import { setHotkeyBySend } from "@reducers/settingsSlice/settingsSlice";
 
 const MessagesSettings = () => {
-    const {themeColor, sendMessageBy} = useAppSelector(state => state.settings);
+    const {themeColor, sendHotkey} = useAppSelector(state => state.settings);
     const dispatch = useAppDispatch();
 
-    const onChange = (value: 'enter' | 'ctrl-enter') => {
-        if (value !== sendMessageBy) {
-            window.storage.set<typeof value>('send-key', value);
-            dispatch(setSendMessageType(value));
+    const onChange = (value: sendHotkey) => {
+        if (value !== sendHotkey) {
+            window.storage.set<sendHotkey>('send-hotkey', value);
+            dispatch(setHotkeyBySend(value));
         }
     }
 
@@ -24,11 +25,11 @@ const MessagesSettings = () => {
             <SettingsTitle title='Messages'/>
             <MessagesSettingsList>
                 <FlexContainer as='li' alignItems='center'>
-                    <RadioButton color={themeColor} checked={sendMessageBy === 'enter'} value={'enter'} onChange={() => onChange('enter')}/>
+                    <RadioButton color={themeColor} checked={sendHotkey === 'enter'} value={'enter'} onChange={() => onChange('enter')}/>
                     <ThemedText text='Send with Enter' onClick={() => onChange('enter')}/>
                 </FlexContainer>
                 <FlexContainer as='li' alignItems='center'>
-                    <RadioButton color={themeColor} checked={sendMessageBy === 'ctrl-enter'} value={'ctrl-enter'} onChange={() => onChange('ctrl-enter')}/>
+                    <RadioButton color={themeColor} checked={sendHotkey === 'ctrl-enter'} value={'ctrl-enter'} onChange={() => onChange('ctrl-enter')}/>
                     <ThemedText text='Send with Ctrl+Enter' onClick={() => onChange('ctrl-enter')}/>
                 </FlexContainer>
             </MessagesSettingsList>

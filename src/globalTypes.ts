@@ -3,6 +3,8 @@ export type dialogId = string;
 export type phone = string;
 export type url = string;
 
+export type sendHotkey = 'enter' | 'ctrl-enter';
+
 export type themeColor =
     '#40a7e3'
     | '#45bce7'

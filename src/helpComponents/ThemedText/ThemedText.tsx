@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import styled from "styled-components";
-import { useAppSelector } from "@hooks/useAppSelector";
-import noop from "@helpers/noop";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import noop from "../../helpers/noop";
 
 const Container = styled.p`
+  margin-left: auto;
   font-size: ${props => props.theme.fontSizes.normal};
   font-weight: 400;
   transform: ${props => props.theme.other.transitionSpeed};

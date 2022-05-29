@@ -1,12 +1,13 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { ChatHeader, ChatItemContainer, ChatLastMessage, UnreadMessages, ChatFooter } from "./ChatItem.styles";
+import { ChatHeader, ChatItemContainer, ChatLastMessage, UnreadMessages } from "./ChatItem.styles";
 import formatDate from "../../formatDate";
-import { dialogId, phone, timestamp } from "../../globalTypes";
+import { phone, timestamp } from "../../globalTypes";
 import { useAppSelector } from "@hooks/useAppSelector";
 import UserAvatar from "@components/UserAvatar/UserAvatar";
+import { FlexContainer } from '@styled-components/FlexContainer';
 
 interface IChatItemProps {
-    dialogId?: dialogId,
+    dialogId?: number,
     partnerAvatar: string,
     partnerNickname: string,
     lastMsg: string,
@@ -27,6 +28,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
                                                 unread
                                             }) => {
     const activeDialogId = useAppSelector(({dialog}) => dialog?.activeDialog?.dialogId);
+    const {themeColor} = useAppSelector(state => state.settings);
 
     const setDialog = () => {
         //todo
@@ -34,17 +36,17 @@ const ChatItem: React.FC<IChatItemProps> = ({
 
 
     return (
-        <ChatItemContainer className={activeDialogId === dialogId ? 'active' : ''} onClick={setDialog}>
-            <UserAvatar image={partnerAvatar}/>
-            <div style={{flex: 1, width: '1px'}}>
+        <ChatItemContainer color={themeColor} className={activeDialogId === dialogId ? 'active' : ''} onClick={setDialog}>
+            <UserAvatar style={{marginRight: 15}} image={partnerAvatar}/>
+            <div style={{flex: 1}}>
                 <ChatHeader>
                     <h4>{partnerNickname}</h4>
                     {lastMsgDate && <span>{formatDate(lastMsgDate)}</span>}
                 </ChatHeader>
-                <ChatFooter>
+                <FlexContainer>
                     <ChatLastMessage>{lastMsg}</ChatLastMessage>
-                    {unread !== 0 && <UnreadMessages>{unread}</UnreadMessages>}
-                </ChatFooter>
+                    {unread !== 0 && <UnreadMessages color={themeColor}>{unread}</UnreadMessages>}
+                </FlexContainer>
             </div>
         </ChatItemContainer>
     );

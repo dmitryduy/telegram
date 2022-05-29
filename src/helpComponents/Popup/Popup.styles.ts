@@ -39,6 +39,7 @@ export const Content = styled.div`
 export const Body = styled.div`
   height: calc(100% - 80px);
   flex: 1 0 auto;
+  padding: 10px ${props => props.theme.other.popupPaddings};
   //border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
 `;
 

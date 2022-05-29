@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Btn } from './Button.styles';
-import { useAppSelector } from "@hooks/useAppSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 interface IButtonProps {
     onClick: (e) => void;

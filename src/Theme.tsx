@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from "styled-components";
-import { useAppSelector } from "@hooks/useAppSelector";
+// без алиаса, чтобы сторибук не ругался
+import { useAppSelector } from "../src/hooks/useAppSelector";
 
 
 const colors = {
@@ -47,7 +48,7 @@ const other = {
     popupPaddings: '15px'
 }
 
-const lightTheme = {
+export const lightTheme = {
     colors: {
         bgColor: colors.white,
         inputBackground: colors.white,
@@ -65,7 +66,6 @@ const lightTheme = {
         hamburgerHover: colors.black,
         chatItemHover: colors.lighterGray,
         chatItemActive: colors.slimBlue,
-        unreadMessage: colors.slimBlue,
         partnerMessage: colors.white,
         userMessage: colors.green,
         helpingBorders: colors.slimGray,
@@ -89,7 +89,7 @@ const lightTheme = {
     other
 }
 
-const darkTheme = {
+export const darkTheme = {
     colors: {
         bgColor: colors.lightBlack,
         inputBackground: colors.transparent,
@@ -107,7 +107,6 @@ const darkTheme = {
         hamburgerHover: colors.white,
         chatItemHover: colors.slimBlack,
         chatItemActive: colors.lightBlue,
-        unreadMessage: colors.blue,
         partnerMessage: colors.lightBlack,
         userMessage: colors.lightBlue,
         helpingBorders: colors.slimBlack,

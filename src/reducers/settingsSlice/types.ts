@@ -1,4 +1,4 @@
-import { themeColor } from "../../globalTypes";
+import { sendHotkey, themeColor } from "../../globalTypes";
 
 export type typeOfSettings =
     'background'
@@ -21,5 +21,5 @@ export interface ISettingsReducerState {
     backgroundImage: string,
     isNightMode: boolean,
     themeColor: themeColor,
-    sendMessageBy: 'enter' | 'ctrl-enter'
+    sendHotkey: sendHotkey
 }
