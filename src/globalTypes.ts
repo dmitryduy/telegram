@@ -16,10 +16,18 @@ export type themeColor =
     | '#687b98'
     | '#dea922';
 
+export type avatarImageUrl = string;
+
+export type avatarImage = themeColor | avatarImageUrl;
+
+export type reaction = 'like' | 'dislike' | 'heart' | 'fire' | 'poop' | null;
+
+
 export interface IMessage {
     createDate: timestamp,
     text: string,
-    senderPhone: phone
+    senderPhone: phone,
+    reaction: reaction
 }
 
 export interface IDialog {

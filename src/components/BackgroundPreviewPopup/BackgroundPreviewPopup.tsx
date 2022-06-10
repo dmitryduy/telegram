@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import Popup from "@helpComponents/Popup/Popup";
 import usePopup from "@hooks/usePopup";
-import Message from "@components/Message/Message";
-import { IMessage } from "../../globalTypes";
+/*import Message from "@components/Message/Message";
+import { IMessage } from "../../globalTypes";*/
 import { BackgroundPreviewContainer } from "@components/BackgroundPreviewPopup/BackgroundPreviewPopup.styles";
 import { getBackgroundImagePath } from "@helpers/paths";
 import { useAppDispatch } from "@hooks/useAppSelector";
 import { setBackgroundImage } from "@reducers/settingsSlice/settingsSlice";
 
-const fakeMessages: [IMessage, IMessage] = [
+/*const fakeMessages: [IMessage, IMessage] = [
     {
         senderPhone: '',
         text:'Ah, you kids today with techno music! you should enjoy the classics, like Hasselhoff!',
@@ -19,7 +19,7 @@ const fakeMessages: [IMessage, IMessage] = [
         text: 'I can\'t even take you seriously right now.',
         createDate: Date.now()
     }
-];
+];*/
 
 interface IBackgroundPreviewPopupProps  {
     previewImage: string
@@ -36,11 +36,11 @@ const BackgroundPreviewPopup: FC<IBackgroundPreviewPopupProps> = ({ previewImage
 
     const [active, , emitCloseName] = usePopup('background-preview', () => window.emitter.emit('background-popup:hide'));
     return (
-        <Popup top='70px' width={370} title='Background preview' emitCloseName={emitCloseName} active={active} bottomButton='Cancel' submitButton='Apply' onSubmit={setBackground}>
+        <Popup top={70} width={370} title='Background preview' emitCloseName={emitCloseName} active={active} bottomButton='Cancel' submitButton='Apply' onSubmit={setBackground}>
             <BackgroundPreviewContainer style={{backgroundImage: `url(${getBackgroundImagePath(previewImage)})`}}>
                 <div className='container'>
-                    <Message message={fakeMessages[0]} isMe={false} isShowBefore={true} isShowNewDate={true} isShowUnread={false}/>
-                    <Message message={fakeMessages[1]} isMe={true} isShowBefore={true} isShowNewDate={false} isShowUnread={false}/>
+                   {/* <Message message={fakeMessages[0]} isMe={false} isShowBefore={true}/>
+                    <Message message={fakeMessages[1]} isMe={true} isShowBefore={true}/>*/}
                 </div>
             </BackgroundPreviewContainer>
         </Popup>

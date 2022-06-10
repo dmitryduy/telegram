@@ -83,7 +83,8 @@ export const lightTheme = {
         switcherTumbler: colors.white,
         tooltip: colors.lightBlack,
         popupBg: colors.lighterGray,
-        success: colors.success
+        success: colors.success,
+        timeTooltipBorder: '#beb4b0'
     },
     fontSizes,
     other
@@ -124,7 +125,8 @@ export const darkTheme = {
         switcherTumbler: colors.lightBlack,
         tooltip: colors.black,
         popupBg: colors.slimBlack,
-        success: colors.success
+        success: colors.success,
+        timeTooltipBorder: colors.slimBlack
     },
     fontSizes,
     other

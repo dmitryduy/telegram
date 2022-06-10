@@ -41,15 +41,23 @@ export const UnreadMessagesMark = styled.div`
   }
 `;
 
-export const MessageContainer = styled.div<{isShowBefore: boolean}>`
-  display: flex;
-  max-width: 70%;
-  margin: 2px 0;
+export const MessageContainer = styled.div<{showBefore: boolean}>`
+  max-width: 50%;
+  min-height: 35px;
   padding: 7px 10px;
   border-radius: 7px;
-  align-items: flex-end;
+  margin: 2px 0 2px 35px;
+  align-self: flex-start;
   color: ${props => props.theme.colors.heading};
   position: relative;
+  .avatar {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: -10px;
+    bottom: 0;
+    transform: translateX(-100%);
+  }
   &::before {
     position: absolute;
     content: '';
@@ -61,19 +69,17 @@ export const MessageContainer = styled.div<{isShowBefore: boolean}>`
   }
   &.me {
     background-color: ${props => props.theme.colors.userMessage};
-    align-self: flex-end;
-  ${props => props.isShowBefore && css`
+  ${props => props.showBefore && css`
     &::before {
       border-bottom: 12px solid ${props => props.theme.colors.userMessage};
-      right: -7px;
+      left: -7px;
     }
   `}
   }
 
   &.partner {
     background-color: ${props => props.theme.colors.partnerMessage};
-    align-self: flex-start;
-    ${props => props.isShowBefore && css`
+    ${props => props.showBefore && css`
       &::before {
         border-bottom: 12px solid ${props => props.theme.colors.partnerMessage};
         left: -7px;
@@ -83,14 +89,7 @@ export const MessageContainer = styled.div<{isShowBefore: boolean}>`
   }
 `;
 
-export const MessageText = styled.span`
-  margin-right: 7px;
+export const MessageText = styled.p`
   font-size: ${props => props.theme.fontSizes.normal};
-  width: calc(100% - 37px);
   word-wrap: break-word;
-`;
-
-export const MessageTime = styled.span`
-  color: ${props => props.theme.colors.paragraph};
-  font-size: ${props => props.theme.fontSizes.small};
 `;

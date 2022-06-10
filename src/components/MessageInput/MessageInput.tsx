@@ -16,7 +16,7 @@ const MessageInput: React.FC = () => {
 
     const sendMessage = () => {
         if (inputValue) {
-            dispatch(dialogActions.addMessage({senderPhone: userPhone!, createDate: Date.now(), text: inputValue}));
+            dispatch(dialogActions.addMessage({senderPhone: userPhone!, createDate: Date.now(), text: inputValue, reaction: null}));
             messageSocket.emit({senderPhone: userPhone,receiverPhone: activeDialog?.partnerPhone,  messageText: inputValue, dialogId: activeDialog?.dialogId});
             clearInput();
         }

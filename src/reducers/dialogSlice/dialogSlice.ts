@@ -1,7 +1,7 @@
 import { IDialogReducerState, INewMessage, } from "./types";
-import { IDialogObject, IGlobalSearch, IMessage } from "../../types";
+import { IDialogObject, IGlobalSearch } from "../../types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { phone, timestamp } from "../../globalTypes";
+import { IMessage, phone, reaction, timestamp } from "../../globalTypes";
 
 const initialState = {
     dialogs: {},
@@ -50,7 +50,8 @@ const dialogSlice = createSlice({
             const newMessage = {
                 senderPhone: action.payload.senderPhone,
                 createDate: action.payload.createDate,
-                text: action.payload.text
+                text: action.payload.text,
+                reaction: action.payload.reaction
             }
 
             if (!state.dialogs || !state.dialogs[action.payload.dialogId]) {
@@ -92,8 +93,22 @@ const dialogSlice = createSlice({
                 state.activeDialog = {...state.activeDialog, lastSeen: null, isOnline: true};
             }
         },
+        deleteReaction(state, action: PayloadAction<number>) {
+            const message = state.activeDialog && state.activeDialog.messages.find(message => message.createDate === action.payload);
+            if (message) {
+                message.reaction = null
+            }
+        },
+        addReaction(state, action: PayloadAction<{createDate: number, reaction: reaction}>) {
+            const message = state.activeDialog && state.activeDialog.messages.find(message => message.createDate === action.payload.createDate);
+            if (message) {
+                message.reaction = message.reaction === action.payload.reaction ? null: action.payload.reaction
+            }
+        }
 
     }
 })
+
+export const {deleteReaction, addReaction} = dialogSlice.actions;
 
 export const {reducer: dialogReducer, actions: dialogActions} = dialogSlice;

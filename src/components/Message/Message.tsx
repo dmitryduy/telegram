@@ -1,27 +1,32 @@
 import React from 'react';
 
-import dateFormat from "dateformat";
+import { MessageContainer, MessageText } from "./Message.styles";
 
-import { MessageContainer, MessageText, MessageTime, NewDate, UnreadMessagesMark } from "./Message.styles";
-
-import { IMessage } from "../../types";
+import MessageTime from './MessageTime/MessageTime';
+import { avatarImage, IMessage } from "../../globalTypes";
+import UserAvatar from "@components/UserAvatar/UserAvatar";
+import ReactionScroller from "../ReactionScroller/ReactionScroller";
+import useThrottle from "@hooks/useThrottle";
 
 interface IMessageProps {
-    message: IMessage,
+    message: Omit<IMessage, 'senderPhone'>,
     isMe: boolean,
-    isShowBefore: boolean,
-    isShowNewDate: boolean,
-    isShowUnread: boolean
+    showBefore: boolean,
+    avatarImage: avatarImage
 }
 
-const Message: React.FC<IMessageProps> = ({message, isMe, isShowBefore, isShowNewDate, isShowUnread}) => {
+const Message: React.FC<IMessageProps> = ({message, isMe, showBefore, avatarImage}) => {
+    const {isThrottle, onStartThrottle, onEndThrottle}  = useThrottle(600);
+
     return (
         <>
-            {isShowNewDate && <NewDate>{dateFormat(message.createDate, 'd mmmm')}</NewDate>}
-            {isShowUnread && <UnreadMessagesMark>Unread messages</UnreadMessagesMark>}
-            <MessageContainer isShowBefore={isShowBefore} className={isMe? 'me': 'partner'}>
-                <MessageText>{message.text}</MessageText>
-                <MessageTime>{dateFormat(message.createDate, 'HH:MM')}</MessageTime>
+            <MessageContainer onMouseEnter={onStartThrottle} onMouseLeave={onEndThrottle} showBefore={showBefore} className={isMe ? 'me': 'partner'}>
+                {showBefore && <UserAvatar image={avatarImage}/>}
+                <MessageText>
+                    {message.text}
+                    <MessageTime date={message.createDate} reaction={message.reaction}/>
+                </MessageText>
+                <ReactionScroller show={isThrottle} date={message.createDate}/>
             </MessageContainer>
         </>
     );
