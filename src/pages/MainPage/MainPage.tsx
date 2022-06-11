@@ -48,7 +48,7 @@ const MainPage: React.FC = () => {
     }, []);
 
     return (
-        <div style={{display: 'flex'}}>
+        <div style={{display: 'flex', overflow: 'hidden'}}>
             <ChatsSide/>
             <MessagesSide/>
             <Settings/>

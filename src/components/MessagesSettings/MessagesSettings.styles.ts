@@ -10,4 +10,7 @@ export const MessagesSettingsList = styled.ul`
     padding-left: 20px;
 
   }
+  .themed-text {
+    margin-left: 0;
+  }
 `;
