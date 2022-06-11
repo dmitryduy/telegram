@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
-import { MessagesSideContainer, Messages, NoContent } from "./MessagesSide.styles";
+import { Messages, NoContent } from "./MessagesSide.styles";
 
 import Message from "@components/Message/Message";
 import MessageInput from "@components/MessageInput/MessageInput";
 import PartnerInfo from "@components/PartnerInfo/PartnerInfo";
 import { useAppSelector } from "@hooks/useAppSelector";
+import MessageSideContainer from "@components/MessagesSide/MessageSideContainer";
 
 const MessagesSide: React.FC = () => {
     const scrollToRef = useRef<HTMLDivElement>(null);
@@ -23,13 +24,13 @@ const MessagesSide: React.FC = () => {
 
     if (!messages) {
         return (
-            <MessagesSideContainer backgroundImage={backgroundImage}>
+            <MessageSideContainer backgroundImage={backgroundImage}>
                 <NoContent>Select a chat to start messaging</NoContent>
-            </MessagesSideContainer>)
+            </MessageSideContainer>)
     }
 
     return (
-        <MessagesSideContainer backgroundImage={backgroundImage} className='content'>
+        <MessageSideContainer backgroundImage={backgroundImage} className='content'>
              <PartnerInfo/>
              <Messages>
                 {messages.map((message, index, arr) => <Message
@@ -43,7 +44,7 @@ const MessagesSide: React.FC = () => {
                 <div ref={scrollToRef}/>
             </Messages>
             <MessageInput/>
-        </MessagesSideContainer>
+        </MessageSideContainer>
     );
 };
 

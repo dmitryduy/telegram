@@ -13,7 +13,6 @@ window.storage = new LocalStorage();
 
 function App() {
     const isAuth = useAppSelector(state => state.user.isAuth);
-
     return (
         <Theme>
             <div className="App">

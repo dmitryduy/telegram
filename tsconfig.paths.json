@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@hooks/*": ["../../hooks/*", "./src/hooks/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@components/*": ["./src/components/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@reducers/*": ["./src/reducers/*"],

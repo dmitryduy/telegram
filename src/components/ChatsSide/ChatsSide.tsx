@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ChatsContainer, ChatsSideContainer, ChatsSideHeader } from "./ChatsSide.styles";
 
 import SearchField from "@components/SearchField/SearchField";
 import HamburgerMenuIcon from "@components/HamburgerMenuIcon/HamburgerMenuIcon";
 import Chats from "@components/Chats/Chats";
+import useMatchMedia from "@hooks/useMatchMedia";
+import cn from "classnames";
 
 const ChatsSide = () => {
     const [isSearch, setSearch] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [isCloseSide, setIsCloseSide] = useState(false);
+    const isPhone = useMatchMedia();
+
+    useEffect(()=>{
+        window.emitter.on('active-dialog-phone:click', () => isPhone && setIsCloseSide(prev => !prev));
+        return () => window.emitter.un('active-dialog-phone:click');
+    }, []);
 
     return (
-        <ChatsSideContainer>
+        <ChatsSideContainer isPhone={isPhone} className={cn({hidden: isCloseSide})}>
             <ChatsSideHeader>
                 <HamburgerMenuIcon/>
                 <SearchField setSearch={setSearch} isSearch={isSearch} setLoading={setLoading}/>

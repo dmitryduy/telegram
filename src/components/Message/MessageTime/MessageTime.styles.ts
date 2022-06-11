@@ -11,7 +11,7 @@ export const Time = styled.span`
   
 `;
 
-export const TimeTooltip = styled.div`
+export const TimeTooltip = styled.span`
   position: absolute;
   z-index: 1;
   width: max-content;

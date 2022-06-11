@@ -1,23 +1,5 @@
 import styled from "styled-components";
 import {rgba} from "polished";
-import { Base_Url } from "../../types";
-
-
-export const MessagesSideContainer = styled.div<{backgroundImage: string}>`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 3;
-  background-image: url(${props => `${Base_Url}/images/backgrounds/${props.backgroundImage}.webp`});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: inherit;
-  &.content {
-    display: block;
-  }
-`;
 
 export const NoContent = styled.span`
   color: #fff;
