@@ -3,5 +3,5 @@ import { IDialog } from "../globalTypes";
 
 
 
-const dialogsToArray = (dialogs: IDialogObject): IDialog[] => Object.keys(dialogs).map(key => ({id: +key, ...dialogs[key]}));
+const dialogsToArray = (dialogs: IDialogObject): IDialog[] => Object.keys(dialogs).map(key => ({...dialogs[key], id: +key}));
 export default dialogsToArray;

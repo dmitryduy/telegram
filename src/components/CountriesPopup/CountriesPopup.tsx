@@ -4,12 +4,11 @@ import useFetch from "@hooks/useFetch";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { changeCountry, changeDialCode } from "@reducers/loginSlice/loginSlice";
 import Search from "./Search/Search";
-import CountryItem from "./CountryItem/CountryItem";
 import { CountriesContainer } from './CountriesPopup.styles';
-import NotFound from "@helpComponents/NotFound/NotFound";
 import { INVALID_COUNTRY_CODE, NO_COUNTRY } from "../../constants";
+import CountriesList from "@components/CountriesPopup/CountriesList/CountriesList";
 
-interface ICountry {
+export interface ICountry {
     name: string,
     dualCode: string,
     mask: string,
@@ -18,15 +17,11 @@ interface ICountry {
 
 const getCountryByDualCode = (countries: ICountry[], dualCode): ICountry | undefined => countries.find(country => country.dualCode === dualCode);
 
-const getCountryFromSearch = (countries: ICountry[], text: string): ICountry[] => {
-    return countries.filter(country => country.name.toLowerCase().includes(text.toLowerCase()));
-}
 
 const CountriesPopup: FC<{ active: boolean }> = ({active}) => {
     const {data: countries} = useFetch<ICountry[]>('/countries/en');
     const {dualCode, searchCountry} = useAppSelector(state => state.login);
     const dispatch = useAppDispatch();
-    let foundedCountries;
 
     useEffect(() => {
         if (!dualCode) {
@@ -51,20 +46,11 @@ const CountriesPopup: FC<{ active: boolean }> = ({active}) => {
         window.emitter.emit('popup-country:hide');
     }
 
-    if (!countries) return null;
-
-    if (countries) {
-        foundedCountries = getCountryFromSearch(countries, searchCountry).map(country => <CountryItem
-            dualCode={country.dualCode} name={country.name}
-            key={country.name + country.dualCode}/>)
-    }
-
-
     return (
         <Popup active={active} emitCloseName='popup-country:hide' title='Select Country' bottomButton='Close'>
             <Search/>
             <CountriesContainer onClick={changeCountryHandler}>
-                {foundedCountries.length ? foundedCountries : <NotFound>Country not found</NotFound>}
+                {countries && <CountriesList searchCountry={searchCountry} countries={countries}/>}
             </CountriesContainer>
         </Popup>
     );

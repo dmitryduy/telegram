@@ -9,22 +9,28 @@ import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 
 const MessageInput: React.FC = () => {
     const [inputValue, changeInputValue, clearInput] = useInput();
-    const activeDialog = useAppSelector(({dialog}) => dialog.activeDialog);
+    const activeDialog = useAppSelector(state => state.dialog.activeDialog);
+    const {sendHotkey} = useAppSelector(state => state.settings);
     const dispatch = useAppDispatch();
     const messageSocket = useSocket('send message');
     const userPhone = useAppSelector(({user}) => user.phoneNumber);
 
+    const sentMessageByHotkey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (sendHotkey === 'enter' && e.key === 'Enter') sendMessage();
+        if (sendHotkey === 'ctrl-enter' && e.key === 'Enter' && e.ctrlKey) sendMessage();
+    }
+
     const sendMessage = () => {
-        if (inputValue) {
-            dispatch(dialogActions.addMessage({senderPhone: userPhone!, createDate: Date.now(), text: inputValue, reaction: null}));
-            messageSocket.emit({senderPhone: userPhone,receiverPhone: activeDialog?.partnerPhone,  messageText: inputValue, dialogId: activeDialog?.dialogId});
+        if (inputValue && userPhone) {
+            dispatch(dialogActions.addMessage({senderPhone: userPhone, createDate: Date.now(), text: inputValue, reaction: null}));
+            messageSocket.emit({senderPhone: userPhone,receiverPhone: activeDialog?.partnerPhone,  messageText: inputValue, dialogId: activeDialog?.id});
             clearInput();
         }
     }
     return (
         <MessageInputContainer>
             <input
-                onKeyUp={(e) => e.keyCode === 13 && sendMessage()}
+                onKeyUp={sentMessageByHotkey}
                 type="text" value={inputValue} onInput={changeInputValue} placeholder='Write a message...'/>
             <button onClick={sendMessage} className={inputValue && 'show'}>
                 <img src={SendMessage} alt="send image"/>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import Input from "@helpComponents/Input/Input";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { setBio, updateBio } from "@reducers/userSlice/userReducer";
@@ -13,19 +13,16 @@ const BioInput = () => {
     const dispatch = useAppDispatch();
 
     const onInput = (e) => {
-        if (MAX_BIO_VALUE < e.target.value.length ) return;
+        if (MAX_BIO_VALUE < e.target.value.length) return;
         setValue(e);
     }
 
-    useEffect(() => {
+    const updateServerBio = () => {
         dispatch(setBio(value));
-    }, [value]);
-
-    const  updateServerBio = () => {
-      dispatch(updateBio())
-          .unwrap()
-          .then(() => window.emitter.emit('tooltip:show', {value: 'Bio updated.'}))
-          .catch(e => window.emitter.emit('tooltip:show', {value: e}));
+        dispatch(updateBio())
+            .unwrap()
+            .then(() => window.emitter.emit('tooltip:show', {value: 'Bio updated.'}))
+            .catch(e => window.emitter.emit('tooltip:show', {value: e}));
     }
 
 

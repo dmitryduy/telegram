@@ -14,7 +14,7 @@ import cn from "classnames";
 
 const BackgroundPopup: React.FC = () => {
     const [active, , emitCloseName] = usePopup('background');
-    const {data: backgroundNames, state} = useFetch<string[]>('/backgrounds');
+    const {data: backgroundNames, progress} = useFetch<string[]>('/backgrounds');
     const {backgroundImage, themeColor} = useAppSelector(state => state.settings);
     const [previewImage, setPreviewImage] = useState<string>(backgroundImage);
 
@@ -31,8 +31,8 @@ const BackgroundPopup: React.FC = () => {
             <Popup emitCloseName={emitCloseName} title='Choose your new background' active={active}
                    bottomButton='Close'>
                 <BackgroundsContainer color={themeColor} onClick={openImagePopup}>
-                    {state === 'loading' && <Loading/>}
-                    {state === 'done' && backgroundNames && backgroundNames.map(backgroundName => <span key={backgroundName} className={cn({'active-image': backgroundImage === backgroundName})}>
+                    {progress === 'loading' && <Loading/>}
+                    {progress === 'done' && backgroundNames && backgroundNames.map(backgroundName => <span key={backgroundName} className={cn({'active-image': backgroundImage === backgroundName})}>
                         <img
                             src={getBackgroundImagePath(backgroundName)} data-image-name={backgroundName}
                             alt={backgroundName}/>

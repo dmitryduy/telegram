@@ -21,7 +21,7 @@ const Message: React.FC<IMessageProps> = ({message, isMe, showBefore, avatarImag
     return (
         <>
             <MessageContainer onMouseEnter={onStartThrottle} onMouseLeave={onEndThrottle} showBefore={showBefore} className={isMe ? 'me': 'partner'}>
-                {showBefore && <UserAvatar image={avatarImage}/>}
+                {showBefore && <UserAvatar image={avatarImage} text={'T'}/>}
                 <MessageText>
                     {message.text}
                     <MessageTime date={message.createDate} reaction={message.reaction}/>

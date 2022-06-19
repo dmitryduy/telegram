@@ -14,10 +14,6 @@ const MessagesSideContainerCommon = styled.div<{ backgroundImage: string }>`
   background-size: cover;
   background-position: center;
   height: 100vh;
-
-  &.content {
-    display: block;
-  }
 `;
 
 
@@ -30,7 +26,7 @@ const MessagesSideContainerPhone = styled(MessagesSideContainerCommon)`
   position: absolute;
   width: 100vw;
   transform: translateX(100%);
-  transition: ${props => props.theme.other.transitionSpeed};
+  transition: transform ${props => props.theme.other.transitionSpeed};
   &.active {
     transform: translateX(0);
   }

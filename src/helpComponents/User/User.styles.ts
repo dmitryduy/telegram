@@ -8,7 +8,7 @@ export const UserContainer = styled.div`
   &.avatar-top {
     flex-direction: column;
 
-    span[data-avatar] {
+    .avatar {
       margin-bottom: 10px;
     }
   }
@@ -16,7 +16,7 @@ export const UserContainer = styled.div`
   &.avatar-left {
     align-items: center;
 
-    span[data-avatar] {
+    .avatar {
       margin-right: 20px;
     }
   }

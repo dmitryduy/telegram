@@ -9,7 +9,7 @@ export const checkPhone = (phone: string, mask: string) => phone.length === mask
 
 export const checkDualCode = (countryName: string) => countryName === INVALID_COUNTRY_CODE || countryName === NO_COUNTRY ? INVALID_DUAL_CODE_ERROR : '';
 
-export const checkNickname = (nickname: string) => nickname.length < 3? INVALID_NICKNAME: '';
+export const checkNickname = (nickname: string) => nickname.length < 3 ? INVALID_NICKNAME : '';
 
 export const getNumericPhone = (phone: string, dualCode: string) => {
     return (dualCode + phone).split('').filter(char => isNumber(char)).join('');

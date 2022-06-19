@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const MessageInputContainer = styled.div`
   position: absolute;
   display: flex;
+  padding-right: 10px;
   align-items: center;
   bottom: 0;
   height: 55px;

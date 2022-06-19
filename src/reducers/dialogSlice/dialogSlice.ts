@@ -1,5 +1,5 @@
-import { IDialogReducerState, INewMessage, } from "./types";
-import { IDialogObject, IGlobalSearch } from "../../types";
+import { IActiveDialog, IDialogReducerState, INewMessage, } from "./types";
+import { Base_Url, IDialogObject, IGlobalSearch } from "../../types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IMessage, phone, reaction, timestamp } from "../../globalTypes";
 
@@ -10,12 +10,12 @@ const initialState = {
 } as IDialogReducerState
 
 interface IFetchActiveDialog {
-    partnerPhone: string,
-    userPhone: phone
+    partnerPhone: phone | null,
+    userPhone: phone | null
 }
 
 export const fetchActiveDialog = createAsyncThunk('dialog/fetchActiveDialog', async ({partnerPhone, userPhone}: IFetchActiveDialog) => {
-    const response = await fetch(`https://telegram-server-part.herokuapp.com/users/phone?partnerPhone=${partnerPhone}&userPhone=${userPhone}`);
+    const response = await fetch(`${Base_Url}/users/phone?partnerPhone=${partnerPhone}&userPhone=${userPhone}`);
     return await response.json();
 });
 
@@ -27,24 +27,26 @@ const dialogSlice = createSlice({
             state.dialogs = action.payload;
         },
         addMessage(state, action: PayloadAction<IMessage>) {
-            const isNewDialog = state.dialogs[state.activeDialog!.dialogId];
-            if (!isNewDialog) {
-                state.dialogs[state.activeDialog!.dialogId] = {
+            if (!state.activeDialog) return;
+
+            const isNewDialog =  !state.dialogs[state.activeDialog.id];
+
+            if (isNewDialog) {
+                state.dialogs[state.activeDialog.id] = {
                     messages: [action.payload],
-                    partnerNickname: state.activeDialog!.partnerNickname,
-                    partnerAvatar: state.activeDialog!.partnerAvatar,
-                    partnerPhone: state.activeDialog!.partnerPhone,
-                    unread: state.activeDialog!.unread
+                    partnerNickname: state.activeDialog.partnerNickname,
+                    partnerAvatar: state.activeDialog.partnerAvatar,
+                    partnerPhone: state.activeDialog.partnerPhone,
+                    unread: state.activeDialog.unread
                 };
-                state.activeDialog = {...state.activeDialog!, unread: 0, messages: [action.payload]};
+                state.activeDialog.messages.push(action.payload);
+                return;
             }
 
-            state.dialogs[state.activeDialog!.dialogId].messages.push(action.payload);
-            state.activeDialog = {
-                ...state.activeDialog!,
-                unread: 0,
-                messages: [...state.activeDialog!.messages, action.payload]
-            };
+            state.dialogs[state.activeDialog.id].messages.push(action.payload);
+
+            state.activeDialog.unread = 0;
+            state.activeDialog.messages.push(action.payload);
         },
         addNewMessage(state, action: PayloadAction<INewMessage>) {
             const newMessage = {
@@ -67,7 +69,7 @@ const dialogSlice = createSlice({
 
             state.dialogs[action.payload.dialogId].messages.push(newMessage);
 
-            if (state.activeDialog?.dialogId === action.payload.dialogId) {
+            if (state.activeDialog?.id === action.payload.dialogId) {
                 state.activeDialog.messages.push(newMessage);
                 state.activeDialog.unread = 0;
             } else {
@@ -79,6 +81,9 @@ const dialogSlice = createSlice({
                 chatsOfGlobal: [...action.payload.chatsOfGlobal],
                 chatsOfUser: [...action.payload.chatsOfUser]
             };
+        },
+        setActiveDialog(state, action: PayloadAction<IActiveDialog>) {
+            state.activeDialog = action.payload;
         },
         removeGlobalUsers(state) {
             state.foundedGlobalUsers = null;
@@ -109,6 +114,6 @@ const dialogSlice = createSlice({
     }
 })
 
-export const {deleteReaction, addReaction} = dialogSlice.actions;
+export const {deleteReaction, addReaction, removeGlobalUsers, setActiveDialog} = dialogSlice.actions;
 
 export const {reducer: dialogReducer, actions: dialogActions} = dialogSlice;

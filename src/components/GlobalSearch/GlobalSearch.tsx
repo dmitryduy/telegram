@@ -1,25 +1,22 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React  from 'react';
 import ChatItem from "@components/ChatItem/ChatItem";
 import { useAppSelector } from "@hooks/useAppSelector";
 
-interface IGlobalSearchProps {
-    setSearch: Dispatch<SetStateAction<boolean>>
-}
 
 
-const GlobalSearch: React.FC<IGlobalSearchProps> = ({setSearch}) => {
+const GlobalSearch: React.FC = () => {
     const foundedGlobalUsers = useAppSelector(({dialog}) => dialog.foundedGlobalUsers?.chatsOfGlobal!);
     return (
         <>
             {foundedGlobalUsers.map(globalUser => <ChatItem
-                setSearch={setSearch}
+                dialogId={globalUser.id}
                 key={globalUser.partnerPhone}
                 partnerAvatar={globalUser.partnerAvatar}
+                partnerSurname={globalUser.partnerSurname}
+                partnerName={globalUser.partnerName}
                 partnerNickname={globalUser.partnerNickname}
                 partnerPhone={globalUser.partnerPhone}
                 lastMsg={`@${globalUser.partnerNickname}`}
-                lastMsgDate={null}
-                unread={0}
             />)}
         </>
     );
