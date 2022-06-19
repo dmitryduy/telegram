@@ -6,8 +6,8 @@ import { SearchInput } from "./SearchField.styles";
 
 import useInput from "@hooks/useInput";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
-import { Base_Url, IGlobalSearch } from "../../types";
 import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
+import { searchUsers } from "../../api/usersServer";
 
 interface ISearchFieldProps {
     setSearch: Dispatch<SetStateAction<boolean>>,
@@ -19,6 +19,7 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
     const [searchValue, setSearchValue] = useInput();
     const [value] = useDebounce(searchValue, 1000);
     const userPhone = useAppSelector(({user})  => user.phoneNumber);
+    const {themeColor} = useAppSelector(state => state.settings);
 
     const dispatch = useAppDispatch();
 
@@ -32,10 +33,9 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
     }, [searchValue])
 
     useEffect(() => {
-        if (value) {
-            fetch(`${Base_Url}/users?value=${searchValue}&userPhone=${userPhone!}`)
-                .then(response => response.json())
-                .then((data: IGlobalSearch) => {
+        if (value && userPhone) {
+            searchUsers(value, userPhone)
+                .then((data) => {
                     setLoading(false);
                     dispatch(dialogActions.setFoundedGlobalUsers(data));
                 });
@@ -43,7 +43,15 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
         }
     }, [value]);
 
-    return <SearchInput value={searchValue} onInput={setSearchValue} placeholder='Search...'/>;
+    useEffect(() => {
+        window.emitter.on<{value: string}>('global-search-value', (data) => {
+            data && setSearchValue(data.value);
+        })
+        return () => window.emitter.un('global-search-value');
+    }, []);
+
+
+    return <SearchInput color={themeColor} value={searchValue} onInput={setSearchValue} placeholder='Search...'/>;
 
 };
 

@@ -36,7 +36,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "set \"REACT_APP_URL=http://192.168.0.103:5000\" && craco start",
+    "dev:desktop": "set \"REACT_APP_URL=http://localhost:5000\" && craco start",
+    "dev:phone": "set \"REACT_APP_URL=http://192.168.0.103:5000\" && craco start",
     "public": "set \"REACT_APP_URL=https://telegram-server-part.herokuapp.com\" && npm build",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"

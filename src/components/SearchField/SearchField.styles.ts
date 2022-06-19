@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const SearchInput = styled.input`
+export const SearchInput = styled.input<{color: string}>`
   outline: none;
   background-color: ${props => props.theme.colors.searchInputBackground};
   border: 2px solid transparent;
@@ -13,7 +13,7 @@ export const SearchInput = styled.input`
   color: ${props => props.theme.colors.inputColor};
 
   &:focus {
-    border: 2px solid ${props => props.theme.colors.searchInputBorder};
+    border: 2px solid ${props => props.color};
     background-color: ${props => props.theme.colors.searchInputBackgroundActive};
   }
 `;

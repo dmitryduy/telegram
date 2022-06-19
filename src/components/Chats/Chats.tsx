@@ -26,11 +26,11 @@ export interface IDialogToArray {
 }
 
 
-const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
-    const dialogs = useAppSelector(({dialog}) => dialog.dialogs);
+const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, /*setSearch*/}) => {
+    //const dialogs = useAppSelector(({dialog}) => dialog.dialogs);
     const foundedGlobalUsers = useAppSelector(({dialog}) => dialog.foundedGlobalUsers);
 
-    const dialogsToArray: IDialogToArray[] = [];
+  /*  const dialogsToArray: IDialogToArray[] = [];
     const userDialogsBySearch: IDialogToArray[] = [];
 
     for (let dialogId in dialogs) {
@@ -48,21 +48,21 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, setSearch}) => {
         if (foundedGlobalUsers?.chatsOfUser.includes(dialogId)) {
             userDialogsBySearch.push(dialogItem);
         }
-    }
+    }*/
 
     if (!isSearch) return <UserChats/>
 
     if (isLoading) return <Loading/>
 
-    if (foundedGlobalUsers?.chatsOfUser.length || foundedGlobalUsers?.chatsOfGlobal.length) {
+    if (foundedGlobalUsers) {
         return <>
-            {foundedGlobalUsers!.chatsOfUser.length ? <>
+            {foundedGlobalUsers.chatsOfUser.length ? <>
                 <ChatsTitle title={`Found ${foundedGlobalUsers!.chatsOfUser.length} chats`}/>
              {/*   <UserChats dialogsToArray={userDialogsBySearch} setSearch={setSearch}/>*/}
             </> : null}
-            {foundedGlobalUsers!.chatsOfGlobal.length ? <>
+            {foundedGlobalUsers.chatsOfGlobal.length ? <>
                 <ChatsTitle title='Global search results'/>
-                <GlobalSearch setSearch={setSearch}/>
+                <GlobalSearch/>
             </> : null}
         </>
 
