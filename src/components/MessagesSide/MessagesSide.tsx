@@ -4,7 +4,7 @@ import { Messages, NoContent } from "./MessagesSide.styles";
 
 import Message from "@components/Message/Message";
 import MessageInput from "@components/MessageInput/MessageInput";
-import PartnerInfo from "@components/PartnerInfo/PartnerInfo";
+import PartnerInfo from "@components/PartnerInfo";
 import { useAppSelector } from "@hooks/useAppSelector";
 import MessageSideContainer from "@components/MessagesSide/MessageSideContainer";
 
