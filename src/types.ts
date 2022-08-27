@@ -1,17 +1,9 @@
-import { dialogId, IMessage, phone } from "./globalTypes";
+import { dialogId, IDialog } from "./globalTypes";
 
 export const Base_Url = process.env.REACT_APP_URL;
 
-export type IDialogObject = { [key: string]: IDialog };
+export type IDialogObject = { [key: number]: IDialog };
 
-
-export interface IDialog {
-    partnerPhone: phone,
-    partnerAvatar: string,
-    partnerNickname: string,
-    unread: number
-    messages: IMessage[];
-}
 
 
 export interface IGlobalSearch {

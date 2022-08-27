@@ -1,26 +1,28 @@
 import React  from "react";
 
-import MainPage from "./pages/MainPage/MainPage";
 import Theme from "./Theme";
-import LoginPage from "./pages/LoginPage/LoginPage";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAppSelector } from "@hooks/useAppSelector";
 import { Emitter } from "@helpers/emitter";
 import { LocalStorage } from "@helpers/localStorage";
+import {Suspense} from 'react';
 
 window.emitter = new Emitter();
 window.storage = new LocalStorage();
 
+const MainPage = React.lazy(() => import('./pages/MainPage/MainPage'));
+const LoginPage = React.lazy(() => import('./pages/LoginPage/LoginPage'));
+
 function App() {
-    const isAuth = useAppSelector(state => state.user.isAuth);
     return (
         <Theme>
             <div className="App">
+                <Suspense fallback={<div>loading...</div>}>
                 <Routes>
-                    <Route path={`${isAuth ? '/': '/login'}`} element={isAuth? <MainPage/>: <LoginPage/>}/>
-                    <Route path='/login' element={<LoginPage/>}/>
-                    <Route path='*' element={<Navigate to='/login'/>}/>
+                        <Route path='/' element={<MainPage/>}/>
+                        <Route path='/login' element={<LoginPage/>}/>
+                        <Route path='*' element={<Navigate to='/'/>}/>
                 </Routes>
+                </Suspense>
             </div>
         </Theme>
 

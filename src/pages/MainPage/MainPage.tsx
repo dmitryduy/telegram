@@ -16,9 +16,8 @@ import NicknamePopup from "@components/NicknamePopup/NicknamePopup";
 import BackgroundPopup from "@components/BackgroundPopup/BackgroundPopup";
 
 
-
 const MainPage: React.FC = () => {
-    const userPhone = useAppSelector(({user}) => user.phoneNumber);
+    const {phoneNumber} = useAppSelector(({user}) => user);
 
     const initSocket = useSocket('joined');
     const newMessageSocket = useSocket('new message');
@@ -27,6 +26,8 @@ const MainPage: React.FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        initSocket.emit(phoneNumber);
+
         newMessageSocket.on((message: INewMessage) => {
             dispatch(dialogActions.addNewMessage(message));
         });
@@ -41,10 +42,6 @@ const MainPage: React.FC = () => {
             offlineUserSocket.off();
             onlineUserSocket.off();
         }
-    }, []);
-
-    useEffect(() => {
-        initSocket.emit(userPhone);
     }, []);
 
     return (

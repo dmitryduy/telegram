@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const ChatItemContainer = styled.div<{color: string}>`
+export const ChatItemContainer = styled.div<{ themeColor: string }>`
   width: 100%;
   padding: 10px;
   display: flex;
@@ -9,21 +9,25 @@ export const ChatItemContainer = styled.div<{color: string}>`
   height: 80px;
   cursor: pointer;
   transition: .1s;
+  user-select: none;
 
-  &:hover {
-    background-color: ${props => props.theme.colors.chatItemHover};
+  @media (min-width: 1000px) {
+    &:hover {
+      background-color: ${props => props.themeColor};
+    }
   }
 
   &.active {
-    background-color: ${props => props.theme.colors.chatItemActive};
+    background-color: ${props => props.themeColor};
 
     * {
       color: #fff;
     }
   }
-  
+
   .avatar {
     position: relative;
+
     &:before {
       position: absolute;
       content: '';
@@ -33,7 +37,7 @@ export const ChatItemContainer = styled.div<{color: string}>`
       bottom: 0;
       right: 0;
       border: 2px solid #fff;
-      background-color: ${props => props.color};
+      background-color: ${props => props.themeColor};
     }
   }
 `;
@@ -65,7 +69,7 @@ export const ChatLastMessage = styled.div`
   margin-right: 5px;
 `;
 
-export const UnreadMessages = styled.span<{color: string}>`
+export const UnreadMessages = styled.span<{ color: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,6 +80,5 @@ export const UnreadMessages = styled.span<{color: string}>`
   background-color: ${props => props.color};
   border-radius: 10px/ 50%;
   font-size: ${props => props.theme.fontSizes.small};
-
 `;
 

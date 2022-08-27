@@ -1,5 +1,5 @@
 export type timestamp = number;
-export type dialogId = string;
+export type dialogId = number;
 export type phone = string;
 export type url = string;
 
@@ -31,10 +31,12 @@ export interface IMessage {
 }
 
 export interface IDialog {
-    id: number
+    id: number// as partnerPhone
     partnerPhone: phone,
     partnerAvatar: string,
     partnerNickname: string,
+    partnerName: string | null,
+    partnerSurname: string | null,
     unread: number
     messages: IMessage[];
 }

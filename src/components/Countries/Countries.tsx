@@ -5,11 +5,10 @@ import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { setSearchCountry } from "@reducers/loginSlice/loginSlice";
 
 
-const Countries: FC = () => {
+const Countries: FC = React.memo(() => {
     const countryName = useAppSelector(state => state.login.countryName);
     const [activePopup, setActivePopup] = useState(false);
     const dispatch = useAppDispatch()
-
     const openPopup = () => {
         setActivePopup(true);
     }
@@ -38,6 +37,6 @@ const Countries: FC = () => {
             <CountriesPopup active={activePopup}/>
         </CountriesContainer>
     );
-};
+});
 
 export default Countries;

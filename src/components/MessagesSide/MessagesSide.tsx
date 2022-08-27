@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 import { Messages, NoContent } from "./MessagesSide.styles";
 
 import Message from "@components/Message/Message";
 import MessageInput from "@components/MessageInput/MessageInput";
-import PartnerInfo from "@components/PartnerInfo/PartnerInfo";
+import PartnerInfo from "@components/PartnerInfo";
 import { useAppSelector } from "@hooks/useAppSelector";
 import MessageSideContainer from "@components/MessagesSide/MessageSideContainer";
 
 const MessagesSide: React.FC = () => {
-    const scrollToRef = useRef<HTMLDivElement>(null);
+    //const scrollToRef = useRef<HTMLDivElement>(null);
 
     const userPhone = useAppSelector(({user}) => user.phoneNumber);
     const messages = useAppSelector(({dialog}) => dialog.activeDialog?.messages);
@@ -18,9 +18,9 @@ const MessagesSide: React.FC = () => {
     const backgroundImage = useAppSelector(({settings}) => settings.backgroundImage);
 
 
-    useEffect(() => {
+    /*useEffect(() => {
         scrollToRef?.current?.scrollIntoView({block: "center"});
-    }, [messages]);
+    }, [messages]);*/
 
     if (!messages) {
         return (
@@ -41,7 +41,7 @@ const MessagesSide: React.FC = () => {
                         ||  arr[index - 1].createDate - message.createDate > 1000 * 60 * 60 * 24)}*/
                     key={message.createDate}
                     message={message}/>)}
-                <div ref={scrollToRef}/>
+                {/*<div ref={scrollToRef}/>*/}
             </Messages>
             <MessageInput/>
         </MessageSideContainer>
