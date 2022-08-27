@@ -1,9 +1,7 @@
 import React from "react";
 import useMatchMedia from "@hooks/useMatchMedia";
 
-function withPlatform<T>(platform: { desktop: T }): T;
 function withPlatform<T, P>(platform: { desktop: T, 'touch-phone': P }): P | T;
-function withPlatform<P>(platform: { 'touch-phone': P }): P;
 function withPlatform(platform) {
     return props => {
         const isPhone = useMatchMedia();

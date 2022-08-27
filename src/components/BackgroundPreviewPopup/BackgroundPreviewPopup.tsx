@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Popup from "@helpComponents/Popup/Popup";
+import Popup from "../../shared/Popup/Popup";
 import usePopup from "@hooks/usePopup";
 import Message from "@components/Message/Message";
 import { IMessage } from "../../globalTypes";
@@ -36,13 +36,17 @@ const BackgroundPreviewPopup: FC<IBackgroundPreviewPopupProps> = ({ previewImage
 
     const [active, , emitCloseName] = usePopup('background-preview', () => window.emitter.emit('background-popup:hide'));
     return (
-        <Popup top={70} width={370} title='Background preview' emitCloseName={emitCloseName} active={active} bottomButton='Cancel' submitButton='Apply' onSubmit={setBackground}>
-            <BackgroundPreviewContainer style={{backgroundImage: `url(${getBackgroundImagePath(previewImage)})`}}>
-                <div className='container'>
-                    <Message avatarImage='#45bce7' message={fakeMessages[0]} isMe={false} showBefore={true}/>
-                    <Message avatarImage='#687b98' message={fakeMessages[1]} isMe={true} showBefore={true}/>
-                </div>
-            </BackgroundPreviewContainer>
+        <Popup top={70} width={370} emitCloseName={emitCloseName} active={active} onSubmit={setBackground}>
+           <Popup.Header title='Background preview'/>
+            <Popup.Content>
+                <BackgroundPreviewContainer style={{backgroundImage: `url(${getBackgroundImagePath(previewImage)})`}}>
+                    <div className='container'>
+                        <Message avatarImage='#45bce7' message={fakeMessages[0]} isMe={false} showBefore={true}/>
+                        <Message avatarImage='#687b98' message={fakeMessages[1]} isMe={true} showBefore={true}/>
+                    </div>
+                </BackgroundPreviewContainer>
+            </Popup.Content>
+            <Popup.Footer submitTitle='Apply' cancelTitle='Cancel'/>
         </Popup>
     );
 };

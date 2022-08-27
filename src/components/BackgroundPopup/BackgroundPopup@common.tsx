@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import Popup from "@helpComponents/Popup/Popup";
+import Popup from "../../shared/Popup/Popup";
 import usePopup from "@hooks/usePopup";
-import { BackgroundsContainer } from './BackgroundPopup.styles';
+import { BackgroundsContainer } from './BackgroundPopup@common.styles';
 import useFetch from "@hooks/useFetch";
 import Loading from "@components/Loading/Loading";
 import { getBackgroundImagePath } from "@helpers/paths";
@@ -28,16 +28,19 @@ const BackgroundPopup: React.FC = () => {
 
     return (
         <>
-            <Popup emitCloseName={emitCloseName} title='Choose your new background' active={active}
-                   bottomButton='Close'>
-                <BackgroundsContainer color={themeColor} onClick={openImagePopup}>
-                    {progress === 'loading' && <Loading/>}
-                    {progress === 'done' && backgroundNames && backgroundNames.map(backgroundName => <span key={backgroundName} className={cn({'active-image': backgroundImage === backgroundName})}>
+            <Popup emitCloseName={emitCloseName} active={active}>
+                <Popup.Header title='Choose your new background'/>
+                <Popup.Content bordered>
+                    <BackgroundsContainer color={themeColor} onClick={openImagePopup}>
+                        {progress === 'loading' && <Loading/>}
+                        {progress === 'done' && backgroundNames && backgroundNames.map(backgroundName => <span key={backgroundName} className={cn({'active-image': backgroundImage === backgroundName})}>
                         <img
-                            src={getBackgroundImagePath(backgroundName)} data-image-name={backgroundName}
-                            alt={backgroundName}/>
+                          src={getBackgroundImagePath(backgroundName)} data-image-name={backgroundName}
+                          alt={backgroundName}/>
                     </span>)}
-                </BackgroundsContainer>
+                    </BackgroundsContainer>
+                </Popup.Content>
+                <Popup.Footer cancelTitle='Close'/>
             </Popup>
             <BackgroundPreviewPopup previewImage={previewImage}/>
         </>

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const TextContainer = styled.div`
   background-color: ${props => props.theme.colors.bgColor};
-  padding: 0 ${props => props.theme.other.popupPaddings} 30px;
   
   &:first-child {
     padding-top: 20px;

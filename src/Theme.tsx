@@ -6,7 +6,7 @@ import { useAppSelector } from "../src/hooks/useAppSelector";
 
 const colors = {
     lightBlack: '#282e33',
-    slimGray: '#e0e0e0',
+    slimGray: '#e7e7e7',
     darkBlue: '#2f6ea5',
     black: '#222222',
     white: '#ffffff',
@@ -45,7 +45,7 @@ const other = {
     borderRadius: '10px',
     transitionSpeed: '.2s',
     transitionSpeedSlow: '.3s',
-    popupPaddings: '15px'
+    popupSidePadding: '15px'
 }
 
 export const lightTheme = {
@@ -84,7 +84,9 @@ export const lightTheme = {
         tooltip: colors.lightBlack,
         popupBg: colors.lighterGray,
         success: colors.success,
-        timeTooltipBorder: '#beb4b0'
+        timeTooltipBorder: '#beb4b0',
+        icons: colors.lgray,
+        border: colors.slimGray
     },
     fontSizes,
     other
@@ -126,7 +128,9 @@ export const darkTheme = {
         tooltip: colors.black,
         popupBg: colors.slimBlack,
         success: colors.success,
-        timeTooltipBorder: colors.slimBlack
+        timeTooltipBorder: colors.slimBlack,
+        icons: '#666',
+        border: colors.gray,
     },
     fontSizes,
     other

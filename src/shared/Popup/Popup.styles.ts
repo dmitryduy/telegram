@@ -21,34 +21,17 @@ export const Background = styled.div`
 `;
 
 
-export const Content = styled.div`
+export const ContentStyled = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   left: 50%;
   top: 50px;
   transform: translateX(-50%);
-  width: 390px;
   background-color: ${props => props.theme.colors.popupBg};
   border-radius: ${props => props.theme.other.borderRadius};
   overflow: hidden;
   max-height: calc(100vh - 50px);
+  max-width: 380px;
   transition: ${props => props.theme.other.transitionSpeed};
-`;
-
-export const Body = styled.div`
-  height: calc(100% - 80px);
-  flex: 1 0 auto;
-  //border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
-`;
-
-export const Bottom = styled.div`
-  display: flex;
-  max-height: 50px;
-  flex: 0 0 auto;
-  margin-bottom: 0;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px ${props => props.theme.other.popupPaddings};
-  background-color: ${props => props.theme.colors.bgColor};
 `;

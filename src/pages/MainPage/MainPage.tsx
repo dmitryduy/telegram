@@ -13,7 +13,7 @@ import ExtraSettings from "@components/ExtraSettings/ExtraSettings";
 import Tooltip from "@helpComponents/Tooltip/Tooltip";
 import NamePopup from "@components/NamePopup/NamePopup";
 import NicknamePopup from "@components/NicknamePopup/NicknamePopup";
-import BackgroundPopup from "@components/BackgroundPopup/BackgroundPopup";
+import BackgroundPopup from "@components/BackgroundPopup/BackgroundPopup@common";
 
 
 const MainPage: React.FC = () => {
