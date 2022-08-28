@@ -1,10 +1,11 @@
 import React from 'react';
-import Popup from "@helpComponents/Popup/Popup";
+import Popup from "../../shared/Popup/Popup";
 import usePopup from "@hooks/usePopup";
 import TextInput from "@helpComponents/TextInput/TextInput";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import useInput from "@hooks/useInput";
 import { setName, updateName } from "@reducers/userSlice/userReducer";
+import { InputContainer } from "@components/NamePopup/NamePopup.styles";
 
 const NamePopup = () => {
     const {name, surname} = useAppSelector(state => state.user);
@@ -27,10 +28,16 @@ const NamePopup = () => {
     }
 
     return (
-        <Popup width={290} top={100} zIndex={100} emitCloseName={emitCloseName} title='Edit your name' active={active} onSubmit={saveName} submitButton='Save' bottomButton='Cancel'>
-            <TextInput emitErrorName='username:error' placeHolder='First name' value={username} setValue={setUsername}/>
-            <TextInput placeHolder='Last Name' value={userSurname} setValue={setUserSurname}/>
-        </Popup>
+        <Popup width={300} top={120} emitCloseName={emitCloseName} active={active} onSubmit={saveName}>
+            <Popup.Header title='Edit your name'/>
+            <Popup.Content stylized>
+                <InputContainer>
+                    <TextInput emitErrorName='username:error' placeHolder='First name' value={username} setValue={setUsername}/>
+                    <TextInput placeHolder='Last Name' value={userSurname} setValue={setUserSurname}/>
+                </InputContainer>
+            </Popup.Content>
+            <Popup.Footer submitTitle='Save' cancelTitle='Cancel'/>
+           </Popup>
     );
 };
 
