@@ -1,11 +1,11 @@
 import React from 'react';
 import Popup from "../../shared/Popup/Popup";
 import usePopup from "@hooks/usePopup";
-import TextInput from "@helpComponents/TextInput/TextInput";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import useInput from "@hooks/useInput";
 import { setName, updateName } from "@reducers/userSlice/userReducer";
 import { InputContainer } from "@components/NamePopup/NamePopup.styles";
+import Input from "../../shared/Input/Input";
 
 const NamePopup = () => {
     const {name, surname} = useAppSelector(state => state.user);
@@ -32,8 +32,12 @@ const NamePopup = () => {
             <Popup.Header title='Edit your name'/>
             <Popup.Content stylized>
                 <InputContainer>
-                    <TextInput emitErrorName='username:error' placeHolder='First name' value={username} setValue={setUsername}/>
-                    <TextInput placeHolder='Last Name' value={userSurname} setValue={setUserSurname}/>
+                  <Input value={username} setValue={setUsername}>
+                    <Input.TextField placeholder='First name' emitErrorName='username:error'/>
+                  </Input>
+                  <Input value={userSurname} setValue={setUserSurname}>
+                    <Input.TextField placeholder='Last Name'/>
+                  </Input>
                 </InputContainer>
             </Popup.Content>
             <Popup.Footer submitTitle='Save' cancelTitle='Cancel'/>

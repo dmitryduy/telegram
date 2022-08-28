@@ -1,25 +1,12 @@
 import React, { FC, useContext } from 'react';
-import styled from "styled-components";
 import cn from "classnames";
 import { PopupContext } from "../PopupContext";
-
-const ContentStyled = styled.main`
-  &.bordered {
-    border-bottom: 1px solid ${props => props.theme.colors.border};
-    border-top: 1px solid ${props => props.theme.colors.border};
-  }
-  
-  &.defaultStyles {
-    padding: 0 ${props => props.theme.other.popupSidePadding};
-    background-color: ${props => props.theme.colors.bgColor};
-  }
-`;
+import { ContentStyled } from './Content.styles';
 
 interface IContentProps {
   stylized?: boolean
   bordered?: boolean
 }
-
 
 const Content: FC<IContentProps> = ({children, stylized, bordered}) => {
   const popupContext = useContext(PopupContext);

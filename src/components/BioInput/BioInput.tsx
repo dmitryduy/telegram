@@ -1,9 +1,10 @@
 import React  from 'react';
-import Input from "@helpComponents/Input/Input";
+
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { setBio, updateBio } from "@reducers/userSlice/userReducer";
 import useInput from "@hooks/useInput";
 import { LettersCounter, BioContainer } from './BioInput.styles';
+import Input from "../../shared/Input/Input";
 
 const MAX_BIO_VALUE = 70;
 
@@ -28,7 +29,9 @@ const BioInput = () => {
 
     return (
         <BioContainer>
-            <Input onBlur={updateServerBio} onInput={onInput} value={value} placeHolder='Bio' textarea/>
+            <Input setValue={onInput} value={value}>
+                <Input.TextArea onBlur={updateServerBio} placeholder='Bio'/>
+            </Input>
             <LettersCounter>{MAX_BIO_VALUE - value.length}</LettersCounter>
         </BioContainer>
     );

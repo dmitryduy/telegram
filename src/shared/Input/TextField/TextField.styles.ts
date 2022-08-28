@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-export const TextContainer = styled.div`
+export const TextFieldStyled = styled.div`
   background-color: ${props => props.theme.colors.bgColor};
-  
-  &:first-child {
-    padding-top: 20px;
-  }
-  
+
   .placeholder {
     transition: ${props => props.theme.other.transitionSpeed};
     font-weight: 500;
@@ -14,23 +10,28 @@ export const TextContainer = styled.div`
     position: absolute;
     pointer-events: none;
     color: ${props => props.theme.colors.paragraph};
+
     &.animate {
       transform: translateY(-15px);
       color: ${props => props.theme.colors.inputFocusBorder};
       font-size: ${props => props.theme.fontSizes.small};
     }
+
     &.error {
       color: ${props => props.theme.colors.error};
     }
+
     &.not-active {
       color: ${props => props.theme.colors.paragraph};
     }
-    
+
   }
-  
+
   div.input {
     position: relative;
-     &:after {
+    padding-top: 20px;
+
+    &:after {
       content: '';
       position: absolute;
       background-color: ${props => props.theme.colors.inputFocusBorder};
@@ -41,17 +42,20 @@ export const TextContainer = styled.div`
       transform: translateX(-50%);
       transition: ${props => props.theme.other.transitionSpeed};
     }
+
     &.animate {
       &:after {
         width: 100%;
       }
     }
+
     &.error {
       &:after {
-        background-color:${props => props.theme.colors.error};
+        background-color: ${props => props.theme.colors.error};
       }
     }
   }
+
   input {
     width: 100%;
     border: none;
