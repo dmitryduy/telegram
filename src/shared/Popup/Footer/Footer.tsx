@@ -1,16 +1,7 @@
 import React, { FC, useContext } from 'react';
-import styled from "styled-components";
 import Button from "@helpComponents/Button/Button";
 import { PopupContext } from "../PopupContext";
-
-const FooterStyled = styled.footer`
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 10px ${props => props.theme.other.popupSidePadding};
-  background-color: ${props => props.theme.colors.bgColor};
-`;
+import { FooterStyled } from './Footer.styles';
 
 interface IFooterProps {
   cancelTitle?: string

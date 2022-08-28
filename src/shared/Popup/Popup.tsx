@@ -36,7 +36,7 @@ const Popup = React.forwardRef<HTMLDivElement | null, IPopupProps & React.ReactN
       <Background as={FlexContainer}
                   className={cn({active: props.active, hidden: !props.active})}
                   onClick={closePopup}>
-        <ContentStyled style={{top: props.top || 100, width: props.width || 'auto'}}
+        <ContentStyled style={{top: props.top || 100, width: props.width || 320}}
                        ref={ref}
                        onClick={e => e.stopPropagation()}>
           {props.children}

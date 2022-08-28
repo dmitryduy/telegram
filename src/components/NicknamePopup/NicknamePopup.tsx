@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import usePopup from "@hooks/usePopup";
 import Popup from "../../shared/Popup/Popup";
-import TextInput from "@helpComponents/TextInput/TextInput";
 import useInput from "@hooks/useInput";
 import { NicknamePopupContainer } from './NicknamePopup.styles';
 import checkNickname, { nicknameClasses, nicknameStatuses } from "@components/NicknamePopup/helpers";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import cn from "classnames";
 import { setNickname, updateNickname } from "@reducers/userSlice/userReducer";
+import Input from "../../shared/Input/Input";
 
 const NicknamePopup = () => {
   const [active, , emitCloseName] = usePopup('nickname');
@@ -43,16 +43,16 @@ const NicknamePopup = () => {
     <Popup top={100} active={active} emitCloseName={emitCloseName} onSubmit={onSubmit}>
       <Popup.Header title='Username'/>
       <Popup.Content stylized>
-        <>
-          <TextInput emitErrorName='nickname-popup:error' placeHolder='@nickname' value={value} setValue={setValue}/>
-          <NicknamePopupContainer>
-            <p className={cn({[nicknameClass]: true})}>{nicknameStatus}</p>
-            <p>You can choose a username on Telegram. If you do, other people will be able to find you by this username
-              and contact you without knowing your phone number.</p>
-            <p>You can use <strong>a-z, 0-9</strong> and <strong>underscores.</strong></p>
-            <p>Minimum Length is <strong>5 characters.</strong></p>
-          </NicknamePopupContainer>
-        </>
+        <Input value={value} setValue={setValue}>
+          <Input.TextField placeholder='@nickname' emitErrorName='nickname-popup:error'/>
+        </Input>
+        <NicknamePopupContainer>
+          <p className={cn({[nicknameClass]: true})}>{nicknameStatus}</p>
+          <p>You can choose a username on Telegram. If you do, other people will be able to find you by this username
+            and contact you without knowing your phone number.</p>
+          <p>You can use <strong>a-z, 0-9</strong> and <strong>underscores.</strong></p>
+          <p>Minimum Length is <strong>5 characters.</strong></p>
+        </NicknamePopupContainer>
       </Popup.Content>
       <Popup.Footer submitTitle='Save' cancelTitle='Cancel'/>
     </Popup>

@@ -7,6 +7,7 @@ import { LocalStorage } from "@helpers/localStorage";
 import {Suspense} from 'react';
 
 
+
 window.emitter = new Emitter();
 window.storage = new LocalStorage();
 
@@ -16,7 +17,6 @@ const LoginPage = React.lazy(() => import('./pages/LoginPage/LoginPage'));
 function App() {
     return (
         <Theme>
-
             <div className="App">
                 <Suspense fallback={<div>loading...</div>}>
                 <Routes>
