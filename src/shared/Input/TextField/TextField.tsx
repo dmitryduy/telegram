@@ -1,7 +1,9 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
-import cn from "classnames";
+import cn from 'classnames';
+
+import { InputContext } from '../InputContext';
+
 import { TextFieldStyled } from './TextField.styles';
-import { InputContext } from "../InputContext";
 
 interface ITextFieldProps {
   placeholder: string
@@ -18,7 +20,7 @@ const TextField: FC<ITextFieldProps> = ({placeholder, emitErrorName}) => {
     emitErrorName && window.emitter.on(emitErrorName, () => {
       setError(true);
       inputRef.current && inputRef.current.focus();
-    })
+    });
 
     return () => {
       emitErrorName && window.emitter.un(emitErrorName);
@@ -34,26 +36,26 @@ const TextField: FC<ITextFieldProps> = ({placeholder, emitErrorName}) => {
 
   const onFocus = () => {
     setAnimate(true);
-  }
+  };
 
   const onBlur = () => {
     setAnimate(false);
     setError(false);
-  }
+  };
 
-  const onInput = (e) => {
+  const onInput = e => {
     setError(false);
     setValue(e);
-  }
+  };
 
   return (
     <TextFieldStyled>
       <div className={cn('input', { animate, error})}>
-                <span className={cn('placeholder',{
-                  animate: animate || value,
-                  error,
-                  'not-active': value && !animate
-                })}>{placeholder}</span>
+        <span className={cn('placeholder', {
+          animate: animate || value,
+          error,
+          'not-active': value && !animate
+        })}>{placeholder}</span>
         <input ref={inputRef} type="text" onFocus={onFocus} onBlur={onBlur} onInput={onInput} value={value}/>
       </div>
     </TextFieldStyled>

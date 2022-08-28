@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderStyled = styled.header`
   color: ${props => props.theme.colors.heading};

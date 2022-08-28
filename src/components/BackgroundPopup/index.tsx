@@ -1,5 +1,5 @@
-import withPlatform from "../../hocs/withPlatform";
+import withPlatform from '../../hocs/withPlatform';
 
-import common from "./BackgroundPopup@common";
+import common from './BackgroundPopup@common';
 
-export default withPlatform({desktop: common, "touch-phone": common});
+export default withPlatform({desktop: common, 'touch-phone': common});

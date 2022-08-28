@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ThemeItemContainer = styled.div<{ beforeColor: string, afterColor: string }>`
   position: relative;

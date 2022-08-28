@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import styled from "styled-components";
-import cn from "classnames";
+import styled from 'styled-components';
+import cn from 'classnames';
 
 interface IHideByConditionProps {
     hide: boolean
@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 
 const HideByCondition: FC<IHideByConditionProps> = ({ hide, children }) => {
-    return <Container className={cn({hide})}>{children}</Container>;
+  return <Container className={cn({hide})}>{children}</Container>;
 };
 
 export default HideByCondition;

@@ -1,5 +1,7 @@
 import React, { FC, useContext, useEffect, useRef } from 'react';
-import { InputContext } from "../InputContext";
+
+import { InputContext } from '../InputContext';
+
 import { TextAreaStyled } from './TextArea.styles';
 
 interface ITextAreaProps {

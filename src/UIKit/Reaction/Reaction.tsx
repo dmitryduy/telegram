@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
-import { reaction } from "../../globalTypes";
-import styled from "styled-components";
+import styled from 'styled-components';
+
+import { reaction } from '../../globalTypes';
 const reactions: {[T in keyof reaction]: string} = {
-    'like': '👍',
-    'dislike': '👎',
-    'heart': '💛',
-    'fire': '🔥',
-    'poop': '💩'
+  'like': '👍',
+  'dislike': '👎',
+  'heart': '💛',
+  'fire': '🔥',
+  'poop': '💩'
 };
 
 interface IReactionProps {
@@ -20,11 +21,11 @@ const ReactionContainer = styled.span`
 `;
 
 const Reaction: FC<IReactionProps> = ({reaction, onClick}) => {
-    return (
-        <ReactionContainer className='reaction' onClick={onClick}>
-            {reaction && reactions[reaction]}
-        </ReactionContainer>
-    );
+  return (
+    <ReactionContainer className="reaction" onClick={onClick}>
+      {reaction && reactions[reaction]}
+    </ReactionContainer>
+  );
 };
 
 export default Reaction;

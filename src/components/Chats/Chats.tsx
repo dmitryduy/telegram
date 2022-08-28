@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { useAppSelector } from '@hooks/useAppSelector';
+import Loading from '@components/Loading/Loading';
+import NotFound from '@components/NotFound/NotFound';
+import GlobalSearch from '@components/GlobalSearch/GlobalSearch';
+import UserChats from '@components/UserChats/UserChats';
+import ChatsTitle from '@components/ChatsTitle/ChatsTitle';
 
-import { useAppSelector } from "@hooks/useAppSelector";
-import { dialogId, phone, timestamp } from "../../globalTypes";
-import Loading from "@components/Loading/Loading";
-import NotFound from "@components/NotFound/NotFound";
-import GlobalSearch from "@components/GlobalSearch/GlobalSearch";
-import UserChats from "@components/UserChats/UserChats";
-import ChatsTitle from "@components/ChatsTitle/ChatsTitle";
+import { dialogId, phone, timestamp } from '../../globalTypes';
 
 interface IChatsProps {
     isSearch: boolean,
@@ -27,8 +27,8 @@ export interface IDialogToArray {
 
 
 const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, /*setSearch*/}) => {
-    //const dialogs = useAppSelector(({dialog}) => dialog.dialogs);
-    const foundedGlobalUsers = useAppSelector(({dialog}) => dialog.foundedGlobalUsers);
+  //const dialogs = useAppSelector(({dialog}) => dialog.dialogs);
+  const foundedGlobalUsers = useAppSelector(({dialog}) => dialog.foundedGlobalUsers);
 
   /*  const dialogsToArray: IDialogToArray[] = [];
     const userDialogsBySearch: IDialogToArray[] = [];
@@ -50,25 +50,25 @@ const Chats: React.FC<IChatsProps> = ({isSearch, isLoading, /*setSearch*/}) => {
         }
     }*/
 
-    if (!isSearch) return <UserChats/>
+  if (!isSearch) return <UserChats/>;
 
-    if (isLoading) return <Loading/>
+  if (isLoading) return <Loading/>;
 
-    if (foundedGlobalUsers) {
-        return <>
-            {foundedGlobalUsers.chatsOfUser.length ? <>
-                <ChatsTitle title={`Found ${foundedGlobalUsers!.chatsOfUser.length} chats`}/>
-             {/*   <UserChats dialogsToArray={userDialogsBySearch} setSearch={setSearch}/>*/}
-            </> : null}
-            {foundedGlobalUsers.chatsOfGlobal.length ? <>
-                <ChatsTitle title='Global search results'/>
-                <GlobalSearch/>
-            </> : null}
-        </>
+  if (foundedGlobalUsers) {
+    return <>
+      {foundedGlobalUsers.chatsOfUser.length ? <>
+        <ChatsTitle title={`Found ${foundedGlobalUsers!.chatsOfUser.length} chats`}/>
+        {/*   <UserChats dialogsToArray={userDialogsBySearch} setSearch={setSearch}/>*/}
+      </> : null}
+      {foundedGlobalUsers.chatsOfGlobal.length ? <>
+        <ChatsTitle title="Global search results"/>
+        <GlobalSearch/>
+      </> : null}
+    </>;
 
-    }
+  }
 
-    return <NotFound/>
+  return <NotFound/>;
 };
 
 export default Chats;

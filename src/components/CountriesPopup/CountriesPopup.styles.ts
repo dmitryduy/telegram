@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Scroll } from "@styled-components/Scroll";
+import styled from 'styled-components';
+import { Scroll } from '@styled-components/Scroll';
 
 export const CountriesContainer = styled(Scroll)`
   overflow: auto;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { useAppSelector } from "@hooks/useAppSelector";
-import styled from "styled-components";
+import { useAppSelector } from '@hooks/useAppSelector';
+import styled from 'styled-components';
 
 const Title = styled.h4`
   display: inline-block;
@@ -15,9 +15,9 @@ interface ISettingsTitleProps {
 }
 
 const SettingsTitle: FC<ISettingsTitleProps> = ({ title }) => {
-    const { themeColor } = useAppSelector(state => state.settings);
+  const { themeColor } = useAppSelector(state => state.settings);
 
-    return <Title style={{color: themeColor}}>{title}</Title>;
+  return <Title style={{color: themeColor}}>{title}</Title>;
 };
 
 export default SettingsTitle;

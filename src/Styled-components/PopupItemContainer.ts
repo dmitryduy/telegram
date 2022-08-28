@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PopupItemContainer = styled.div`
   padding: 10px ${props => props.theme.other.popupPaddings};

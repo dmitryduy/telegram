@@ -1,4 +1,4 @@
-import { sendHotkey, themeColor } from "../globalTypes";
+import { sendHotkey, themeColor } from '../globalTypes';
 
 export type localStorageKeys = 'night-mode' | 'theme-color' | 'background-image' | 'send-hotkey';
 
@@ -10,26 +10,26 @@ interface ILocalStorage {
 }
 
 const testData = {
-    'night-mode': true,
-    'theme-color': "#52b440",
-    'background-image': '',
-    'send-hotkey': 'enter'
+  'night-mode': true,
+  'theme-color': '#52b440',
+  'background-image': '',
+  'send-hotkey': 'enter'
 } as ILocalStorage;
 
 
 export class LocalStorage {
-    get<T>(key: localStorageKeys): T | undefined {
-        const item = localStorage.getItem(key);
-        if (!item) return;
+  get<T>(key: localStorageKeys): T | undefined {
+    const item = localStorage.getItem(key);
+    if (!item) return;
 
-        return JSON.parse(item);
-    }
+    return JSON.parse(item);
+  }
 
-    set<T>(key: localStorageKeys, value: T){
-        if (typeof value !== typeof testData[key]) {
-            window.emitter.emit<{value: string}>('tooltip:show', {value: 'Invalid value of localStorage'});
-            return;
-        }
-        localStorage.setItem(key, JSON.stringify(value));
+  set<T>(key: localStorageKeys, value: T) {
+    if (typeof value !== typeof testData[key]) {
+      window.emitter.emit<{value: string}>('tooltip:show', {value: 'Invalid value of localStorage'});
+      return;
     }
+    localStorage.setItem(key, JSON.stringify(value));
+  }
 }

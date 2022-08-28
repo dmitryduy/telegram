@@ -1,6 +1,8 @@
 import React, { FC, useContext } from 'react';
-import { icons } from "../../../icons";
-import { PopupContext } from "../PopupContext";
+
+import { icons } from '../../../icons';
+import { PopupContext } from '../PopupContext';
+
 import { HeaderStyled } from './Header.styles';
 
 interface IHeaderProps {
@@ -21,7 +23,7 @@ const Header: FC<IHeaderProps> = ({backEmitName, extraContent, closeButton, back
     }
 
     window.emitter.emit(backEmitName);
-  }
+  };
 
   if (!popupContext) {
     console.error('PopupHeader cannot be without Popup');
@@ -30,13 +32,13 @@ const Header: FC<IHeaderProps> = ({backEmitName, extraContent, closeButton, back
 
   return (
     <HeaderStyled>
-      <div className='title'>
+      <div className="title">
         {backButton && <div onClick={onBack}>{icons.back}</div>}
         <h2>{title}</h2>
         {moreButton && icons.more}
         {closeButton && <div onClick={popupContext.onClose}>{icons.times}</div>}
       </div>
-      <div className='extra-content'>
+      <div className="extra-content">
         {extraContent}
       </div>
     </HeaderStyled>

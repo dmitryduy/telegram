@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import { Item } from './CountryItem.styles';
 
 interface ICountryItemProps {
@@ -7,12 +8,12 @@ interface ICountryItemProps {
 }
 
 const CountryItem: FC<ICountryItemProps> = ({dualCode, name}) => {
-    return (
-        <Item className='country-button' data-dual-code={dualCode}>
-            <span>{name}</span>
-            <span>+{dualCode}</span>
-        </Item>
-    );
+  return (
+    <Item className="country-button" data-dual-code={dualCode}>
+      <span>{name}</span>
+      <span>+{dualCode}</span>
+    </Item>
+  );
 };
 
 export default CountryItem;

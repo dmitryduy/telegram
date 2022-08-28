@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import styled from "styled-components";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import noop from "../../helpers/noop";
+import styled from 'styled-components';
+
+import { useAppSelector } from '../../hooks/useAppSelector';
+import noop from '../../helpers/noop';
 
 const Container = styled.p`
   margin-left: auto;
@@ -17,9 +18,9 @@ interface IThemeTextProps {
 }
 
 const ThemedText: FC<IThemeTextProps> = ({text, onClick}) => {
-    const {themeColor} = useAppSelector(state => state.settings);
+  const {themeColor} = useAppSelector(state => state.settings);
 
-    return <Container className='themed-text' style={{color: themeColor}} onClick={onClick || noop}>{text}</Container>;
+  return <Container className="themed-text" style={{color: themeColor}} onClick={onClick || noop}>{text}</Container>;
 };
 
 export default ThemedText;

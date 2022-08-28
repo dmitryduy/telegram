@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { rgba } from "polished";
+import styled from 'styled-components';
+import { rgba } from 'polished';
 
 export const LoginContainer = styled.div`
   display: flex;
@@ -28,14 +28,14 @@ export const LoginSubtitle = styled.p`
 const Input = styled.input`
   outline: none;
   border: none;
-  border-bottom: 2px solid ${props => props.theme.colors.inputBorder};
+  border-bottom: 1px solid ${props => props.theme.colors.inputBorder};
   padding: 7px;
   background-color: ${props => props.theme.colors.inputBackground};
   font-size: ${props => props.theme.fontSizes.extraMedium};
   letter-spacing: 2px;
   color: ${props => props.theme.colors.inputColor};
   &:focus {
-    border-bottom: 2px solid ${props => props.theme.colors.inputFocusBorder};
+    border-bottom: 1px solid ${props => props.theme.colors.inputFocusBorder};
   }
 `;
 
@@ -46,14 +46,6 @@ export const CountryCodeInput = styled(Input)`
 
 export const NumberInput = styled(Input)``;
 
-export const NicknameInput = styled(Input)`
-  width: 100%;
-  margin-top: -5px;
-`;
-
-export const NicknameTitle = styled(LoginSubtitle)`
-  margin-top: 20px;
-`;
 
 export const PhoneError = styled.span`
   display: block;
@@ -83,6 +75,6 @@ export const LoginButton = styled.button`
   transition: .1s;
   font-weight: 500;
   &:hover {
-    background-color: ${props =>rgba(props.theme.colors.button, .95)};
+    background-color: ${props => rgba(props.theme.colors.button, .95)};
   }
 `;

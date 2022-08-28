@@ -1,6 +1,8 @@
 import React, { FC, useContext } from 'react';
-import cn from "classnames";
-import { PopupContext } from "../PopupContext";
+import cn from 'classnames';
+
+import { PopupContext } from '../PopupContext';
+
 import { ContentStyled } from './Content.styles';
 
 interface IContentProps {
@@ -17,7 +19,7 @@ const Content: FC<IContentProps> = ({children, stylized, bordered}) => {
   }
 
   return (
-    <ContentStyled className={cn({defaultStyles: stylized, bordered: bordered})}>
+    <ContentStyled className={cn({defaultStyles: stylized, bordered})}>
       {children}
     </ContentStyled>
   );

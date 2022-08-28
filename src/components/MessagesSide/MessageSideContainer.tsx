@@ -1,15 +1,16 @@
-import { FC, useEffect, useState } from "react";
-import styled from "styled-components";
-import { Base_Url } from "../../types";
-import useMatchMedia from "@hooks/useMatchMedia";
-import React from "react";
-import cn from "classnames";
+import { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import useMatchMedia from '@hooks/useMatchMedia';
+import React from 'react';
+import cn from 'classnames';
+
+import { BASE_URL } from '../../types';
 
 const MessagesSideContainerCommon = styled.div<{ backgroundImage: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(${props => `${Base_Url}/images/backgrounds/${props.backgroundImage}.webp`});
+  background-image: url(${props => `${BASE_URL}/images/backgrounds/${props.backgroundImage}.webp`});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -27,38 +28,41 @@ const MessagesSideContainerPhone = styled(MessagesSideContainerCommon)`
   width: 100vw;
   transform: translateX(100%);
   transition: transform ${props => props.theme.other.transitionSpeed};
+
   &.active {
     transform: translateX(0);
   }
 `;
 
 interface IMessageSideContainerProps {
-    backgroundImage: string,
-    className?: string
+  backgroundImage: string,
+  className?: string
 }
 
 const MessageSideContainer: FC<IMessageSideContainerProps> = ({children, backgroundImage, className}) => {
-    const isPhone = useMatchMedia();
-    const [isActiveInPhone, setIsActiveInPhone] = useState(false);
+  const isPhone = useMatchMedia();
+  const [isActiveInPhone, setIsActiveInPhone] = useState(false);
 
-    useEffect(()=>{
-        window.emitter.on('active-dialog-phone:click', () => isPhone && setIsActiveInPhone(prev => !prev));
-        return () => window.emitter.un('active-dialog-phone:click');
-    }, []);
+  useEffect(() => {
+    window.emitter.on('active-dialog-phone:click', () => isPhone && setIsActiveInPhone(prev => !prev));
+    return () => window.emitter.un('active-dialog-phone:click');
+  }, []);
 
-    if (!isPhone) {
-        return (
-            <MessagesSideContainerDesktop backgroundImage={backgroundImage} className={className || ''}>
-                {children}
-            </MessagesSideContainerDesktop>
-        );
-    }
-
+  if (!isPhone) {
     return (
-        <MessagesSideContainerPhone className={cn({active: isActiveInPhone, [className || '']: true})} backgroundImage={backgroundImage}>
-            {children}
-        </MessagesSideContainerPhone>
+      <MessagesSideContainerDesktop backgroundImage={backgroundImage} className={className || ''}>
+        {children}
+      </MessagesSideContainerDesktop>
     );
-}
+  }
+
+  return (
+    <MessagesSideContainerPhone
+      className={cn('className', {active: isActiveInPhone})}
+      backgroundImage={backgroundImage}>
+      {children}
+    </MessagesSideContainerPhone>
+  );
+};
 
 export default MessageSideContainer;
