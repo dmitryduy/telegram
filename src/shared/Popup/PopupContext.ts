@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext } from 'react';
 
 interface IPopupContext {
   onClose: (e: React.FormEvent<HTMLElement>) => void

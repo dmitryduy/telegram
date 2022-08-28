@@ -1,3 +1,3 @@
-import PartnerInfo from "@components/PartnerInfo/PartnerInfo@common";
+import PartnerInfo from '@components/PartnerInfo/PartnerInfo@common';
 
 export default PartnerInfo;

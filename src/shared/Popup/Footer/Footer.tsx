@@ -1,6 +1,8 @@
 import React, { FC, useContext } from 'react';
-import Button from "@helpComponents/Button/Button";
-import { PopupContext } from "../PopupContext";
+
+import { PopupContext } from '../PopupContext';
+import Button from '../../Button/Button';
+
 import { FooterStyled } from './Footer.styles';
 
 interface IFooterProps {
@@ -18,8 +20,8 @@ const Footer: FC<IFooterProps> = ({ cancelTitle, submitTitle,}) => {
 
   return (
     <FooterStyled>
-      {cancelTitle && <Button onClick={popupContext.onClose}>{cancelTitle}</Button>}
-      {submitTitle && <Button onClick={popupContext.onSubmit}>{submitTitle}</Button>}
+      {cancelTitle && <Button onClick={popupContext.onClose} text={cancelTitle}/>}
+      {submitTitle && <Button onClick={popupContext.onSubmit} text={submitTitle}/>}
     </FooterStyled>
   );
 };

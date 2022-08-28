@@ -1,4 +1,4 @@
-import { localStorageKeys } from "@helpers/localStorage";
+import { localStorageKeys } from '@helpers/localStorage';
 
 export {};
 

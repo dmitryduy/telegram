@@ -41,9 +41,6 @@ export interface IDialog {
     messages: IMessage[];
 }
 
-export interface IUserSettings {
-}
-
 export interface IUser {
     phoneNumber: phone,
     dialogs: IDialog[] | null,
@@ -56,7 +53,7 @@ export interface IUser {
     bio: string | null,
     name: string | null,
     surname: string | null,
-    settings: IUserSettings
+    settings: Record<string, never>
 }
 
 export interface INewMessagePopup {

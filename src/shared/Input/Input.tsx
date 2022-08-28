@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+
 import Search from './Search/Search';
 import { InputContext } from './InputContext';
-import TextField from "./TextField/TextField";
-import TextArea from "./TextArea/TextArea";
+import TextField from './TextField/TextField';
+import TextArea from './TextArea/TextArea';
 
 interface IInputProps {
   value: string

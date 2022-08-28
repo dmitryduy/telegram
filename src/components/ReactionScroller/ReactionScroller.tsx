@@ -1,10 +1,12 @@
 import React, { FC, useState } from 'react';
-import cn from "classnames";
+import cn from 'classnames';
+import { useAppDispatch } from '@hooks/useAppSelector';
+import { addReaction } from '@reducers/dialogSlice/dialogSlice';
+
+import Reaction from '../../UIKit/Reaction/Reaction';
+import { reaction } from '../../globalTypes';
+
 import { Scroller } from './ReactionScroller.styles';
-import Reaction from "../../UIKit/Reaction/Reaction";
-import { reaction } from "../../globalTypes";
-import { useAppDispatch } from "@hooks/useAppSelector";
-import { addReaction } from "@reducers/dialogSlice/dialogSlice";
 
 interface IReactionScrollerProps {
     show: boolean,
@@ -14,26 +16,27 @@ interface IReactionScrollerProps {
 const reactions: reaction[] = ['like', 'dislike', 'heart', 'fire', 'poop'];
 
 const ReactionScroller: FC<IReactionScrollerProps> = ({ show, date}) => {
-    const [open, setOpen] = useState(false);
-    const dispatch = useAppDispatch();
+  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
-    const mouseEnter = () => {
-        setOpen(true);
-    };
+  const mouseEnter = () => {
+    setOpen(true);
+  };
 
-    const mouseLeave = () => {
-        setOpen(false);
-    }
+  const mouseLeave = () => {
+    setOpen(false);
+  };
 
-    const reactionClick = (reactionName: reaction) => {
-        dispatch(addReaction({createDate: date, reaction: reactionName}));
-    }
+  const reactionClick = (reactionName: reaction) => {
+    dispatch(addReaction({createDate: date, reaction: reactionName}));
+  };
 
-    return (
-        <Scroller onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} className={cn({show, open})}>
-            {reactions.map(reaction => <Reaction key={reaction} reaction={reaction} onClick={reactionClick.bind(null, reaction)}/>)}
-        </Scroller>
-    );
+  return (
+    <Scroller onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} className={cn({show, open})}>
+      {reactions.map(reaction =>
+        <Reaction key={reaction} reaction={reaction} onClick={reactionClick.bind(null, reaction)}/>)}
+    </Scroller>
+  );
 };
 
 export default ReactionScroller;

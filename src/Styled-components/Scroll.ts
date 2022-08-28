@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { rgba } from "polished";
+import styled from 'styled-components';
+import { rgba } from 'polished';
 
 export const Scroll = styled.div`
   &::-webkit-scrollbar {

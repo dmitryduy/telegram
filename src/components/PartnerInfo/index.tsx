@@ -1,5 +1,6 @@
-import desktop from "./PartnerInfo@desktop";
-import touchPhone from "./PartnerInfo@touch-phone";
-import withPlatform from "../../hocs/withPlatform";
+import withPlatform from '../../hocs/withPlatform';
 
-export default withPlatform({desktop: desktop, 'touch-phone': touchPhone});
+import desktop from './PartnerInfo@desktop';
+import touchPhone from './PartnerInfo@touch-phone';
+
+export default withPlatform({desktop, 'touch-phone': touchPhone});

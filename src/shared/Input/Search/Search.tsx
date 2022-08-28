@@ -1,9 +1,12 @@
 import React, { FC, useContext } from 'react';
-import { icons } from "../../../icons";
-import { InputContext } from "../InputContext";
-import cn from "classnames";
+import cn from 'classnames';
+import { useAppSelector } from '@hooks/useAppSelector';
+
+import { icons } from '../../../icons';
+import { InputContext } from '../InputContext';
+
 import { SearchStyled, InputStyled } from './Search.styles';
-import { useAppSelector } from "@hooks/useAppSelector";
+
 
 
 interface ISearchProps {
@@ -32,7 +35,7 @@ const Search: FC<ISearchProps> = ({placeholder, searchIcon, timesIcon, bordered}
         <input type="text" value={value} onInput={setValue}/>
       </InputStyled>
       {timesIcon && <span onClick={() => inputContext.setValue('')}
-                          className={cn('times-container', {visible: value})}>{icons.times}</span>}
+        className={cn('times-container', {visible: value})}>{icons.times}</span>}
     </SearchStyled>
   );
 };

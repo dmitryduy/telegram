@@ -11,9 +11,9 @@ interface IUserAvatarProps {
 
 const UserAvatar: React.FC<IUserAvatarProps> = ({onClick, image, style = {}, text}) => {
 
-    return <UserAvatarContainer className='avatar' onClick={onClick} style={style} color={image || ''}>
-        {text}
-    </UserAvatarContainer>;
+  return <UserAvatarContainer className="avatar" onClick={onClick} style={style} color={image || ''}>
+    {text}
+  </UserAvatarContainer>;
 };
 
 export default UserAvatar;

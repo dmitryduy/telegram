@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import {rgba} from 'polished';
-import cn from "classnames";
+import cn from 'classnames';
 
 const Container = styled.div`
   position: fixed;
@@ -28,27 +28,27 @@ const Container = styled.div`
 `;
 
 const Tooltip = () => {
-    const [value, setValue] = useState('');
-    const [hide, setHide] = useState(true);
+  const [value, setValue] = useState('');
+  const [hide, setHide] = useState(true);
 
-    useEffect(() => {
-        window.emitter.on<{value: string}>('tooltip:show', (data) => {
-            setValue(data?.value || '');
-            setTimeout(() => setHide(true), 2000);
-            setTimeout(() => setValue(''), 3500);
-        })
-        return () => {
-            window.emitter.un('tooltip:show');
-        };
-    }, []);
+  useEffect(() => {
+    window.emitter.on<{value: string}>('tooltip:show', data => {
+      setValue(data?.value || '');
+      setTimeout(() => setHide(true), 2000);
+      setTimeout(() => setValue(''), 3500);
+    });
+    return () => {
+      window.emitter.un('tooltip:show');
+    };
+  }, []);
 
-    useEffect(() => {
-        if (value) {
-            setHide(false);
-        }
-    }, [value]);
+  useEffect(() => {
+    if (value) {
+      setHide(false);
+    }
+  }, [value]);
 
-    return <Container className={cn({hide, show: !hide})}>{value}</Container>;
+  return <Container className={cn({hide, show: !hide})}>{value}</Container>;
 };
 
 export default Tooltip;

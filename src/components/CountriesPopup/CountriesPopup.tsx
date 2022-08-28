@@ -1,12 +1,15 @@
 import React, { FC, useEffect } from 'react';
-import Popup from "../../shared/Popup/Popup";
-import useFetch from "@hooks/useFetch";
-import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
-import { changeCountry, changeDialCode } from "@reducers/loginSlice/loginSlice";
-import Search from "./Search/Search";
+import useFetch from '@hooks/useFetch';
+import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
+import { changeCountry, changeDialCode } from '@reducers/loginSlice/loginSlice';
+import CountriesList from '@components/CountriesPopup/CountriesList/CountriesList';
+
+import { INVALID_COUNTRY_CODE, NO_COUNTRY } from '../../constants';
+import Popup from '../../shared/Popup/Popup';
+
+import Search from './Search/Search';
 import { CountriesContainer } from './CountriesPopup.styles';
-import { INVALID_COUNTRY_CODE, NO_COUNTRY } from "../../constants";
-import CountriesList from "@components/CountriesPopup/CountriesList/CountriesList";
+
 
 export interface ICountry {
   name: string,
@@ -15,10 +18,12 @@ export interface ICountry {
 }
 
 
-const getCountryByDualCode = (countries: ICountry[], dualCode): ICountry | undefined => countries.find(country => country.dualCode === dualCode);
+const getCountryByDualCode = (countries: ICountry[], dualCode): ICountry | undefined => {
+  return countries.find(country => country.dualCode === dualCode);
+};
 
 
-const CountriesPopup: FC<{ active: boolean }> = ({active}) => {
+const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active, hidePopup}) => {
   const {data: countries} = useFetch<ICountry[]>('/countries/en');
   const {dualCode, searchCountry} = useAppSelector(state => state.login);
   const dispatch = useAppDispatch();
@@ -28,33 +33,37 @@ const CountriesPopup: FC<{ active: boolean }> = ({active}) => {
       dispatch(changeCountry({countryName: NO_COUNTRY, mask: ''}));
       return;
     }
-    const countryObject = getCountryByDualCode(countries || [], dualCode);
+    const country = getCountryByDualCode(countries || [], dualCode);
 
-    if (!countryObject) {
+    if (!country) {
       dispatch(changeCountry({countryName: INVALID_COUNTRY_CODE, mask: ''}));
     } else {
-      dispatch(changeCountry({countryName: countryObject.name, mask: countryObject.mask}));
+      dispatch(changeCountry({countryName: country.name, mask: country.mask}));
     }
   }, [dualCode]);
 
   const changeCountryHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    const button = e.nativeEvent.composedPath().find(element => (element as Element)?.classList.contains('country-button')) as Element;
+    const button = e.nativeEvent
+      .composedPath()
+      .find(element => (element as Element)
+        ?.classList
+        .contains('country-button')) as Element;
     if (!button) return;
 
     const dualCode = button.getAttribute('data-dual-code');
     dispatch(changeDialCode(dualCode || ''));
-    window.emitter.emit('popup-country:hide');
-  }
+    hidePopup();
+  };
 
   return (
-    <Popup active={active} emitCloseName='popup-country:hide'>
-      <Popup.Header title='Select Country' extraContent={<Search/>}/>
+    <Popup active={active} hide={hidePopup}>
+      <Popup.Header title="Select Country" extraContent={<Search/>}/>
       <Popup.Content bordered>
-          <CountriesContainer onClick={changeCountryHandler}>
-            {countries && <CountriesList searchCountry={searchCountry} countries={countries}/>}
-          </CountriesContainer>
+        <CountriesContainer onClick={changeCountryHandler}>
+          {countries && <CountriesList searchCountry={searchCountry} countries={countries}/>}
+        </CountriesContainer>
       </Popup.Content>
-      <Popup.Footer cancelTitle='Close'/>
+      <Popup.Footer cancelTitle="Close"/>
     </Popup>
   );
 };

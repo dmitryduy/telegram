@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 
 export const CountriesContainer = styled.div`
   position: relative;
   padding: 5px 0;
-  border-bottom: 2px solid ${props => props.theme.colors.inputBorder};
+  border-bottom: 1px solid ${props => props.theme.colors.inputBorder};
   margin-bottom: 20px;
   cursor: pointer;
   

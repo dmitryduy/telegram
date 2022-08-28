@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import usePopup from "@hooks/usePopup";
-import Popup from "../../shared/Popup/Popup";
-import useInput from "@hooks/useInput";
+import usePopup from '@hooks/usePopup';
+import useInput from '@hooks/useInput';
+import checkNickname, { nicknameClasses, nicknameStatuses } from '@components/NicknamePopup/helpers';
+import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
+import cn from 'classnames';
+import { setNickname, updateNickname } from '@reducers/userSlice/userReducer';
+
+import Popup from '../../shared/Popup/Popup';
+import Input from '../../shared/Input/Input';
+
 import { NicknamePopupContainer } from './NicknamePopup.styles';
-import checkNickname, { nicknameClasses, nicknameStatuses } from "@components/NicknamePopup/helpers";
-import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
-import cn from "classnames";
-import { setNickname, updateNickname } from "@reducers/userSlice/userReducer";
-import Input from "../../shared/Input/Input";
 
 const NicknamePopup = () => {
   const [active, , emitCloseName] = usePopup('nickname');
@@ -26,10 +28,10 @@ const NicknamePopup = () => {
       dispatch(updateNickname({nickname: value}))
         .unwrap()
         .then(() => dispatch(setNickname(value)))
-        .catch((e) => window.emitter.emit('tooltip:show', {value: e}));
+        .catch(e => window.emitter.emit('tooltip:show', {value: e}));
       window.emitter.emit(emitCloseName);
     });
-  }
+  };
 
   useEffect(() => {
     checkNickname(value).then(([status, classValue]) => {
@@ -41,10 +43,10 @@ const NicknamePopup = () => {
 
   return (
     <Popup top={100} active={active} emitCloseName={emitCloseName} onSubmit={onSubmit}>
-      <Popup.Header title='Username'/>
+      <Popup.Header title="Username"/>
       <Popup.Content stylized>
         <Input value={value} setValue={setValue}>
-          <Input.TextField placeholder='@nickname' emitErrorName='nickname-popup:error'/>
+          <Input.TextField placeholder="@nickname" emitErrorName="nickname-popup:error"/>
         </Input>
         <NicknamePopupContainer>
           <p className={cn({[nicknameClass]: true})}>{nicknameStatus}</p>
@@ -54,7 +56,7 @@ const NicknamePopup = () => {
           <p>Minimum Length is <strong>5 characters.</strong></p>
         </NicknamePopupContainer>
       </Popup.Content>
-      <Popup.Footer submitTitle='Save' cancelTitle='Cancel'/>
+      <Popup.Footer submitTitle="Save" cancelTitle="Cancel"/>
     </Popup>
   );
 };

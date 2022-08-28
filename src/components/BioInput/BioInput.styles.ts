@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const BioContainer = styled.div`
   display: flex;
   justify-content: space-between;

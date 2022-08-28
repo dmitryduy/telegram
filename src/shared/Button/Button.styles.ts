@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { rgba } from "polished";
+import styled from 'styled-components';
+import { rgba } from 'polished';
 
-export const Btn = styled.button<{color: string}>`
+export const ButtonStyled = styled.button<{color: string}>`
   cursor: pointer;
   color: ${props => props.color};
   padding: 5px 10px;

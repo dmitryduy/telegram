@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import styled  from "styled-components";
-import cn from "classnames";
+import styled  from 'styled-components';
+import cn from 'classnames';
 
 const RadioLabel = styled.label<{ color: string }>`
   display: inline-block;
@@ -59,11 +59,11 @@ interface IRadioButtonProps {
 }
 
 const RadioButton: FC<IRadioButtonProps> = ({checked, value, color = '#fff', filled = false, onChange}) => {
-    return (
-        <RadioLabel color={color} className={cn({active: checked, filled, radiobutton: true})} htmlFor={value}>
-            <Radio type='radio' id={value} value={value} checked={checked} onChange={onChange}/>
-        </RadioLabel>
-    );
+  return (
+    <RadioLabel color={color} className={cn({active: checked, filled, radiobutton: true})} htmlFor={value}>
+      <Radio type="radio" id={value} value={value} checked={checked} onChange={onChange}/>
+    </RadioLabel>
+  );
 };
 
 export default RadioButton;

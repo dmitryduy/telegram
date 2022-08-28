@@ -1,20 +1,20 @@
 
 export class Emitter {
-    listeners = {}
-    on<T extends object>(eventName: string, cb: (data?: T) => void) {
-        if (!this.listeners[eventName]) {
-            this.listeners[eventName] = [];
-        }
-        this.listeners[eventName].push(cb);
+  listeners = {};
+  on<T extends object>(eventName: string, cb: (data?: T) => void) {
+    if (!this.listeners[eventName]) {
+      this.listeners[eventName] = [];
     }
-    emit<T extends object>(eventName: string, data?: T) {
-        if (this.listeners[eventName]) {
-            for (let cb of this.listeners[eventName]) {
-                cb(data);
-            }
-        }
+    this.listeners[eventName].push(cb);
+  }
+  emit<T extends object>(eventName: string, data?: T) {
+    if (this.listeners[eventName]) {
+      for (const cb of this.listeners[eventName]) {
+        cb(data);
+      }
     }
-    un(eventName: string) {
-        delete this.listeners[eventName];
-    }
+  }
+  un(eventName: string) {
+    delete this.listeners[eventName];
+  }
 }

@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import {rgba} from "polished";
+import styled from 'styled-components';
+import {rgba} from 'polished';
 
 export const NoContent = styled.span`
   color: #fff;
   font-size: ${props => props.theme.fontSizes.normal};
   padding: 5px;
-  background-color: ${props => rgba( props.theme.colors.bgColor, .2)};
+  background-color: ${props => rgba(props.theme.colors.bgColor, .2)};
   border-radius: 10px;
 `;
 
