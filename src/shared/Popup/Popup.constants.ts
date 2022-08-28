@@ -1,0 +1,2 @@
+export const DEFAULT_POPUP_WIDTH = 390;
+export const DEFAULT_POPUP_TOP_POSITION = 100;

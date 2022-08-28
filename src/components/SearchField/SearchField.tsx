@@ -2,12 +2,12 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react';
 
 import { useDebounce } from "use-debounce";
 
-import { SearchInput } from "./SearchField.styles";
 
 import useInput from "@hooks/useInput";
 import { useAppDispatch, useAppSelector } from "@hooks/useAppSelector";
 import { dialogActions } from "@reducers/dialogSlice/dialogSlice";
 import { searchUsers } from "../../api/usersServer";
+import Input from "../../shared/Input/Input";
 
 interface ISearchFieldProps {
     setSearch: Dispatch<SetStateAction<boolean>>,
@@ -19,7 +19,6 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
     const [searchValue, setSearchValue] = useInput();
     const [value] = useDebounce(searchValue, 1000);
     const userPhone = useAppSelector(({user})  => user.phoneNumber);
-    const {themeColor} = useAppSelector(state => state.settings);
 
     const dispatch = useAppDispatch();
 
@@ -51,7 +50,11 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
     }, []);
 
 
-    return <SearchInput color={themeColor} value={searchValue} onInput={setSearchValue} placeholder='Search...'/>;
+    return (
+      <Input value={searchValue} setValue={setSearchValue}>
+          <Input.Search placeholder='Search...' bordered/>
+      </Input>
+    );
 
 };
 

@@ -36,7 +36,7 @@ const NamePopup = () => {
                     <Input.TextField placeholder='First name' emitErrorName='username:error'/>
                   </Input>
                   <Input value={userSurname} setValue={setUserSurname}>
-                    <Input.TextField placeholder='Last Name' emitErrorName='username:error'/>
+                    <Input.TextField placeholder='Last Name'/>
                   </Input>
                 </InputContainer>
             </Popup.Content>

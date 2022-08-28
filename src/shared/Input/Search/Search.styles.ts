@@ -69,11 +69,12 @@ export const InputStyled = styled.div<{borderColor: string}>`
 
   &.bordered {
     .placeholder {
-      left: 10px;
+      left: 8px;
     }
 
     input {
-      padding: 10px;
+      border-radius: 5px;
+      padding: 7px;
       background-color: ${props => props.theme.colors.searchInputBackground};
       border: 2px solid transparent;
       transition: ${props => props.theme.other.transitionSpeed};

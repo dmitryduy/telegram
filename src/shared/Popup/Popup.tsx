@@ -9,6 +9,7 @@ import Content from './Content/Content';
 import Footer from "./Footer/Footer";
 import { PopupContext } from './PopupContext';
 import noop from "@helpers/noop";
+import { DEFAULT_POPUP_TOP_POSITION, DEFAULT_POPUP_WIDTH } from "./Popup.constants";
 
 interface IPopupProps {
   active: boolean
@@ -36,7 +37,7 @@ const Popup = React.forwardRef<HTMLDivElement | null, IPopupProps & React.ReactN
       <Background as={FlexContainer}
                   className={cn({active: props.active, hidden: !props.active})}
                   onClick={closePopup}>
-        <ContentStyled style={{top: props.top || 100, width: props.width || 320}}
+        <ContentStyled style={{top: props.top || DEFAULT_POPUP_TOP_POSITION, width: props.width || DEFAULT_POPUP_WIDTH}}
                        ref={ref}
                        onClick={e => e.stopPropagation()}>
           {props.children}
