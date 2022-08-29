@@ -5,7 +5,6 @@ export const CountriesContainer = styled.div`
   position: relative;
   padding: 5px 0;
   border-bottom: 1px solid ${props => props.theme.colors.inputBorder};
-  margin-bottom: 20px;
   cursor: pointer;
   
   svg {

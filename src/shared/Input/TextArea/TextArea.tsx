@@ -6,10 +6,9 @@ import { TextAreaStyled } from './TextArea.styles';
 
 interface ITextAreaProps {
   onBlur: () => void
-  placeholder: string
 }
 
-const TextArea: FC<ITextAreaProps> = ({onBlur, placeholder}) => {
+const TextArea: FC<ITextAreaProps> = ({onBlur}) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const inputContext = useContext(InputContext);
 
@@ -33,7 +32,7 @@ const TextArea: FC<ITextAreaProps> = ({onBlur, placeholder}) => {
     return null;
   }
 
-  const {value, setValue} = inputContext;
+  const {value, setValue, placeholder} = inputContext;
 
   return (
     <TextAreaStyled ref={textareaRef} onBlur={onBlur} onInput={setValue} value={value} placeholder={placeholder}/>

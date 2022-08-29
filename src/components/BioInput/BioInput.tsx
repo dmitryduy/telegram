@@ -30,8 +30,8 @@ const BioInput = () => {
 
   return (
     <BioContainer>
-      <Input setValue={onInput} value={value}>
-        <Input.TextArea onBlur={updateServerBio} placeholder="Bio"/>
+      <Input setValue={onInput} value={value} placeholder="Bio">
+        <Input.TextArea onBlur={updateServerBio}/>
       </Input>
       <LettersCounter>{MAX_BIO_VALUE - value.length}</LettersCounter>
     </BioContainer>

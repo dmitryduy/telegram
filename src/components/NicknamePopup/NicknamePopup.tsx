@@ -45,8 +45,8 @@ const NicknamePopup = () => {
     <Popup top={100} active={active} emitCloseName={emitCloseName} onSubmit={onSubmit}>
       <Popup.Header title="Username"/>
       <Popup.Content stylized>
-        <Input value={value} setValue={setValue}>
-          <Input.TextField placeholder="@nickname" emitErrorName="nickname-popup:error"/>
+        <Input value={value} setValue={setValue} placeholder="@nickname">
+          <Input.TextField emitErrorName="nickname-popup:error"/>
         </Input>
         <NicknamePopupContainer>
           <p className={cn({[nicknameClass]: true})}>{nicknameStatus}</p>

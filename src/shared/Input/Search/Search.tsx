@@ -8,15 +8,13 @@ import { InputContext } from '../InputContext';
 import { SearchStyled, InputStyled } from './Search.styles';
 
 
-
 interface ISearchProps {
-  placeholder: string
-  searchIcon?: boolean
-  timesIcon?: boolean
-  bordered?: boolean
+  searchIcon?: boolean;
+  timesIcon?: boolean;
+  bordered?: boolean;
 }
 
-const Search: FC<ISearchProps> = ({placeholder, searchIcon, timesIcon, bordered}) => {
+const Search: FC<ISearchProps> = ({searchIcon, timesIcon, bordered}) => {
   const inputContext = useContext(InputContext);
   const {themeColor} = useAppSelector(state => state.settings);
 
@@ -25,7 +23,7 @@ const Search: FC<ISearchProps> = ({placeholder, searchIcon, timesIcon, bordered}
     return null;
   }
 
-  const {value, setValue} = inputContext;
+  const {value, setValue, placeholder} = inputContext;
 
   return (
     <SearchStyled>

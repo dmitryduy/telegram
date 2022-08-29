@@ -19,8 +19,8 @@ const Search = () => {
 
 
   return (
-    <Input value={searchCountry} setValue={onInput}>
-      <Input.Search placeholder="Search" searchIcon timesIcon/>
+    <Input value={searchCountry} setValue={onInput} placeholder="Search">
+      <Input.Search searchIcon timesIcon/>
     </Input>
   );
 };
