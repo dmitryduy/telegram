@@ -8,6 +8,7 @@ import TextArea from './TextArea/TextArea';
 interface IInputProps {
   value: string
   setValue: (e: React.FormEvent<EventTarget> | string) => void
+  placeholder: string
 }
 
 interface InputComponent {
@@ -16,9 +17,9 @@ interface InputComponent {
   TextArea: typeof TextArea
 }
 
-const Input: FC<IInputProps> & InputComponent = ({children, value, setValue}) => {
+const Input: FC<IInputProps> & InputComponent = ({children, value, setValue, placeholder}) => {
   return (
-    <InputContext.Provider value={{value, setValue}}>
+    <InputContext.Provider value={{value, setValue, placeholder}}>
       {children}
     </InputContext.Provider>
   );

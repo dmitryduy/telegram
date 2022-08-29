@@ -23,7 +23,7 @@ export interface ISetErrorAC {
 export type UserReducerAction = IFetchUserInfoAC | ISetErrorAC;
 
 export interface IUserReducerState{
-    isError: boolean,
+    backendError: string | null,
     isAuth: boolean,
     phoneNumber: phone | null,
     nickname: string | null,

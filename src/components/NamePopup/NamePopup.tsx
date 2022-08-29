@@ -33,11 +33,11 @@ const NamePopup = () => {
       <Popup.Header title="Edit your name"/>
       <Popup.Content stylized>
         <InputContainer>
-          <Input value={username} setValue={setUsername}>
-            <Input.TextField placeholder="First name" emitErrorName="username:error"/>
+          <Input value={username} setValue={setUsername} placeholder="First name">
+            <Input.TextField emitErrorName="username:error"/>
           </Input>
-          <Input value={userSurname} setValue={setUserSurname}>
-            <Input.TextField placeholder="Last Name"/>
+          <Input value={userSurname} setValue={setUserSurname} placeholder="Last Name">
+            <Input.TextField/>
           </Input>
         </InputContainer>
       </Popup.Content>

@@ -3,8 +3,8 @@ import useFetch from '@hooks/useFetch';
 import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
 import { changeCountry, changeDialCode } from '@reducers/loginSlice/loginSlice';
 import CountriesList from '@components/CountriesPopup/CountriesList/CountriesList';
+import { COUNTRY_NOT_SELECTED, INVALID_DUAL_CODE } from '@pages/LoginPage/LoginPage.constants';
 
-import { INVALID_COUNTRY_CODE, NO_COUNTRY } from '../../constants';
 import Popup from '../../shared/Popup/Popup';
 
 import Search from './Search/Search';
@@ -30,13 +30,13 @@ const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active,
 
   useEffect(() => {
     if (!dualCode) {
-      dispatch(changeCountry({countryName: NO_COUNTRY, mask: ''}));
+      dispatch(changeCountry({countryName: COUNTRY_NOT_SELECTED, mask: ''}));
       return;
     }
     const country = getCountryByDualCode(countries || [], dualCode);
 
     if (!country) {
-      dispatch(changeCountry({countryName: INVALID_COUNTRY_CODE, mask: ''}));
+      dispatch(changeCountry({countryName: INVALID_DUAL_CODE, mask: ''}));
     } else {
       dispatch(changeCountry({countryName: country.name, mask: country.mask}));
     }

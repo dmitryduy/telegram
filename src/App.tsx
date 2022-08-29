@@ -12,7 +12,7 @@ window.emitter = new Emitter();
 window.storage = new LocalStorage();
 
 const MainPage = React.lazy(() => import('./pages/MainPage/MainPage'));
-const LoginPage = React.lazy(() => import('./pages/LoginPage/LoginPage'));
+const LoginPage = React.lazy(() => import('@pages/LoginPage'));
 
 function App() {
   return (

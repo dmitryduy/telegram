@@ -18,4 +18,17 @@ export const ButtonStyled = styled.button<{color: string}>`
     cursor: default;
     color: ${props => props.theme.colors.buttonDisabled};
   }
+  
+  &.fullButton {
+    width: 100%;
+    background-color: ${props => props.color};
+    color: #fff;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: ${props => props.theme.fontSizes.extraMedium};
+    font-weight: 500;
+    &:hover {
+      background-color: ${props => rgba(props.color, .95)};
+    }
+  }
 `;

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-export const TextFieldStyled = styled.div`
+export const TextFieldStyled = styled.div<{ themeColor: string }>`
   background-color: ${props => props.theme.colors.bgColor};
+  width: 100%;
 
   .placeholder {
     transition: ${props => props.theme.other.transitionSpeed};
@@ -13,7 +14,7 @@ export const TextFieldStyled = styled.div`
 
     &.animate {
       transform: translateY(-15px);
-      color: ${props => props.theme.colors.inputFocusBorder};
+      color: ${props => props.themeColor};
       font-size: ${props => props.theme.fontSizes.small};
     }
 
@@ -34,7 +35,7 @@ export const TextFieldStyled = styled.div`
     &:after {
       content: '';
       position: absolute;
-      background-color: ${props => props.theme.colors.inputFocusBorder};
+      background-color: ${props => props.themeColor};
       height: 2px;
       bottom: 0;
       width: 0;
@@ -59,7 +60,8 @@ export const TextFieldStyled = styled.div`
   input {
     width: 100%;
     border: none;
-    padding-bottom: 7px;
+    padding-bottom: 5px;
+    font-size: ${props => props.theme.fontSizes.extraNormal};
     outline: none;
     border-bottom: 1px solid ${props => props.theme.colors.helpingBorders};
     background-color: ${props => props.theme.colors.inputBackground};

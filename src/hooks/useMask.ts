@@ -28,7 +28,7 @@ const inputWithMask = (value: string, mask: string) => {
   return newValue + value[value.length - 1];
 };
 
-const useMask = (mask: string): [string, (e: React.FormEvent<EventTarget> | string) => void, () => void] => {
+const useMask = (mask: string): [string, (e: React.FormEvent<EventTarget> | string) => void] => {
   const [value, setValue] = useState<string>('');
 
   const changeValue = (e: React.FormEvent<EventTarget> | string) => {
@@ -44,7 +44,7 @@ const useMask = (mask: string): [string, (e: React.FormEvent<EventTarget> | stri
     isCorrectByMask(input.value, mask) && setValue(input.value);
   };
 
-  return [value, changeValue, () => setValue('')];
+  return [value, changeValue];
 };
 
 export default useMask;

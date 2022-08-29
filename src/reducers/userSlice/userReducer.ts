@@ -6,7 +6,7 @@ import { RootState } from '../../store/store';
 import { IUserReducerState } from './types';
 
 const initialState = {
-  isError: false,
+  backendError: null,
   isAuth: false,
   phoneNumber: null,
   nickname: null,
@@ -118,10 +118,10 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       if (action.payload.error) {
-        state.isError = true;
+        state.backendError = action.payload.error;
         return;
       }
-      const {phoneNumber, nickname, avatar, bio, name, surname} = action.payload as IUser & { error: null };
+      const {phoneNumber, nickname, avatar, bio, name, surname} = action.payload as IUser;
       state.avatar = avatar;
       state.phoneNumber = phoneNumber;
       state.nickname = nickname;
@@ -129,7 +129,6 @@ const userSlice = createSlice({
       state.name = name;
       state.surname = surname;
       state.isAuth = true;
-      state.isError = false;
     });
   }
 });

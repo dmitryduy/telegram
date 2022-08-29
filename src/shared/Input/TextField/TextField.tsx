@@ -1,20 +1,24 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
+import { useAppSelector } from '@hooks/useAppSelector';
 
 import { InputContext } from '../InputContext';
 
 import { TextFieldStyled } from './TextField.styles';
 
 interface ITextFieldProps {
-  placeholder: string
   emitErrorName?: string
+  hidePlaceholder?: boolean
+  type?: 'text' | 'tel'
 }
 
-const TextField: FC<ITextFieldProps> = ({placeholder, emitErrorName}) => {
+const TextField: FC<ITextFieldProps> = ({emitErrorName, hidePlaceholder, type}) => {
   const inputContext = useContext(InputContext);
   const [animate, setAnimate] = useState(false);
   const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const {themeColor} = useAppSelector(state => state.settings);
 
   useEffect(() => {
     emitErrorName && window.emitter.on(emitErrorName, () => {
@@ -32,7 +36,7 @@ const TextField: FC<ITextFieldProps> = ({placeholder, emitErrorName}) => {
     return null;
   }
 
-  const {value, setValue} = inputContext;
+  const {value, setValue, placeholder} = inputContext;
 
   const onFocus = () => {
     setAnimate(true);
@@ -49,14 +53,18 @@ const TextField: FC<ITextFieldProps> = ({placeholder, emitErrorName}) => {
   };
 
   return (
-    <TextFieldStyled>
-      <div className={cn('input', { animate, error})}>
+    <TextFieldStyled themeColor={themeColor}>
+      <div className={cn('input', {animate, error})}>
+        {!hidePlaceholder &&
         <span className={cn('placeholder', {
           animate: animate || value,
           error,
           'not-active': value && !animate
-        })}>{placeholder}</span>
-        <input ref={inputRef} type="text" onFocus={onFocus} onBlur={onBlur} onInput={onInput} value={value}/>
+        })}>
+          {placeholder}
+        </span>
+        }
+        <input ref={inputRef} type={type || 'text'} onFocus={onFocus} onBlur={onBlur} onInput={onInput} value={value}/>
       </div>
     </TextFieldStyled>
   );

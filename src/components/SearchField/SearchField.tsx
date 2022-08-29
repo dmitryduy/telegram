@@ -49,8 +49,8 @@ const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoadi
 
 
   return (
-    <Input value={searchValue} setValue={setSearchValue}>
-      <Input.Search placeholder="Search..." bordered/>
+    <Input value={searchValue} setValue={setSearchValue} placeholder="Search...">
+      <Input.Search bordered/>
     </Input>
   );
 
