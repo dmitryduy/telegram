@@ -10,11 +10,10 @@ interface IHeaderProps {
   closeButton?: boolean
   backButton?: boolean
   moreButton?: boolean
-  extraContent?: React.ReactNode
   backEmitName?: string
 }
 
-const Header: FC<IHeaderProps> = ({backEmitName, extraContent, closeButton, backButton, title, moreButton}) => {
+const Header: FC<IHeaderProps> = ({backEmitName, children, closeButton, backButton, title, moreButton}) => {
   const popupContext = useContext(PopupContext);
 
   const onBack = () => {
@@ -39,7 +38,7 @@ const Header: FC<IHeaderProps> = ({backEmitName, extraContent, closeButton, back
         {closeButton && <div onClick={popupContext.onClose}>{icons.times}</div>}
       </div>
       <div className="extra-content">
-        {extraContent}
+        {children}
       </div>
     </HeaderStyled>
   );

@@ -7,12 +7,11 @@ import { InputContext } from '../InputContext';
 import { TextFieldStyled } from './TextField.styles';
 
 interface ITextFieldProps {
-  emitErrorName?: string
-  hidePlaceholder?: boolean
-  type?: 'text' | 'tel'
+  emitErrorName?: string;
+  type?: 'text' | 'tel';
 }
 
-const TextField: FC<ITextFieldProps> = ({emitErrorName, hidePlaceholder, type}) => {
+const TextField: FC<ITextFieldProps> = ({emitErrorName, type}) => {
   const inputContext = useContext(InputContext);
   const [animate, setAnimate] = useState(false);
   const [error, setError] = useState(false);
@@ -55,7 +54,6 @@ const TextField: FC<ITextFieldProps> = ({emitErrorName, hidePlaceholder, type}) 
   return (
     <TextFieldStyled themeColor={themeColor}>
       <div className={cn('input', {animate, error})}>
-        {!hidePlaceholder &&
         <span className={cn('placeholder', {
           animate: animate || value,
           error,
@@ -63,7 +61,6 @@ const TextField: FC<ITextFieldProps> = ({emitErrorName, hidePlaceholder, type}) 
         })}>
           {placeholder}
         </span>
-        }
         <input ref={inputRef} type={type || 'text'} onFocus={onFocus} onBlur={onBlur} onInput={onInput} value={value}/>
       </div>
     </TextFieldStyled>

@@ -11,9 +11,10 @@ export const TextFieldStyled = styled.div<{ themeColor: string }>`
     position: absolute;
     pointer-events: none;
     color: ${props => props.theme.colors.paragraph};
+    bottom: 5px;
 
     &.animate {
-      transform: translateY(-15px);
+      transform: translateY(-20px);
       color: ${props => props.themeColor};
       font-size: ${props => props.theme.fontSizes.small};
     }

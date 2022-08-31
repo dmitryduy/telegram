@@ -1,23 +1,42 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import NotFound from '@helpComponents/NotFound/NotFound';
 import { ICountry } from '@components/CountriesPopup/CountriesPopup';
-import CountryItem from '@components/CountriesPopup/CountryItem/CountryItem';
-import { getCountryFromSearch } from '@components/CountriesPopup/CountriesList/CountriesList.utils';
+import { CountriesContext } from '@pages/LoginPage/CountriesContext';
+
+import ListItem from '../../../shared/ListItem/ListItem';
 
 interface ICountriesListProps {
-  countries: ICountry[],
-  searchCountry: string
+  countries: ICountry[]
+  hidePopup: () => void
 }
 
-const CountriesList: FC<ICountriesListProps> = React.memo(({countries, searchCountry}) => {
+const CountriesList: FC<ICountriesListProps> = React.memo(({countries, hidePopup}) => {
+  const countriesContext = useContext(CountriesContext);
 
-  const foundedCountries = getCountryFromSearch(countries, searchCountry).map(country => <CountryItem
-    dualCode={country.dualCode} name={country.name}
-    key={country.name + country.dualCode}/>);
+  if (!countriesContext) {
+    return null;
+  }
+
+  const {setDualCode, setSelectedCountry, setPhoneMask} = countriesContext;
+
+  const onCountryClick = (country: ICountry) => {
+    setDualCode(`+${country.dualCode}`);
+    setPhoneMask(country.mask);
+    setSelectedCountry(country.name);
+    hidePopup();
+  };
 
   return (
-    foundedCountries.length ?
-      <>{foundedCountries}</> :
+    countries.length ?
+      <ul>
+        {countries.map(country =>
+          <ListItem
+            text={country.name}
+            key={country.name + country.dualCode}
+            subtext={`+${country.dualCode}`}
+            onClick={() => onCountryClick(country)}
+          />)}
+      </ul> :
       <NotFound>Country not found</NotFound>
   );
 });

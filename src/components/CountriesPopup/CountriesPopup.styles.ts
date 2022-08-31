@@ -3,5 +3,6 @@ import { Scroll } from '@styled-components/Scroll';
 
 export const CountriesContainer = styled(Scroll)`
   overflow: auto;
-  max-height: 55vh;
+  height: 55vh;
+  background-color: ${props => props.theme.colors.bgColor};
 `;
