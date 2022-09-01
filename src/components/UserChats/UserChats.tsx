@@ -7,7 +7,6 @@ import getLastMessageText from '@helpers/getLastMessageText';
 
 const UserChats = () => {
   const {dialogs} = useAppSelector(state => state.dialog);
-  console.log(dialogs);
   return (
     <>
       {dialogsToArray(dialogs)

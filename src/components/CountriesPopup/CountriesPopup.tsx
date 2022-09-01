@@ -51,7 +51,6 @@ const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active,
     }
   }, [active]);
 
-
   return (
     <Popup active={active} hide={hidePopup}>
       <Popup.Header title="Select Country">

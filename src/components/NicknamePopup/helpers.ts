@@ -30,7 +30,7 @@ const checkNickname = async (value: string): Promise<[nicknameStatuses, nickname
       body: JSON.stringify({nickname: value})
     });
     const isAvailable = await res.json();
-    console.log(isAvailable);
+
     return isAvailable ? ['This username is available.', 'success'] : ['This username is already occupied', 'error'];
 
   } catch (e) {
