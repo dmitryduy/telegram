@@ -20,15 +20,26 @@ module.exports = {
         type: 'input',
         name: 'tag',
         message: 'Where is the tag name(Optional div)',
+        initial: 'div'
+      },
+      {
+        type: 'confirm',
+        name: 'isConstant',
+        message: 'Is create constants file?',
+      },
+      {
+        type: 'confirm',
+        name: 'isTypings',
+        message: 'Is create typings file?',
       },
     ];
     return inquirer
       .prompt(questions)
       .then(answers => {
-        const {dir, componentName, tag} = answers;
+        const {dir, componentName} = answers;
 
         const absPath = `src/${dir}/${capitalize(componentName)}`;
-        return {componentName: capitalize(componentName), tag: tag ? tag : 'div', absPath};
+        return {...answers, componentName: capitalize(componentName), absPath};
       });
   }
 };

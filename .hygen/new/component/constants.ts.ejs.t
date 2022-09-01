@@ -1,3 +1,5 @@
 ---
-to: <%= absPath %>/<%= componentName %>.constants.ts
+to: "<%= isConstant ? `${absPath}/${componentName}.constants.ts` : null %>"
 ---
+
+export const <%= h.upper(componentName) %> = '';
