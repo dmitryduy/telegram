@@ -8,9 +8,10 @@ import User from '@helpComponents/User/User';
 import copyNickname from '@components/ExtraSettings/helpers/copyNickname';
 import usePopup from '@hooks/usePopup';
 import HideByCondition from '@helpComponents/HideByCondition/HideByCondition';
-import ListItem from '@helpComponents/ListItem/ListItem';
 
 import Popup from '../../shared/Popup/Popup';
+import ListItem from '../../shared/ListItem/ListItem';
+import IconImage from '../../shared/IconImage/IconImage';
 
 import { Main, LeftSide, RightSide, Items } from './ExtraSettings.styles';
 
@@ -74,9 +75,9 @@ const ExtraSettings = () => {
             <User styleAvatar={{height: 80, width: 80, fontSize: 25}} styleContainer={{padding: '10px 20px'}}
               avatarPos="avatar-left" onNicknameClick={() => copyNickname(nickname || '')} nickname phone/>
             <Items>
-              <ListItem text="Edit Profile" imgName="edit-profile"
+              <ListItem text="Edit Profile" leftElement={<IconImage imageName="edit-profile"/>}
                 onClick={() => window.emitter.emit('extra-settings-item:click', {type: 'edit-profile'})}/>
-              <ListItem text="Chat Settings" imgName="chat-settings"
+              <ListItem text="Chat Settings" leftElement={<IconImage imageName="chat-settings"/>}
                 onClick={() => window.emitter.emit('extra-settings-item:click', {type: 'chat-settings'})}/>
             </Items>
           </Popup.Content>

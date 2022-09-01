@@ -1,66 +1,68 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import useFetch from '@hooks/useFetch';
-import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
-import { changeCountry, changeDialCode } from '@reducers/loginSlice/loginSlice';
 import CountriesList from '@components/CountriesPopup/CountriesList/CountriesList';
-import { COUNTRY_NOT_SELECTED, INVALID_DUAL_CODE } from '@pages/LoginPage/LoginPage.constants';
+import useInput from '@hooks/useInput';
+import { getCountriesByPattern } from '@components/CountriesPopup/CountriesPopup.utils/getCountriesByPattern';
+import { CountriesContext } from '@pages/LoginPage/CountriesContext';
+import { ICountriesContext } from '@pages/LoginPage/LoginPage.typings';
+import { COUNTRY_NOT_SELECTED, INVALID_COUNTRY_CODE } from '@pages/LoginPage/LoginPage.constants';
+import { getCountryByDualCode } from '@components/CountriesPopup/CountriesPopup.utils/getCountryByDualCode';
 
 import Popup from '../../shared/Popup/Popup';
+import Input from '../../shared/Input/Input';
 
-import Search from './Search/Search';
 import { CountriesContainer } from './CountriesPopup.styles';
 
 
 export interface ICountry {
-  name: string,
-  dualCode: string,
-  mask: string,
+  name: string;
+  dualCode: string;
+  mask: string;
 }
-
-
-const getCountryByDualCode = (countries: ICountry[], dualCode): ICountry | undefined => {
-  return countries.find(country => country.dualCode === dualCode);
-};
-
 
 const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active, hidePopup}) => {
   const {data: countries} = useFetch<ICountry[]>('/countries/en');
-  const {dualCode, searchCountry} = useAppSelector(state => state.login);
-  const dispatch = useAppDispatch();
+
+  const [countryValue, setCountryValue] = useInput('');
+
+  const {dualCode, setPhoneMask, setSelectedCountry} = useContext(CountriesContext) || {} as ICountriesContext;
 
   useEffect(() => {
-    if (!dualCode) {
-      dispatch(changeCountry({countryName: COUNTRY_NOT_SELECTED, mask: ''}));
+    if (dualCode === '+') {
+      setSelectedCountry(COUNTRY_NOT_SELECTED);
+      setPhoneMask('');
       return;
     }
-    const country = getCountryByDualCode(countries || [], dualCode);
+    const country = getCountryByDualCode(countries || [], dualCode.slice(1));
 
     if (!country) {
-      dispatch(changeCountry({countryName: INVALID_DUAL_CODE, mask: ''}));
+      setSelectedCountry(INVALID_COUNTRY_CODE);
+      setPhoneMask('');
     } else {
-      dispatch(changeCountry({countryName: country.name, mask: country.mask}));
+      setSelectedCountry(country.name);
+      setPhoneMask(country.mask);
     }
   }, [dualCode]);
 
-  const changeCountryHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    const button = e.nativeEvent
-      .composedPath()
-      .find(element => (element as Element)
-        ?.classList
-        .contains('country-button')) as Element;
-    if (!button) return;
+  useEffect(() => {
+    if (!active) {
+      // надо, чтобы пользователь не видел удаление поля страны в попапе при его закрытии
+      setTimeout(() => setCountryValue(''), 200);
+    }
+  }, [active]);
 
-    const dualCode = button.getAttribute('data-dual-code');
-    dispatch(changeDialCode(dualCode || ''));
-    hidePopup();
-  };
 
   return (
     <Popup active={active} hide={hidePopup}>
-      <Popup.Header title="Select Country" extraContent={<Search/>}/>
+      <Popup.Header title="Select Country">
+        <Input value={countryValue} setValue={setCountryValue} placeholder="Search">
+          <Input.Search searchIcon timesIcon/>
+        </Input>
+      </Popup.Header>
       <Popup.Content bordered>
-        <CountriesContainer onClick={changeCountryHandler}>
-          {countries && <CountriesList searchCountry={searchCountry} countries={countries}/>}
+        <CountriesContainer>
+          {countries &&
+          <CountriesList countries={getCountriesByPattern(countries, countryValue)} hidePopup={hidePopup}/>}
         </CountriesContainer>
       </Popup.Content>
       <Popup.Footer cancelTitle="Close"/>

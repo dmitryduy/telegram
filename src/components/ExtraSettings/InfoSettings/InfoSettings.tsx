@@ -1,12 +1,12 @@
 import React from 'react';
 import User from '@helpComponents/User/User';
 import BioInput from '@components/BioInput/BioInput';
-import ListItem from '@helpComponents/ListItem/ListItem';
 import popupOpen from '@helpers/popupOpen';
-import ThemedText from '@helpComponents/ThemedText/ThemedText';
 import useBeautifyUserInfo from '@hooks/useBeautifyUserInfo';
 
 import { Items } from '../ExtraSettings.styles';
+import ListItem from '../../../shared/ListItem/ListItem';
+import IconImage from '../../../shared/IconImage/IconImage';
 
 import { Container, Tip } from './InfoSettings.styles';
 
@@ -24,15 +24,15 @@ const InfoSettings = () => {
       <Items>
         <ListItem
           text="Name"
-          imgName="name"
+          leftElement={<IconImage imageName="name"/>}
           onClick={() => popupOpen('name')}
-          RightItem={<ThemedText text={fullName}/>}
+          rightElement={fullName}
         />
         <ListItem
           text="Username"
-          imgName="nickname"
+          leftElement={<IconImage imageName="nickname"/>}
           onClick={() => popupOpen('nickname')}
-          RightItem={<ThemedText text={nickname}/>}
+          rightElement={nickname}
         />
       </Items>
     </Container>
