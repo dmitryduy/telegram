@@ -20,10 +20,9 @@ export interface ICountry {
   mask: string;
 }
 
-const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = React.memo(({active, hidePopup}) => {
+const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active, hidePopup}) => {
   const {data: countries} = useFetch<ICountry[]>('/countries/en');
 
-  console.log('popup');
   const [countryValue, setCountryValue] = useInput('');
 
   const {dualCode, setPhoneMask, setSelectedCountry} = useContext(CountriesContext) || {} as ICountriesContext;
@@ -68,6 +67,6 @@ const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = React.mem
       <Popup.Footer cancelTitle="Close"/>
     </Popup>
   );
-});
+};
 
 export default CountriesPopup;
