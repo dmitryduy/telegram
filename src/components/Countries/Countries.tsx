@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import CountriesPopup from '@components/CountriesPopup/CountriesPopup';
 
 
@@ -15,12 +15,16 @@ const Countries: FC<{selectedCountry}> = React.memo(({selectedCountry}) => {
     setActivePopup(true);
   };
 
+  const hidePopup = useCallback(() => {
+    setActivePopup(false);
+  }, []);
+
 
   return (
     <CountriesContainer onClick={openPopup}>
       {icons.hide}
       <span>{selectedCountry}</span>
-      <CountriesPopup active={activePopup} hidePopup={() => setActivePopup(false)}/>
+      <CountriesPopup active={activePopup} hidePopup={hidePopup}/>
     </CountriesContainer>
   );
 });

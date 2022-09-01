@@ -44,7 +44,11 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "lint": "eslint --ext ts,tsx .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "new:component": "hygen new component",
+    "new:util": "hygen new util",
+    "new:hook": "hygen new hook",
+    "new:i18n": "hygen new i18n"
   },
   "eslintConfig": {
     "extends": [

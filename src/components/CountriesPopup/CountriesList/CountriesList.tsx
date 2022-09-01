@@ -12,7 +12,7 @@ interface ICountriesListProps {
 
 const CountriesList: FC<ICountriesListProps> = React.memo(({countries, hidePopup}) => {
   const countriesContext = useContext(CountriesContext);
-
+  console.log('render');
   if (!countriesContext) {
     return null;
   }
