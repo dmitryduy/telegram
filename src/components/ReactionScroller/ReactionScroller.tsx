@@ -4,7 +4,7 @@ import { useAppDispatch } from '@hooks/useAppSelector';
 import { addReaction } from '@reducers/dialogSlice/dialogSlice';
 
 import Reaction from '../../UIKit/Reaction/Reaction';
-import { reaction } from '../../globalTypes';
+import { reaction } from '../../global.typings';
 
 import { Scroller } from './ReactionScroller.styles';
 

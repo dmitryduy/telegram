@@ -6,7 +6,7 @@ import { getBackgroundImagePath } from '@helpers/paths';
 import { useAppDispatch } from '@hooks/useAppSelector';
 import { setBackgroundImage } from '@reducers/settingsSlice/settingsSlice';
 
-import { IMessage } from '../../globalTypes';
+import { IMessage } from '../../global.typings';
 import Popup from '../../shared/Popup/Popup';
 
 const fakeMessages: [Omit<IMessage, 'senderPhone'>, Omit<IMessage, 'senderPhone'>] = [

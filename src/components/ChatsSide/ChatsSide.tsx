@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import SearchField from '@components/SearchField/SearchField';
 import HamburgerMenuIcon from '@components/HamburgerMenuIcon/HamburgerMenuIcon';
-import Chats from '@components/Chats/Chats';
 import useMatchMedia from '@hooks/useMatchMedia';
 import cn from 'classnames';
+import { useDialogs } from '@components/ChatsSide/ChatsSide.hook/useDialogs';
+import DialogList from '@components/ChatsSide/DialogList/DialogList';
+import { getDialogsType } from '@components/ChatsSide/ChatsSide.utils/getDialogsType';
 
-import { ChatsContainer, ChatsSideContainer, ChatsSideHeader } from './ChatsSide.styles';
+import Input from '../../shared/Input/Input';
+
+import { ChatsContainer, ChatsSideStyled, ChatsSideHeader } from './ChatsSide.styles';
 
 const ChatsSide = () => {
-  const [isSearch, setSearch] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+
+  const {searchValue, searchDialogs, isLoading, setSearchValue} = useDialogs();
   const [isCloseSide, setIsCloseSide] = useState(false);
   const isPhone = useMatchMedia();
+
 
   useEffect(() => {
     window.emitter.on('active-dialog-phone:click', () => isPhone && setIsCloseSide(prev => !prev));
@@ -19,15 +23,17 @@ const ChatsSide = () => {
   }, []);
 
   return (
-    <ChatsSideContainer isPhone={isPhone} className={cn({hidden: isCloseSide})}>
+    <ChatsSideStyled isPhone={isPhone} className={cn({hidden: isCloseSide})}>
       <ChatsSideHeader>
         <HamburgerMenuIcon/>
-        <SearchField setSearch={setSearch} isSearch={isSearch} setLoading={setLoading}/>
+        <Input value={searchValue} setValue={setSearchValue} placeholder="Search...">
+          <Input.Search bordered/>
+        </Input>
       </ChatsSideHeader>
       <ChatsContainer>
-        <Chats isSearch={isSearch} isLoading={isLoading} setSearch={setSearch}/>
+        <DialogList renderComponent={getDialogsType(searchDialogs, isLoading)}/>
       </ChatsContainer>
-    </ChatsSideContainer>
+    </ChatsSideStyled>
   );
 };
 

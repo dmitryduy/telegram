@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IUser, phone } from '../../globalTypes';
+import { IUser, phone } from '../../global.typings';
 import { RootState } from '../../store/store';
 
 import { IUserReducerState } from './types';

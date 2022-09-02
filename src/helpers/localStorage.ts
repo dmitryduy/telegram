@@ -1,4 +1,4 @@
-import { sendHotkey, themeColor } from '../globalTypes';
+import { sendHotkey, themeColor } from '../global.typings';
 
 export type localStorageKeys = 'night-mode' | 'theme-color' | 'background-image' | 'send-hotkey';
 

@@ -2,8 +2,7 @@ import React from 'react';
 import useInput from '@hooks/useInput';
 import SendMessage from '@images/send-button.svg';
 import useSocket from '@hooks/useSocket';
-import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
-import { dialogActions } from '@reducers/dialogSlice/dialogSlice';
+import { useAppSelector } from '@hooks/useAppSelector';
 
 import { MessageInputContainer } from './MessageInput.styles';
 
@@ -11,18 +10,18 @@ const MessageInput: React.FC = () => {
   const [inputValue, changeInputValue, clearInput] = useInput();
   const activeDialog = useAppSelector(state => state.dialog.activeDialog);
   const {sendHotkey} = useAppSelector(state => state.settings);
-  const dispatch = useAppDispatch();
+  /*  const dispatch = useAppDispatch();*/
   const messageSocket = useSocket('send message');
   const userPhone = useAppSelector(({user}) => user.phoneNumber);
 
   const sendMessage = () => {
     if (inputValue && userPhone) {
-      dispatch(dialogActions.addMessage({
+      /*dispatch(dialogActions.addMessage({
         senderPhone: userPhone,
         createDate: Date.now(),
         text: inputValue,
         reaction: null
-      }));
+      }));*/
       messageSocket.emit({
         senderPhone: userPhone,
         receiverPhone: activeDialog?.partnerPhone,

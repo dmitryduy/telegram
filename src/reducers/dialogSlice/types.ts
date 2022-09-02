@@ -1,5 +1,4 @@
-import { IDialogObject, IGlobalSearch } from '../../types';
-import { phone, timestamp, dialogId, IMessage, IDialog } from '../../globalTypes';
+import { phone, timestamp, dialogId, IMessage, IDialog, IGlobalSearchResults, IWeakDialog } from '../../global.typings';
 
 export type INewMessage =
     IMessage
@@ -9,7 +8,7 @@ export type IActiveDialog = IDialog & { isOnline: boolean, lastSeen: timestamp |
 
 
 export interface IDialogReducerState {
-    dialogs: IDialogObject | Record<string, never>,
+    dialogs: IWeakDialog[] | null,
     activeDialog: IActiveDialog | null,
-    foundedGlobalUsers: IGlobalSearch | null
+    globalSearchResults: IGlobalSearchResults | null
 }

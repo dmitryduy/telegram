@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { BASE_URL, IDialogObject, IGlobalSearch } from '../../types';
-import { IMessage, phone, reaction, timestamp } from '../../globalTypes';
+import { BASE_URL } from '../../types';
+import { IGlobalSearchResults, IWeakDialog, phone, reaction, timestamp } from '../../global.typings';
 
-import { IActiveDialog, IDialogReducerState, INewMessage, } from './types';
+import { IActiveDialog, IDialogReducerState } from './types';
 
 const initialState = {
-  dialogs: {},
+  dialogs: null,
   activeDialog: null,
-  foundedGlobalUsers: null,
+  globalSearchResults: null,
 } as IDialogReducerState;
 
 interface IFetchActiveDialog {
-    partnerPhone: phone | null,
-    userPhone: phone | null
+  partnerPhone: phone | null,
+  userPhone: phone | null
 }
 
 export const fetchActiveDialog = createAsyncThunk(
@@ -27,13 +27,13 @@ const dialogSlice = createSlice({
   name: 'dialog',
   initialState,
   reducers: {
-    initializeDialogs(state, action: PayloadAction<IDialogObject>) {
+    initializeDialogs(state, action: PayloadAction<IWeakDialog[]>) {
       state.dialogs = action.payload;
     },
-    addMessage(state, action: PayloadAction<IMessage>) {
+    /*  addMessage(state, action: PayloadAction<IMessage>) {
       if (!state.activeDialog) return;
 
-      const isNewDialog =  !state.dialogs[state.activeDialog.id];
+      const isNewDialog = !state.dialogs[state.activeDialog.id];
 
       if (isNewDialog) {
         state.dialogs[state.activeDialog.id] = {
@@ -79,18 +79,18 @@ const dialogSlice = createSlice({
       } else {
         state.dialogs[action.payload.dialogId].unread++;
       }
-    },
-    setFoundedGlobalUsers(state, action: PayloadAction<IGlobalSearch>) {
-      state.foundedGlobalUsers = {
-        chatsOfGlobal: [...action.payload.chatsOfGlobal],
-        chatsOfUser: [...action.payload.chatsOfUser]
+    },*/
+    setFoundedGlobalUsers(state, action: PayloadAction<IGlobalSearchResults>) {
+      state.globalSearchResults = {
+        userDialogs: [...action.payload.userDialogs],
+        globalDialogs: [...action.payload.globalDialogs]
       };
     },
     setActiveDialog(state, action: PayloadAction<IActiveDialog>) {
       state.activeDialog = action.payload;
     },
     removeGlobalUsers(state) {
-      state.foundedGlobalUsers = null;
+      state.globalSearchResults = null;
     },
     setOfflineUser(state: IDialogReducerState, action: PayloadAction<{ userPhone: phone, userLastSeen: timestamp }>) {
       if (state.activeDialog?.partnerPhone === action.payload.userPhone) {
@@ -109,7 +109,7 @@ const dialogSlice = createSlice({
         message.reaction = null;
       }
     },
-    addReaction(state, action: PayloadAction<{createDate: number, reaction: reaction}>) {
+    addReaction(state, action: PayloadAction<{ createDate: number, reaction: reaction }>) {
       const message = state.activeDialog &&
         state.activeDialog.messages.find(message => message.createDate === action.payload.createDate);
       if (message) {

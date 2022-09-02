@@ -4,7 +4,6 @@ import MessagesSide from '@components/MessagesSide/MessagesSide';
 import useSocket from '@hooks/useSocket';
 import Settings from '@components/Settings/Settings';
 import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
-import { INewMessage } from '@reducers/dialogSlice/types';
 import { dialogActions } from '@reducers/dialogSlice/dialogSlice';
 import ExtraSettings from '@components/ExtraSettings/ExtraSettings';
 import Tooltip from '@helpComponents/Tooltip/Tooltip';
@@ -12,23 +11,26 @@ import NamePopup from '@components/NamePopup/NamePopup';
 import NicknamePopup from '@components/NicknamePopup/NicknamePopup';
 import BackgroundPopup from '@components/BackgroundPopup/BackgroundPopup@common';
 
-import { phone, timestamp } from '../../globalTypes';
+import { phone, timestamp } from '../../global.typings';
+
+import { MainPageStyled } from './MainPage.styles';
 
 
 const MainPage: React.FC = () => {
-  const {phoneNumber} = useAppSelector(({user}) => user);
+  const {phoneNumber} = useAppSelector(state => state.user);
 
   const initSocket = useSocket('joined');
   const newMessageSocket = useSocket('new message');
   const offlineUserSocket = useSocket('user offline');
   const onlineUserSocket = useSocket('user online');
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     initSocket.emit(phoneNumber);
 
-    newMessageSocket.on((message: INewMessage) => {
-      dispatch(dialogActions.addNewMessage(message));
+    newMessageSocket.on((/*message: INewMessage*/) => {
+      /*dispatch(dialogActions.addNewMessage(message));*/
     });
     offlineUserSocket.on(({userPhone, userLastSeen}: { userPhone: phone, userLastSeen: timestamp }) => {
       dispatch(dialogActions.setOfflineUser({userPhone, userLastSeen}));
@@ -37,6 +39,7 @@ const MainPage: React.FC = () => {
       dispatch(dialogActions.sendOnlineUser(userPhone));
     });
     return () => {
+      initSocket.off();
       newMessageSocket.off();
       offlineUserSocket.off();
       onlineUserSocket.off();
@@ -44,7 +47,7 @@ const MainPage: React.FC = () => {
   }, []);
 
   return (
-    <div style={{display: 'flex', overflow: 'hidden'}}>
+    <MainPageStyled>
       <ChatsSide/>
       <MessagesSide/>
       <Settings/>
@@ -53,7 +56,7 @@ const MainPage: React.FC = () => {
       <NicknamePopup/>
       <BackgroundPopup/>
       <Tooltip/>
-    </div>
+    </MainPageStyled>
   );
 };
 

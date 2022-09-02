@@ -16,7 +16,7 @@ interface ISearchFieldProps {
 const SearchField: React.FC<ISearchFieldProps> = ({setSearch, isSearch, setLoading}) => {
   const [searchValue, setSearchValue] = useInput();
   const [value] = useDebounce(searchValue, 1000);
-  const userPhone = useAppSelector(({user})  => user.phoneNumber);
+  const userPhone = useAppSelector(state  => state.user.phoneNumber);
 
   const dispatch = useAppDispatch();
 

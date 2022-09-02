@@ -7,7 +7,7 @@ import ThemedText from '@helpComponents/ThemedText/ThemedText';
 import { FlexContainer } from '@styled-components/FlexContainer';
 import { setHotkeyBySend } from '@reducers/settingsSlice/settingsSlice';
 
-import { sendHotkey } from '../../globalTypes';
+import { sendHotkey } from '../../global.typings';
 
 import { MessagesSettingsList } from './MessagesSettings.styles';
 
