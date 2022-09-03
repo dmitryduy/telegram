@@ -4,8 +4,6 @@ import { dialogActions } from '@reducers/dialogSlice/dialogSlice';
 import { useAppDispatch } from '@hooks/useAppSelector';
 import { IInputObject } from '@pages/LoginPage/LoginPage.typings';
 
-import { dialogsToObject } from '../../../utils/dialogsToObject';
-
 export const useLogin = (phoneInput: IInputObject, dualCodeInput: IInputObject, nicknameInput: IInputObject) => {
   const dispatch = useAppDispatch();
 
@@ -16,7 +14,7 @@ export const useLogin = (phoneInput: IInputObject, dualCodeInput: IInputObject, 
     }))
       .unwrap()
       .then(data => {
-        dispatch(dialogActions.initializeDialogs(dialogsToObject(data.dialogs)));
+        dispatch(dialogActions.initializeDialogs(data.dialogs));
       });
   };
 };

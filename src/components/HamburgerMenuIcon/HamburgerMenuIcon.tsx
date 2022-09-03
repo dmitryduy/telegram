@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch } from '@hooks/useAppSelector';
 import { switchSettings } from '@reducers/settingsSlice/settingsSlice';
 
-import { HamburgerContainer } from './HamburgerMenuIcon.styles';
+import { HamburgerContainerIconStyled } from './HamburgerMenuIcon.styles';
 
 
 const HamburgerMenuIcon: React.FC = () => {
@@ -13,9 +13,11 @@ const HamburgerMenuIcon: React.FC = () => {
   };
 
   return (
-    <HamburgerContainer onClick={onOpenSettings}>
-      <span/><span/><span/>
-    </HamburgerContainer>
+    <HamburgerContainerIconStyled onClick={onOpenSettings}>
+      <span/>
+      <span/>
+      <span/>
+    </HamburgerContainerIconStyled>
   );
 };
 

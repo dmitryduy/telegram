@@ -6,7 +6,7 @@ import { deleteReaction } from '@reducers/dialogSlice/dialogSlice';
 import useThrottle from '@hooks/useThrottle';
 
 import Reaction from '../../../UIKit/Reaction/Reaction';
-import { reaction } from '../../../globalTypes';
+import { reaction } from '../../../global.typings';
 
 import { Time, TimeTooltip } from './MessageTime.styles';
 

@@ -1,6 +1,6 @@
 import dateFormat from 'dateformat';
 
-import { timestamp } from './globalTypes';
+import { timestamp } from '../global.typings';
 
 const DAY_BEFORE = 1000 * 60 * 60 * 24;
 

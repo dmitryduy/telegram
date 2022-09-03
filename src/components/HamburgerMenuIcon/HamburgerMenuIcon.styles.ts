@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const HamburgerContainer = styled.div`
+export const HamburgerContainerIconStyled = styled.div`
   position: relative;
   width: 25px;
   height: 17px;

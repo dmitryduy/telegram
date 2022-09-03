@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { sendHotkey, themeColor } from '../../globalTypes';
+import { sendHotkey, themeColor } from '../../global.typings';
 
 import { ISettingsReducerState } from './types';
 

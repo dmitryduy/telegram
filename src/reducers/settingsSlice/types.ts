@@ -1,4 +1,4 @@
-import { sendHotkey, themeColor } from '../../globalTypes';
+import { sendHotkey, themeColor } from '../../global.typings';
 
 export type typeOfSettings =
     'background'

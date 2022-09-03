@@ -1,4 +1,4 @@
-import { dialogId, IDialog } from '../globalTypes';
+import { dialogId, IDialog } from '../global.typings';
 import { IDialogObject } from '../types';
 
 export const dialogsToObject = (dialogs: [ dialogId, IDialog][] | undefined): IDialogObject => {

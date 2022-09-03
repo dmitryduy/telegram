@@ -2,7 +2,7 @@ import React from 'react';
 import UserAvatar from '@components/UserAvatar/UserAvatar';
 import useThrottle from '@hooks/useThrottle';
 
-import { avatarImage, IMessage } from '../../globalTypes';
+import { avatarImage, IMessage } from '../../global.typings';
 import ReactionScroller from '../ReactionScroller/ReactionScroller';
 
 import { MessageContainer, MessageText } from './Message.styles';

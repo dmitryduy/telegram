@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { reaction } from '../../globalTypes';
+import { reaction } from '../../global.typings';
 const reactions: {[T in keyof reaction]: string} = {
   'like': '👍',
   'dislike': '👎',

@@ -1,4 +1,4 @@
-import { phone } from '../../globalTypes';
+import { phone } from '../../global.typings';
 
 
 export enum userActionType {

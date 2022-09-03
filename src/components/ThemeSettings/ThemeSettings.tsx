@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
 import { setThemeColor, toggleNightMode } from '@reducers/settingsSlice/settingsSlice';
 import noop from '@helpers/noop';
 
-import { themeColor } from '../../globalTypes';
+import { themeColor } from '../../global.typings';
 
 const checkboxColors = [
   '#40a7e3',
