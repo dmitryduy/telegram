@@ -17,12 +17,8 @@ export const useDialogs = () => {
 
   useEffect(() => {
     setSearchDialogs(false);
+    setLoading(!!searchValue);
 
-    if (searchValue) {
-      setLoading(true);
-    } else {
-      setSearchDialogs(false);
-    }
   }, [searchValue]);
 
   useEffect(() => {

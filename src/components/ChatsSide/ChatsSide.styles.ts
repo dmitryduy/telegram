@@ -7,10 +7,6 @@ export const ChatsSideStyled = styled.div<{isPhone: boolean}>`
   background-color: ${props => props.theme.colors.bgColor};
   border-right: 1px solid  ${props => props.theme.colors.helpingBorders};
   transition: ${props => props.theme.other.transitionSpeedSlow};
-  
-  &.hidden {
-    transform: translateX(-30%);
-  }
 `;
 
 export const ChatsSideHeader = styled.div`
