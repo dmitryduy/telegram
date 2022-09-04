@@ -24,7 +24,7 @@ const MessagesSide: React.FC = () => {
     }
   };
 
-  /* useEffect(() => scrollToBottomIsNeeded(), [messages]);*/
+  useEffect(() => scrollToBottomIsNeeded(), [messages]);
 
   useEffect(() => {
     const onMessageScroll = () => {
@@ -46,14 +46,14 @@ const MessagesSide: React.FC = () => {
 
 
   return (
-    <MessageSideStyled className="content">
+    <MessageSideStyled>
       <Background backgroundImage={backgroundImage}/>
       {!messages ?
         <EmptyActiveDialog>Select a chat to start messaging</EmptyActiveDialog> :
         <>
           <PartnerInfo/>
-          <Messages ref={messagesRef}>
-            <MessagesContent>
+          <Messages>
+            <MessagesContent ref={messagesRef}>
               {messages.map((message, index) =>
                 <Message
                   key={message.createdDate + message.sender}

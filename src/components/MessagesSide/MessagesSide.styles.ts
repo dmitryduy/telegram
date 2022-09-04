@@ -27,9 +27,7 @@ export const Background = styled.div<{backgroundImage: string}>`
 `;
 
 export const EmptyActiveDialog = styled.span`
-  z-index: 100;
-  align-self: center;
-  margin: 0 auto;
+  margin: auto;
   color: #fff;
   font-size: ${props => props.theme.fontSizes.normal};
   padding: 5px;
