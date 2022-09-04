@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Scroll } from '@styled-components/Scroll';
 
 
 export const ChatsSideStyled = styled.div<{isPhone: boolean}>`
@@ -16,7 +17,7 @@ export const ChatsSideHeader = styled.div`
   height: 57px;
 `;
 
-export const ChatsContainer = styled.div`
+export const ChatsContainer = styled(Scroll)`
   position: relative;
   overflow: auto;
   height: calc(100vh - 57px);

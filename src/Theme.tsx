@@ -87,7 +87,8 @@ export const lightTheme = {
     success: colors.success,
     timeTooltipBorder: '#beb4b0',
     icons: colors.lgray,
-    border: colors.slimGray
+    border: colors.slimGray,
+    darkBlue: colors.darkBlue
   },
   fontSizes,
   other
@@ -132,6 +133,7 @@ export const darkTheme = {
     timeTooltipBorder: colors.slimBlack,
     icons: '#666',
     border: colors.gray,
+    darkBlue: colors.darkBlue
   },
   fontSizes,
   other

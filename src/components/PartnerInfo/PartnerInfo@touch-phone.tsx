@@ -1,22 +1,19 @@
 import React from 'react';
 import { useAppSelector } from '@hooks/useAppSelector';
 import UserAvatar from '@components/UserAvatar/UserAvatar';
-import getAvatarName from '@helpers/getAvatarName';
 
-import Test from './PartnerInfo@common';
+import Test from './PartnerInfo';
 import { PartnerInfoTouchPhone } from './PartnerInfo@touch-phone.styles';
 
 const PartnerInfo: React.FC = () => {
   const {
-    partnerAvatar,
-    partnerNickname,
-    partnerSurname,
-    partnerName
+    avatar,
+    avatarText,
   } = useAppSelector(({dialog}) => dialog.activeDialog!);
   return (
     <PartnerInfoTouchPhone>
             hello df
-      <UserAvatar image={partnerAvatar} text={getAvatarName(partnerName, partnerSurname, partnerNickname)}/>
+      <UserAvatar image={avatar} text={avatarText}/>
       <Test/>
     </PartnerInfoTouchPhone>
   );

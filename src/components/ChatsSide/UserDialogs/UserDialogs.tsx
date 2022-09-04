@@ -3,6 +3,7 @@ import { getDialogsTemplate } from '@components/ChatsSide/ChatsSide.utils/getDia
 
 const UserDialogs = () => {
   const {dialogs} = useAppSelector(state => state.dialog);
+
   return dialogs && getDialogsTemplate(dialogs, true);
 };
 

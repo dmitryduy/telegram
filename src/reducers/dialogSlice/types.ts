@@ -1,8 +1,8 @@
-import { phone, timestamp, dialogId, IMessage, IDialog, IGlobalSearchResults, IWeakDialog } from '../../global.typings';
+import { phone, timestamp, IMessage, IDialog, IGlobalSearchResults, IWeakDialog } from '../../global.typings';
 
 export type INewMessage =
     IMessage
-    & { dialogId: dialogId, partnerPhone: phone, partnerAvatar: string, partnerNickname: string };
+    & { dialogId: number, partnerPhone: phone, partnerAvatar: string, partnerNickname: string };
 
 export type IActiveDialog = IDialog & { isOnline: boolean, lastSeen: timestamp | null }
 

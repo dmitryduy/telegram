@@ -20,7 +20,7 @@ const GlobalSearchResult: React.FC = () => {
       {globalDialogs.length ?
         <>
           <Info infoText="Global search results"/>
-          {getDialogsTemplate(globalDialogs)}
+          {getDialogsTemplate(globalDialogs, false)}
         </> :
         null}
     </>

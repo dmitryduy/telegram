@@ -28,7 +28,7 @@ const ReactionScroller: FC<IReactionScrollerProps> = ({ show, date}) => {
   };
 
   const reactionClick = (reactionName: reaction) => {
-    dispatch(addReaction({createDate: date, reaction: reactionName}));
+    dispatch(addReaction({createdDate: date, reaction: reactionName}));
   };
 
   return (
