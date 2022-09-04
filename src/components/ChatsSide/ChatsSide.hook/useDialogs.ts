@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import useInput from '@hooks/useInput';
 import { useDebounce } from 'use-debounce';
 import { DEBOUNCE_SEARCH_TIME } from '@components/ChatsSide/ChatsSide.constants';
-import { dialogActions } from '@reducers/dialogSlice/dialogSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
+import { setFoundedGlobalUsers } from '@reducers/dialogSlice/dialogSlice';
 
 import { searchUsers } from '../../../api/usersServer';
 
@@ -22,13 +22,21 @@ export const useDialogs = () => {
   }, [searchValue]);
 
   useEffect(() => {
+    window.emitter.on('active-dialogs:changed', () => {
+      setSearchValue('');
+    });
+
+    return () => window.emitter.un('active-dialogs:changed');
+  }, []);
+
+  useEffect(() => {
     if (debouncedValue && userPhone) {
       setLoading(true);
       searchUsers(debouncedValue, userPhone)
         .then(data => {
           setSearchDialogs(true);
           setLoading(false);
-          dispatch(dialogActions.setFoundedGlobalUsers(data));
+          dispatch(setFoundedGlobalUsers(data));
         });
 
     }

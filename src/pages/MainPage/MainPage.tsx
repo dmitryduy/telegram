@@ -4,12 +4,12 @@ import MessagesSide from '@components/MessagesSide/MessagesSide';
 import useSocket from '@hooks/useSocket';
 import Settings from '@components/Settings/Settings';
 import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
-import { dialogActions } from '@reducers/dialogSlice/dialogSlice';
 import ExtraSettings from '@components/ExtraSettings/ExtraSettings';
 import Tooltip from '@helpComponents/Tooltip/Tooltip';
 import NamePopup from '@components/NamePopup/NamePopup';
 import NicknamePopup from '@components/NicknamePopup/NicknamePopup';
 import BackgroundPopup from '@components/BackgroundPopup/BackgroundPopup@common';
+import { sendOnlineUser, setOfflineUser } from '@reducers/dialogSlice/dialogSlice';
 
 import { phone, timestamp } from '../../global.typings';
 
@@ -33,10 +33,10 @@ const MainPage: React.FC = () => {
       /*dispatch(dialogActions.addNewMessage(message));*/
     });
     offlineUserSocket.on(({userPhone, userLastSeen}: { userPhone: phone, userLastSeen: timestamp }) => {
-      dispatch(dialogActions.setOfflineUser({userPhone, userLastSeen}));
+      dispatch(setOfflineUser({userPhone, userLastSeen}));
     });
     onlineUserSocket.on(({userPhone}: { userPhone: phone }) => {
-      dispatch(dialogActions.sendOnlineUser(userPhone));
+      dispatch(sendOnlineUser(userPhone));
     });
     return () => {
       initSocket.off();

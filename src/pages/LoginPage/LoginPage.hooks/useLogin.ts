@@ -1,8 +1,8 @@
 import { fetchUserInfo } from '@reducers/userSlice/userReducer';
 import { getNumericPhone } from '@pages/LoginPage/LoginPage.utils';
-import { dialogActions } from '@reducers/dialogSlice/dialogSlice';
 import { useAppDispatch } from '@hooks/useAppSelector';
 import { IInputObject } from '@pages/LoginPage/LoginPage.typings';
+import { initializeDialogs } from '@reducers/dialogSlice/dialogSlice';
 
 export const useLogin = (phoneInput: IInputObject, dualCodeInput: IInputObject, nicknameInput: IInputObject) => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const useLogin = (phoneInput: IInputObject, dualCodeInput: IInputObject, 
     }))
       .unwrap()
       .then(data => {
-        dispatch(dialogActions.initializeDialogs(data.dialogs));
+        dispatch(initializeDialogs(data.dialogs));
       });
   };
 };

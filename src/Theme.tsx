@@ -51,6 +51,7 @@ const other = {
 
 export const lightTheme = {
   colors: {
+    blue: colors.slimBlue,
     bgColor: colors.white,
     inputBackground: colors.white,
     inputFocusBorder: colors.slimBlue,
@@ -96,6 +97,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   colors: {
+    blue: colors.slimBlue,
     bgColor: colors.lightBlack,
     inputBackground: colors.transparent,
     inputFocusBorder: colors.darkGreen,

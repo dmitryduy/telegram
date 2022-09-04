@@ -36,6 +36,7 @@ const Dialog: React.FC<IDialogProps> = ({
 
   const openDialog = () => {
     dispatch(fetchActiveDialog({partnerPhone}));
+    window.emitter.emit('active-dialogs:changed');
   };
 
   return (

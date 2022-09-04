@@ -30,7 +30,6 @@ export interface IMessage {
   createdDate: timestamp,
   text: string,
   sender: 'user' | 'partner'
-  reaction: reaction
 }
 
 export interface IWeakDialog {

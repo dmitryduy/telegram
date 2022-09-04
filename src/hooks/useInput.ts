@@ -11,8 +11,9 @@ const useInput = (
       return;
     }
 
-    if (pattern.test((event.target as HTMLInputElement).value)) {
-      setInputValue((event.target as HTMLInputElement).value);
+    const value = (event.target as HTMLInputElement).value;
+    if (pattern.test(value) && !value.includes('\n')) {
+      setInputValue(value);
     }
   };
   return [inputValue, changeState, () => {

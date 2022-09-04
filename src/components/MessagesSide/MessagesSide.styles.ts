@@ -6,9 +6,12 @@ import { BASE_URL } from '../../types';
 
 export const MessageSideStyled = styled.div`
   display: flex;
+  flex-direction: column;
   flex: 1;
   position: relative;
+  height: 100vh;
 `;
+
 
 export const Background = styled.div<{backgroundImage: string}>`
   position: absolute;
@@ -20,6 +23,7 @@ export const Background = styled.div<{backgroundImage: string}>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  z-index: -1;
 `;
 
 export const EmptyActiveDialog = styled.span`
@@ -34,16 +38,16 @@ export const EmptyActiveDialog = styled.span`
 `;
 
 export const Messages = styled(Scroll)`
-  position: absolute;
-  z-index: 100;
-  left: 0;
-  right: 0;
-  bottom: 55px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+`;
+
+export const MessagesContent = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - 55px - 57px);
-  margin-top: auto;
   padding: 5px 20px;
-  justify-content: flex-start;
-  overflow-x: hidden;
+  overflow: auto;
 `;

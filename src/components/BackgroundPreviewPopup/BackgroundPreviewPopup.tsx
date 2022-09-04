@@ -45,7 +45,7 @@ const BackgroundPreviewPopup: FC<IBackgroundPreviewPopupProps> = ({ previewImage
             <Message
               text={fakeMessages[0].text}
               sender={fakeMessages[0].sender}
-              isUnreadToolip={false}
+              isUnreadTooltip={false}
               date={fakeMessages[0].createdDate}
               isDateTooltip={false}
               isLastMessageByUser
@@ -53,7 +53,7 @@ const BackgroundPreviewPopup: FC<IBackgroundPreviewPopupProps> = ({ previewImage
             <Message
               text={fakeMessages[1].text}
               sender={fakeMessages[0].sender}
-              isUnreadToolip={false}
+              isUnreadTooltip={false}
               date={fakeMessages[0].createdDate}
               isDateTooltip={false}
               isLastMessageByUser

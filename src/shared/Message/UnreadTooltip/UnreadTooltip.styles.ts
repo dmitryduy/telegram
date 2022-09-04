@@ -7,9 +7,7 @@ export const UnreadTooltipStyled = styled.div`
   text-align: center;
   color: ${props => props.theme.colors.darkBlue};
   background-color: #fff;
-  font-weight: 600;
-  letter-spacing: -1px;
+  font-weight: 500;
   margin: 5px 0;
   position: relative;
- 
 `;

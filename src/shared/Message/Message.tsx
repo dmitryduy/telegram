@@ -17,7 +17,7 @@ interface IMessageProps {
   sender: 'user' | 'partner';
   isLastMessageByUser: boolean;
   isDateTooltip: boolean;
-  isUnreadToolip: boolean;
+  isUnreadTooltip: boolean;
 }
 
 const Message: React.FC<IMessageProps> & MessageComponent = ({
@@ -26,12 +26,12 @@ const Message: React.FC<IMessageProps> & MessageComponent = ({
   sender,
   isLastMessageByUser,
   isDateTooltip,
-  isUnreadToolip
+  isUnreadTooltip
 }) => {
   return (
     <>
       {isDateTooltip && <Message.DateTooltip timestamp={date}/>}
-      {isUnreadToolip && <Message.UnreadTooltip/>}
+      {isUnreadTooltip && <Message.UnreadTooltip/>}
       <MessageStyled>
         <MessageContent
           decorate={isLastMessageByUser}
