@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/telegram/static/css/main.40052021.css",
+    "main.js": "/telegram/static/js/main.021a559a.js",
+    "static/js/262.e7c1eabc.chunk.js": "/telegram/static/js/262.e7c1eabc.chunk.js",
+    "static/js/435.eb6563fa.chunk.js": "/telegram/static/js/435.eb6563fa.chunk.js",
+    "static/js/11.38ccfdaa.chunk.js": "/telegram/static/js/11.38ccfdaa.chunk.js",
+    "static/js/840.340b1f5f.chunk.js": "/telegram/static/js/840.340b1f5f.chunk.js",
+    "static/js/854.a65c040c.chunk.js": "/telegram/static/js/854.a65c040c.chunk.js",
+    "static/js/113.402ae794.chunk.js": "/telegram/static/js/113.402ae794.chunk.js",
+    "static/js/559.59d99439.chunk.js": "/telegram/static/js/559.59d99439.chunk.js",
+    "static/js/525.84eb17e8.chunk.js": "/telegram/static/js/525.84eb17e8.chunk.js",
+    "static/js/152.df28e9c0.chunk.js": "/telegram/static/js/152.df28e9c0.chunk.js",
+    "static/js/251.0276c641.chunk.js": "/telegram/static/js/251.0276c641.chunk.js",
+    "static/js/616.916592b5.chunk.js": "/telegram/static/js/616.916592b5.chunk.js",
+    "static/js/442.66d707d4.chunk.js": "/telegram/static/js/442.66d707d4.chunk.js",
+    "static/js/360.e50da05c.chunk.js": "/telegram/static/js/360.e50da05c.chunk.js",
+    "static/js/755.0a669a54.chunk.js": "/telegram/static/js/755.0a669a54.chunk.js",
+    "static/js/438.b4b7870c.chunk.js": "/telegram/static/js/438.b4b7870c.chunk.js",
+    "static/js/769.5b721757.chunk.js": "/telegram/static/js/769.5b721757.chunk.js",
+    "index.html": "/telegram/index.html",
+    "static/media/back-icon.svg": "/telegram/static/media/back-icon.2c1c2c7033a89a74f3302f90535dd846.svg",
+    "main.40052021.css.map": "/telegram/static/css/main.40052021.css.map",
+    "main.021a559a.js.map": "/telegram/static/js/main.021a559a.js.map",
+    "262.e7c1eabc.chunk.js.map": "/telegram/static/js/262.e7c1eabc.chunk.js.map",
+    "435.eb6563fa.chunk.js.map": "/telegram/static/js/435.eb6563fa.chunk.js.map",
+    "755.0a669a54.chunk.js.map": "/telegram/static/js/755.0a669a54.chunk.js.map",
+    "438.b4b7870c.chunk.js.map": "/telegram/static/js/438.b4b7870c.chunk.js.map",
+    "769.5b721757.chunk.js.map": "/telegram/static/js/769.5b721757.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.40052021.css",
+    "static/js/main.021a559a.js"
+  ]
+}
