@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser, phone } from '../../global.typings';
 import { RootState } from '../../store/store';
+import { getAppUrl } from '../../utils/getAppUrl';
 
 import { IUserReducerState } from './types';
 
@@ -25,7 +26,7 @@ export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async ({
   userPhone,
   nickname
 }: IUserFetch): Promise<IUser & { error: null } | { error: string }> => {
-  const response = await fetch(`${process.env.REACT_APP_URL}/login`, {
+  const response = await fetch(`${getAppUrl()}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -39,7 +40,7 @@ export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async ({
 export const updateBio = createAsyncThunk('user/updateBio', async (_, {getState, rejectWithValue}) => {
   const state = getState() as RootState;
   try {
-    const response = await fetch(`${process.env.REACT_APP_URL}/bio`, {
+    const response = await fetch(`${getAppUrl()}/bio`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -61,7 +62,7 @@ export const updateName = createAsyncThunk(
   async ({name, surname}: { name: string, surname: string }, {rejectWithValue, getState}) => {
     const state = getState() as RootState;
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/name`, {
+      const response = await fetch(`${getAppUrl()}/name`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -82,7 +83,7 @@ export const updateNickname = createAsyncThunk(
   async ({nickname}: { nickname: string }, {rejectWithValue, getState}) => {
     const state = getState() as RootState;
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/is-available-nickname`, {
+      const response = await fetch(`${getAppUrl()}/is-available-nickname`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

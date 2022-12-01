@@ -1,4 +1,5 @@
+import { getAppUrl } from '../utils/getAppUrl';
 
 export const getBackgroundImagePath = (imageName: string) => {
-  return `${process.env.REACT_APP_URL}/images/backgrounds/${imageName}.webp`;
+  return `${getAppUrl()}/images/backgrounds/${imageName}.webp`;
 };

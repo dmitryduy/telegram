@@ -1,5 +1,6 @@
 import {  IDialog } from './global.typings';
+import { getAppUrl } from './utils/getAppUrl';
 
-export const BASE_URL = process.env.REACT_APP_URL;
+export const BASE_URL = getAppUrl();
 
 export type IDialogObject = { [key: number]: IDialog };
