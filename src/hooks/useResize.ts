@@ -1,19 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useEventListener } from '@hooks/useEventListener';
 
 const useResize = () => {
 
-  const [width, setWidth] = useState(window.outerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
 
   const onResize = useCallback(() => {
-    setWidth(window.outerWidth);
+    setWidth(window.innerWidth);
   }, []);
 
-  useEffect(() => {
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+  useEventListener('resize', onResize, null);
 
-  return {width};
+  return width;
 };
 
 export default useResize;

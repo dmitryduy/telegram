@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useMemo } from 'react';
 import NotFound from '@helpComponents/NotFound/NotFound';
 import { ICountry } from '@components/CountriesPopup/CountriesPopup';
 import { CountriesContext } from '@pages/LoginPage/CountriesContext';
@@ -6,11 +6,11 @@ import { CountriesContext } from '@pages/LoginPage/CountriesContext';
 import ListItem from '../../../shared/ListItem/ListItem';
 
 interface ICountriesListProps {
-  countries: ICountry[]
-  hidePopup: () => void
+  countries: ICountry[];
+  hidePopup: () => void;
 }
 
-const CountriesList: FC<ICountriesListProps> = React.memo(({countries, hidePopup}) => {
+const CountriesList: FC<ICountriesListProps> = ({countries, hidePopup}) => {
   const countriesContext = useContext(CountriesContext);
 
   if (!countriesContext) {
@@ -26,19 +26,18 @@ const CountriesList: FC<ICountriesListProps> = React.memo(({countries, hidePopup
     hidePopup();
   };
 
+  const countriesMemo = useMemo(() => (
+    countries.map(country =>
+      <ListItem
+        text={country.name}
+        key={country.name + country.dualCode}
+        subtext={`+${country.dualCode}`}
+        onClick={() => onCountryClick(country)}
+      />)), [countries]);
+
   return (
-    countries.length ?
-      <ul>
-        {countries.map(country =>
-          <ListItem
-            text={country.name}
-            key={country.name + country.dualCode}
-            subtext={`+${country.dualCode}`}
-            onClick={() => onCountryClick(country)}
-          />)}
-      </ul> :
-      <NotFound>Country not found</NotFound>
+    countriesMemo.length ? <>{countriesMemo}</> : <NotFound>Country not found</NotFound>
   );
-});
+};
 
 export default CountriesList;

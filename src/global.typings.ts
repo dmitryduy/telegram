@@ -1,7 +1,6 @@
 import { FormEvent } from 'react';
 
 export type timestamp = number;
-export type dialogId = number;
 export type phone = string;
 export type url = string;
 
@@ -28,26 +27,29 @@ export type reaction = 'like' | 'dislike' | 'heart' | 'fire' | 'poop' | null;
 
 
 export interface IMessage {
-  createDate: timestamp,
+  createdDate: timestamp,
   text: string,
-  senderPhone: phone,
-  reaction: reaction
+  sender: 'user' | 'partner'
 }
 
-export interface IDialog {
-  id: number// as partnerPhone
-  partnerPhone: phone,
-  partnerAvatar: string,
-  partnerNickname: string,
-  partnerName: string | null,
-  partnerSurname: string | null,
-  unread: number
+export interface IWeakDialog {
+  phoneNumber: phone;
+  avatar: string;
+  avatarText: string;
+  fullName: string;
+  unreadMessageCount: number | null;
+  lastMessage: string | null;
+  lastMessageDate: timestamp | null;
+}
+
+
+export interface IDialog extends Omit<IWeakDialog, 'lastMessageDate' | 'lastMessage'> {
   messages: IMessage[];
 }
 
 export interface IUser {
   phoneNumber: phone,
-  dialogs: IDialog[] | null,
+  dialogs: IWeakDialog[] | null,
   isOnline: boolean,
   socketId: string | null,
   nickname: string,
@@ -65,16 +67,6 @@ export interface INewMessagePopup {
   partnerAvatar: string,
   partnerNickname: string,
   partnerPhone: phone
-}
-
-export interface IWeakDialog {
-  id: number
-  avatar: string
-  avatarText: string
-  nickname: string
-  unread: number | null
-  lastMessage: string | null
-  lastMessageDate: timestamp | null
 }
 
 export interface IGlobalSearchResults {

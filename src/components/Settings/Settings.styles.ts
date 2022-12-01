@@ -29,6 +29,8 @@ export const SettingsContent = styled.div`
   transition: ${props => props.theme.other.transitionSpeed};
   transform: translateX(-100%);
   z-index: 10000;
+  box-shadow: 4px 0 8px 0 rgba(34, 60, 80, 0.2);
+  border-radius: 5px;
 
   &.active {
     transform: translateX(0);

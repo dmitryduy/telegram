@@ -2,12 +2,14 @@ import styled from 'styled-components';
 
 export const TextAreaStyled = styled.textarea`
   outline: none;
+  width: 100%;
   background-color: ${props => props.theme.colors.inputBackground};
   color: ${props => props.theme.colors.inputColor};
   border: none;
-  font-size: ${props => props.theme.fontSizes.extraMedium};
+  font-size: ${props => props.theme.fontSizes.medium};
   resize: none;
-  overflow: hidden;
-  font-size: ${props => props.theme.fontSizes.normal};
-  padding-bottom: 15px;
+  padding: 10px 0;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 `;

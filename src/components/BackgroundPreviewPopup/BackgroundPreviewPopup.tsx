@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import usePopup from '@hooks/usePopup';
-import Message from '@components/Message/Message';
 import { BackgroundPreviewContainer } from '@components/BackgroundPreviewPopup/BackgroundPreviewPopup.styles';
 import { getBackgroundImagePath } from '@helpers/paths';
 import { useAppDispatch } from '@hooks/useAppSelector';
@@ -8,17 +7,18 @@ import { setBackgroundImage } from '@reducers/settingsSlice/settingsSlice';
 
 import { IMessage } from '../../global.typings';
 import Popup from '../../shared/Popup/Popup';
+import Message from '../../shared/Message/Message';
 
-const fakeMessages: [Omit<IMessage, 'senderPhone'>, Omit<IMessage, 'senderPhone'>] = [
+const fakeMessages:Omit<IMessage, 'reaction'>[] = [
   {
     text: 'Ah, you kids today with techno music! you should enjoy the classics, like Hasselhoff!',
-    createDate: Date.now(),
-    reaction: null
+    createdDate: Date.now(),
+    sender: 'user'
   },
   {
     text: 'I can\'t even take you seriously right now.',
-    createDate: Date.now(),
-    reaction: null
+    createdDate: Date.now(),
+    sender: 'partner'
   }
 ];
 
@@ -42,8 +42,22 @@ const BackgroundPreviewPopup: FC<IBackgroundPreviewPopupProps> = ({ previewImage
       <Popup.Content>
         <BackgroundPreviewContainer style={{backgroundImage: `url(${getBackgroundImagePath(previewImage)})`}}>
           <div className="container">
-            <Message avatarImage="#45bce7" message={fakeMessages[0]} isMe={false} showBefore={true}/>
-            <Message avatarImage="#687b98" message={fakeMessages[1]} isMe={true} showBefore={true}/>
+            <Message
+              text={fakeMessages[0].text}
+              sender={fakeMessages[0].sender}
+              isUnreadTooltip={false}
+              date={fakeMessages[0].createdDate}
+              isDateTooltip={false}
+              isLastMessageByUser
+            />
+            <Message
+              text={fakeMessages[1].text}
+              sender={fakeMessages[0].sender}
+              isUnreadTooltip={false}
+              date={fakeMessages[0].createdDate}
+              isDateTooltip={false}
+              isLastMessageByUser
+            />
           </div>
         </BackgroundPreviewContainer>
       </Popup.Content>

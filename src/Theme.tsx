@@ -51,6 +51,7 @@ const other = {
 
 export const lightTheme = {
   colors: {
+    blue: colors.slimBlue,
     bgColor: colors.white,
     inputBackground: colors.white,
     inputFocusBorder: colors.slimBlue,
@@ -87,7 +88,8 @@ export const lightTheme = {
     success: colors.success,
     timeTooltipBorder: '#beb4b0',
     icons: colors.lgray,
-    border: colors.slimGray
+    border: colors.slimGray,
+    darkBlue: colors.darkBlue
   },
   fontSizes,
   other
@@ -95,6 +97,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   colors: {
+    blue: colors.slimBlue,
     bgColor: colors.lightBlack,
     inputBackground: colors.transparent,
     inputFocusBorder: colors.darkGreen,
@@ -132,6 +135,7 @@ export const darkTheme = {
     timeTooltipBorder: colors.slimBlack,
     icons: '#666',
     border: colors.gray,
+    darkBlue: colors.darkBlue
   },
   fontSizes,
   other

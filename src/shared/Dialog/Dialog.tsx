@@ -3,44 +3,54 @@ import { useAppSelector } from '@hooks/useAppSelector';
 import UserAvatar from '@components/UserAvatar/UserAvatar';
 import cn from 'classnames';
 
-import { avatarImage, timestamp } from '../../global.typings';
+import { avatarImage, phone, timestamp } from '../../global.typings';
 import formatDate from '../../utils/formatDate';
 
 import { DialogStyled, MainContent, ExtraContent } from './Dialog.styles';
 
 interface IDialogProps {
-  fulled?: boolean;
   title: string;
   text: string;
   time: timestamp | null;
   unreadMessagesCount: number | null;
-  dialogId: number;
+  partnerPhone: phone;
   avatarName: string;
   avatarImage: avatarImage;
+  isDialogExisted: boolean;
+  onClick: (phoneNumber: string) => void
 }
 
 const Dialog: React.FC<IDialogProps> = ({
-  fulled,
   title,
-  dialogId,
+  partnerPhone,
   text,
   time,
   avatarImage,
   avatarName,
-  unreadMessagesCount
+  unreadMessagesCount,
+  isDialogExisted,
+  onClick
 }) => {
   const themeColor = useAppSelector(state => state.settings.themeColor);
-  const activeDialogId = useAppSelector(state => state.dialog.activeDialog?.id);
+  const activeDialogPhone = useAppSelector(state => state.dialog.activeDialog?.phoneNumber);
+
+  const openDialog = () => {
+    onClick(partnerPhone);
+  };
 
   return (
-    <DialogStyled themeColor={themeColor} className={cn({active: activeDialogId === dialogId})}>
+    <DialogStyled
+      onClick={openDialog}
+      themeColor={themeColor}
+      className={cn({active: partnerPhone === activeDialogPhone})}
+    >
       <UserAvatar style={{marginRight: 15}} image={avatarImage} text={avatarName}/>
       <MainContent>
         <h4 className="title">{title}</h4>
         {text && <div className="text">{text}</div>}
       </MainContent>
-      {fulled &&
-      <ExtraContent themeColor={themeColor} className={cn({active: activeDialogId === dialogId})}>
+      {isDialogExisted &&
+      <ExtraContent themeColor={themeColor} className={cn({active: partnerPhone === activeDialogPhone})}>
         {time && <span className="time">{formatDate(time)}</span>}
         {unreadMessagesCount && <span className="unread-count">{unreadMessagesCount}</span>}
       </ExtraContent>

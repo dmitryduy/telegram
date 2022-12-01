@@ -1,15 +1,9 @@
 import React, { FC } from 'react';
 
 import Search from './Search/Search';
-import { InputContext } from './InputContext';
+import { IInputContext, InputContext } from './InputContext';
 import TextField from './TextField/TextField';
 import TextArea from './TextArea/TextArea';
-
-interface IInputProps {
-  value: string
-  setValue: (e: React.FormEvent<EventTarget> | string) => void
-  placeholder: string
-}
 
 interface InputComponent {
   Search: typeof Search
@@ -17,9 +11,15 @@ interface InputComponent {
   TextArea: typeof TextArea
 }
 
-const Input: FC<IInputProps> & InputComponent = ({children, value, setValue, placeholder}) => {
+const Input: FC<IInputContext> & InputComponent = ({
+  children,
+  value,
+  setValue,
+  placeholder,
+  onKeyUp
+}) => {
   return (
-    <InputContext.Provider value={{value, setValue, placeholder}}>
+    <InputContext.Provider value={{value, setValue, placeholder, onKeyUp}}>
       {children}
     </InputContext.Provider>
   );

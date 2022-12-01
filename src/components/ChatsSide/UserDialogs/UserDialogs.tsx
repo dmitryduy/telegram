@@ -1,9 +1,12 @@
+import React from 'react';
 import { useAppSelector } from '@hooks/useAppSelector';
-import { getDialogsTemplate } from '@components/ChatsSide/ChatsSide.utils/getDialogsTemplate';
+
+import Dialogs from '../Dialogs/Dialogs';
 
 const UserDialogs = () => {
   const {dialogs} = useAppSelector(state => state.dialog);
-  return dialogs && getDialogsTemplate(dialogs, true);
+
+  return <Dialogs dialogs={dialogs} isDialogExisted/>;
 };
 
 export default UserDialogs;

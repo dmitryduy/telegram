@@ -31,7 +31,7 @@ const BioInput = () => {
   return (
     <BioContainer>
       <Input setValue={onInput} value={value} placeholder="Bio">
-        <Input.TextArea onBlur={updateServerBio}/>
+        <Input.TextArea onBlur={updateServerBio} onHeightUpdate={() => window.emitter.emit('popup:resize')}/>
       </Input>
       <LettersCounter>{MAX_BIO_VALUE - value.length}</LettersCounter>
     </BioContainer>

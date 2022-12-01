@@ -1,30 +1,25 @@
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
+import useResize from '@hooks/useResize';
 
 import { InputContext } from '../InputContext';
 
 import { TextAreaStyled } from './TextArea.styles';
+import { useTextareaResize } from './TextArea.hook/useTextareaResize';
 
 interface ITextAreaProps {
-  onBlur: () => void
+  onBlur?: () => void;
+  onHeightUpdate?: () => void;
+  maxLines?: number;
 }
 
-const TextArea: FC<ITextAreaProps> = ({onBlur}) => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+const TextArea: FC<ITextAreaProps> = ({onBlur, onHeightUpdate, maxLines = Infinity}) => {
   const inputContext = useContext(InputContext);
+  const [textareaRef, resize] = useTextareaResize(maxLines);
+  const width = useResize();
 
   useEffect(() => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-
-    const oldHeight = textarea.clientHeight;
-    textarea.style.height = '1px';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-
-    if (oldHeight !== textarea.clientHeight) {
-      window.emitter.emit('popup:resize');
-    }
-
-  }, [inputContext?.value]);
+    resize(onHeightUpdate);
+  }, [inputContext?.value, width]);
 
 
   if (!inputContext) {
@@ -32,10 +27,17 @@ const TextArea: FC<ITextAreaProps> = ({onBlur}) => {
     return null;
   }
 
-  const {value, setValue, placeholder} = inputContext;
+  const {value, setValue, placeholder, onKeyUp} = inputContext;
 
   return (
-    <TextAreaStyled ref={textareaRef} onBlur={onBlur} onInput={setValue} value={value} placeholder={placeholder}/>
+    <TextAreaStyled
+      onKeyUp={onKeyUp}
+      ref={textareaRef}
+      onBlur={onBlur}
+      onInput={setValue}
+      value={value}
+      placeholder={placeholder}
+    />
   );
 };
 
