@@ -14,7 +14,7 @@ module.exports = {
         type: 'select',
         name: 'dir',
         message: 'Where is the directory?',
-        choices: ['components', 'pages']
+        choices: ['components', 'pages', 'shared']
       }
     ];
     return inquirer

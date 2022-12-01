@@ -1,8 +1,7 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '@hooks/useAppSelector';
+import { useAppSelector } from '@hooks/useAppSelector';
 import UserAvatar from '@components/UserAvatar/UserAvatar';
 import cn from 'classnames';
-import { fetchActiveDialog } from '@reducers/dialogSlice/dialogSlice';
 
 import { avatarImage, phone, timestamp } from '../../global.typings';
 import formatDate from '../../utils/formatDate';
@@ -18,6 +17,7 @@ interface IDialogProps {
   avatarName: string;
   avatarImage: avatarImage;
   isDialogExisted: boolean;
+  onClick: (phoneNumber: string) => void
 }
 
 const Dialog: React.FC<IDialogProps> = ({
@@ -28,15 +28,14 @@ const Dialog: React.FC<IDialogProps> = ({
   avatarImage,
   avatarName,
   unreadMessagesCount,
-  isDialogExisted
+  isDialogExisted,
+  onClick
 }) => {
   const themeColor = useAppSelector(state => state.settings.themeColor);
   const activeDialogPhone = useAppSelector(state => state.dialog.activeDialog?.phoneNumber);
-  const dispatch = useAppDispatch();
 
   const openDialog = () => {
-    dispatch(fetchActiveDialog({partnerPhone}));
-    window.emitter.emit('active-dialogs:changed');
+    onClick(partnerPhone);
   };
 
   return (

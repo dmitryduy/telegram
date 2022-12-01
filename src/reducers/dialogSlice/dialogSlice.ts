@@ -4,24 +4,26 @@ import { BASE_URL } from '../../types';
 import { IGlobalSearchResults, IMessage, IWeakDialog, phone, timestamp } from '../../global.typings';
 import { RootState } from '../../store/store';
 
-import { IDialogReducerState } from './types';
+import { IActiveDialog, IDialogReducerState } from './types';
 
 const initialState = {
   dialogs: null,
   activeDialog: null,
   globalSearchResults: null,
+  isActiveDialogLoaded: false,
 } as IDialogReducerState;
 
 
 export const fetchActiveDialog = createAsyncThunk(
   'dialog/fetchActiveDialog',
-  async ({partnerPhone}: {partnerPhone: phone}, {getState}) => {
+  async ({partnerPhone}: {partnerPhone: phone}, {getState, signal}) => {
     const state = getState() as RootState;
     const response = await fetch(`${BASE_URL}/dialog`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
+      signal,
       body: JSON.stringify({partnerPhone, initiatorPhone: state.user.phoneNumber})
     });
 
@@ -32,8 +34,9 @@ const dialogSlice = createSlice({
   name: 'dialog',
   initialState,
   reducers: {
-    initializeDialogs(state, action: PayloadAction<IWeakDialog[]>) {
-      state.dialogs = action.payload;
+    initializeDialogs(state, action: PayloadAction<IWeakDialog[] | null>) {
+      state.dialogs = action.payload?.sort(
+        (a, b) => (b.lastMessageDate || 0) - (a.lastMessageDate || 0)) || null;
     },
     addMessage(state, action: PayloadAction<IMessage>) {
       if (!state.activeDialog) {
@@ -58,34 +61,32 @@ const dialogSlice = createSlice({
         });
       }
     },
-    /*addNewMessage(state, action: PayloadAction<INewMessage>) {
-      const newMessage = {
-        senderPhone: action.payload.senderPhone,
-        createDate: action.payload.createDate,
-        text: action.payload.text,
-        reaction: action.payload.reaction
-      };
-
-      if (!state.dialogs || !state.dialogs[action.payload.dialogId]) {
-        state.dialogs[action.payload.dialogId] = {
-          messages: [newMessage],
-          partnerNickname: action.payload.partnerNickname,
-          partnerAvatar: action.payload.partnerAvatar,
-          partnerPhone: action.payload.partnerPhone,
-          unread: 1
-        };
+    addNewMessage(state, action: PayloadAction<IWeakDialog>) {
+      if (!state.dialogs) {
+        state.dialogs = [action.payload];
         return;
       }
 
-      state.dialogs[action.payload.dialogId].messages.push(newMessage);
+      const dialogIndex = state.dialogs.findIndex(dialog => dialog.phoneNumber === action.payload.phoneNumber);
 
-      if (state.activeDialog?.id === action.payload.dialogId) {
-        state.activeDialog.messages.push(newMessage);
-        state.activeDialog.unread = 0;
-      } else {
-        state.dialogs[action.payload.dialogId].unread++;
+      if (dialogIndex === -1) {
+        state.dialogs.unshift(action.payload);
+        return;
       }
-    },*/
+
+      state.dialogs.splice(dialogIndex, 1);
+      state.dialogs.unshift(action.payload);
+
+      if (state.activeDialog?.phoneNumber === action.payload.phoneNumber) {
+        state.activeDialog.messages.push({
+          text: action.payload.lastMessage || '',
+          createdDate: action.payload.lastMessageDate || 0,
+          sender: 'partner'
+        });
+        state.activeDialog.unreadMessageCount = null;
+        state.dialogs[dialogIndex].unreadMessageCount = null;
+      }
+    },
     setFoundedGlobalUsers(state, action: PayloadAction<IGlobalSearchResults>) {
       state.globalSearchResults = {
         userDialogs: [...action.payload.userDialogs],
@@ -104,17 +105,31 @@ const dialogSlice = createSlice({
       if (state.activeDialog && state.activeDialog.phoneNumber === action.payload) {
         state.activeDialog = {...state.activeDialog, lastSeen: null, isOnline: true};
       }
+    },
+    clearActiveDialog(state) {
+      state.activeDialog = null;
     }
 
   },
   extraReducers: builder => {
     builder.addCase(fetchActiveDialog.fulfilled, (state, action) => {
+      state.isActiveDialogLoaded = false;
       if (action.payload.error) {
-        console.error('error');
         return;
       }
 
+      const dialog = state.dialogs?.find(dialog => dialog.phoneNumber === action.meta.arg.partnerPhone);
+      if (dialog) {
+        dialog.unreadMessageCount = null;
+      }
       state.activeDialog = action.payload;
+    });
+    builder.addCase(fetchActiveDialog.pending, (state, action) => {
+      state.isActiveDialogLoaded = true;
+      if (!state.activeDialog) {
+        state.activeDialog = {} as IActiveDialog;
+      }
+      state.activeDialog.phoneNumber = action.meta.arg.partnerPhone;
     });
   },
 }
@@ -126,7 +141,9 @@ export const {
   setFoundedGlobalUsers,
   initializeDialogs,
   setOfflineUser,
-  sendOnlineUser
+  sendOnlineUser,
+  addNewMessage,
+  clearActiveDialog
 } = dialogSlice.actions;
 
 export const {reducer: dialogReducer} = dialogSlice;

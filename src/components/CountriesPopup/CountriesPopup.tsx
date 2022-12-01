@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect, useMemo } from 'react';
 import useFetch from '@hooks/useFetch';
 import CountriesList from '@components/CountriesPopup/CountriesList/CountriesList';
 import useInput from '@hooks/useInput';
@@ -26,7 +26,6 @@ const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active,
   const [countryValue, setCountryValue] = useInput('');
 
   const {dualCode, setPhoneMask, setSelectedCountry} = useContext(CountriesContext) || {} as ICountriesContext;
-
   useEffect(() => {
     if (dualCode === '+') {
       setSelectedCountry(COUNTRY_NOT_SELECTED);
@@ -51,6 +50,8 @@ const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active,
     }
   }, [active]);
 
+  const foundedCountries = useMemo(() => getCountriesByPattern(countries, countryValue), [countryValue, countries]);
+
   return (
     <Popup active={active} hide={hidePopup}>
       <Popup.Header title="Select Country">
@@ -61,7 +62,7 @@ const CountriesPopup: FC<{ active: boolean, hidePopup: () => void }> = ({active,
       <Popup.Content bordered>
         <CountriesContainer>
           {countries &&
-          <CountriesList countries={getCountriesByPattern(countries, countryValue)} hidePopup={hidePopup}/>}
+          <CountriesList countries={foundedCountries} hidePopup={hidePopup}/>}
         </CountriesContainer>
       </Popup.Content>
       <Popup.Footer cancelTitle="Close"/>

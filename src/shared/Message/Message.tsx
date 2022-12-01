@@ -38,7 +38,7 @@ const Message: React.FC<IMessageProps> & MessageComponent = ({
           className={cn({user: sender === 'user', partner: sender === 'partner'})}
         >
           <span className="text">{text}</span>
-          <span className="date">{dateFormat(date, 'hh mm')}</span>
+          <span className="date">{dateFormat(date, 'HH:MM')}</span>
         </MessageContent>
       </MessageStyled>
     </>

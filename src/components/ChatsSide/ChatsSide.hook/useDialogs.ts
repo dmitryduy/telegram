@@ -8,7 +8,8 @@ import { setFoundedGlobalUsers } from '@reducers/dialogSlice/dialogSlice';
 import { searchUsers } from '../../../api/usersServer';
 
 export const useDialogs = () => {
-  const userPhone = useAppSelector(state  => state.user.phoneNumber);
+  const userPhone = useAppSelector(state => state.user.phoneNumber);
+  const activeDialogPhone = useAppSelector(state => state.dialog.activeDialog?.phoneNumber);
   const [searchValue, setSearchValue] = useInput();
   const [debouncedValue] = useDebounce(searchValue, DEBOUNCE_SEARCH_TIME);
   const [searchDialogs, setSearchDialogs] = useState(false);
@@ -22,12 +23,8 @@ export const useDialogs = () => {
   }, [searchValue]);
 
   useEffect(() => {
-    window.emitter.on('active-dialogs:changed', () => {
-      setSearchValue('');
-    });
-
-    return () => window.emitter.un('active-dialogs:changed');
-  }, []);
+    setSearchValue('');
+  }, [activeDialogPhone]);
 
   useEffect(() => {
     if (debouncedValue && userPhone) {

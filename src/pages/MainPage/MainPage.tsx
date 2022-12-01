@@ -9,15 +9,16 @@ import Tooltip from '@helpComponents/Tooltip/Tooltip';
 import NamePopup from '@components/NamePopup/NamePopup';
 import NicknamePopup from '@components/NicknamePopup/NicknamePopup';
 import BackgroundPopup from '@components/BackgroundPopup/BackgroundPopup@common';
-import { sendOnlineUser, setOfflineUser } from '@reducers/dialogSlice/dialogSlice';
+import { addNewMessage, sendOnlineUser, setOfflineUser } from '@reducers/dialogSlice/dialogSlice';
+import useMatchMedia from '@hooks/useMatchMedia';
 
-import { phone, timestamp } from '../../global.typings';
+import { IWeakDialog, phone, timestamp } from '../../global.typings';
 
 import { MainPageStyled } from './MainPage.styles';
 
-
 const MainPage: React.FC = () => {
   const {phoneNumber} = useAppSelector(state => state.user);
+  const isPhone = useMatchMedia();
 
   const initSocket = useSocket('joined');
   const newMessageSocket = useSocket('new message');
@@ -29,8 +30,8 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     initSocket.emit(phoneNumber);
 
-    newMessageSocket.on((/*message: INewMessage*/) => {
-      /*dispatch(dialogActions.addNewMessage(message));*/
+    newMessageSocket.on((dialog: IWeakDialog) => {
+      dispatch(addNewMessage(dialog));
     });
     offlineUserSocket.on(({userPhone, userLastSeen}: { userPhone: phone, userLastSeen: timestamp }) => {
       dispatch(setOfflineUser({userPhone, userLastSeen}));
@@ -47,7 +48,7 @@ const MainPage: React.FC = () => {
   }, []);
 
   return (
-    <MainPageStyled>
+    <MainPageStyled isPhone={isPhone}>
       <ChatsSide/>
       <MessagesSide/>
       <Settings/>

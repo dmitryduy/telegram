@@ -1,9 +1,10 @@
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
+import useResize from '@hooks/useResize';
 
 import { InputContext } from '../InputContext';
 
 import { TextAreaStyled } from './TextArea.styles';
-import { getTextAreaRowsCount } from './TextArea.utils/getTextAreaRowsCount';
+import { useTextareaResize } from './TextArea.hook/useTextareaResize';
 
 interface ITextAreaProps {
   onBlur?: () => void;
@@ -11,34 +12,14 @@ interface ITextAreaProps {
   maxLines?: number;
 }
 
-const TextArea: FC<ITextAreaProps> = ({onBlur, onHeightUpdate, maxLines}) => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+const TextArea: FC<ITextAreaProps> = ({onBlur, onHeightUpdate, maxLines = Infinity}) => {
   const inputContext = useContext(InputContext);
-  const linesRef = useRef(1);
+  const [textareaRef, resize] = useTextareaResize(maxLines);
+  const width = useResize();
 
   useEffect(() => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-
-    const oldHeight = textarea.clientHeight;
-    textarea.style.height = '1px';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-
-    if (oldHeight > textarea.clientHeight) {
-      linesRef.current = getTextAreaRowsCount(textarea);
-    }
-
-    if (linesRef.current === maxLines) {
-      textarea.style.height = `${oldHeight}px`;
-      return;
-    }
-
-    if (oldHeight !== textarea.clientHeight) {
-      onHeightUpdate && onHeightUpdate();
-      linesRef.current = getTextAreaRowsCount(textarea);
-    }
-
-  }, [inputContext?.value]);
+    resize(onHeightUpdate);
+  }, [inputContext?.value, width]);
 
 
   if (!inputContext) {

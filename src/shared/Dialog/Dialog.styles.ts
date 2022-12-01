@@ -4,7 +4,6 @@ export const DialogStyled = styled.li<{ themeColor: string }>`
   width: 100%;
   padding: 10px;
   display: flex;
-  align-items: center;
   height: 80px;
   cursor: pointer;
   transition: .1s;
@@ -90,6 +89,7 @@ export const ExtraContent = styled.div<{ themeColor: string }>`
     height: 20px;
     color: #fff;
     padding: 0 5px;
+    margin-top: 5px;
     background-color: ${props => props.themeColor};
     border-radius: 10px/ 50%;
     font-size: ${props => props.theme.fontSizes.small};

@@ -10,7 +10,6 @@ import { CountriesContainer } from './Countries.styles';
 const Countries: FC<{selectedCountry}> = React.memo(({selectedCountry}) => {
   const [activePopup, setActivePopup] = useState(false);
 
-
   const openPopup = () => {
     setActivePopup(true);
   };

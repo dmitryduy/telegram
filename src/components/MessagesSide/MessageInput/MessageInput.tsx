@@ -11,10 +11,10 @@ import { IMessage } from '../../../global.typings';
 import { MessageInputContainer } from './MessageInput.styles';
 
 interface IMessageInputProps {
-  onHeightUpdate: () => void;
+  scrollToBottomIsNeeded: (forceScroll?: boolean) => void;
 }
 
-const MessageInput: React.FC<IMessageInputProps> = ({onHeightUpdate}) => {
+const MessageInput: React.FC<IMessageInputProps> = ({scrollToBottomIsNeeded}) => {
   const [inputValue, changeInputValue, clearInput] = useInput();
   const activeDialog = useAppSelector(state => state.dialog.activeDialog);
   const {sendHotkey} = useAppSelector(state => state.settings);
@@ -39,6 +39,7 @@ const MessageInput: React.FC<IMessageInputProps> = ({onHeightUpdate}) => {
         createdDate: message.createdDate
       });
       clearInput();
+      setTimeout(() => scrollToBottomIsNeeded(true));
     }
   };
 
@@ -57,7 +58,7 @@ const MessageInput: React.FC<IMessageInputProps> = ({onHeightUpdate}) => {
         placeholder="Write a message..."
         onKeyUp={sentMessageByHotkey}
       >
-        <Input.TextArea onHeightUpdate={onHeightUpdate} maxLines={5}/>
+        <Input.TextArea onHeightUpdate={scrollToBottomIsNeeded} maxLines={5}/>
       </Input>
       <button onClick={sendMessage} className={cn('send-button', {show: inputValue})}/>
     </MessageInputContainer>
