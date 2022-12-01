@@ -1,3 +1,5 @@
+import { getAppUrl } from '../../utils/getAppUrl';
+
 export type nicknameStatuses =
     'This username is available.'
     | 'Choose your username.'
@@ -22,7 +24,7 @@ const checkNickname = async (value: string): Promise<[nicknameStatuses, nickname
   }
 
   try {
-    const res = await fetch(`${process.env.REACT_APP_URL}/is-available-nickname`, {
+    const res = await fetch(`${getAppUrl()}/is-available-nickname`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

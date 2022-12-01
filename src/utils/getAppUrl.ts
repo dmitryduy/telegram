@@ -1,0 +1,1 @@
+export const getAppUrl = () => process.env.REACT_APP_URL || 'https://telegram-server-part.herokuapp.com';
