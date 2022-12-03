@@ -28,7 +28,7 @@ const User: FC<IUserProps> = ({textPosition = '', ...props}) => {
   return (
     <UserContainer style={props.styleContainer} className={props.avatarPos}>
       <UserAvatar style={props.styleAvatar} onClick={props.onAvatarClick || noop} image={avatar}
-        text={getFullName(name || '', surname || '', nickname || '')}/>
+        text={getFullName(name || '', surname || '', nickname || '')[0]}/>
       <div className={cn({info: true, [textPosition]: true})}>
         <h4 className="name" onClick={props.onNameClick || noop}>
           {name ? `${name} ${surname}` : 'Please, enter name'}

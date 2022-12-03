@@ -18,7 +18,7 @@ export const selectedCountryError = (selectedCountry: string) => {
     '';
 };
 
-export const nicknameErrorMessage = (nickname: string) => (nickname.length < 3 ? INVALID_NICKNAME : '');
+export const nicknameErrorMessage = (nickname: string) => (nickname.length < 5 ? INVALID_NICKNAME : '');
 
 export const getNumericPhone = (phone: string, dualCode: string) => {
   return (dualCode + phone).split('').filter(char => isNumber(char)).join('');
