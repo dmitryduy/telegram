@@ -1,6 +1,7 @@
 {
   "name": "telegram",
   "version": "0.1.0",
+  "homepage": "https://dmitryduy.github.io/telegram",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.3",
@@ -48,7 +49,9 @@
     "new:component": "hygen new component",
     "new:util": "hygen new util",
     "new:hook": "hygen new hook",
-    "new:i18n": "hygen new i18n"
+    "new:i18n": "hygen new i18n",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

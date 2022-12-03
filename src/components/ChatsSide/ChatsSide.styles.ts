@@ -24,6 +24,6 @@ export const ChatsSideHeader = styled.div`
 export const ChatsContainer = styled(Scroll)`
   position: relative;
   overflow: auto;
-  height: calc(100vh - 57px);
+  height: calc(100% - 57px);
   overflow-x: hidden;
 `;

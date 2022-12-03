@@ -1,0 +1,1466 @@
+[
+  {
+    "nameEn": "Ascension",
+    "nameRu": "Остров Вознесения",
+    "dialCode": "247",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "Andorra",
+    "nameRu": "Андорра",
+    "dialCode": "376",
+    "mask": "000-000"
+  },
+  {
+    "nameEn": "United Arab Emirates",
+    "nameRu": "Объединенные Арабские Эмираты",
+    "dialCode": "9715",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Afghanistan",
+    "nameRu": "Афганистан",
+    "dialCode": "93",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Antigua & Barbuda",
+    "nameRu": "Антигуа и Барбуда",
+    "dialCode": "1268",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Anguilla",
+    "nameRu": "Ангилья",
+    "dialCode": "1264",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Albania",
+    "nameRu": "Албания",
+    "dialCode": "355",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Armenia",
+    "nameRu": "Армения",
+    "dialCode": "374",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Netherlands Antilles",
+    "nameRu": "Нидерландские Антильские острова",
+    "dialCode": "5999",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Angola",
+    "nameRu": "Ангола",
+    "dialCode": "244",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Australian bases in Antarctica",
+    "nameRu": "Австралийская антарктическая база",
+    "dialCode": "6721",
+    "mask": "00-000"
+  },
+  {
+    "nameEn": "Argentina",
+    "nameRu": "Аргентина",
+    "dialCode": "54",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "American Samoa",
+    "nameRu": "Американское Самоа",
+    "dialCode": "1684",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Austria",
+    "nameRu": "Австрия",
+    "dialCode": "43",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Australia",
+    "nameRu": "Австралия",
+    "dialCode": "61",
+    "mask": "0-0000-0000"
+  },
+  {
+    "nameEn": "Aruba",
+    "nameRu": "Аруба",
+    "dialCode": "297",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Azerbaijan",
+    "nameRu": "Азербайджан",
+    "dialCode": "994",
+    "mask": "00-000-00-00"
+  },
+  {
+    "nameEn": "Bosnia and Herzegovina",
+    "nameRu": "Босния и Герцеговина",
+    "dialCode": "387",
+    "mask": "00-0000"
+  },
+  {
+    "nameEn": "Barbados",
+    "nameRu": "Барбадос",
+    "dialCode": "1246",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Bangladesh",
+    "nameRu": "Бангладеш",
+    "dialCode": "880",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Belgium",
+    "nameRu": "Бельгия",
+    "dialCode": "32",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Burkina Faso",
+    "nameRu": "Буркина Фасо",
+    "dialCode": "226",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Bulgaria",
+    "nameRu": "Болгария",
+    "dialCode": "359",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Bahrain",
+    "nameRu": "Бахрейн",
+    "dialCode": "973",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Burundi",
+    "nameRu": "Бурунди",
+    "dialCode": "257",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Benin",
+    "nameRu": "Бенин",
+    "dialCode": "229",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Bermuda",
+    "nameRu": "Бермудские острова",
+    "dialCode": "1441",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Brunei Darussalam",
+    "nameRu": "Бруней-Даруссалам",
+    "dialCode": "673",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Bolivia",
+    "nameRu": "Боливия",
+    "dialCode": "591",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Brazil",
+    "nameRu": "Бразилия",
+    "dialCode": "559",
+    "mask": "(00)0000-0000"
+  },
+  {
+    "nameEn": "Bahamas",
+    "nameRu": "Багамские Острова",
+    "dialCode": "1242",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Bhutan",
+    "nameRu": "Бутан",
+    "dialCode": "975",
+    "mask": "0-000-000"
+  },
+  {
+    "nameEn": "Botswana",
+    "nameRu": "Ботсвана",
+    "dialCode": "267",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Belarus",
+    "nameRu": "Беларусь (Белоруссия)",
+    "dialCode": "375",
+    "mask": "(00)000-00-00"
+  },
+  {
+    "nameEn": "Belize",
+    "nameRu": "Белиз",
+    "dialCode": "501",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Dem. Rep. Congo",
+    "nameRu": "Дем. Респ. Конго (Киншаса)",
+    "dialCode": "243",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Central African Republic",
+    "nameRu": "Центральноафриканская Республика",
+    "dialCode": "236",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Congo (Brazzaville)",
+    "nameRu": "Конго (Браззавиль)",
+    "dialCode": "242",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Switzerland",
+    "nameRu": "Швейцария",
+    "dialCode": "41",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Cote d’Ivoire (Ivory Coast)",
+    "nameRu": "Кот-д’Ивуар",
+    "dialCode": "225",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Cook Islands",
+    "nameRu": "Острова Кука",
+    "dialCode": "682",
+    "mask": "00-000"
+  },
+  {
+    "nameEn": "Chile",
+    "nameRu": "Чили",
+    "dialCode": "56",
+    "mask": "0-0000-0000"
+  },
+  {
+    "nameEn": "Cameroon",
+    "nameRu": "Камерун",
+    "dialCode": "237",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "China (PRC)",
+    "nameRu": "Китайская Н.Р.",
+    "dialCode": "86",
+    "mask": "00-00000-00000"
+  },
+  {
+    "nameEn": "Colombia",
+    "nameRu": "Колумбия",
+    "dialCode": "57",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Costa Rica",
+    "nameRu": "Коста-Рика",
+    "dialCode": "506",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Cuba",
+    "nameRu": "Куба",
+    "dialCode": "53",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Cape Verde",
+    "nameRu": "Кабо-Верде",
+    "dialCode": "238",
+    "mask": "(000)00-00"
+  },
+  {
+    "nameEn": "Curacao",
+    "nameRu": "Кюрасао",
+    "dialCode": "599",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Cyprus",
+    "nameRu": "Кипр",
+    "dialCode": "357",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Czech Republic",
+    "nameRu": "Чехия",
+    "dialCode": "420",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Germany",
+    "nameRu": "Германия",
+    "dialCode": "49",
+    "mask": "000-000"
+  },
+  {
+    "nameEn": "Djibouti",
+    "nameRu": "Джибути",
+    "dialCode": "253",
+    "mask": "00-00-00-00"
+  },
+  {
+    "nameEn": "Denmark",
+    "nameRu": "Дания",
+    "dialCode": "45",
+    "mask": "00-00-00-00"
+  },
+  {
+    "nameEn": "Dominica",
+    "nameRu": "Доминика",
+    "dialCode": "1767",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Dominican Republic",
+    "nameRu": "Доминиканская Республика",
+    "dialCode": "1849",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Algeria",
+    "nameRu": "Алжир",
+    "dialCode": "213",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Ecuador ",
+    "nameRu": "Эквадор ",
+    "dialCode": "593",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Ecuador",
+    "nameRu": "Эквадор",
+    "dialCode": "593",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Estonia ",
+    "nameRu": "Эстония ",
+    "dialCode": "372",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Estonia",
+    "nameRu": "Эстония",
+    "dialCode": "372",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Egypt",
+    "nameRu": "Египет",
+    "dialCode": "20",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Eritrea",
+    "nameRu": "Эритрея",
+    "dialCode": "291",
+    "mask": "0-000-000"
+  },
+  {
+    "nameEn": "Spain",
+    "nameRu": "Испания",
+    "dialCode": "34",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Ethiopia",
+    "nameRu": "Эфиопия",
+    "dialCode": "251",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Finland",
+    "nameRu": "Финляндия",
+    "dialCode": "358",
+    "mask": "(000)000-00-00"
+  },
+  {
+    "nameEn": "Fiji",
+    "nameRu": "Фиджи",
+    "dialCode": "679",
+    "mask": "00-00000"
+  },
+  {
+    "nameEn": "Falkland Islands",
+    "nameRu": "Фолклендские острова",
+    "dialCode": "500",
+    "mask": "00000"
+  },
+  {
+    "nameEn": "F.S. Micronesia",
+    "nameRu": "Ф.Ш. Микронезии",
+    "dialCode": "691",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Faroe Islands",
+    "nameRu": "Фарерские острова",
+    "dialCode": "298",
+    "mask": "000-000"
+  },
+  {
+    "nameEn": "Mayotte",
+    "nameRu": "Майотта",
+    "dialCode": "262",
+    "mask": "00000-0000"
+  },
+  {
+    "nameEn": "France",
+    "nameRu": "Франция",
+    "dialCode": "33",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "St Pierre & Miquelon",
+    "nameRu": "Сен-Пьер и Микелон",
+    "dialCode": "508",
+    "mask": "00-0000"
+  },
+  {
+    "nameEn": "Guadeloupe",
+    "nameRu": "Гваделупа",
+    "dialCode": "590",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Gabon",
+    "nameRu": "Габон",
+    "dialCode": "241",
+    "mask": "0-00-00-00"
+  },
+  {
+    "nameEn": "Grenada",
+    "nameRu": "Гренада",
+    "dialCode": "1473",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Rep. of Georgia",
+    "nameRu": "Грузия",
+    "dialCode": "995",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Guiana (French)",
+    "nameRu": "Фр. Гвиана",
+    "dialCode": "594",
+    "mask": "00000-0000"
+  },
+  {
+    "nameEn": "Ghana",
+    "nameRu": "Гана",
+    "dialCode": "233",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Gibraltar",
+    "nameRu": "Гибралтар",
+    "dialCode": "350",
+    "mask": "000-00000"
+  },
+  {
+    "nameEn": "Greenland",
+    "nameRu": "Гренландия",
+    "dialCode": "299",
+    "mask": "00-00-00"
+  },
+  {
+    "nameEn": "Gambia",
+    "nameRu": "Гамбия",
+    "dialCode": "220",
+    "mask": "(000)00-00"
+  },
+  {
+    "nameEn": "Guinea",
+    "nameRu": "Гвинея",
+    "dialCode": "224",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Equatorial Guinea",
+    "nameRu": "Экваториальная Гвинея",
+    "dialCode": "240",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Greece",
+    "nameRu": "Греция",
+    "dialCode": "30",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Guatemala",
+    "nameRu": "Гватемала",
+    "dialCode": "502",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Guam",
+    "nameRu": "Гуам",
+    "dialCode": "1671",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Guinea-Bissau",
+    "nameRu": "Гвинея-Бисау",
+    "dialCode": "245",
+    "mask": "0-000000"
+  },
+  {
+    "nameEn": "Guyana",
+    "nameRu": "Гайана",
+    "dialCode": "592",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Hong Kong",
+    "nameRu": "Гонконг",
+    "dialCode": "852",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Honduras",
+    "nameRu": "Гондурас",
+    "dialCode": "504",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Croatia",
+    "nameRu": "Хорватия",
+    "dialCode": "385",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Haiti",
+    "nameRu": "Гаити",
+    "dialCode": "509",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Hungary",
+    "nameRu": "Венгрия",
+    "dialCode": "36",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Indonesia ",
+    "nameRu": "Индонезия ",
+    "dialCode": "628",
+    "mask": "(00)000-00-000"
+  },
+  {
+    "nameEn": "Ireland",
+    "nameRu": "Ирландия",
+    "dialCode": "353",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Israel ",
+    "nameRu": "Израиль ",
+    "dialCode": "9725",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Israel",
+    "nameRu": "Израиль",
+    "dialCode": "972",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "India",
+    "nameRu": "Индия",
+    "dialCode": "91",
+    "mask": "(0000)000-000"
+  },
+  {
+    "nameEn": "Diego Garcia",
+    "nameRu": "Диего-Гарсия",
+    "dialCode": "246",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Iraq",
+    "nameRu": "Ирак",
+    "dialCode": "964",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Iran",
+    "nameRu": "Иран",
+    "dialCode": "98",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Iceland",
+    "nameRu": "Исландия",
+    "dialCode": "354",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Italy",
+    "nameRu": "Италия",
+    "dialCode": "39",
+    "mask": "(000)0000-000"
+  },
+  {
+    "nameEn": "Jamaica",
+    "nameRu": "Ямайка",
+    "dialCode": "1876",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Jordan",
+    "nameRu": "Иордания",
+    "dialCode": "962",
+    "mask": "0-0000-0000"
+  },
+  {
+    "nameEn": "Japan ",
+    "nameRu": "Япония ",
+    "dialCode": "81",
+    "mask": "00-0000-0000"
+  },
+  {
+    "nameEn": "Japan",
+    "nameRu": "Япония",
+    "dialCode": "81",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Kenya",
+    "nameRu": "Кения",
+    "dialCode": "254",
+    "mask": "000-000000"
+  },
+  {
+    "nameEn": "Kyrgyzstan",
+    "nameRu": "Киргизия",
+    "dialCode": "996",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Cambodia",
+    "nameRu": "Камбоджа",
+    "dialCode": "855",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Kiribati",
+    "nameRu": "Кирибати",
+    "dialCode": "686",
+    "mask": "00-000"
+  },
+  {
+    "nameEn": "Comoros",
+    "nameRu": "Коморы",
+    "dialCode": "269",
+    "mask": "00-00000"
+  },
+  {
+    "nameEn": "Saint Kitts & Nevis",
+    "nameRu": "Сент-Китс и Невис",
+    "dialCode": "1869",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Kuwait",
+    "nameRu": "Кувейт",
+    "dialCode": "965",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Cayman Islands",
+    "nameRu": "Каймановы острова",
+    "dialCode": "1345",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Kazakhstan",
+    "nameRu": "Казахстан",
+    "dialCode": "76",
+    "mask": "(00)000-00-00"
+  },
+  {
+    "nameEn": "Kazakhstan",
+    "nameRu": "Казахстан",
+    "dialCode": "77",
+    "mask": "(00)000-00-00"
+  },
+  {
+    "nameEn": "Laos ",
+    "nameRu": "Лаос ",
+    "dialCode": "85620",
+    "mask": "(00)000-000"
+  },
+  {
+    "nameEn": "Laos",
+    "nameRu": "Лаос",
+    "dialCode": "856",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Lebanon ",
+    "nameRu": "Ливан ",
+    "dialCode": "961",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Lebanon",
+    "nameRu": "Ливан",
+    "dialCode": "961",
+    "mask": "0-000-000"
+  },
+  {
+    "nameEn": "Saint Lucia",
+    "nameRu": "Сент-Люсия",
+    "dialCode": "1758",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Liechtenstein",
+    "nameRu": "Лихтенштейн",
+    "dialCode": "423",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Sri Lanka",
+    "nameRu": "Шри-Ланка",
+    "dialCode": "94",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Liberia",
+    "nameRu": "Либерия",
+    "dialCode": "231",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Lesotho",
+    "nameRu": "Лесото",
+    "dialCode": "266",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Lithuania",
+    "nameRu": "Литва",
+    "dialCode": "370",
+    "mask": "(000)00-000"
+  },
+  {
+    "nameEn": "Luxembourg",
+    "nameRu": "Люксембург",
+    "dialCode": "352",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Latvia",
+    "nameRu": "Латвия",
+    "dialCode": "371",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Libya",
+    "nameRu": "Ливия",
+    "dialCode": "218",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Morocco",
+    "nameRu": "Марокко",
+    "dialCode": "212",
+    "mask": "00-0000-000"
+  },
+  {
+    "nameEn": "Monaco",
+    "nameRu": "Монако",
+    "dialCode": "377",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Moldova",
+    "nameRu": "Молдова",
+    "dialCode": "373",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Montenegro",
+    "nameRu": "Черногория",
+    "dialCode": "382",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Madagascar",
+    "nameRu": "Мадагаскар",
+    "dialCode": "261",
+    "mask": "00-00-00000"
+  },
+  {
+    "nameEn": "Marshall Islands",
+    "nameRu": "Маршалловы Острова",
+    "dialCode": "692",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Republic of Macedonia",
+    "nameRu": "Респ. Македония",
+    "dialCode": "389",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Mali",
+    "nameRu": "Мали",
+    "dialCode": "223",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Burma (Myanmar)",
+    "nameRu": "Бирма (Мьянма)",
+    "dialCode": "95",
+    "mask": "000-000"
+  },
+  {
+    "nameEn": "Mongolia",
+    "nameRu": "Монголия",
+    "dialCode": "976",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Macau",
+    "nameRu": "Макао",
+    "dialCode": "853",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Northern Mariana Islands",
+    "nameRu": "Северные Марианские острова Сайпан",
+    "dialCode": "1670",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Martinique",
+    "nameRu": "Мартиника",
+    "dialCode": "596",
+    "mask": "(000)00-00-00"
+  },
+  {
+    "nameEn": "Mauritania",
+    "nameRu": "Мавритания",
+    "dialCode": "222",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Montserrat",
+    "nameRu": "Монтсеррат",
+    "dialCode": "1664",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Malta",
+    "nameRu": "Мальта",
+    "dialCode": "356",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Mauritius",
+    "nameRu": "Маврикий",
+    "dialCode": "230",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Maldives",
+    "nameRu": "Мальдивские острова",
+    "dialCode": "960",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Malawi",
+    "nameRu": "Малави",
+    "dialCode": "265",
+    "mask": "0-0000-0000"
+  },
+  {
+    "nameEn": "Mexico",
+    "nameRu": "Мексика",
+    "dialCode": "52",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Malaysia",
+    "nameRu": "Малайзия",
+    "dialCode": "60",
+    "mask": "0-000-000"
+  },
+  {
+    "nameEn": "Mozambique",
+    "nameRu": "Мозамбик",
+    "dialCode": "258",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Namibia",
+    "nameRu": "Намибия",
+    "dialCode": "264",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "New Caledonia",
+    "nameRu": "Новая Каледония",
+    "dialCode": "687",
+    "mask": "00-0000"
+  },
+  {
+    "nameEn": "Niger",
+    "nameRu": "Нигер",
+    "dialCode": "227",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Norfolk Island",
+    "nameRu": "Норфолк (остров)",
+    "dialCode": "6723",
+    "mask": "00-000"
+  },
+  {
+    "nameEn": "Nigeria ",
+    "nameRu": "Нигерия ",
+    "dialCode": "234",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Nicaragua",
+    "nameRu": "Никарагуа",
+    "dialCode": "505",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Netherlands",
+    "nameRu": "Нидерланды",
+    "dialCode": "31",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Norway",
+    "nameRu": "Норвегия",
+    "dialCode": "47",
+    "mask": "(000)00-000"
+  },
+  {
+    "nameEn": "Nepal",
+    "nameRu": "Непал",
+    "dialCode": "977",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Nauru",
+    "nameRu": "Науру",
+    "dialCode": "674",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Niue",
+    "nameRu": "Ниуэ",
+    "dialCode": "683",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "New Zealand",
+    "nameRu": "Новая Зеландия",
+    "dialCode": "64",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Oman",
+    "nameRu": "Оман",
+    "dialCode": "968",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Panama",
+    "nameRu": "Панама",
+    "dialCode": "507",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Peru",
+    "nameRu": "Перу",
+    "dialCode": "51",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "French Polynesia",
+    "nameRu": "Французская Полинезия (Таити)",
+    "dialCode": "689",
+    "mask": "00-00-00"
+  },
+  {
+    "nameEn": "Papua New Guinea",
+    "nameRu": "Папуа-Новая Гвинея",
+    "dialCode": "675",
+    "mask": "(000)00-000"
+  },
+  {
+    "nameEn": "Philippines",
+    "nameRu": "Филиппины",
+    "dialCode": "63",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Pakistan",
+    "nameRu": "Пакистан",
+    "dialCode": "92",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Poland",
+    "nameRu": "Польша",
+    "dialCode": "48",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Palestine",
+    "nameRu": "Палестина",
+    "dialCode": "970",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Portugal",
+    "nameRu": "Португалия",
+    "dialCode": "351",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Palau",
+    "nameRu": "Палау",
+    "dialCode": "680",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Paraguay",
+    "nameRu": "Парагвай",
+    "dialCode": "595",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Qatar",
+    "nameRu": "Катар",
+    "dialCode": "974",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Reunion",
+    "nameRu": "Реюньон",
+    "dialCode": "262",
+    "mask": "00000-0000"
+  },
+  {
+    "nameEn": "Romania",
+    "nameRu": "Румыния",
+    "dialCode": "40",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Serbia",
+    "nameRu": "Сербия",
+    "dialCode": "381",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Russia",
+    "nameRu": "Россия",
+    "dialCode": "7",
+    "mask": "(000)000-00-00"
+  },
+  {
+    "nameEn": "Rwanda",
+    "nameRu": "Руанда",
+    "dialCode": "250",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Saudi Arabia ",
+    "nameRu": "Саудовская Аравия ",
+    "dialCode": "9665",
+    "mask": "-0000-0000"
+  },
+  {
+    "nameEn": "Saudi Arabia",
+    "nameRu": "Саудовская Аравия",
+    "dialCode": "966",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Solomon Islands ",
+    "nameRu": "Соломоновы Острова ",
+    "dialCode": "677",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Solomon Islands",
+    "nameRu": "Соломоновы Острова",
+    "dialCode": "677",
+    "mask": "00000"
+  },
+  {
+    "nameEn": "Seychelles",
+    "nameRu": "Сейшелы",
+    "dialCode": "248",
+    "mask": "0-000-000"
+  },
+  {
+    "nameEn": "Sudan",
+    "nameRu": "Судан",
+    "dialCode": "249",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Sweden",
+    "nameRu": "Швеция",
+    "dialCode": "46",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Singapore",
+    "nameRu": "Сингапур",
+    "dialCode": "65",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Saint Helena",
+    "nameRu": "Остров Святой Елены",
+    "dialCode": "290",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "Tristan da Cunha",
+    "nameRu": "Тристан-да-Кунья",
+    "dialCode": "290",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "Slovenia",
+    "nameRu": "Словения",
+    "dialCode": "386",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Slovakia",
+    "nameRu": "Словакия",
+    "dialCode": "421",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "Sierra Leone",
+    "nameRu": "Сьерра-Леоне",
+    "dialCode": "232",
+    "mask": "00-000000"
+  },
+  {
+    "nameEn": "San Marino",
+    "nameRu": "Сан-Марино",
+    "dialCode": "378",
+    "mask": "0000-000000"
+  },
+  {
+    "nameEn": "Senegal",
+    "nameRu": "Сенегал",
+    "dialCode": "221",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Somalia ",
+    "nameRu": "Сомали ",
+    "dialCode": "252",
+    "mask": "0-000-000"
+  },
+  {
+    "nameEn": "Suriname ",
+    "nameRu": "Суринам ",
+    "dialCode": "597",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Suriname",
+    "nameRu": "Суринам",
+    "dialCode": "597",
+    "mask": "000-000"
+  },
+  {
+    "nameEn": "South Sudan",
+    "nameRu": "Южный Судан",
+    "dialCode": "211",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Sao Tome and Principe",
+    "nameRu": "Сан-Томе и Принсипи",
+    "dialCode": "239",
+    "mask": "00-00000"
+  },
+  {
+    "nameEn": "El Salvador",
+    "nameRu": "Сальвадор",
+    "dialCode": "503",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Sint Maarten",
+    "nameRu": "Синт-Маартен",
+    "dialCode": "1721",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Syrian Arab Republic",
+    "nameRu": "Сирийская арабская республика",
+    "dialCode": "963",
+    "mask": "00-0000-000"
+  },
+  {
+    "nameEn": "Swaziland",
+    "nameRu": "Свазиленд",
+    "dialCode": "268",
+    "mask": "00-00-0000"
+  },
+  {
+    "nameEn": "Turks & Caicos",
+    "nameRu": "Тёркс и Кайкос",
+    "dialCode": "1649",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Chad",
+    "nameRu": "Чад",
+    "dialCode": "235",
+    "mask": "00-00-00-00"
+  },
+  {
+    "nameEn": "Togo",
+    "nameRu": "Того",
+    "dialCode": "228",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Thailand ",
+    "nameRu": "Таиланд ",
+    "dialCode": "66",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Thailand",
+    "nameRu": "Таиланд",
+    "dialCode": "66",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Tajikistan",
+    "nameRu": "Таджикистан",
+    "dialCode": "992",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Tokelau",
+    "nameRu": "Токелау",
+    "dialCode": "690",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "East Timor",
+    "nameRu": "Восточный Тимор",
+    "dialCode": "670",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Turkmenistan",
+    "nameRu": "Туркменистан",
+    "dialCode": "993",
+    "mask": "0-000-0000"
+  },
+  {
+    "nameEn": "Tunisia",
+    "nameRu": "Тунис",
+    "dialCode": "216",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "Tonga",
+    "nameRu": "Тонга",
+    "dialCode": "676",
+    "mask": "00000"
+  },
+  {
+    "nameEn": "Turkey",
+    "nameRu": "Турция",
+    "dialCode": "90",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "Trinidad & Tobago",
+    "nameRu": "Тринидад и Тобаго",
+    "dialCode": "1868",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Tuvalu ",
+    "nameRu": "Тувалу ",
+    "dialCode": "68890",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "Tuvalu",
+    "nameRu": "Тувалу",
+    "dialCode": "6882",
+    "mask": "0000"
+  },
+  {
+    "nameEn": "Taiwan",
+    "nameRu": "Тайвань",
+    "dialCode": "886",
+    "mask": "0000-0000"
+  },
+  {
+    "nameEn": "Tanzania",
+    "nameRu": "Танзания",
+    "dialCode": "255",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Ukraine",
+    "nameRu": "Украина",
+    "dialCode": "380",
+    "mask": "(00)000-00-00"
+  },
+  {
+    "nameEn": "Uganda",
+    "nameRu": "Уганда",
+    "dialCode": "256",
+    "mask": "(000)000-000"
+  },
+  {
+    "nameEn": "United Kingdom",
+    "nameRu": "Великобритания",
+    "dialCode": "44",
+    "mask": "00-0000-0000"
+  },
+  {
+    "nameEn": "Uruguay",
+    "nameRu": "Уругвай",
+    "dialCode": "598",
+    "mask": "0-000-00-00"
+  },
+  {
+    "nameEn": "Uzbekistan",
+    "nameRu": "Узбекистан",
+    "dialCode": "998",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Vatican City",
+    "nameRu": "Ватикан",
+    "dialCode": "3966",
+    "mask": "00000"
+  },
+  {
+    "nameEn": "Saint Vincent & the Grenadines",
+    "nameRu": "Сент-Винсент и Гренадины",
+    "dialCode": "1784",
+    "mask": "000-0000"
+  },
+  {
+    "nameEn": "Venezuela",
+    "nameRu": "Венесуэла",
+    "dialCode": "58",
+    "mask": "(000)000-0000"
+  },
+  {
+    "nameEn": "British Virgin Islands",
+    "nameRu": "Британские Виргинские острова",
+    "dialCode": "1284",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "US Virgin Islands",
+    "nameRu": "Американские Виргинские острова",
+    "dialCode": "1340",
+    "mask": "()000-0000"
+  },
+  {
+    "nameEn": "Vietnam",
+    "nameRu": "Вьетнам",
+    "dialCode": "84",
+    "mask": "(000)0000-000"
+  },
+  {
+    "nameEn": "Vanuatu ",
+    "nameRu": "Вануату ",
+    "dialCode": "678",
+    "mask": "00-00000"
+  },
+  {
+    "nameEn": "Vanuatu",
+    "nameRu": "Вануату",
+    "dialCode": "678",
+    "mask": "00000"
+  },
+  {
+    "nameEn": "Wallis and Futuna",
+    "nameRu": "Уоллис и Футуна",
+    "dialCode": "681",
+    "mask": "00-0000"
+  },
+  {
+    "nameEn": "Samoa",
+    "nameRu": "Самоа",
+    "dialCode": "685",
+    "mask": "00-0000"
+  },
+  {
+    "nameEn": "Yemen",
+    "nameRu": "Йемен",
+    "dialCode": "967",
+    "mask": "00-000-000"
+  },
+  {
+    "nameEn": "South Africa",
+    "nameRu": "Южно-Африканская Респ.",
+    "dialCode": "27",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Zambia",
+    "nameRu": "Замбия",
+    "dialCode": "260",
+    "mask": "00-000-0000"
+  },
+  {
+    "nameEn": "Zimbabwe",
+    "nameRu": "Зимбабве",
+    "dialCode": "263",
+    "mask": "0-000000"
+  },
+  {
+    "nameEn": "USA and Canada",
+    "nameRu": "США и Канада",
+    "dialCode": "1",
+    "mask": "(000)000-0000"
+  }
+]
