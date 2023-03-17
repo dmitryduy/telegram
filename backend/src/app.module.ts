@@ -9,9 +9,15 @@ import { DialogInfo } from './entities/dialogInfo.entity';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
+import { BackgroundModule } from './background/background.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'assets'),
+    }),
     ConfigModule.forRoot({
       envFilePath: '.env',
       load: [configuration],
@@ -33,6 +39,7 @@ import configuration from './config/configuration';
     }),
     CountryModule,
     UserModule,
+    BackgroundModule,
   ],
   controllers: [],
   providers: [],

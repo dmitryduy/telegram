@@ -6,7 +6,7 @@ export class DialogInfo {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
+  @Column({ default: 0 })
   unreadMessageCount: number;
 
   @Column()
