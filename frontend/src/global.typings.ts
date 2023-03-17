@@ -33,10 +33,10 @@ export interface IMessage {
 }
 
 export interface IWeakDialog {
-  phoneNumber: phone;
-  avatar: string;
-  avatarText: string;
-  fullName: string;
+  partnerPhone: phone;
+  partnerAvatar: string;
+  partnerAvatarContent: string;
+  partnerFullName: string;
   unreadMessageCount: number | null;
   lastMessage: string | null;
   lastMessageDate: timestamp | null;
@@ -71,5 +71,5 @@ export interface INewMessagePopup {
 
 export interface IGlobalSearchResults {
   userDialogs: IWeakDialog[],
-  globalDialogs: IWeakDialog[]
+  globalDialogs: Omit<IWeakDialog, 'lastMessageDate' | 'lastMessage'>[]
 }

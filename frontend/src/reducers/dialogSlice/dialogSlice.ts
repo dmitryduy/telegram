@@ -97,7 +97,7 @@ const dialogSlice = createSlice({
       state.globalSearchResults = null;
     },
     setOfflineUser(state: IDialogReducerState, action: PayloadAction<{ userPhone: phone, userLastSeen: timestamp }>) {
-      if (state.activeDialog?.phoneNumber === action.payload.userPhone) {
+      if (state.activeDialog?.partnerPhone === action.payload.userPhone) {
         state.activeDialog = {...(state.activeDialog as IActiveDialog),
           lastSeen: action.payload.userLastSeen,
           isOnline: false

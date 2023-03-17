@@ -24,7 +24,7 @@ type themeColor =
 @Entity()
 export class User {
   @PrimaryColumn()
-  phone: string;
+  phoneNumber: string;
 
   @Column({ nullable: true })
   isOnline: boolean;

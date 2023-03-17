@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { LoginUserDto } from './dto/login-user-dto';
+import { userToDialogInfo } from '../utils/userToDialogInfo';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
 
   async login(loginUserDto: LoginUserDto): Promise<Omit<User, 'dialogs'>> {
     const user = await this.userRepository.findOneBy({
-      phone: loginUserDto.userPhone,
+      phoneNumber: loginUserDto.userPhone,
     });
 
     if (!user) {
@@ -34,12 +35,33 @@ export class UserService {
     return userWithoutDialogs;
   }
   async createUser(
-    phone: string,
+    phoneNumber: string,
     nickname: string,
   ): Promise<Omit<User, 'dialogs'>> {
-    const user = this.userRepository.create({ phone, nickname });
+    const user = this.userRepository.create({ phoneNumber, nickname });
 
     await this.userRepository.save(user);
     return user;
+  }
+  async getByText(value: string, phoneNumber: string) {
+    const allUsers = (
+      await this.userRepository.findBy({
+        nickname: Like(`%${value}%`),
+      })
+    ).filter((user) => user.phoneNumber !== phoneNumber);
+    const user = await this.userRepository.findOneBy({ phoneNumber });
+    const partnersPhone =
+      user.dialogInfo?.map((partner) => partner.partnerPhone) || [];
+
+    return {
+      userDialogs:
+        user.dialogInfo?.filter((partner) =>
+          partner.partnerPhone.includes(value),
+        ) || [],
+      globalDialogs:
+        allUsers
+          ?.filter((user) => !partnersPhone.includes(user.phoneNumber))
+          ?.map((user) => userToDialogInfo(user)) || [],
+    };
   }
 }

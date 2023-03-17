@@ -38,12 +38,12 @@ const Dialogs: React.FC<IDialogsProps> = ({dialogs, isDialogExisted}) => {
     <ul>
       {dialogs.map(userDialog =>
         <Dialog
-          key={userDialog.phoneNumber}
-          title={userDialog.fullName}
+          key={userDialog.partnerPhone}
+          title={userDialog.partnerFullName}
           text={userDialog.lastMessage || ''}
-          partnerPhone={userDialog.phoneNumber}
-          avatarName={userDialog.avatarText}
-          avatarImage={userDialog.avatar}
+          partnerPhone={userDialog.partnerPhone}
+          avatarName={userDialog.partnerAvatarContent}
+          avatarImage={userDialog.partnerAvatar}
           time={userDialog.lastMessageDate}
           unreadMessagesCount={userDialog.unreadMessageCount}
           isDialogExisted={isDialogExisted}
