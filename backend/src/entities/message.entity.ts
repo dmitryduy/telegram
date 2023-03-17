@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Dialog } from './dialog.entity';
 
 @Entity()
@@ -6,7 +12,7 @@ export class Message {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
+  @CreateDateColumn()
   createdDate: Date;
 
   @Column()
