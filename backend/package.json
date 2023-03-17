@@ -9,8 +9,8 @@
     "prebuild": "backend/node_modules/.bin/rimraf dist",
     "build": "backend/node_modules/.bin/nest build",
     "format": "backend/node_modules/.bin/prettier --write \\\\\\\"../src/**/*.ts\\\\\\\" \\\\\\\"test/**/*.ts\\\\\\\"",
-    "start": "backend/node_modules/.bin/nest start",
-    "start:dev": "backend/node_modules/.bin/nest start --watch",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
     "start:debug": "backend/node_modules/.bin/nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "backend/node_modules/.bin/eslint \\\"{src,apps,libs,test}/**/*.ts\\\" --fix",
@@ -22,11 +22,15 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/typeorm": "^9.0.1",
+    "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "typeorm": "^0.3.12"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

@@ -8,7 +8,7 @@ import Theme from './Theme';
 
 windowExtends();
 
-const MainPage = React.lazy(() => import('./pages/MainPage/MainPage'));
+const MainPage = React.lazy(() => import('@pages/MainPage/MainPage'));
 const LoginPage = React.lazy(() => import('@pages/LoginPage'));
 
 function App() {
